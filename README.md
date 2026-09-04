@@ -13,6 +13,7 @@ Site web institutionnel de **KofCorporation**, entreprise informatique basée à
 | Framework | [Next.js 14+](https://nextjs.org/) — App Router |
 | Styling | [Tailwind CSS v4](https://tailwindcss.com/) |
 | Animations | [Framer Motion](https://www.framer.com/motion/) |
+| Icônes | [Lucide React](https://lucide.dev/) |
 | CMS | [Sanity CMS](https://www.sanity.io/) |
 | Formulaire | React Hook Form + reCAPTCHA v3 |
 | i18n | [next-intl](https://next-intl-docs.vercel.app/) — FR / EN |
