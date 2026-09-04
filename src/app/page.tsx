@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import Partners from "@/components/Partners";
 import SplashScreen from "@/components/SplashScreen";
 
 export default function Home() {
@@ -7,7 +8,7 @@ export default function Home() {
       <SplashScreen />
       <main>
         <Hero />
-        {/* Placeholder for future sections */}
+        <Partners />
       </main>
     </>
   );

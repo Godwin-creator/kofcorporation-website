@@ -1,0 +1,192 @@
+/* ============================================================
+   Partners — Styles
+   ============================================================ */
+
+.partners {
+  position: relative;
+  width: 100%;
+  padding: 4rem 1.5rem 5rem;
+  background-color: var(--color-bg);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.partners__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+/* Header */
+.partners__header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  max-width: 650px;
+}
+
+.partners__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  background-color: rgba(12, 172, 232, 0.1);
+  border: 1px solid rgba(12, 172, 232, 0.25);
+  color: var(--color-accent);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.partners__title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+  line-height: 1.25;
+}
+
+.partners__title-highlight {
+  background: linear-gradient(135deg, #0CACE8 0%, #1C71AA 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.partners__description {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* Marquee Container */
+.partners__marquee-wrapper {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  user-select: none;
+  /* Gradient masks for smooth fade edge effects */
+  mask-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 1) 15%,
+    rgba(0, 0, 0, 1) 85%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 1) 15%,
+    rgba(0, 0, 0, 1) 85%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.partners__marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  width: max-content;
+  animation: marquee-scroll 35s linear infinite;
+  padding: 0.5rem 0;
+}
+
+.partners__marquee-wrapper:hover .partners__marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Partner Card */
+.partner-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.75rem;
+  border-radius: 16px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 240px;
+  cursor: default;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.partner-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(12, 172, 232, 0.4);
+  background-color: var(--color-surface-alt);
+  box-shadow: 0 12px 24px -6px rgba(12, 172, 232, 0.15);
+}
+
+.partner-card__icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(12, 172, 232, 0.08);
+  border: 1px solid rgba(12, 172, 232, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-accent);
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.partner-card:hover .partner-card__icon-wrap {
+  transform: scale(1.08);
+  background: rgba(12, 172, 232, 0.16);
+}
+
+.partner-card__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.partner-card__name {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text);
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+
+.partner-card__sector {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+/* Background Ambient Glow */
+.partners__glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(12, 172, 232, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
+  pointer-events: none;
+  z-index: 0;
+}
