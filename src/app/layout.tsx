@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "KofCorporation — Société informatique d'édition de logiciels",
@@ -38,7 +40,11 @@ export default function RootLayout({
         {/* Injection du thème avant le premier paint — évite le flash */}
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
-      <body className="font-sans min-h-full flex flex-col">{children}</body>
+      <body className="font-sans min-h-full flex flex-col" style={{ paddingTop: 64 }}>
+            <Header />
+            <main style={{ flex: 1 }}>{children}</main>
+            <Footer />
+      </body>
     </html>
   );
 }
