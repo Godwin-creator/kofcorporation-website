@@ -1,0 +1,311 @@
+.about-page {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+.about-page__hero {
+  background-color: var(--color-surface-alt);
+}
+
+.about-page__hero-inner,
+.about-page__container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 7rem 1.5rem;
+}
+
+.about-page__hero-inner {
+  max-width: 900px;
+  text-align: center;
+}
+
+.about-page__eyebrow {
+  margin: 0 0 1rem;
+  color: var(--color-accent);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.about-page h1,
+.about-page h2,
+.about-page h3 {
+  color: var(--color-text);
+}
+
+.about-page h1 {
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: var(--font-heading);
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.98;
+}
+
+.about-page__hero-inner > p:not(.about-page__eyebrow) {
+  max-width: 620px;
+  margin: 2rem auto 0;
+  color: var(--color-text-muted);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.6;
+}
+
+.about-page__hero-link,
+.about-page__contact {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.about-page__hero-link {
+  margin-top: 2rem;
+}
+
+.about-page__mission {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.about-page__mission-grid,
+.about-page__story-grid,
+.about-page__team-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+}
+
+.about-page h2 {
+  max-width: 17ch;
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+}
+
+.about-page__mission-copy {
+  max-width: 52ch;
+  color: var(--color-text-muted);
+  line-height: 1.75;
+}
+
+.about-page__mission-copy p + p {
+  margin-top: 1.25rem;
+}
+
+.about-page__section-header {
+  display: grid;
+  grid-template-columns: 1fr 0.8fr;
+  gap: 5rem;
+  align-items: end;
+  margin-bottom: 3.5rem;
+}
+
+.about-page__section-header > p {
+  max-width: 42ch;
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+.about-page__values-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.about-value-card {
+  min-height: 240px;
+  padding: 1.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background-color: var(--color-surface);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.about-value-card:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 16px 30px rgba(12, 172, 232, 0.1);
+  transform: translateY(-4px);
+}
+
+.about-value-card > svg {
+  color: var(--color-accent);
+}
+
+.about-value-card h3 {
+  margin: 2.5rem 0 0;
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.about-value-card p {
+  margin: 0.75rem 0 0;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.about-page__story {
+  border-top: 1px solid var(--color-border);
+}
+
+.about-page__story-intro {
+  max-width: 38ch;
+  margin: 1.5rem 0 0;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+.about-page__story-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.about-page__story-list li {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.about-page__story-list li:last-child {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.about-page__story-list > li > span {
+  color: var(--color-accent);
+  font-family: var(--font-heading);
+  font-weight: 600;
+}
+
+.about-page__story-list h3 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.about-page__story-list p {
+  margin: 0.4rem 0 0;
+  color: var(--color-text-muted);
+  line-height: 1.55;
+}
+
+.about-page__team {
+  border-top: 1px solid var(--color-border);
+}
+
+.about-page__team-mark {
+  display: flex;
+  min-height: 280px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #2f3974, #1c71aa);
+}
+
+.about-page__team-grid > div:last-child > p:not(.about-page__eyebrow) {
+  max-width: 48ch;
+  margin: 1.25rem 0 0;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+.about-page__founder {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 48ch;
+  padding-top: 1.5rem;
+  margin-top: 2rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.about-page__founder div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.about-page__founder strong {
+  color: var(--color-text);
+  font-family: var(--font-heading);
+  font-weight: 600;
+}
+
+.about-page__founder span,
+.about-page__location {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+.about-page__location {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.about-page__contact {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 1.5rem;
+  border-top: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+}
+
+@media (max-width: 900px) {
+  .about-page__values-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .about-page__hero-inner,
+  .about-page__container {
+    padding: 4.5rem 1.25rem;
+  }
+
+  .about-page h1 {
+    font-size: clamp(2.75rem, 14vw, 4.5rem);
+  }
+
+  .about-page__mission-grid,
+  .about-page__story-grid,
+  .about-page__team-grid,
+  .about-page__section-header {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .about-page__section-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .about-page__values-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-value-card {
+    min-height: 0;
+  }
+
+  .about-page__founder {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
