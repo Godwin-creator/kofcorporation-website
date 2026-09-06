@@ -127,7 +127,9 @@ const Threads = ({ color = [1, 1, 1], amplitude = 1, distance = 0, enableMouseIn
   // Keep the latest props in a ref so updating them mutates the live shader
   // uniforms instead of tearing down and rebuilding the whole WebGL context.
   const propsRef = useRef({ color, amplitude, distance, enableMouseInteraction });
-  propsRef.current = { color, amplitude, distance, enableMouseInteraction };
+  useEffect(() => {
+    propsRef.current = { color, amplitude, distance, enableMouseInteraction };
+  }, [color, amplitude, distance, enableMouseInteraction]);
 
   useEffect(() => {
     const container = containerRef.current;
