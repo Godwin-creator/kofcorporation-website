@@ -1,7 +1,7 @@
 .stats {
   width: 100%;
-  background-color: var(--color-primary);
-  color: #ffffff;
+  background-color: #ffffff;
+  color: var(--color-text);
   overflow: hidden;
 }
 
@@ -14,7 +14,7 @@
 
 .stats__title {
   margin: 0 0 3rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--color-text-muted);
   font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 500;
@@ -39,7 +39,7 @@
 }
 
 .stats__item + .stats__item {
-  border-left: 1px solid rgba(255, 255, 255, 0.14);
+  border-left: 1px solid var(--color-border);
 }
 
 .stats__icon {
@@ -60,7 +60,7 @@
 
 .stats__label {
   margin: 0.75rem 0 0;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--color-text-muted);
   font-family: var(--font-body);
   font-size: 0.9375rem;
   line-height: 1.5;
@@ -97,4 +97,18 @@
   .stats__value {
     transition: none;
   }
+}
+
+[data-theme="dark"] .stats {
+  background-color: #2F3974;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .stats__title,
+[data-theme="dark"] .stats__label {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+[data-theme="dark"] .stats__item + .stats__item {
+  border-left-color: rgba(255, 255, 255, 0.14);
 }
