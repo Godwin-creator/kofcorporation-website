@@ -20,8 +20,9 @@ function getInitialTheme(): Theme {
   const stored = localStorage.getItem("theme");
   if (stored === "light" || stored === "dark") return stored;
 
-  // Aucune préférence enregistrée : le site commence en mode clair.
-  return "light";
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
 }
 
 /**
@@ -53,10 +54,24 @@ export function useTheme(): {
     if (typeof window === "undefined") return;
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) {
+      meta.setAttribute("content", theme === "dark" ? "#1A1E3A" : "#F8F9FA");
+    }
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) {
+      meta.setAttribute(
+        "content",
+        newTheme === "dark" ? "#1A1E3A" : "#F8F9FA"
+      );
+    }
   };
 
   return { theme, toggleTheme, isDark: theme === "dark" };

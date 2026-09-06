@@ -13,6 +13,10 @@ export const metadata: Metadata = {
   title: "KofCorporation — Société informatique d'édition de logiciels",
   description:
     "KofCorporation conçoit des applications web, mobiles et logiciels sur mesure pour les entreprises et startups au Togo.",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#F8F9FA" },
+    { media: "(prefers-color-scheme: dark)", color: "#1A1E3A" },
+  ],
   icons: [
     { rel: "icon", url: "/favicon.svg", type: "image/svg+xml" },
     { rel: "icon", url: "/favicon.ico" },
@@ -25,8 +29,17 @@ const themeInitScript = `
 (function () {
   try {
     var stored = localStorage.getItem('theme');
-    var theme = stored === 'dark' || stored === 'light' ? stored : 'light';
+    var theme = stored === 'dark' || stored === 'light'
+      ? stored
+      : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     document.documentElement.setAttribute('data-theme', theme);
+    var themeColorMeta = document.querySelector('meta[name="theme-color"]');
+    if (themeColorMeta) {
+      themeColorMeta.setAttribute(
+        'content',
+        theme === 'dark' ? '#1A1E3A' : '#F8F9FA'
+      );
+    }
   } catch (e) {}
 })();
 `.trim();

@@ -66,7 +66,7 @@ export default function Hero() {
         >
           <div className="hero__image">
             <Image
-              src="/images/hero-team.jpg"
+              src="/images/hero-team.png"
               alt="L'équipe KofCorporation au travail"
               fill
               sizes="(max-width: 767px) 0px, (max-width: 1023px) 100vw, 45vw"
