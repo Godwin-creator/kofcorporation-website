@@ -108,7 +108,14 @@ export default function Footer() {
             <ul className="footer__list footer__list--contact">
               <li>
                 <MapPin size={18} className="footer__icon" />
-                <span>Agoè Minamadou, à côté de ESA, Lomé, Togo</span>
+                <a
+                  href="https://maps.app.goo.gl/srEiWn6anmGeb7du6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="footer__link footer__location-link"
+                >
+                  Agoè Minamadou, à côté de ESA, Lomé, Togo
+                </a>
               </li>
               <li>
                 <Phone size={18} className="footer__icon" />
