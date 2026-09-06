@@ -4,8 +4,8 @@
 
 .partners {
   width: 100%;
-  padding: 3.5rem 0 4rem;
-  background-color: var(--color-surface-alt);
+  padding: 6rem 0;
+  background-color: var(--color-bg);
   overflow: hidden;
 }
 
@@ -112,7 +112,7 @@
 
 @media (max-width: 640px) {
   .partners {
-    padding: 2.75rem 0 3.25rem;
+    padding: 4rem 0;
   }
 
   .partners__marquee-track {

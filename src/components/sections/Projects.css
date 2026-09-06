@@ -1,6 +1,6 @@
 .projects {
   width: 100%;
-  background-color: var(--color-surface-alt);
+  background-color: var(--color-bg);
 }
 
 .projects__inner {
@@ -90,13 +90,28 @@
 .project-card__visual {
   position: relative;
   display: flex;
-  min-height: 190px;
+  min-height: 140px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   color: #ffffff;
-  background: linear-gradient(135deg, #0cace8 0%, #2f3974 100%);
+  background: linear-gradient(135deg, var(--project-color-start), var(--project-color-end));
+}
+
+.project-card__visual--aoa-togo {
+  --project-color-start: #2f9e8f;
+  --project-color-end: #176b68;
+}
+
+.project-card__visual--jeunesse-plus {
+  --project-color-start: #e8798f;
+  --project-color-end: #b94c70;
+}
+
+.project-card__visual--elycha {
+  --project-color-start: #e8a33d;
+  --project-color-end: #b9681e;
 }
 
 .project-card__visual::after {
@@ -109,26 +124,9 @@
   transform: rotate(-24deg);
 }
 
-.project-card__visual--jeunesse-plus {
-  background: linear-gradient(135deg, #0cace8 0%, #147d9e 100%);
-}
-
-.project-card__visual--elycha {
-  background: linear-gradient(135deg, #2f3974 0%, #1a85bd 100%);
-}
-
-.project-card__visual-mark,
-.project-card__visual-name {
-  position: relative;
-  z-index: 1;
-}
-
 .project-card__visual-mark {
-  font-family: var(--font-heading);
-  font-size: 4rem;
-  font-weight: 700;
-  line-height: 1;
-  opacity: 0.9;
+  display: inline-flex;
+  color: rgba(255, 255, 255, 0.92);
 }
 
 .project-card__visual-name {
@@ -229,6 +227,6 @@
   }
 
   .project-card__visual {
-    min-height: 175px;
+    min-height: 140px;
   }
 }

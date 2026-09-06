@@ -1,14 +1,8 @@
 .testimonials {
   width: 100%;
   overflow: hidden;
-  background-color: #2f3974;
-  color: #ffffff;
-  --color-surface: #232d61;
-}
-
-[data-theme="dark"] .testimonials {
-  background-color: #1a2235;
-  --color-surface: #2c417a;
+  background-color: var(--color-bg);
+  color: var(--color-text);
 }
 
 .testimonials__inner {
@@ -37,7 +31,7 @@
 
 .testimonials__title {
   margin: 0;
-  color: #ffffff;
+  color: var(--color-text);
   font-family: var(--font-heading);
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 600;
@@ -69,7 +63,8 @@
   padding: 2.75rem clamp(1.5rem, 5vw, 4.25rem);
   border-radius: 12px;
   background-color: var(--color-surface);
-  box-shadow: 0 20px 48px rgba(11, 18, 57, 0.22);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
 }
 
 .testimonial-card__rating {
@@ -80,7 +75,7 @@
 
 .testimonial-card__quote {
   margin: 1.75rem 0 2rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--color-text);
   font-family: var(--font-body);
   font-size: clamp(1.1rem, 2vw, 1.4rem);
   font-style: italic;
@@ -94,7 +89,7 @@
 }
 
 .testimonial-card__author strong {
-  color: #ffffff;
+  color: var(--color-text);
   font-family: var(--font-heading);
   font-size: 1rem;
   font-weight: 600;
@@ -102,7 +97,7 @@
 }
 
 .testimonial-card__author span {
-  color: rgba(255, 255, 255, 0.62);
+  color: var(--color-text-muted);
   font-family: var(--font-body);
   font-size: 0.85rem;
   line-height: 1.4;
@@ -115,9 +110,9 @@
   align-items: center;
   justify-content: center;
   padding: 0;
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  border: 1px solid var(--color-border);
   border-radius: 50%;
-  color: #ffffff;
+  color: var(--color-text);
   background: transparent;
   cursor: pointer;
   transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
@@ -144,7 +139,7 @@
   padding: 0;
   border: 0;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.35);
+  background-color: var(--color-border);
   cursor: pointer;
   transition: width 0.2s ease, border-radius 0.2s ease, background-color 0.2s ease;
 }
@@ -162,7 +157,7 @@
 
 @media (max-width: 767px) {
   .testimonials__inner {
-    padding: 4.5rem 1.25rem;
+    padding: 4rem 1.25rem;
   }
 
   .testimonials__header {

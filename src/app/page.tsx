@@ -5,6 +5,7 @@ import Services from "@/components/sections/Services";
 import Stats from "@/components/sections/Stats";
 import Projects from "@/components/sections/Projects";
 import Testimonials from "@/components/sections/Testimonials";
+import CallToAction from "@/components/sections/CallToAction";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
         <Projects />
         <Partners />
         <Testimonials />
+        <CallToAction />
       </main>
     </>
   );

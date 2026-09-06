@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Heart, HeartPulse, Home } from "lucide-react";
 import "./Projects.css";
 
 interface Project {
@@ -12,7 +12,7 @@ interface Project {
   description: string;
   tags: string[];
   url: string;
-  accent: string;
+  icon: typeof Heart;
 }
 
 const PROJECTS: Project[] = [
@@ -23,7 +23,7 @@ const PROJECTS: Project[] = [
     description: "Site vitrine pour une ONG, avec CMS headless et déploiement continu.",
     tags: ["React 19", "Tailwind", "Sanity CMS", "Vercel"],
     url: "https://aoa-togo.org",
-    accent: "A",
+    icon: Heart,
   },
   {
     id: "jeunesse-plus",
@@ -32,7 +32,7 @@ const PROJECTS: Project[] = [
     description: "Plateforme dédiée à l'éducation sexuelle et reproductive, avec quiz, forum et ligne verte.",
     tags: ["Laravel", "Flutter", "Firebase", "MySQL"],
     url: "https://jeunesse-plus.com",
-    accent: "J",
+    icon: HeartPulse,
   },
   {
     id: "elycha",
@@ -41,7 +41,7 @@ const PROJECTS: Project[] = [
     description: "Application d'annonces immobilières et automobiles avec favoris et notifications en temps réel.",
     tags: ["Laravel", "Flutter", "Firebase", "MySQL"],
     url: "https://elycha.com",
-    accent: "E",
+    icon: Home,
   },
 ];
 
@@ -89,11 +89,11 @@ export default function Projects() {
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
         >
-          {PROJECTS.map(({ id, title, sector, description, tags, url, accent }) => (
+          {PROJECTS.map(({ id, title, sector, description, tags, url, icon: Icon }) => (
             <motion.article className="project-card" key={id} variants={cardVariants}>
               <div className={`project-card__visual project-card__visual--${id}`} aria-label={`Aperçu de ${title}`}>
                 <span className="project-card__visual-mark" aria-hidden="true">
-                  {accent}
+                  <Icon size={56} strokeWidth={1.4} />
                 </span>
                 <span className="project-card__visual-name">{title}</span>
               </div>

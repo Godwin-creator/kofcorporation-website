@@ -1,6 +1,6 @@
 # Document de Référence — Refonte Site KofCorporation
 > **Statut** : En cours — champs `[À confirmer]` à valider lors de la présentation v1  
-> **Dernière mise à jour** : Septembre 2026  
+> **Dernière mise à jour** : 6 septembre 2026  
 > **Responsable projet** : Komi Godwin EDOH BEDI — Stagiaire Développement Web
 
 ---
@@ -160,6 +160,8 @@ kofcorporation.com/
 
 **Formations** → redirection ou section dédiée vers academy.kofcorporation.com (à décider avec le chef)
 
+> **Direction visuelle validée après itération** — voir section 13.1 pour le détail par composant. Le pattern d'alternance zebra initialement envisagé a été abandonné au profit d'un fond stable inspiré de theodo.com.
+
 ---
 
 ## 10. Stack Technique (refonte)
@@ -265,9 +267,19 @@ Extraite du site actuel (à affiner via DevTools) et adaptée pour les deux mode
 | **Style & Cohérence** | Trait fin (strokeWidth 1.5 à 2), aligné avec la typographie, taille standardisée (16px, 20px, 24px) |
 
 ### Philosophie visuelle
-- **Sections pleine largeur à angles droits** — pas de border-radius sur les sections, séparation par espace et changement de fond uniquement. Border-radius réservé aux éléments UI internes (cards, boutons, badges, images, inputs).
-- **Typographie forte** — les titres portent la hiérarchie, pas les couleurs
-- **Fond sombre dominant** sur les sections hero et alternées — accent cyan pour les CTA uniquement
+- **Fond de page quasi unique** — `--color-bg` est utilisé sur toutes les sections courantes : Hero, Services, Stats, Projects, Partners et Testimonials.
+- **Deux exceptions seulement** — le Hero peut garder un fond légèrement distinct (`--color-surface-alt` ou un dégradé subtil), tandis que le CTA final est le seul bloc à fond plein `--color-primary` de toute la page et constitue le point d'ancrage unique en fin de scroll.
+- **Variation portée par le contenu** — le rythme visuel vient des cards à bordures, des ombres légères et des couleurs de marque par projet, et non plus de l'alternance des fonds de sections.
+- **Aucune animation de fond** — pas de particules, mesh ou gradients animés ; seules les transitions Framer Motion déjà en place sont utilisées (fade-in, slide-up, stagger).
+- **Référence Theodo** — direction directement inspirée de theodo.com : fond stable et variation par la couleur du contenu.
+- **Sections pleine largeur à angles droits** — pas de `border-radius` sur les sections ; les arrondis sont réservés aux éléments UI internes (cards, boutons, badges, images, inputs).
+- **Typographie forte** — les titres portent la hiérarchie, pas les couleurs.
+
+### 13.1 Composants — spécificités visuelles
+- **Stats** — affiché en panneau centré (`max-width: 900px`), avec fond `--color-surface`, bordure `1px solid --color-border`, ombre légère et séparateurs verticaux entre les quatre métriques ; ce n'est pas une section pleine largeur colorée.
+- **Testimonials** — fond global `--color-bg` ; la card individuelle porte la distinction avec `--color-surface`, une bordure et une ombre légère. Le texte utilise `--color-text`, sans texte blanc sur fond sombre.
+- **Projects** — chaque card possède une couleur de bandeau visuel dédiée par secteur : AOA Togo en teal/vert, JeunessePlus en corail/rose et Elycha en ambre/orange. Les icônes Lucide correspondantes sont `Heart`, `HeartPulse` et `Home`. Le corps de la card reste en `--color-surface` avec une bordure fine ; aucun dégradé n'est utilisé hors du bandeau supérieur d'environ 140px.
+- **CTA final** — fond plein `--color-primary`, sans dégradé ; bouton primaire blanc et bouton secondaire en outline blanc.
 
 ---
 
@@ -336,4 +348,3 @@ export const metadata = {
   manifest: '/site.webmanifest',
 }
 ```
-

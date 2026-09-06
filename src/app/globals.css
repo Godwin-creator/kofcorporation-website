@@ -37,6 +37,7 @@
   --color-bg:          #1A1E3A;
   --color-surface:     #2C417A;
   --color-surface-alt: #2F3974;
+  --color-emphasis:    #111936;
   --color-text:        #E2E8F0;
   --color-text-muted:  #94A3B8;
   --color-border:      #1E293B;
@@ -66,6 +67,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+main {
+  background-color: var(--color-bg);
 }
 
 /* 5. CUSTOM SCROLLBAR — WebKit */
