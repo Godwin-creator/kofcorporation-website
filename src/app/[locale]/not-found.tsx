@@ -1,7 +1,9 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import { Home, Mail } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 
-export default function NotFound() {
+export default async function NotFound() {
+  const t = await getTranslations("notFound");
   return (
     <section
       aria-labelledby="not-found-title"
@@ -47,7 +49,7 @@ export default function NotFound() {
             lineHeight: 1.1,
           }}
         >
-          Page introuvable
+          {t("title")}
         </h1>
         <p
           style={{
@@ -58,7 +60,7 @@ export default function NotFound() {
             fontSize: "1.05rem",
           }}
         >
-          La page que vous cherchez n&apos;existe pas ou a été déplacée.
+          {t("description")}
         </p>
         <div
           style={{
@@ -87,7 +89,7 @@ export default function NotFound() {
             }}
           >
             <Home size={18} aria-hidden="true" />
-            Retour à l&apos;accueil
+            {t("home")}
           </Link>
           <Link
             href="/contact"
@@ -107,7 +109,7 @@ export default function NotFound() {
             }}
           >
             <Mail size={18} aria-hidden="true" />
-            Nous contacter
+            {t("contact")}
           </Link>
         </div>
       </div>

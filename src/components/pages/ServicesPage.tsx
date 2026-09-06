@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -13,6 +13,7 @@ import {
 import type { LucideIcon } from "lucide-react";
 import CallToAction from "@/components/sections/CallToAction";
 import "./ServicesPage.css";
+import { Link } from "@/i18n/navigation";
 
 interface ServiceDetail {
   id: string;
@@ -98,6 +99,7 @@ const cardVariants = {
 };
 
 export default function ServicesPage() {
+  const t = useTranslations("pages");
   return (
     <>
       <div className="services-page">
@@ -109,12 +111,12 @@ export default function ServicesPage() {
           variants={sectionVariants}
         >
           <div className="services-page__hero-inner">
-            <p className="services-page__eyebrow">Nos expertises</p>
+            <p className="services-page__eyebrow">{t("servicesEyebrow")}</p>
             <h1 id="services-page-title">
-              <span className="services-page__hero-title-line">Des solutions digitales</span>
+              <span className="services-page__hero-title-line">{t("servicesTitle")}</span>
               <br />
               <span className="services-page__hero-title-line services-page__hero-title-highlight">
-                pour vos ambitions.
+                {t("servicesHighlight")}
               </span>
             </h1>
             <p className="services-page__hero-description">

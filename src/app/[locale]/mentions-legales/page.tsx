@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
+import { getTranslations } from "next-intl/server";
 
 export const metadata: Metadata = {
   title: "Mentions légales — KofCorporation",
@@ -16,7 +17,9 @@ const sectionTitleStyle = {
   lineHeight: 1.2,
 };
 
-export default function MentionsLegalesPage() {
+export default async function MentionsLegalesPage() {
+  const t = await getTranslations("pages");
+
   return (
     <div style={{ color: "var(--color-text)" }}>
       <header
@@ -36,7 +39,7 @@ export default function MentionsLegalesPage() {
               lineHeight: 0.95,
             }}
           >
-            Mentions Légales
+            {t("legal")}
           </h1>
           <p
             style={{

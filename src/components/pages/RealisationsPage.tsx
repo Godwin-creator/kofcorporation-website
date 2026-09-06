@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import {
   ArrowUpRight,
@@ -16,6 +16,7 @@ import {
 import type { LucideIcon } from "lucide-react";
 import CallToAction from "@/components/sections/CallToAction";
 import "./RealisationsPage.css";
+import { Link } from "@/i18n/navigation";
 
 interface Project {
   id: string;
@@ -119,6 +120,7 @@ const cardVariants = {
 };
 
 export default function RealisationsPage() {
+  const t = useTranslations("pages");
   return (
     <>
       <div className="realisations-page">
@@ -130,12 +132,12 @@ export default function RealisationsPage() {
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
           <div className="realisations-page__hero-inner">
-            <p className="realisations-page__eyebrow">Nos réalisations</p>
+            <p className="realisations-page__eyebrow">{t("projectsEyebrow")}</p>
             <h1 id="realisations-title">
-              <span className="realisations-page__hero-title-line">Des idées concrètes</span>
+              <span className="realisations-page__hero-title-line">{t("projectsTitle")}</span>
               <br />
               <span className="realisations-page__hero-title-line realisations-page__hero-title-highlight">
-                en solutions utiles.
+                {t("projectsHighlight")}
               </span>
             </h1>
             <p>

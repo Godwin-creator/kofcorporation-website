@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -12,6 +12,7 @@ import {
   Users,
 } from "lucide-react";
 import "./AboutPage.css";
+import { Link } from "@/i18n/navigation";
 
 const VALUES = [
   {
@@ -67,6 +68,7 @@ const sectionVariants = {
 };
 
 export default function AboutPage() {
+  const t = useTranslations("pages");
   return (
     <>
       <div className="about-page">
@@ -78,12 +80,12 @@ export default function AboutPage() {
           variants={sectionVariants}
         >
           <div className="about-page__hero-inner">
-            <p className="about-page__eyebrow">Qui sommes-nous ?</p>
+            <p className="about-page__eyebrow">{t("aboutEyebrow")}</p>
             <h1 id="about-title">
-              <span className="about-page__hero-title-line">Une équipe locale,</span>
+              <span className="about-page__hero-title-line">{t("aboutTitle")}</span>
               <br />
               <span className="about-page__hero-title-line about-page__hero-title-highlight">
-                des standards mondiaux.
+                {t("aboutHighlight")}
               </span>
             </h1>
             <p>

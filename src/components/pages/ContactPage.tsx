@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -13,6 +14,7 @@ import {
 import "./ContactPage.css";
 
 export default function ContactPage() {
+  const t = useTranslations("contact");
   const [submitted, setSubmitted] = useState(false);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -30,17 +32,16 @@ export default function ContactPage() {
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
         <div className="contact-page__hero-inner">
-          <p className="contact-page__eyebrow">Nous contacter</p>
+          <p className="contact-page__eyebrow">{t("eyebrow")}</p>
           <h1 id="contact-title">
-            <span className="contact-page__hero-title-line">Parlons de &quot;QUOI&quot;</span>
+            <span className="contact-page__hero-title-line">{t("headline")}</span>
             <br />
             <span className="contact-page__hero-title-line contact-page__hero-title-highlight">
-              construire ensemble.
+              {t("headlineHighlight")}
             </span>
           </h1>
           <p>
-            Un projet web, mobile, logiciel ou une idée à clarifier ? Décrivez-nous
-            votre besoin, nous vous répondrons avec une première piste concrète.
+            {t("intro")}
           </p>
         </div>
       </motion.section>
@@ -58,74 +59,70 @@ export default function ContactPage() {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <p className="contact-page__eyebrow">Votre projet</p>
-            <h2 id="contact-form-title">Dites-nous où vous voulez aller.</h2>
+            <p className="contact-page__eyebrow">{t("project")}</p>
+            <h2 id="contact-form-title">{t("formTitle")}</h2>
             {submitted ? (
               <div className="contact-page__success" role="status">
                 <Send size={22} strokeWidth={1.8} aria-hidden="true" />
-                <h3>Merci pour votre message.</h3>
-                <p>
-                  Votre demande est prête à être transmise à notre équipe. Nous
-                  reviendrons vers vous rapidement.
-                </p>
+                <h3>{t("successTitle")}</h3>
+                <p>{t("successDescription")}</p>
                 <button type="button" onClick={() => setSubmitted(false)}>
-                  Envoyer un autre message
+                  {t("another")}
                 </button>
               </div>
             ) : (
               <form className="contact-form" onSubmit={handleSubmit}>
                 <div className="contact-form__row">
                   <label>
-                    Nom complet
-                    <input name="name" type="text" placeholder="Votre nom" required />
+                    {t("name")}
+                    <input name="name" type="text" placeholder={t("namePlaceholder")} required />
                   </label>
                   <label>
-                    Email professionnel
-                    <input name="email" type="email" placeholder="vous@entreprise.com" required />
+                    {t("email")}
+                    <input name="email" type="email" placeholder={t("emailPlaceholder")} required />
                   </label>
                 </div>
                 <label>
-                  Sujet
+                  {t("subject")}
                   <select name="subject" defaultValue="" required>
                     <option value="" disabled>
-                      Choisir un sujet
+                      {t("chooseSubject")}
                     </option>
-                    <option value="web">Projet web</option>
-                    <option value="mobile">Application mobile</option>
-                    <option value="software">Logiciel de gestion</option>
-                    <option value="training">Formation ou coaching</option>
-                    <option value="other">Autre demande</option>
+                    <option value="web">{t("web")}</option>
+                    <option value="mobile">{t("mobile")}</option>
+                    <option value="software">{t("software")}</option>
+                    <option value="training">{t("training")}</option>
+                    <option value="other">{t("other")}</option>
                   </select>
                 </label>
                 <label>
-                  Parlez-nous de votre projet
+                  {t("message")}
                   <textarea
                     name="message"
                     rows={6}
-                    placeholder="Objectifs, contexte, délais…"
+                    placeholder={t("messagePlaceholder")}
                     required
                   />
                 </label>
                 <button className="contact-form__submit" type="submit">
-                  Envoyer le message
+                  {t("send")}
                   <ArrowRight size={18} strokeWidth={1.8} aria-hidden="true" />
                 </button>
                 <p className="contact-form__note">
-                  En envoyant ce formulaire, vous acceptez que KofCorporation
-                  utilise ces informations pour vous répondre.
+                  {t("privacy")}
                 </p>
               </form>
             )}
           </motion.div>
 
-          <aside className="contact-page__aside" aria-label="Coordonnées KofCorporation">
+          <aside className="contact-page__aside" aria-label={t("formAside")}>
             <div className="contact-page__details">
-              <p className="contact-page__eyebrow">Nos coordonnées</p>
-              <h2>Une équipe accessible, basée à Lomé.</h2>
+              <p className="contact-page__eyebrow">{t("details")}</p>
+              <h2>{t("detailsTitle")}</h2>
               <ul>
                 <li>
                   <MapPin size={20} strokeWidth={1.7} aria-hidden="true" />
-                  <span>Agoè Minamadou, à côté de ESA, Lomé, Togo</span>
+                  <span>{t("address")}</span>
                 </li>
                 <li>
                   <Phone size={20} strokeWidth={1.7} aria-hidden="true" />
@@ -142,14 +139,14 @@ export default function ContactPage() {
                 </li>
                 <li>
                   <Clock3 size={20} strokeWidth={1.7} aria-hidden="true" />
-                  <span>Lun–Sam, 8h–18h</span>
+                  <span>{t("hours")}</span>
                 </li>
               </ul>
             </div>
 
             <div className="contact-page__map">
               <iframe
-                title="Localisation de KofCorporation à Lomé"
+                title={t("map")}
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1200!2d1.1903082352326708!3d6.222112510720469!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1021599db15d7109%3A0xd3dd99c055cdec10!2sKofCorporation!5e1!3m2!1sen!2stg!4v1788719337955!5m2!1sen!2stg"
                 loading="lazy"
                 referrerPolicy="strict-origin-when-cross-origin"

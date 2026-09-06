@@ -1,11 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import "./globals.css";
+import { hasLocale } from "next-intl";
+import { getMessages, setRequestLocale } from "next-intl/server";
+import { notFound } from "next/navigation";
+import { NextIntlClientProvider } from "next-intl";
+import "../globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import InlineScript from "@/components/InlineScript";
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
+import { routing } from "@/i18n/routing";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -49,20 +54,39 @@ const themeInitScript = `
 
 export default function RootLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }) {
+  return <LocaleLayout params={params}>{children}</LocaleLayout>;
+}
+
+async function LocaleLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) notFound();
+  setRequestLocale(locale);
+  const messages = await getMessages();
+
   return (
-    <html lang="fr" suppressHydrationWarning={true} className={cn("font-sans", geist.variable)}>
+    <html lang={locale} suppressHydrationWarning={true} className={cn("font-sans", geist.variable)}>
       <head>
         {/* Injection du thème avant le premier paint — évite le flash */}
         <InlineScript html={themeInitScript} />
       </head>
       <body className="font-sans min-h-full flex flex-col" style={{ paddingTop: 64 }}>
+        <NextIntlClientProvider messages={messages}>
             <Header />
             <main style={{ flex: 1 }}>{children}</main>
             <Footer />
             <BackToTop />
+        </NextIntlClientProvider>
       </body>
     </html>
   );
