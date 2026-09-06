@@ -92,7 +92,7 @@
   font-weight: 500;
   color: var(--color-text-muted);
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 0;
   transition: color 0.2s ease, background-color 0.2s ease;
 }
 
@@ -121,7 +121,7 @@
   width: 36px;
   height: 36px;
   border: none;
-  border-radius: 8px;
+  border-radius: 0;
   background-color: transparent;
   color: var(--color-text-muted);
   cursor: pointer;
@@ -167,7 +167,7 @@
   padding: 0.25rem;
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: 10px;
+  border-radius: 0;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   z-index: 50;
 }
@@ -177,7 +177,7 @@
   width: 100%;
   padding: 0.4rem 0.75rem;
   border: none;
-  border-radius: 6px;
+  border-radius: 0;
   background: transparent;
   color: var(--color-text-muted);
   font-family: var(--font-body);
@@ -210,7 +210,7 @@
   color: #ffffff;
   background: linear-gradient(135deg, #0CACE8 0%, #1C71AA 100%);
   border: none;
-  border-radius: 9px;
+  border-radius: 0;
   text-decoration: none;
   cursor: pointer;
   transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
@@ -242,7 +242,7 @@
   width: 40px;
   height: 40px;
   border: none;
-  border-radius: 8px;
+  border-radius: 0;
   background: transparent;
   color: var(--color-text);
   cursor: pointer;
@@ -302,7 +302,7 @@
   font-weight: 600;
   color: var(--color-text);
   text-decoration: none;
-  border-radius: 10px;
+  border-radius: 0;
   transition: color 0.2s ease, background-color 0.2s ease;
 }
 
@@ -324,7 +324,7 @@
   color: #ffffff;
   background: linear-gradient(135deg, #0CACE8 0%, #1C71AA 100%);
   border: none;
-  border-radius: 12px;
+  border-radius: 0;
   text-decoration: none;
   cursor: pointer;
   box-shadow: 0 2px 12px rgba(12, 172, 232, 0.25);

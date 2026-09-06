@@ -11,7 +11,7 @@
   margin: 0 auto;
   padding: 3rem;
   border: 1px solid var(--color-border);
-  border-radius: 12px;
+  border-radius: 0;
   background-color: var(--color-surface);
   box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
 }

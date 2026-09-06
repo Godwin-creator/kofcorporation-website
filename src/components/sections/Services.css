@@ -48,7 +48,7 @@
   align-items: flex-start;
   padding: 2rem;
   border: 1px solid var(--color-border);
-  border-radius: 12px;
+  border-radius: 0;
   background-color: var(--color-surface);
   transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
 }
@@ -67,7 +67,7 @@
   height: 48px;
   margin-bottom: 1.5rem;
   border: 1px solid rgba(12, 172, 232, 0.25);
-  border-radius: 10px;
+  border-radius: 0;
   color: var(--color-accent);
   background-color: rgba(12, 172, 232, 0.08);
 }
@@ -103,7 +103,7 @@
 .service-card__tags li {
   padding: 0.3rem 0.6rem;
   border: 1px solid var(--color-border);
-  border-radius: 999px;
+  border-radius: 0;
   color: var(--color-text-muted);
   font-family: var(--font-body);
   font-size: 0.72rem;

@@ -272,7 +272,7 @@ Extraite du site actuel (à affiner via DevTools) et adaptée pour les deux mode
 - **Variation portée par le contenu** — le rythme visuel vient des cards à bordures, des ombres légères et des couleurs de marque par projet, et non plus de l'alternance des fonds de sections.
 - **Aucune animation de fond** — pas de particules, mesh ou gradients animés ; seules les transitions Framer Motion déjà en place sont utilisées (fade-in, slide-up, stagger).
 - **Référence Theodo** — direction directement inspirée de theodo.com : fond stable et variation par la couleur du contenu.
-- **Sections pleine largeur à angles droits** — pas de `border-radius` sur les sections ; les arrondis sont réservés aux éléments UI internes (cards, boutons, badges, images, inputs).
+- **Approche sharp / zero rounded** — à partir de maintenant, tous les composants adoptent des angles droits et `border-radius: 0`. Aucun arrondi n'est autorisé sur les sections, cards, boutons, badges, images, inputs, contrôles ou éléments décoratifs.
 - **Typographie forte** — les titres portent la hiérarchie, pas les couleurs.
 
 ### 13.1 Composants — spécificités visuelles
