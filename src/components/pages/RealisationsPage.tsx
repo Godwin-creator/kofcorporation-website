@@ -132,7 +132,11 @@ export default function RealisationsPage() {
           <div className="realisations-page__hero-inner">
             <p className="realisations-page__eyebrow">Nos réalisations</p>
             <h1 id="realisations-title">
-              Des idées concrétisées en solutions utiles.
+              <span className="realisations-page__hero-title-line">Des idées concrètes</span>
+              <br />
+              <span className="realisations-page__hero-title-line realisations-page__hero-title-highlight">
+                en solutions utiles.
+              </span>
             </h1>
             <p>
               Nous concevons des expériences digitales qui répondent à des

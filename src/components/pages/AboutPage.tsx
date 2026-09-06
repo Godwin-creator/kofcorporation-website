@@ -79,7 +79,13 @@ export default function AboutPage() {
         >
           <div className="about-page__hero-inner">
             <p className="about-page__eyebrow">Qui sommes-nous ?</p>
-            <h1 id="about-title">Une équipe locale. Des standards internationaux.</h1>
+            <h1 id="about-title">
+              <span className="about-page__hero-title-line">Une équipe locale,</span>
+              <br />
+              <span className="about-page__hero-title-line about-page__hero-title-highlight">
+                des standards mondiaux.
+              </span>
+            </h1>
             <p>
               KofCorporation est une société informatique togolaise qui conçoit
               des applications web, mobiles et des logiciels sur mesure pour

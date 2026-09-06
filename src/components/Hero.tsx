@@ -10,7 +10,7 @@ export default function Hero() {
     <section className="hero">
       <div className="hero__inner">
         <div className="hero__content">
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
@@ -18,7 +18,7 @@ export default function Hero() {
           >
             <span className="hero__badge-pulse" />
             Agence Tech basée à Lomé, Togo
-          </motion.div>
+          </motion.div> */}
 
           <motion.h1
             className="hero__title"

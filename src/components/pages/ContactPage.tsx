@@ -31,7 +31,13 @@ export default function ContactPage() {
       >
         <div className="contact-page__hero-inner">
           <p className="contact-page__eyebrow">Nous contacter</p>
-          <h1 id="contact-title">Parlons de ce que nous pouvons construire ensemble.</h1>
+          <h1 id="contact-title">
+            <span className="contact-page__hero-title-line">Parlons de &quot;QUOI&quot;</span>
+            <br />
+            <span className="contact-page__hero-title-line contact-page__hero-title-highlight">
+              construire ensemble.
+            </span>
+          </h1>
           <p>
             Un projet web, mobile, logiciel ou une idée à clarifier ? Décrivez-nous
             votre besoin, nous vous répondrons avec une première piste concrète.

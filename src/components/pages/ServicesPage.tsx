@@ -111,7 +111,11 @@ export default function ServicesPage() {
           <div className="services-page__hero-inner">
             <p className="services-page__eyebrow">Nos expertises</p>
             <h1 id="services-page-title">
-              La technologie au service de vos ambitions.
+              <span className="services-page__hero-title-line">Des solutions digitales</span>
+              <br />
+              <span className="services-page__hero-title-line services-page__hero-title-highlight">
+                pour vos ambitions.
+              </span>
             </h1>
             <p className="services-page__hero-description">
               De la première idée au produit en production, nous construisons
