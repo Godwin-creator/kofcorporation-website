@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, Code2 } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 import Threads from "./Threads";
 import "./Hero.css";
 
@@ -11,6 +12,15 @@ export default function Hero() {
     <section className="hero">
       <div className="hero__inner">
         <div className="hero__content">
+          <div className="hero__threads" aria-hidden="true">
+            <Threads
+              color={[0.32, 0.15, 1]}
+              amplitude={2}
+              distance={0.7}
+              enableMouseInteraction={false}
+            />
+          </div>
+
           <motion.h1
             className="hero__title"
             initial={{ opacity: 0, y: 20 }}
@@ -54,39 +64,16 @@ export default function Hero() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.3 }}
         >
-          <div className="hero__threads" aria-hidden="true">
-            <Threads
-              color={[0.32, 0.15, 1]}
-              amplitude={2}
-              distance={0.7}
-              enableMouseInteraction={false}
+          <div className="hero__image">
+            <Image
+              src="/images/hero-team.jpg"
+              alt="L'équipe KofCorporation au travail"
+              fill
+              sizes="(max-width: 767px) 0px, (max-width: 1023px) 100vw, 45vw"
+              className="hero__image-content"
+              priority
             />
-          </div>
-
-          <div className="hero__code-window">
-            <div className="hero__code-header">
-              <span className="hero__code-dot" style={{ backgroundColor: "#FF5F56" }} />
-              <span className="hero__code-dot" style={{ backgroundColor: "#FFBD2E" }} />
-              <span className="hero__code-dot" style={{ backgroundColor: "#27C93F" }} />
-            </div>
-            <div className="hero__code-body">
-              <pre>
-                <code>
-                  <span className="code-keyword">const</span> <span className="code-variable">solution</span> = <span className="code-keyword">new</span> <span className="code-class">KofCorporation</span>();{"\n"}
-                  {"\n"}
-                  <span className="code-keyword">await</span> solution.<span className="code-function">build</span>({"{\n"}
-                  {"  "}type: <span className="code-string">&quot;Web &amp; Mobile&quot;</span>,{"\n"}
-                  {"  "}quality: <span className="code-number">100</span>,{"\n"}
-                  {"  "}fastDelivery: <span className="code-boolean">true</span>{"\n"}
-                  {"}"});{"\n"}
-                  {"\n"}
-                  <span className="code-comment">{"// L'innovation commence ici."}</span>
-                </code>
-              </pre>
-              <div className="hero__code-icon">
-                <Code2 size={48} strokeWidth={1} />
-              </div>
-            </div>
+            <div className="hero__image-overlay" aria-hidden="true" />
           </div>
         </motion.div>
       </div>
