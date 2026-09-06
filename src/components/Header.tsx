@@ -207,7 +207,7 @@ export default function Header() {
             </div>
 
             {/* CTA — Desktop */}
-            <Link href="/contact" className="header__cta">
+            <Link href="/contact#contact-form" className="header__cta">
               <CalendarCheck size={16} strokeWidth={2} />
               Prendre RDV
             </Link>
@@ -288,7 +288,7 @@ export default function Header() {
 
               {/* Mobile CTA */}
               <Link
-                href="/contact"
+                href="/contact#contact-form"
                 className="mobile-nav__cta"
                 onClick={() => setMobileOpen(false)}
               >

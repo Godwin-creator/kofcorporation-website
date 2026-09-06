@@ -45,7 +45,11 @@ export default function ContactPage() {
         </div>
       </motion.section>
 
-      <section className="contact-page__content" aria-labelledby="contact-form-title">
+      <section
+        id="contact-form"
+        className="contact-page__content"
+        aria-labelledby="contact-form-title"
+      >
         <div className="contact-page__container contact-page__grid">
           <motion.div
             className="contact-page__form-panel"

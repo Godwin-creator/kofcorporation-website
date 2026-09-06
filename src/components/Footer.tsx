@@ -90,7 +90,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="footer__link">
+                <Link href="/contact#contact-form" className="footer__link">
                   Prendre rendez-vous
                 </Link>
               </li>

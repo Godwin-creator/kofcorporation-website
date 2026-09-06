@@ -22,7 +22,10 @@ export default function CallToAction() {
           Parlons de votre projet et trouvons la solution qui fera avancer votre activité.
         </p>
         <div className="call-to-action__actions">
-          <Link href="/contact" className="call-to-action__button call-to-action__button--primary">
+          <Link
+            href="/contact#contact-form"
+            className="call-to-action__button call-to-action__button--primary"
+          >
             <CalendarCheck size={19} strokeWidth={1.9} aria-hidden="true" />
             Prendre rendez-vous
           </Link>

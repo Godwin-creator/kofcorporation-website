@@ -3,6 +3,10 @@
   color: var(--color-text);
 }
 
+.contact-page__content {
+  scroll-margin-top: 5rem;
+}
+
 .contact-page__hero {
   background-color: var(--color-surface-alt);
 }

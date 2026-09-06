@@ -7,10 +7,10 @@ type Theme = "light" | "dark";
 /**
  * Lit le thème courant depuis le DOM (attribut data-theme appliqué par le
  * script inline du layout) ou depuis localStorage. Côté SSR on renvoie
- * toujours 'dark' pour correspondre à notre valeur par défaut premium.
+ * toujours 'light' pour garantir un affichage clair par défaut.
  */
 function getInitialTheme(): Theme {
-  if (typeof window === "undefined") return "dark";
+  if (typeof window === "undefined") return "light";
 
   // Priorité 1 : attribut déjà positionné par le script anti-flash
   const domTheme = document.documentElement.getAttribute("data-theme");
@@ -20,10 +20,8 @@ function getInitialTheme(): Theme {
   const stored = localStorage.getItem("theme");
   if (stored === "light" || stored === "dark") return stored;
 
-  // Priorité 3 : préférence système
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
+  // Aucune préférence enregistrée : le site commence en mode clair.
+  return "light";
 }
 
 /**
@@ -39,7 +37,7 @@ export function useTheme(): {
   isDark: boolean;
 } {
   // Initialisation SSR-safe : valeur stable avant l'hydratation
-  const [theme, setTheme] = useState<Theme>("dark");
+  const [theme, setTheme] = useState<Theme>("light");
 
   // Synchronisation après montage avec ce que le script inline a déjà appliqué
   useEffect(() => {
