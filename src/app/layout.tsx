@@ -2,7 +2,12 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import BackToTop from "@/components/BackToTop";
 import InlineScript from "@/components/InlineScript";
+import { Geist } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
   title: "KofCorporation — Société informatique d'édition de logiciels",
@@ -32,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" suppressHydrationWarning={true}>
+    <html lang="fr" suppressHydrationWarning={true} className={cn("font-sans", geist.variable)}>
       <head>
         {/* Injection du thème avant le premier paint — évite le flash */}
         <InlineScript html={themeInitScript} />
@@ -41,6 +46,7 @@ export default function RootLayout({
             <Header />
             <main style={{ flex: 1 }}>{children}</main>
             <Footer />
+            <BackToTop />
       </body>
     </html>
   );

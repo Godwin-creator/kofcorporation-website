@@ -2,6 +2,7 @@
 > **Statut** : En cours — champs `[À confirmer]` à valider lors de la présentation v1  
 > **Dernière mise à jour** : 6 septembre 2026  
 > **Responsable projet** : Komi Godwin EDOH BEDI — Stagiaire Développement Web
+> **État réel du projet** : site vitrine fonctionnel, pages métiers terminées, direction visuelle stabilisée, thème par défaut en mode clair
 
 ---
 
@@ -267,19 +268,24 @@ Extraite du site actuel (à affiner via DevTools) et adaptée pour les deux mode
 | **Style & Cohérence** | Trait fin (strokeWidth 1.5 à 2), aligné avec la typographie, taille standardisée (16px, 20px, 24px) |
 
 ### Philosophie visuelle
-- **Fond de page quasi unique** — `--color-bg` est utilisé sur toutes les sections courantes : Hero, Services, Stats, Projects, Partners et Testimonials.
-- **Deux exceptions seulement** — le Hero peut garder un fond légèrement distinct (`--color-surface-alt` ou un dégradé subtil), tandis que le CTA final est le seul bloc à fond plein `--color-primary` de toute la page et constitue le point d'ancrage unique en fin de scroll.
+- **Fond de page stable** — `--color-bg` est utilisé sur la majorité des sections : Hero, Services, Stats, Projects, Partners et Testimonials.
+- **Une seule exception validée** — le composant `Threads` est autorisé UNIQUEMENT dans le Hero pour apporter une sensation premium sans dénaturer le design. Toutes les autres sections restent sans animation de fond.
 - **Variation portée par le contenu** — le rythme visuel vient des cards à bordures, des ombres légères et des couleurs de marque par projet, et non plus de l'alternance des fonds de sections.
-- **Aucune animation de fond** — pas de particules, mesh ou gradients animés ; seules les transitions Framer Motion déjà en place sont utilisées (fade-in, slide-up, stagger).
-- **Référence Theodo** — direction directement inspirée de theodo.com : fond stable et variation par la couleur du contenu.
-- **Approche sharp / zero rounded** — à partir de maintenant, tous les composants adoptent des angles droits et `border-radius: 0`. Aucun arrondi n'est autorisé sur les sections, cards, boutons, badges, images, inputs, contrôles ou éléments décoratifs.
+- **Aucune animation de fond en dehors du Hero** — pas de particules, mesh, gradients animés ou effets de lumière dans les sections générales ; seules les transitions Framer Motion déjà en place sont utilisées (fade-in, slide-up, stagger).
+- **Référence Theodo / modern SaaS** — direction inspirée d'une charte premium sobre : fond stable, contenus clairs, hiérarchie forte, pas de bruit visuel.
+- **Approche sharp / zero rounded** — tous les composants adoptent des angles droits et `border-radius: 0`. Aucun arrondi n'est autorisé sur les sections, cards, boutons, badges, images, inputs, contrôles ou éléments décoratifs.
 - **Typographie forte** — les titres portent la hiérarchie, pas les couleurs.
+- **Thème par défaut** — le site a été stabilisé en mode clair (`light`) comme réglage par défaut, avec le mode sombre conservé comme variante secondaire.
+- **Réalisations intégrées** — les pages /services, /qui-sommes-nous, /realisations, /contact sont désormais validées et cohérentes avec le design système final.
 
 ### 13.1 Composants — spécificités visuelles
+- **Hero** — l’unique animation de fond validée est le composant `Threads`, positionné derrière la fenêtre code du visuel sans interférer avec le contenu. Le reste de la page reste sobre et sans animation globale.
 - **Stats** — affiché en panneau centré (`max-width: 900px`), avec fond `--color-surface`, bordure `1px solid --color-border`, ombre légère et séparateurs verticaux entre les quatre métriques ; ce n'est pas une section pleine largeur colorée.
 - **Testimonials** — fond global `--color-bg` ; la card individuelle porte la distinction avec `--color-surface`, une bordure et une ombre légère. Le texte utilise `--color-text`, sans texte blanc sur fond sombre.
 - **Projects** — chaque card possède une couleur de bandeau visuel dédiée par secteur : AOA Togo en teal/vert, JeunessePlus en corail/rose et Elycha en ambre/orange. Les icônes Lucide correspondantes sont `Heart`, `HeartPulse` et `Home`. Le corps de la card reste en `--color-surface` avec une bordure fine ; aucun dégradé n'est utilisé hors du bandeau supérieur d'environ 140px.
 - **CTA final** — fond plein `--color-primary`, sans dégradé ; bouton primaire blanc et bouton secondaire en outline blanc.
+- **Google Maps embed** — intégré sur la page Contact pour présenter l'emplacement de l’agence à Lomé, sans heurter le design global du site.
+- **Correctifs de stabilité** — erreurs de lint résolues sur `Hero.tsx` et `useTheme.ts` lors de la stabilisation du design et du thème.
 
 ---
 
@@ -317,7 +323,8 @@ Extraite du site actuel (à affiner via DevTools) et adaptée pour les deux mode
 - Sélecteur dans le header : dropdown ou toggle FR | EN
 
 ### Mode clair / sombre
-- Géré via CSS custom properties sur `:root` et `[data-theme="dark"]`
+- Géré via CSS custom properties sur `:root`, `[data-theme="light"]` et `[data-theme="dark"]`
+- Thème par défaut validé : `light` (décision prise en cours de développement)
 - Toggle dans le header — persisté en `localStorage`
 - Palette adaptée (voir section 13)
 - Logos partenaires : prévoir versions adaptées mode sombre (fond blanc semi-opaque ou inversion)

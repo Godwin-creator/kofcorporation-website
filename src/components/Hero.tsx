@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, Code2 } from "lucide-react";
+import Threads from "./Threads";
 import "./Hero.css";
 
 export default function Hero() {
@@ -10,16 +11,6 @@ export default function Hero() {
     <section className="hero">
       <div className="hero__inner">
         <div className="hero__content">
-          {/* <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="hero__badge"
-          >
-            <span className="hero__badge-pulse" />
-            Agence Tech basée à Lomé, Togo
-          </motion.div> */}
-
           <motion.h1
             className="hero__title"
             initial={{ opacity: 0, y: 20 }}
@@ -63,6 +54,15 @@ export default function Hero() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.3 }}
         >
+          <div className="hero__threads" aria-hidden="true">
+            <Threads
+              color={[0.32, 0.15, 1]}
+              amplitude={2}
+              distance={0.7}
+              enableMouseInteraction={false}
+            />
+          </div>
+
           <div className="hero__code-window">
             <div className="hero__code-header">
               <span className="hero__code-dot" style={{ backgroundColor: "#FF5F56" }} />
@@ -88,10 +88,6 @@ export default function Hero() {
               </div>
             </div>
           </div>
-          
-          {/* Decorative elements */}
-          <div className="hero__glow hero__glow--1" />
-          <div className="hero__glow hero__glow--2" />
         </motion.div>
       </div>
     </section>

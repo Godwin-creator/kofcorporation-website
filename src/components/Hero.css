@@ -150,18 +150,43 @@
 .hero__visual {
   position: relative;
   width: 100%;
+  min-height: 500px;
   display: flex;
   justify-content: center;
+  align-items: center;
+  isolation: isolate;
+}
+
+.hero__threads {
+  position: absolute;
+  inset: -8% -10% -10% -10%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.78;
+  filter: blur(0.5px) saturate(1.15);
+}
+
+.hero__threads .threads-container {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+}
+
+.hero__threads canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .hero__code-window {
   width: 100%;
   max-width: 500px;
-  background-color: #0d1117; /* GitHub dark theme inspired for code */
+  background-color: rgba(13, 17, 23, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 0;
   overflow: hidden;
   box-shadow: 0 24px 48px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(12px);
   z-index: 2;
   position: relative;
 }
@@ -214,32 +239,3 @@
   color: rgba(255, 255, 255, 0.05);
 }
 
-/* ---- Decorative Glow ---- */
-.hero__glow {
-  position: absolute;
-  border-radius: 0;
-  filter: blur(80px);
-  z-index: 1;
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-.hero__glow--1 {
-  top: -10%;
-  right: -10%;
-  width: 300px;
-  height: 300px;
-  background: rgba(12, 172, 232, 0.3);
-}
-
-.hero__glow--2 {
-  bottom: -10%;
-  left: 20%;
-  width: 250px;
-  height: 250px;
-  background: rgba(44, 65, 122, 0.3);
-}
-
-[data-theme="light"] .hero__glow {
-  opacity: 0.3;
-}

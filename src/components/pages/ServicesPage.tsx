@@ -68,7 +68,7 @@ const SERVICES: ServiceDetail[] = [
     benefit: "Une montée en compétence progressive, en présentiel, en ligne ou en hybride.",
     tags: ["Academy", "Présentiel", "En ligne", "Hybride"],
     icon: GraduationCap,
-    href: "/services/formations",
+    href: "https://academy.kofcorporation.com/",
   },
 ];
 
@@ -175,7 +175,12 @@ export default function ServicesPage() {
                       <li key={tag}>{tag}</li>
                     ))}
                   </ul>
-                  <Link className="services-detail-card__link" href={href}>
+                  <Link
+                    className="services-detail-card__link"
+                    href={href}
+                    target={href.startsWith("http") ? "_blank" : undefined}
+                    rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  >
                     Découvrir l&apos;expertise
                     <ArrowRight size={17} strokeWidth={1.8} aria-hidden="true" />
                   </Link>

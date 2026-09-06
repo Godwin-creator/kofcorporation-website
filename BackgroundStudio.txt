@@ -1,0 +1,78 @@
+Animation 1, pointillet suivant le curseur en direct depuis le background
+
+Installer via CLI: npx shadcn@latest add @react-bits/Antigravity-JS-CSS
+Code: 
+<div style={{ width: '1080px', height: '1080px', position: 'relative' }}>
+  <Antigravity
+    count={300}
+    magnetRadius={13}
+    ringRadius={12}
+    waveSpeed={0.6}
+    waveAmplitude={1}
+    particleSize={1}
+    lerpSpeed={0.1}
+    color="#3B82F6"
+    autoAnimate
+    particleVariance={1}
+    rotationSpeed={0}
+    depthFactor={1}
+    pulseSpeed={3}
+    particleShape="capsule"
+    fieldStrength={10}
+  />
+</div>
+
+
+
+
+Animation 2, celui du curseur au click :
+
+Installer via CLI: npx shadcn@latest add @react-bits/ClickSpark-JS-CSS
+Code: 
+<div style={{ width: '1080px', height: '1080px', position: 'relative' }}>
+  <ClickSpark
+    sparkColor="#ffffff"
+    sparkSize={10}
+    sparkRadius={51}
+    sparkCount={8}
+    duration={400}
+    easing="ease-out"
+    extraScale={1}
+  />
+</div>
+
+
+Animation 3, background avec des pointillet comme grille et suivui du curseur.
+
+Installer via CLI: npx shadcn@latest add @react-bits/DotField-JS-CSS
+Code: 
+<div style={{ width: '1080px', height: '1080px', position: 'relative' }}>
+  <DotField
+    dotRadius={1}
+    dotSpacing={20}
+    cursorRadius={400}
+    cursorForce={0.22}
+    bulgeOnly
+    bulgeStrength={67}
+    glowRadius={100}
+    sparkle={false}
+    waveAmplitude={0}
+    gradientFrom="#6366F1"
+    gradientTo="#ffffff"
+    glowColor="#704cac"
+  />
+</div>
+
+
+Animation 4, Threads
+
+Installer via CLI: npx shadcn@latest add @react-bits/Threads-JS-CSS
+Code:
+<div style={{ width: '1080px', height: '1080px', position: 'relative' }}>
+  <Threads
+    color={[0.32,0.15,1]}
+    amplitude={2}
+    distance={0.7}
+    enableMouseInteraction={false}
+  />
+</div>

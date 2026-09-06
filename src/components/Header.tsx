@@ -45,7 +45,7 @@ type LangCode = (typeof LANGUAGES)[number]["code"];
 /* ------------------------------------------------------------------ */
 
 export default function Header() {
-  const { theme, toggleTheme, isDark } = useTheme();
+  const { toggleTheme, isDark } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [currentLang, setCurrentLang] = useState<LangCode>("fr");

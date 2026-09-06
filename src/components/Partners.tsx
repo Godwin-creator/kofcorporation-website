@@ -1,4 +1,5 @@
 import "./Partners.css";
+import Image from "next/image";
 
 interface Partner {
   id: string;
@@ -55,10 +56,12 @@ export default function Partners() {
                 className="partner-logo-frame"
                 aria-hidden={index >= PARTNERS.length}
               >
-                <img
+                <Image
                   className="partner-logo"
                   src={partner.logo}
                   alt={index < PARTNERS.length ? partner.name : ""}
+                  width={160}
+                  height={64}
                 />
               </div>
             ))}
