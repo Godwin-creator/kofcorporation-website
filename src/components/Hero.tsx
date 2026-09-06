@@ -75,12 +75,12 @@ export default function Hero() {
                   <span className="code-keyword">const</span> <span className="code-variable">solution</span> = <span className="code-keyword">new</span> <span className="code-class">KofCorporation</span>();{"\n"}
                   {"\n"}
                   <span className="code-keyword">await</span> solution.<span className="code-function">build</span>({"{\n"}
-                  {"  "}type: <span className="code-string">"Web & Mobile"</span>,{"\n"}
+                  {"  "}type: <span className="code-string">&quot;Web &amp; Mobile&quot;</span>,{"\n"}
                   {"  "}quality: <span className="code-number">100</span>,{"\n"}
                   {"  "}fastDelivery: <span className="code-boolean">true</span>{"\n"}
                   {"}"});{"\n"}
                   {"\n"}
-                  <span className="code-comment">// L'innovation commence ici.</span>
+                  <span className="code-comment">{"// L'innovation commence ici."}</span>
                 </code>
               </pre>
               <div className="hero__code-icon">

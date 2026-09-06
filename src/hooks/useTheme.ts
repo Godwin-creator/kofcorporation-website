@@ -43,7 +43,11 @@ export function useTheme(): {
 
   // Synchronisation après montage avec ce que le script inline a déjà appliqué
   useEffect(() => {
-    setTheme(getInitialTheme());
+    const frame = window.requestAnimationFrame(() => {
+      setTheme(getInitialTheme());
+    });
+
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   // Propagation des changements vers le DOM et localStorage
