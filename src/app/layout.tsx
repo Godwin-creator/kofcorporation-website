@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import InlineScript from "@/components/InlineScript";
 
 export const metadata: Metadata = {
   title: "KofCorporation — Société informatique d'édition de logiciels",
@@ -38,7 +39,7 @@ export default function RootLayout({
     <html lang="fr" suppressHydrationWarning={true}>
       <head>
         {/* Injection du thème avant le premier paint — évite le flash */}
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <InlineScript html={themeInitScript} />
       </head>
       <body className="font-sans min-h-full flex flex-col" style={{ paddingTop: 64 }}>
             <Header />

@@ -9,21 +9,18 @@ import { AnimatePresence, motion } from "framer-motion";
  *
  * - Apparaît au premier rendu, disparaît après 1200 ms.
  * - Utilise AnimatePresence de Framer Motion pour l'animation de sortie.
- * - SSR-safe : retourne null côté serveur.
+ * - SSR-safe : attend le montage client avant de s'afficher.
  */
 export default function SplashScreen() {
-  // SSR-safe : on ne monte rien côté serveur
-  if (typeof window === "undefined") return null;
-
-  return <SplashScreenClient />;
-}
-
-function SplashScreenClient() {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(false), 1200);
-    return () => clearTimeout(timer);
+    const showTimer = window.setTimeout(() => setIsVisible(true), 0);
+    const hideTimer = window.setTimeout(() => setIsVisible(false), 1200);
+    return () => {
+      window.clearTimeout(showTimer);
+      window.clearTimeout(hideTimer);
+    };
   }, []);
 
   return (
