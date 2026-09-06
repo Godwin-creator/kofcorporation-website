@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -13,14 +13,17 @@ export const metadata: Metadata = {
   title: "KofCorporation — Société informatique d'édition de logiciels",
   description:
     "KofCorporation conçoit des applications web, mobiles et logiciels sur mesure pour les entreprises et startups au Togo.",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#F8F9FA" },
-    { media: "(prefers-color-scheme: dark)", color: "#1A1E3A" },
-  ],
   icons: [
     { rel: "icon", url: "/favicon.svg", type: "image/svg+xml" },
     { rel: "icon", url: "/favicon.ico" },
     { rel: "apple-touch-icon", url: "/apple-touch-icon.png" },
+  ],
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#F8F9FA" },
+    { media: "(prefers-color-scheme: dark)", color: "#1A1E3A" },
   ],
 };
 
