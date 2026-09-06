@@ -91,7 +91,12 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/services/formations" className="footer__link">
+                <Link
+                  href="https://academy.kofcorporation.com/"
+                  className="footer__link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Formations (Academy)
                 </Link>
               </li>
