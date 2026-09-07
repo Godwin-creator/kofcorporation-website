@@ -72,27 +72,27 @@ export default async function MentionsLegalesPage() {
           </h2>
           <dl style={{ margin: 0, color: "var(--color-text-muted)" }}>
             <div>
-              <dt>Dénomination</dt>
+              <dt style={{ textDecoration: "underline" }}>Dénomination</dt>
               <dd>KofCorporation</dd>
             </div>
             <br />
             <div>
-              <dt>Directeur de publication</dt>
+              <dt style={{ textDecoration: "underline" }}>Directeur de publication</dt>
               <dd>Omar Farouk KOUGBADA</dd>
             </div>
             <br />
             <div>
-              <dt>Adresse</dt>
+              <dt style={{ textDecoration: "underline" }}>Adresse</dt>
               <dd>Agoè Minamadou, à côté de ESA, Lomé, Togo</dd>
             </div>
             <br />
             <div>
-              <dt>Téléphone</dt>
+              <dt style={{ textDecoration: "underline" }}>Téléphone</dt>
               <dd>+228 70 44 16 36 / +228 93 55 47 40</dd>
             </div>
             <br />
             <div>
-              <dt>Email</dt>
+              <dt style={{ textDecoration: "underline" }}>Email</dt>
               <dd>
                 <a href="mailto:contact@kofcorporation.com">
                   contact@kofcorporation.com
@@ -101,25 +101,26 @@ export default async function MentionsLegalesPage() {
             </div>
             <br />
             <div>
-              <dt>Forme juridique</dt>
+              <dt style={{ textDecoration: "underline" }}>Forme juridique</dt>
               <dd>SARL U (Société Unipersonnelle à Responsabilité Limitée)</dd>
             </div>
             <br />
             <div>
-              <dt>Numéro CFE</dt>
+              <dt style={{ textDecoration: "underline" }}>Numéro CFE</dt>
               <dd>01882PM2022</dd>
             </div>
             <br />
             <div>
-              <dt>Objet social</dt>
-              <dd>Édition de logiciels, développement IT, 
-  fournitures de matériels informatiques, infographie, 
-  formation dans le domaine de l&apos;informatique notamment 
-  les langages de programmation</dd>
+              <dt style={{ textDecoration: "underline" }}>Objet social</dt>
+              <dd>
+                Édition de logiciels, développement IT, fournitures de matériels
+                informatiques, infographie, formation dans le domaine de
+                l&apos;informatique notamment les langages de programmation
+              </dd>
             </div>
             <br />
             <div>
-              <dt>Numéro CFE</dt>
+              <dt style={{ textDecoration: "underline" }}>Numéro CFE</dt>
               <dd>01882PM2022</dd>
             </div>
           </dl>
