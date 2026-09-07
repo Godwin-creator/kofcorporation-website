@@ -1,13 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import Threads from "./Threads";
 import "./Hero.css";
+import { Link } from "@/i18n/navigation";
 
 export default function Hero() {
+  const t = useTranslations("hero");
   return (
     <section className="hero">
       <div className="hero__inner">
@@ -27,8 +29,8 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            Votre vision, <br />
-            <span className="hero__title-highlight">notre code.</span>
+            {t("headline")} <br />
+            <span className="hero__title-highlight">{t("headlineHighlight")}</span>
           </motion.h1>
 
           <motion.p
@@ -37,9 +39,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            KofCorporation conçoit des applications web, mobiles et des
-            logiciels sur mesure pour accélérer la croissance de votre
-            entreprise.
+            {t("description")}
           </motion.p>
 
           <motion.div
@@ -48,12 +48,12 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            <Link href="/contact" className="hero__cta hero__cta--primary">
-              Prendre RDV
+            <Link href="/services" className="hero__cta hero__cta--primary">
+              {t("discoverServices")}
               <ArrowRight size={18} strokeWidth={2} />
             </Link>
             <Link href="/realisations" className="hero__cta hero__cta--secondary">
-              Découvrir nos réalisations
+              {t("discoverProjects")}
             </Link>
           </motion.div>
         </div>
@@ -67,7 +67,7 @@ export default function Hero() {
           <div className="hero__image">
             <Image
               src="/images/hero-team.png"
-              alt="L'équipe KofCorporation au travail"
+              alt={t("imageAlt")}
               fill
               sizes="(max-width: 767px) 0px, (max-width: 1023px) 100vw, 45vw"
               className="hero__image-content"

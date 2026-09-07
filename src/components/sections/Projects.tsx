@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { useTranslations } from "next-intl";
 import { motion, useInView } from "framer-motion";
 import { ExternalLink, Heart, HeartPulse, Home } from "lucide-react";
 import "./Projects.css";
@@ -64,6 +65,7 @@ const cardVariants = {
 };
 
 export default function Projects() {
+  const t = useTranslations("projects");
   const projectsRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(projectsRef, { once: true, amount: 0.2 });
 
@@ -72,13 +74,13 @@ export default function Projects() {
       <div className="projects__inner">
         <header className="projects__header">
           <div className="projects__heading">
-            <p className="projects__eyebrow">Nos réalisations</p>
+            <p className="projects__eyebrow">{t("eyebrow")}</p>
             <h2 id="projects-title" className="projects__title">
-              Des projets qui transforment les idées en impact
+              {t("title")}
             </h2>
           </div>
           <a className="projects__all-link" href="#">
-            Voir tous les projets <span aria-hidden="true">→</span>
+            {t("viewAll")} <span aria-hidden="true">→</span>
           </a>
         </header>
 
@@ -91,7 +93,7 @@ export default function Projects() {
         >
           {PROJECTS.map(({ id, title, sector, description, tags, url, icon: Icon }) => (
             <motion.article className="project-card" key={id} variants={cardVariants}>
-              <div className={`project-card__visual project-card__visual--${id}`} aria-label={`Aperçu de ${title}`}>
+              <div className={`project-card__visual project-card__visual--${id}`} aria-label={t("preview", { title })}>
                 <span className="project-card__visual-mark" aria-hidden="true">
                   <Icon size={56} strokeWidth={1.4} />
                 </span>
@@ -107,13 +109,13 @@ export default function Projects() {
                     href={url}
                     target="_blank"
                     rel="noreferrer"
-                    aria-label={`Visiter le site de ${title}`}
+                    aria-label={t("visit", { title })}
                   >
                     <ExternalLink size={18} strokeWidth={1.8} aria-hidden="true" />
                   </a>
                 </div>
                 <p className="project-card__description">{description}</p>
-                <ul className="project-card__tags" aria-label={`Technologies utilisées pour ${title}`}>
+                <ul className="project-card__tags" aria-label={t("technologies", { title })}>
                   {tags.map((tag) => (
                     <li key={tag}>{tag}</li>
                   ))}

@@ -3,8 +3,8 @@
 import "./Header.css";
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLocale, useTranslations } from "next-intl";
 import {
   Sun,
   Moon,
@@ -15,22 +15,24 @@ import {
   CalendarCheck,
 } from "lucide-react";
 import { useTheme } from "@/hooks/useTheme";
+import { Link, usePathname, useRouter } from "@/i18n/navigation";
+import SpecularButton from "./ui/SpecularButton";
 
 /* ------------------------------------------------------------------ */
 /*  Types & Data                                                       */
 /* ------------------------------------------------------------------ */
 
 interface NavItem {
-  label: string;
+  key: "home" | "services" | "projects" | "about" | "contact";
   href: string;
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { label: "Accueil", href: "/" },
-  { label: "Services", href: "/services" },
-  { label: "Réalisations", href: "/realisations" },
-  { label: "Qui sommes-nous", href: "/qui-sommes-nous" },
-  { label: "Contact", href: "/contact" },
+  { key: "home", href: "/" },
+  { key: "services", href: "/services" },
+  { key: "projects", href: "/realisations" },
+  { key: "about", href: "/qui-sommes-nous" },
+  { key: "contact", href: "/contact" },
 ];
 
 const LANGUAGES = [
@@ -46,10 +48,19 @@ type LangCode = (typeof LANGUAGES)[number]["code"];
 
 export default function Header() {
   const { toggleTheme, isDark } = useTheme();
+  const t = useTranslations("header");
+  const navT = useTranslations("nav");
+  const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
-  const [currentLang, setCurrentLang] = useState<LangCode>("fr");
   const [scrolled, setScrolled] = useState(false);
+
+  const specularColors = {
+    textColor: isDark ? "#E8F0FE" : "#2F3974",
+    baseColor: isDark ? "#2C417A" : "#FFFFFF",
+  };
 
   /* --- Scroll detection for sticky glass effect ------------------- */
   useEffect(() => {
@@ -86,9 +97,8 @@ export default function Header() {
 
   /* --- Handlers -------------------------------------------------- */
   const handleLangChange = (code: LangCode) => {
-    setCurrentLang(code);
     setLangOpen(false);
-    // TODO: intégrer next-intl pour changer la locale
+    router.replace(pathname, { locale: code });
   };
 
   return (
@@ -99,7 +109,7 @@ export default function Header() {
       >
         <div className="header__inner">
           {/* ---- Logo ---- */}
-          <Link href="/" className="header__logo" aria-label="Accueil KofCorporation">
+          <Link href="/" className="header__logo" aria-label={t("homeAria")}>
             <Image
               src="/images/logo.svg"
               alt="KofCorporation"
@@ -112,13 +122,32 @@ export default function Header() {
           </Link>
 
           {/* ---- Desktop Navigation ---- */}
-          <nav className="header__nav" aria-label="Navigation principale">
+          <nav className="header__nav" aria-label={t("mainNavigation")}>
             <ul className="header__nav-list">
               {NAV_ITEMS.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="header__nav-link">
-                    {item.label}
-                  </Link>
+                  <SpecularButton
+                    href={item.href}
+                    size="sm"
+                    radius={0}
+                    tint="#000000"
+                    tintOpacity={0}
+                    blur={0}
+                    lineColor="#0CACE8"
+                    {...specularColors}
+                    intensity={1}
+                    shineSize={44}
+                    shineFade={40}
+                    thickness={2.5}
+                    speed={1.2}
+                    followMouse
+                    proximity={250}
+                    className={`header__specular-button ${
+                      pathname === item.href ? "header__nav-link--active" : ""
+                    }`}
+                  >
+                    {navT(item.key)}
+                  </SpecularButton>
                 </li>
               ))}
             </ul>
@@ -127,11 +156,25 @@ export default function Header() {
           {/* ---- Actions (theme, lang, CTA) ---- */}
           <div className="header__actions">
             {/* Theme toggle */}
-            <button
+            <SpecularButton
               onClick={toggleTheme}
-              className="header__icon-btn"
-              aria-label={isDark ? "Passer en mode clair" : "Passer en mode sombre"}
-              title={isDark ? "Mode clair" : "Mode sombre"}
+              size="sm"
+              radius={0}
+              tint="#000000"
+              tintOpacity={0}
+              blur={0}
+              lineColor="#0CACE8"
+              {...specularColors}
+              intensity={1}
+              shineSize={44}
+              shineFade={40}
+              thickness={2.5}
+              speed={1.2}
+              followMouse
+              proximity={250}
+              className="header__specular-button header__icon-btn"
+              aria-label={isDark ? t("lightMode") : t("darkMode")}
+              title={isDark ? t("lightMode") : t("darkMode")}
             >
               <AnimatePresence mode="wait" initial={false}>
                 {isDark ? (
@@ -158,27 +201,41 @@ export default function Header() {
                   </motion.span>
                 )}
               </AnimatePresence>
-            </button>
+            </SpecularButton>
 
             {/* Language selector */}
             <div className="header__lang-wrapper">
-              <button
+              <SpecularButton
                 onClick={(e) => {
                   e.stopPropagation();
                   setLangOpen((prev) => !prev);
                 }}
-                className="header__icon-btn header__lang-btn"
-                aria-label="Changer de langue"
+                size="sm"
+                radius={0}
+                tint="#000000"
+                tintOpacity={0}
+                blur={0}
+                lineColor="#0CACE8"
+                {...specularColors}
+                intensity={1}
+                shineSize={44}
+                shineFade={40}
+                thickness={2.5}
+                speed={0.35}
+                followMouse
+                proximity={250}
+                className="header__specular-button header__icon-btn header__lang-btn"
+                aria-label={t("changeLanguage")}
                 aria-expanded={langOpen}
               >
                 <Globe size={18} strokeWidth={1.75} />
-                <span className="header__lang-current">{currentLang.toUpperCase()}</span>
+                <span className="header__lang-current">{locale.toUpperCase()}</span>
                 <ChevronDown
                   size={14}
                   strokeWidth={2}
                   className={`header__lang-chevron ${langOpen ? "header__lang-chevron--open" : ""}`}
                 />
-              </button>
+              </SpecularButton>
 
               <AnimatePresence>
                 {langOpen && (
@@ -195,7 +252,7 @@ export default function Header() {
                         key={lang.code}
                         onClick={() => handleLangChange(lang.code)}
                         className={`header__lang-option ${
-                          currentLang === lang.code ? "header__lang-option--active" : ""
+                          locale === lang.code ? "header__lang-option--active" : ""
                         }`}
                       >
                         {lang.label}
@@ -209,14 +266,14 @@ export default function Header() {
             {/* CTA — Desktop */}
             <Link href="/contact#contact-form" className="header__cta">
               <CalendarCheck size={16} strokeWidth={2} />
-              Prendre RDV
+              {t("bookMeeting")}
             </Link>
 
             {/* Mobile hamburger */}
             <button
               onClick={() => setMobileOpen((prev) => !prev)}
               className="header__hamburger"
-              aria-label={mobileOpen ? "Fermer le menu" : "Ouvrir le menu"}
+              aria-label={mobileOpen ? t("closeMenu") : t("openMenu")}
               aria-expanded={mobileOpen}
             >
               <AnimatePresence mode="wait" initial={false}>
@@ -265,7 +322,7 @@ export default function Header() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 28, stiffness: 300 }}
-              aria-label="Navigation mobile"
+              aria-label={t("mobileNavigation")}
             >
               <ul className="mobile-nav__list">
                 {NAV_ITEMS.map((item, i) => (
@@ -280,7 +337,7 @@ export default function Header() {
                       className="mobile-nav__link"
                       onClick={() => setMobileOpen(false)}
                     >
-                      {item.label}
+                      {navT(item.key)}
                     </Link>
                   </motion.li>
                 ))}
@@ -293,7 +350,7 @@ export default function Header() {
                 onClick={() => setMobileOpen(false)}
               >
                 <CalendarCheck size={18} strokeWidth={2} />
-                Prendre RDV
+                {t("bookMeeting")}
               </Link>
             </motion.nav>
           </motion.div>

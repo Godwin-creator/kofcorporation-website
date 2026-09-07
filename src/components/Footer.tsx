@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import {
   MapPin,
@@ -6,10 +6,12 @@ import {
   Mail,
 } from "lucide-react";
 import "./Footer.css";
+import { Link } from "@/i18n/navigation";
 
 const currentYear = new Date().getFullYear();
 
 export default function Footer() {
+  const t = useTranslations("footer");
   return (
     <footer className="footer">
       <div className="footer__top">
@@ -17,10 +19,10 @@ export default function Footer() {
           
           {/* Brand & Intro */}
           <div className="footer__col footer__brand">
-            <Link href="/" className="footer__logo" aria-label="Accueil KofCorporation">
+            <Link href="/" className="footer__logo" aria-label={t("homeAria")}>
               <Image
                 src="/images/logo.svg"
-                alt="KofCorporation Logo"
+                alt={t("logoAlt")}
                 width={32}
                 height={32}
                 className="footer__logo-img"
@@ -28,8 +30,7 @@ export default function Footer() {
               <span className="footer__logo-text">KofCorporation</span>
             </Link>
             <p className="footer__desc">
-              Société informatique togolaise concevant des applications web, 
-              mobiles et logiciels sur mesure avec des standards internationaux.
+              {t("description")}
             </p>
             <div className="footer__socials">
               <a
@@ -73,21 +74,21 @@ export default function Footer() {
 
           {/* Navigation - Services */}
           <div className="footer__col">
-            <h3 className="footer__title">Expertises</h3>
+            <h3 className="footer__title">{t("expertise")}</h3>
             <ul className="footer__list">
               <li>
                 <Link href="/services/developpement-web" className="footer__link">
-                  Développement Web
+                  {t("web")}
                 </Link>
               </li>
               <li>
                 <Link href="/services/applications-mobiles" className="footer__link">
-                  Applications Mobiles
+                  {t("mobile")}
                 </Link>
               </li>
               <li>
                 <Link href="/services/logiciels-gestion" className="footer__link">
-                  Logiciels de Gestion
+                  {t("management")}
                 </Link>
               </li>
               <li>
@@ -97,7 +98,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Formations (Academy)
+                  {t("training")}
                 </Link>
               </li>
             </ul>
@@ -105,26 +106,26 @@ export default function Footer() {
 
           {/* Navigation - Entreprise */}
           <div className="footer__col">
-            <h3 className="footer__title">Entreprise</h3>
+            <h3 className="footer__title">{t("company")}</h3>
             <ul className="footer__list">
               <li>
                 <Link href="/qui-sommes-nous" className="footer__link">
-                  Qui sommes-nous ?
+                  {t("about")}
                 </Link>
               </li>
               <li>
                 <Link href="/realisations" className="footer__link">
-                  Nos réalisations
+                  {t("projects")}
                 </Link>
               </li>
               <li>
                 <Link href="/contact#contact-form" className="footer__link">
-                  Prendre rendez-vous
+                  {t("meeting")}
                 </Link>
               </li>
               <li>
                 <Link href="/mentions-legales" className="footer__link">
-                  Mentions Légales
+                  {t("legal")}
                 </Link>
               </li>
             </ul>
@@ -132,7 +133,7 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div className="footer__col footer__contact">
-            <h3 className="footer__title">Nous contacter</h3>
+            <h3 className="footer__title">{t("contact")}</h3>
             <ul className="footer__list footer__list--contact">
               <li>
                 <MapPin size={18} className="footer__icon" />
@@ -142,7 +143,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="footer__link footer__location-link"
                 >
-                  Agoè Minamadou, à côté de ESA, Lomé, Togo
+                  {t("address")}
                 </a>
               </li>
               <li>
@@ -168,10 +169,10 @@ export default function Footer() {
       <div className="footer__bottom">
         <div className="footer__inner footer__inner--bottom">
           <p className="footer__copy">
-            © {currentYear} KofCorporation. Tous droits réservés.
+            © {currentYear} KofCorporation. {t("copyright")}
           </p>
           <div className="footer__bottom-links">
-             <Link href="/mentions-legales">CGU & Confidentialité</Link>
+             <Link href="/mentions-legales">{t("terms")}</Link>
           </div>
         </div>
       </div>

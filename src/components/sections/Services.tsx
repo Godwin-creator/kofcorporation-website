@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { useTranslations } from "next-intl";
 import { motion, useInView } from "framer-motion";
 import { Globe, GraduationCap, Monitor, Smartphone } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -64,6 +65,7 @@ const cardVariants = {
 };
 
 export default function Services() {
+  const t = useTranslations("services");
   const servicesRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(servicesRef, { once: true, amount: 0.2 });
 
@@ -71,9 +73,9 @@ export default function Services() {
     <section className="services" aria-labelledby="services-title">
       <div className="services__inner">
         <header className="services__header">
-          <p className="services__eyebrow">Notre savoir-faire</p>
+          <p className="services__eyebrow">{t("eyebrow")}</p>
           <h2 id="services-title" className="services__title">
-            Des solutions digitales qui font avancer votre activité
+            {t("title")}
           </h2>
         </header>
 
@@ -84,23 +86,26 @@ export default function Services() {
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
         >
-          {SERVICES.map(({ id, title, description, tags, icon: Icon }) => (
+          {SERVICES.map(({ id, tags, icon: Icon }) => {
+            const title = t(`items.${id}.title`);
+            return (
             <motion.article className="service-card" key={id} variants={cardVariants}>
               <div className="service-card__icon" aria-hidden="true">
                 <Icon size={25} strokeWidth={1.7} />
               </div>
               <h3 className="service-card__title">{title}</h3>
-              <p className="service-card__description">{description}</p>
-              <ul className="service-card__tags" aria-label={`Technologies pour ${title}`}>
+              <p className="service-card__description">{t(`items.${id}.description`)}</p>
+              <ul className="service-card__tags" aria-label={t("technologies", { title })}>
                 {tags.map((tag) => (
                   <li key={tag}>{tag}</li>
                 ))}
               </ul>
               <a className="service-card__link" href="#">
-                En savoir plus <span aria-hidden="true">→</span>
+                {t("learnMore")} <span aria-hidden="true">→</span>
               </a>
             </motion.article>
-          ))}
+            );
+          })}
         </motion.div>
       </div>
     </section>

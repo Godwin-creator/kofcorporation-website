@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import "./Testimonials.css";
@@ -60,6 +61,7 @@ const slideVariants = {
 };
 
 export default function Testimonials() {
+  const t = useTranslations("testimonials");
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const [isPaused, setIsPaused] = useState(false);
@@ -100,9 +102,9 @@ export default function Testimonials() {
     >
       <div className="testimonials__inner">
         <header className="testimonials__header">
-          <p className="testimonials__eyebrow">Ils nous font confiance</p>
+          <p className="testimonials__eyebrow">{t("eyebrow")}</p>
           <h2 id="testimonials-title" className="testimonials__title">
-            Des collaborations qui comptent
+            {t("title")}
           </h2>
         </header>
 
@@ -111,7 +113,7 @@ export default function Testimonials() {
             className="testimonials__control testimonials__control--previous"
             type="button"
             onClick={() => changeSlide(-1)}
-            aria-label="Témoignage précédent"
+            aria-label={t("previous")}
           >
             <ChevronLeft size={22} strokeWidth={1.8} aria-hidden="true" />
           </button>
@@ -127,7 +129,7 @@ export default function Testimonials() {
                 animate="center"
                 exit="exit"
               >
-                <div className="testimonial-card__rating" aria-label="5 étoiles sur 5">
+                <div className="testimonial-card__rating" aria-label={t("rating")}>
                   {Array.from({ length: 5 }, (_, index) => (
                     <Star key={index} size={18} strokeWidth={1.5} fill="currentColor" aria-hidden="true" />
                   ))}
@@ -145,20 +147,20 @@ export default function Testimonials() {
             className="testimonials__control testimonials__control--next"
             type="button"
             onClick={() => changeSlide(1)}
-            aria-label="Témoignage suivant"
+            aria-label={t("next")}
           >
             <ChevronRight size={22} strokeWidth={1.8} aria-hidden="true" />
           </button>
         </div>
 
-        <div className="testimonials__dots" aria-label="Sélectionner un témoignage">
+        <div className="testimonials__dots" aria-label={t("select")}>
           {TESTIMONIALS.map((testimonial, index) => (
             <button
               className={`testimonials__dot${index === activeIndex ? " testimonials__dot--active" : ""}`}
               key={testimonial.id}
               type="button"
               onClick={() => goToSlide(index)}
-              aria-label={`Afficher le témoignage ${index + 1}`}
+              aria-label={t("show", { number: index + 1 })}
               aria-current={index === activeIndex ? "true" : undefined}
             />
           ))}

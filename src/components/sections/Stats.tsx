@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useTranslations } from "next-intl";
 import { animate, motion, useInView, useMotionValue, useTransform } from "framer-motion";
 import { Clock, FolderCheck, GraduationCap, Star } from "lucide-react";
 import "./Stats.css";
@@ -13,33 +14,25 @@ interface Stat {
   icon: typeof Clock;
 }
 
-const STATS: Stat[] = [
+const STATS: Omit<Stat, "label" | "suffix">[] = [
   {
     id: "experience",
     value: 5,
-    suffix: " ans",
-    label: "d'expérience",
     icon: Clock,
   },
   {
     id: "projects",
     value: 20,
-    suffix: "+",
-    label: "projets réalisés",
     icon: FolderCheck,
   },
   {
     id: "satisfaction",
     value: 98,
-    suffix: "%",
-    label: "de satisfaction client",
     icon: Star,
   },
   {
     id: "training",
     value: 200,
-    suffix: "+",
-    label: "étudiants formés",
     icon: GraduationCap,
   },
 ];
@@ -70,19 +63,22 @@ function AnimatedValue({ value, suffix }: Pick<Stat, "value" | "suffix">) {
 }
 
 export default function Stats() {
+  const t = useTranslations("stats");
+  const labels = ["experience", "projects", "satisfaction", "training"] as const;
+  const suffixes = [t("years"), "+", "%", "+"];
   return (
     <section className="stats" aria-labelledby="stats-title">
       <div className="stats__inner">
         <h2 id="stats-title" className="stats__title">
-          KofCorporation en chiffres
+          {t("title")}
         </h2>
 
         <div className="stats__grid">
-          {STATS.map(({ id, value, suffix, label, icon: Icon }) => (
+          {STATS.map(({ id, value, icon: Icon }, index) => (
             <article className="stats__item" key={id}>
               <Icon className="stats__icon" size={24} strokeWidth={1.6} aria-hidden="true" />
-              <AnimatedValue value={value} suffix={suffix} />
-              <p className="stats__label">{label}</p>
+              <AnimatedValue value={value} suffix={suffixes[index]} />
+              <p className="stats__label">{t(labels[index])}</p>
             </article>
           ))}
         </div>
