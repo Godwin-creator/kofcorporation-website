@@ -20,9 +20,9 @@
 
 .partners__title {
   font-family: var(--font-body);
-  font-size: 0.75rem;
+  font-size: 1.2rem;
   font-weight: 500;
-  color: var(--color-text-muted);
+  color: var(--color-text);
   margin: 0;
   line-height: 1.4;
   letter-spacing: 0.18em;
@@ -58,7 +58,7 @@
   align-items: center;
   gap: 4rem;
   width: max-content;
-  animation: marquee-scroll 32s linear infinite;
+  animation: marquee-scroll 15s linear infinite;
   padding: 1rem 0;
 }
 
@@ -81,13 +81,13 @@
   justify-content: center;
   width: 180px;
   height: 64px;
-  flex: 0 0 180px;
+  flex: 0 0 8px;
 }
 
 .partner-logo {
   width: auto;
   max-width: 150px;
-  height: 48px;
+  height: 100px;
   object-fit: contain;
   filter: grayscale(1);
   mix-blend-mode: multiply;

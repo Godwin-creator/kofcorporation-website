@@ -37,7 +37,7 @@ export default async function NotFound() {
             letterSpacing: "-0.08em",
           }}
         >
-          404
+          Oups, 404
         </p>
         <h1
           id="not-found-title"

@@ -40,7 +40,7 @@ export default function SplashScreen() {
             alignItems: "center",
             justifyContent: "center",
             gap: "1.25rem",
-            backgroundColor: "#1A1E3A",
+            backgroundColor: "#1A1A2E",
           }}
           aria-hidden="true"
         >
