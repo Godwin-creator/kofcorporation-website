@@ -48,8 +48,8 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            <Link href="/contact" className="hero__cta hero__cta--primary">
-              {t("bookMeeting")}
+            <Link href="/services" className="hero__cta hero__cta--primary">
+              {t("discoverServices")}
               <ArrowRight size={18} strokeWidth={2} />
             </Link>
             <Link href="/realisations" className="hero__cta hero__cta--secondary">

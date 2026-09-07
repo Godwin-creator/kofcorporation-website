@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { useTheme } from "@/hooks/useTheme";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
+import SpecularButton from "./ui/SpecularButton";
 
 /* ------------------------------------------------------------------ */
 /*  Types & Data                                                       */
@@ -55,6 +56,11 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  const specularColors = {
+    textColor: isDark ? "#E8F0FE" : "#2F3974",
+    baseColor: isDark ? "#2C417A" : "#FFFFFF",
+  };
 
   /* --- Scroll detection for sticky glass effect ------------------- */
   useEffect(() => {
@@ -120,9 +126,28 @@ export default function Header() {
             <ul className="header__nav-list">
               {NAV_ITEMS.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="header__nav-link">
+                  <SpecularButton
+                    href={item.href}
+                    size="sm"
+                    radius={0}
+                    tint="#000000"
+                    tintOpacity={0}
+                    blur={0}
+                    lineColor="#0CACE8"
+                    {...specularColors}
+                    intensity={1}
+                    shineSize={44}
+                    shineFade={40}
+                    thickness={2.5}
+                    speed={1.2}
+                    followMouse
+                    proximity={250}
+                    className={`header__specular-button ${
+                      pathname === item.href ? "header__nav-link--active" : ""
+                    }`}
+                  >
                     {navT(item.key)}
-                  </Link>
+                  </SpecularButton>
                 </li>
               ))}
             </ul>
@@ -131,9 +156,23 @@ export default function Header() {
           {/* ---- Actions (theme, lang, CTA) ---- */}
           <div className="header__actions">
             {/* Theme toggle */}
-            <button
+            <SpecularButton
               onClick={toggleTheme}
-              className="header__icon-btn"
+              size="sm"
+              radius={0}
+              tint="#000000"
+              tintOpacity={0}
+              blur={0}
+              lineColor="#0CACE8"
+              {...specularColors}
+              intensity={1}
+              shineSize={44}
+              shineFade={40}
+              thickness={2.5}
+              speed={1.2}
+              followMouse
+              proximity={250}
+              className="header__specular-button header__icon-btn"
               aria-label={isDark ? t("lightMode") : t("darkMode")}
               title={isDark ? t("lightMode") : t("darkMode")}
             >
@@ -162,16 +201,30 @@ export default function Header() {
                   </motion.span>
                 )}
               </AnimatePresence>
-            </button>
+            </SpecularButton>
 
             {/* Language selector */}
             <div className="header__lang-wrapper">
-              <button
+              <SpecularButton
                 onClick={(e) => {
                   e.stopPropagation();
                   setLangOpen((prev) => !prev);
                 }}
-                className="header__icon-btn header__lang-btn"
+                size="sm"
+                radius={0}
+                tint="#000000"
+                tintOpacity={0}
+                blur={0}
+                lineColor="#0CACE8"
+                {...specularColors}
+                intensity={1}
+                shineSize={44}
+                shineFade={40}
+                thickness={2.5}
+                speed={0.35}
+                followMouse
+                proximity={250}
+                className="header__specular-button header__icon-btn header__lang-btn"
                 aria-label={t("changeLanguage")}
                 aria-expanded={langOpen}
               >
@@ -182,7 +235,7 @@ export default function Header() {
                   strokeWidth={2}
                   className={`header__lang-chevron ${langOpen ? "header__lang-chevron--open" : ""}`}
                 />
-              </button>
+              </SpecularButton>
 
               <AnimatePresence>
                 {langOpen && (
