@@ -48,6 +48,8 @@ const themeInitScript = `
         theme === 'dark' ? '#1A1E3A' : '#F8F9FA'
       );
     }
+    // Add splash-active class to hide main content initially
+    document.documentElement.classList.add('splash-active');
   } catch (e) {}
 })();
 `.trim();

@@ -8,7 +8,8 @@
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding: 8rem 1.5rem 6rem;
+  justify-content: center;
+  padding: 1.5rem;
   overflow: hidden;
   background-color: var(--color-bg);
 }
@@ -17,27 +18,24 @@
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 4rem;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  text-align: center;
   z-index: 10;
 }
 
-@media (min-width: 1024px) {
-  .hero__inner {
-    grid-template-columns: minmax(0, 55fr) minmax(0, 45fr);
-    gap: 2rem;
-  }
-}
-
-/* ---- Content (Left) ---- */
+/* ---- Content (Centered) ---- */
 .hero__content {
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   gap: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
   isolation: isolate;
 }
 
@@ -98,7 +96,7 @@
   font-family: var(--font-body);
   font-size: clamp(1.125rem, 2vw, 1.25rem);
   color: var(--color-text-muted);
-  max-width: 540px;
+  max-width: 600px;
   margin: 0;
   line-height: 1.6;
 }
@@ -146,75 +144,4 @@
   background-color: var(--color-surface-alt);
   color: var(--color-primary);
   border-color: rgba(12, 172, 232, 0.3);
-}
-
-/* ---- Threads (behind the left content) ---- */
-.hero__threads {
-  position: absolute;
-  inset: -12% -18% -18% -12%;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0.78;
-  filter: blur(0.5px) saturate(1.15);
-}
-
-.hero__threads .threads-container {
-  width: 100%;
-  height: 100%;
-  min-height: 100%;
-}
-
-.hero__threads canvas {
-  display: block;
-  width: 100% !important;
-  height: 100% !important;
-}
-
-/* ---- Visual (Right) ---- */
-.hero__visual {
-  position: relative;
-  width: 100%;
-  min-height: 500px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  isolation: isolate;
-}
-
-.hero__image {
-  position: relative;
-  width: 100%;
-  height: 500px;
-  overflow: hidden;
-  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.15);
-}
-
-.hero__image-content {
-  object-fit: cover;
-}
-
-.hero__image-overlay {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-[data-theme="dark"] .hero__image-overlay {
-  background-color: rgba(26, 30, 58, 0.3);
-}
-
-@media (min-width: 768px) and (max-width: 1023px) {
-  .hero__visual {
-    min-height: 300px;
-  }
-
-  .hero__image {
-    height: 300px;
-  }
-}
-
-@media (max-width: 767px) {
-  .hero__visual {
-    display: none;
-  }
 }

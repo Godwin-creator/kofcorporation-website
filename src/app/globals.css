@@ -110,6 +110,11 @@ h6 {
   color: var(--color-text);
 }
 
+/* 8. SPLASH SCREEN */
+.splash-active main {
+  opacity: 0;
+}
+
 /* Sections — angles droits, pas de border-radius */
 section {
   border-radius: 0;

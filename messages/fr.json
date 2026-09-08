@@ -1,14 +1,530 @@
 {
-  "nav": {"home":"Accueil","services":"Services","projects":"Réalisations","about":"Qui sommes-nous","contact":"Contact"},
-  "header": {"mainNavigation":"Navigation principale","mobileNavigation":"Navigation mobile","changeLanguage":"Changer de langue","lightMode":"Mode clair","darkMode":"Mode sombre","bookMeeting":"Prendre RDV","openMenu":"Ouvrir le menu","closeMenu":"Fermer le menu","homeAria":"Accueil KofCorporation"},
-  "hero": {"headline":"Votre vision,","headlineHighlight":"notre code.","description":"KofCorporation conçoit des applications web, mobiles et des logiciels sur mesure pour accélérer la croissance de votre entreprise.","bookMeeting":"Prendre RDV","discoverServices":"Découvrir nos services","discoverProjects":"Découvrir nos réalisations","imageAlt":"L'équipe KofCorporation au travail"},
-  "stats": {"title":"KofCorporation en chiffres","experience":"d'expérience","projects":"projets réalisés","satisfaction":"de satisfaction client","training":"étudiants formés","years":" ans"},
-  "services": {"eyebrow":"Notre savoir-faire","title":"Des solutions digitales qui font avancer votre activité","learnMore":"En savoir plus","technologies":"Technologies pour {title}","items":{"web":{"title":"Développement Web & Applications","description":"Sites vitrines, plateformes web et applications métier sur mesure."},"mobile":{"title":"Applications Mobiles","description":"Applications Android/iOS natives et cross-platform, pensées pour durer."},"management":{"title":"Logiciels de Gestion","description":"Logiciels métier sur mesure pour l'ERP, le CRM, les RH et la facturation."},"training":{"title":"Formations & Coaching Tech","description":"Formation en développement web, mobile et outils numériques pour chaque parcours."}}},
-  "projects": {"eyebrow":"Nos réalisations","title":"Des projets qui transforment les idées en impact","viewAll":"Voir tous les projets","preview":"Aperçu de {title}","visit":"Visiter le site de {title}","technologies":"Technologies utilisées pour {title}"},
-  "testimonials": {"eyebrow":"Ils nous font confiance","title":"Des collaborations qui comptent","previous":"Témoignage précédent","next":"Témoignage suivant","rating":"5 étoiles sur 5","select":"Sélectionner un témoignage","show":"Afficher le témoignage {number}"},
-  "cta": {"title":"Construisons quelque chose d'utile, ensemble.","subtitle":"Parlons de votre projet et trouvons la solution qui fera avancer votre activité.","book":"Prendre rendez-vous","contact":"Nous contacter"},
-  "footer": {"homeAria":"Accueil KofCorporation","logoAlt":"Logo KofCorporation","description":"Société informatique togolaise concevant des applications web, mobiles et logiciels sur mesure avec des standards internationaux.","expertise":"Expertises","company":"Entreprise","contact":"Nous contacter","web":"Développement Web","mobile":"Applications Mobiles","management":"Logiciels de Gestion","training":"Formations (Academy)","about":"Qui sommes-nous ?","projects":"Nos réalisations","meeting":"Prendre rendez-vous","legal":"Mentions Légales","address":"Agoè Minamadou, à côté de ESA, Lomé, Togo","copyright":"Tous droits réservés.","terms":"CGU & Confidentialité"},
-  "pages": {"home":"Accueil","about":"Qui sommes-nous ?","aboutEyebrow":"Qui sommes-nous ?","aboutTitle":"Une équipe locale,","aboutHighlight":"des standards mondiaux.","services":"Nos services","servicesEyebrow":"Nos expertises","servicesTitle":"Des solutions digitales","servicesHighlight":"pour vos ambitions.","projects":"Nos réalisations","projectsEyebrow":"Nos réalisations","projectsTitle":"Des idées concrètes","projectsHighlight":"en solutions utiles.","contact":"Contact","legal":"Mentions légales"},
-  "notFound": {"title":"Page introuvable","description":"La page que vous cherchez n'existe pas ou a été déplacée.","home":"Retour à l'accueil","contact":"Nous contacter"},
-  "contact": {"eyebrow":"Nous contacter","headline":"Parlons de \"QUOI\"","headlineHighlight":"construire ensemble.","intro":"Un projet web, mobile, logiciel ou une idée à clarifier ? Décrivez-nous votre besoin, nous vous répondrons avec une première piste concrète.","project":"Votre projet","formTitle":"Dites-nous où vous voulez aller.","successTitle":"Merci pour votre message.","successDescription":"Votre demande est prête à être transmise à notre équipe. Nous reviendrons vers vous rapidement.","another":"Envoyer un autre message","name":"Nom complet","namePlaceholder":"Votre nom","email":"Email professionnel","emailPlaceholder":"vous@entreprise.com","subject":"Sujet","chooseSubject":"Choisir un sujet","web":"Projet web","mobile":"Application mobile","software":"Logiciel de gestion","training":"Formation ou coaching","other":"Autre demande","message":"Parlez-nous de votre projet","messagePlaceholder":"Objectifs, contexte, délais…","send":"Envoyer le message","privacy":"En envoyant ce formulaire, vous acceptez que KofCorporation utilise ces informations pour vous répondre.","details":"Nos coordonnées","detailsTitle":"Une équipe accessible, basée à Lomé.","address":"Agoè Minamadou, à côté de ESA, Lomé, Togo","hours":"Lun–Sam, 8h–18h","map":"Localisation de KofCorporation à Lomé","formAside":"Coordonnées KofCorporation"}
+  "nav": {
+    "home": "Accueil",
+    "services": "Services",
+    "projects": "Réalisations",
+    "about": "Qui sommes-nous",
+    "contact": "Contact"
+  },
+  "header": {
+    "mainNavigation": "Navigation principale",
+    "mobileNavigation": "Navigation mobile",
+    "changeLanguage": "Changer de langue",
+    "lightMode": "Mode clair",
+    "darkMode": "Mode sombre",
+    "bookMeeting": "Prendre RDV",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
+    "homeAria": "Accueil KofCorporation"
+  },
+  "hero": {
+    "headline": "Votre vision,",
+    "headlineHighlight": "notre code.",
+    "description": "KofCorporation conçoit des applications web, mobiles et des logiciels sur mesure pour accélérer la croissance de votre entreprise.",
+    "bookMeeting": "Prendre RDV",
+    "discoverServices": "Découvrir nos services",
+    "discoverProjects": "Découvrir nos réalisations",
+    "imageAlt": "L'équipe KofCorporation au travail"
+  },
+  "stats": {
+    "title": "KofCorporation en chiffres",
+    "experience": "d'expérience",
+    "projects": "projets réalisés",
+    "satisfaction": "de satisfaction client",
+    "training": "étudiants formés",
+    "years": " ans"
+  },
+  "services": {
+    "eyebrow": "Notre savoir-faire",
+    "title": "Des solutions digitales qui font avancer votre activité",
+    "learnMore": "En savoir plus",
+    "technologies": "Technologies pour {title}",
+    "items": {
+      "web": {
+        "title": "Développement Web & Applications",
+        "description": "Sites vitrines, plateformes web et applications métier sur mesure."
+      },
+      "mobile": {
+        "title": "Applications Mobiles",
+        "description": "Applications Android/iOS natives et cross-platform, pensées pour durer."
+      },
+      "management": {
+        "title": "Logiciels de Gestion",
+        "description": "Logiciels métier sur mesure pour l'ERP, le CRM, les RH et la facturation."
+      },
+      "training": {
+        "title": "Formations & Coaching Tech",
+        "description": "Formation en développement web, mobile et outils numériques pour chaque parcours."
+      }
+    }
+  },
+  "projects": {
+    "eyebrow": "Nos réalisations",
+    "title": "Des projets qui transforment les idées en impact",
+    "viewAll": "Voir tous les projets",
+    "preview": "Aperçu de {title}",
+    "visit": "Visiter le site de {title}",
+    "technologies": "Technologies utilisées pour {title}"
+  },
+  "testimonials": {
+    "eyebrow": "Ils nous font confiance",
+    "title": "Des collaborations qui comptent",
+    "previous": "Témoignage précédent",
+    "next": "Témoignage suivant",
+    "rating": "5 étoiles sur 5",
+    "select": "Sélectionner un témoignage",
+    "show": "Afficher le témoignage {number}"
+  },
+  "cta": {
+    "title": "Construisons quelque chose d'utile, ensemble.",
+    "subtitle": "Parlons de votre projet et trouvons la solution qui fera avancer votre activité.",
+    "book": "Prendre rendez-vous",
+    "contact": "Nous contacter"
+  },
+  "footer": {
+    "homeAria": "Accueil KofCorporation",
+    "logoAlt": "Logo KofCorporation",
+    "description": "Société informatique togolaise concevant des applications web, mobiles et logiciels sur mesure avec des standards internationaux.",
+    "expertise": "Expertises",
+    "company": "Entreprise",
+    "contact": "Nous contacter",
+    "web": "Développement Web",
+    "mobile": "Applications Mobiles",
+    "management": "Logiciels de Gestion",
+    "training": "Formations (Academy)",
+    "about": "Qui sommes-nous ?",
+    "projects": "Nos réalisations",
+    "meeting": "Prendre rendez-vous",
+    "legal": "Mentions Légales",
+    "address": "Agoè Minamadou, à côté de ESA, Lomé, Togo",
+    "copyright": "Tous droits réservés.",
+    "terms": "CGU & Confidentialité"
+  },
+  "pages": {
+    "home": "Accueil",
+    "about": "Qui sommes-nous ?",
+    "aboutEyebrow": "Qui sommes-nous ?",
+    "aboutTitle": "Une équipe locale,",
+    "aboutHighlight": "des standards mondiaux.",
+    "services": "Nos services",
+    "servicesEyebrow": "Nos expertises",
+    "servicesTitle": "Des solutions digitales",
+    "servicesHighlight": "pour vos ambitions.",
+    "projects": "Nos réalisations",
+    "projectsEyebrow": "Nos réalisations",
+    "projectsTitle": "Des idées concrètes",
+    "projectsHighlight": "en solutions utiles.",
+    "contact": "Contact",
+    "legal": "Mentions légales"
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "description": "La page que vous cherchez n'existe pas ou a été déplacée.",
+    "home": "Retour à l'accueil",
+    "contact": "Nous contacter"
+  },
+  "contact": {
+    "eyebrow": "Nous contacter",
+    "headline": "Parlons de \"QUOI\"",
+    "headlineHighlight": "construire ensemble.",
+    "intro": "Un projet web, mobile, logiciel ou une idée à clarifier ? Décrivez-nous votre besoin, nous vous répondrons avec une première piste concrète.",
+    "project": "Votre projet",
+    "formTitle": "Dites-nous où vous voulez aller.",
+    "successTitle": "Merci pour votre message.",
+    "successDescription": "Votre demande est prête à être transmise à notre équipe. Nous reviendrons vers vous rapidement.",
+    "another": "Envoyer un autre message",
+    "name": "Nom complet",
+    "namePlaceholder": "Votre nom",
+    "email": "Email professionnel",
+    "emailPlaceholder": "vous@entreprise.com",
+    "subject": "Sujet",
+    "chooseSubject": "Choisir un sujet",
+    "web": "Projet web",
+    "mobile": "Application mobile",
+    "software": "Logiciel de gestion",
+    "training": "Formation ou coaching",
+    "other": "Autre demande",
+    "message": "Parlez-nous de votre projet",
+    "messagePlaceholder": "Objectifs, contexte, délais…",
+    "send": "Envoyer le message",
+    "privacy": "En envoyant ce formulaire, vous acceptez que KofCorporation utilise ces informations pour vous répondre.",
+    "details": "Nos coordonnées",
+    "detailsTitle": "Une équipe accessible, basée à Lomé.",
+    "address": "Agoè Minamadou, à côté de ESA, Lomé, Togo",
+    "hours": "Lun–Sam, 8h–18h",
+    "map": "Localisation de KofCorporation à Lomé",
+    "formAside": "Coordonnées KofCorporation"
+  },
+  "about": {
+    "hero": {
+      "description": "KofCorporation est une société informatique togolaise qui conçoit des applications web, mobiles et des logiciels sur mesure pour faire avancer les organisations.",
+      "cta": "Découvrir notre histoire"
+    },
+    "mission": {
+      "eyebrow": "Notre mission",
+      "title": "Rendre la technologie utile, accessible et durable.",
+      "description1": "Nous croyons qu'une bonne solution digitale commence par une compréhension précise du terrain. Notre rôle est de rendre la complexité simple à utiliser, pour les équipes comme pour leurs publics.",
+      "description2": "Depuis Lomé, nous accompagnons PME, startups, ONG et institutions avec une approche de bout en bout : conseil, design, développement, déploiement et transmission."
+    },
+    "values": {
+      "eyebrow": "Ce qui nous guide",
+      "title": "Une manière de travailler construite sur quatre forces.",
+      "subtitle": "La proximité n'est pas un compromis sur l'exigence : c'est ce qui nous permet de mieux comprendre et mieux livrer.",
+      "expertise": {
+        "title": "Expertise full-stack locale",
+        "description": "Web, mobile et logiciel réunis dans une même équipe."
+      },
+      "stack": {
+        "title": "Stack moderne & éprouvée",
+        "description": "Des technologies choisies pour leur fiabilité et leur capacité à évoluer."
+      },
+      "training": {
+        "title": "Formation & transmission",
+        "description": "Nous livrons des solutions et transmettons les compétences pour les faire vivre."
+      },
+      "proximity": {
+        "title": "Proximité & réactivité",
+        "description": "Une équipe basée à Lomé, disponible et engagée à chaque étape."
+      }
+    },
+    "story": {
+      "eyebrow": "Notre façon d'avancer",
+      "title": "Du premier échange à l'impact.",
+      "intro": "Une méthode claire pour garder le cap, prendre les bonnes décisions et construire avec confiance.",
+      "listen": {
+        "title": "Écouter avant de construire",
+        "description": "Nous commençons par comprendre votre activité, vos utilisateurs et les contraintes qui comptent vraiment."
+      },
+      "transform": {
+        "title": "Transformer une idée en produit",
+        "description": "Nous concevons une expérience claire et développons une solution robuste, adaptée à vos priorités."
+      },
+      "grow": {
+        "title": "Grandir avec vous",
+        "description": "Notre accompagnement continue après la mise en ligne pour faire évoluer le produit et les équipes."
+      }
+    },
+    "team": {
+      "eyebrow": "L'équipe",
+      "title": "Des profils qui aiment résoudre les vrais problèmes.",
+      "description": "Notre équipe réunit des développeurs, designers et formateurs engagés à construire des produits utiles depuis Lomé.",
+      "founder": {
+        "name": "Omar Farouk KOUGBADA",
+        "role": "Fondateur & CEO",
+        "location": "Lomé, Togo"
+      }
+    },
+    "contact": {
+      "cta": "Parlons de votre projet"
+    }
+  },
+  "servicesPage": {
+    "hero": {
+      "description": "De la première idée au produit en production, nous construisons des solutions digitales utiles, durables et adaptées à votre réalité.",
+      "cta": "Explorer nos services"
+    },
+    "expertises": {
+      "eyebrow": "Ce que nous faisons",
+      "title": "Une équipe pour chaque étape de votre transformation digitale.",
+      "description": "Notre expertise full-stack locale nous permet de vous accompagner avec une seule équipe, de la stratégie au déploiement."
+    },
+    "web": {
+      "eyebrow": "01 · Web",
+      "title": "Développement Web & Applications",
+      "description": "Des sites vitrines, plateformes web et applications métier conçus autour de vos objectifs.",
+      "benefit": "Une présence digitale professionnelle, performante et livrée clé en main."
+    },
+    "mobile": {
+      "eyebrow": "02 · Mobile",
+      "title": "Applications Mobiles",
+      "description": "Des expériences Android et iOS fluides, pensées pour vos utilisateurs et votre croissance.",
+      "benefit": "Une application robuste et prête à évoluer sur Play Store et App Store."
+    },
+    "management": {
+      "eyebrow": "03 · Gestion",
+      "title": "Logiciels de Gestion",
+      "description": "Des outils métier sur mesure pour simplifier vos opérations et fiabiliser vos données.",
+      "benefit": "Un système adapté à vos processus, sans vous imposer une solution standard."
+    },
+    "training": {
+      "eyebrow": "04 · Transmission",
+      "title": "Formations & Coaching Tech",
+      "description": "Des parcours concrets pour développer les compétences numériques de vos équipes et talents.",
+      "benefit": "Une montée en compétence progressive, en présentiel, en ligne ou en hybride."
+    },
+    "card": {
+      "cta": "Découvrir l'expertise"
+    },
+    "method": {
+      "eyebrow": "Notre méthode",
+      "title": "Un accompagnement simple, de l'idée à l'impact.",
+      "step1": {
+        "title": "Comprendre",
+        "description": "Nous clarifions vos objectifs, vos utilisateurs et vos priorités."
+      },
+      "step2": {
+        "title": "Construire",
+        "description": "Nous concevons, développons et testons une solution utile."
+      },
+      "step3": {
+        "title": "Faire évoluer",
+        "description": "Nous restons à vos côtés pour mesurer, améliorer et transmettre."
+      }
+    }
+  },
+  "projectsPage": {
+    "hero": {
+      "description": "Nous concevons des expériences digitales qui répondent à des besoins réels et créent un impact durable pour leurs utilisateurs.",
+      "cta": "Voir les projets"
+    },
+    "portfolio": {
+      "eyebrow": "Portfolio",
+      "title": "Des projets pensés pour durer.",
+      "description": "Chaque projet commence par l'écoute et se construit avec une attention particulière portée à l'usage, à la clarté et à la qualité technique."
+    },
+    "card": {
+      "client": "Client",
+      "visit": "Visiter le site de ",
+      "technologies": "Technologies utilisées pour "
+    },
+    "aoaTogo": {
+      "title": "AOA Togo",
+      "sector": "ONG",
+      "client": "ONG AOA",
+      "description": "Une présence digitale claire pour mieux présenter les actions et l'impact de l'organisation.",
+      "features": "Site vitrine, CMS headless et déploiement continu."
+    },
+    "jeunessePlus": {
+      "title": "JeunessePlus",
+      "sector": "Santé",
+      "client": "Jhpiego",
+      "description": "Une plateforme accessible pour informer et accompagner les jeunes sur leur santé sexuelle et reproductive.",
+      "features": "Quiz, forum, contenus éducatifs et ligne verte."
+    },
+    "elycha": {
+      "title": "Elycha",
+      "sector": "Immobilier / Auto",
+      "client": "Elycha",
+      "description": "Une expérience de recherche fluide pour trouver, sauvegarder et suivre des annonces.",
+      "features": "Annonces, favoris et notifications en temps réel."
+    },
+    "goldenGroup": {
+      "title": "Golden Group Technologies",
+      "sector": "Services tech",
+      "client": "Golden Group Technologies SARL",
+      "description": "Des outils numériques pour structurer l'activité et soutenir le développement commercial.",
+      "features": "Centre d'appel, étude de marché et formation commerciale."
+    },
+    "muslimTogo": {
+      "title": "Muslim Togo",
+      "sector": "Communautaire",
+      "client": "KofCorporation",
+      "description": "Une application mobile pensée pour accompagner les pratiques quotidiennes de sa communauté.",
+      "features": "Coran audio, horaires de prière, Qibla et calendrier islamique."
+    },
+    "groupeCat": {
+      "title": "Groupe CAT",
+      "sector": "Juridique",
+      "client": "Groupe CAT",
+      "description": "Un site institutionnel qui rend les expertises juridiques plus lisibles et accessibles.",
+      "features": "Services juridiques, audits et formations."
+    }
+  },
+  "servicesDetail": {
+    "web": {
+      "hero": {
+        "eyebrow": "01 · Web",
+        "title": "Développement Web & Applications",
+        "description": "Des sites vitrines, plateformes web et applications métier conçus autour de vos objectifs.",
+        "cta": "Demander un devis",
+        "back": "Retour aux services"
+      },
+      "overview": {
+        "title": "Expertise en développement web",
+        "description": "Nous créons des expériences web performantes, accessibles et évolutives qui transforment vos visiteurs en clients. De la conception à la mise en ligne, nous vous accompagnons à chaque étape."
+      },
+      "features": {
+        "title": "Ce que nous offrons",
+        "subtitle": "Des solutions web complètes pour chaque besoin.",
+        "responsive": {
+          "title": "Design responsive",
+          "description": "Interfaces qui s'adaptent parfaitement à tous les écrans et appareils."
+        },
+        "custom": {
+          "title": "Solutions sur mesure",
+          "description": "Développement personnalisé selon vos besoins spécifiques et objectifs business."
+        },
+        "performance": {
+          "title": "Performance optimisée",
+          "description": "Sites rapides et optimisés pour les moteurs de recherche et l'expérience utilisateur."
+        },
+        "security": {
+          "title": "Sécurité renforcée",
+          "description": "Protection des données et conformité aux normes de sécurité web actuelles."
+        },
+        "seo": {
+          "title": "SEO intégré",
+          "description": "Optimisation pour les moteurs de recherche dès la conception du site."
+        },
+        "mobile": {
+          "title": "Expérience mobile",
+          "description": "Navigation fluide et intuitive sur smartphones et tablettes."
+        }
+      },
+      "technologies": {
+        "title": "Technologies que nous utilisons",
+        "description": "Nous travaillons avec les technologies les plus récentes et les plus fiables du marché."
+      },
+      "process": {
+        "title": "Notre processus de développement",
+        "subtitle": "Une méthodologie éprouvée pour garantir le succès de votre projet.",
+        "step1": {
+          "title": "Analyse et planification",
+          "description": "Compréhension de vos besoins, définition des objectifs et planification technique."
+        },
+        "step2": {
+          "title": "Design et développement",
+          "description": "Création de l'interface utilisateur et développement de la solution technique."
+        },
+        "step3": {
+          "title": "Tests et optimisation",
+          "description": "Validation fonctionnelle, tests de performance et optimisation SEO."
+        },
+        "step4": {
+          "title": "Déploiement et support",
+          "description": "Mise en ligne, formation et support continu pour assurer le succès."
+        }
+      }
+    },
+    "mobile": {
+      "hero": {
+        "eyebrow": "02 · Mobile",
+        "title": "Applications Mobiles",
+        "description": "Des expériences Android et iOS fluides, pensées pour vos utilisateurs et votre croissance.",
+        "cta": "Demander un devis",
+        "back": "Retour aux services"
+      },
+      "overview": {
+        "title": "Expertise en développement mobile",
+        "description": "Nous développons des applications mobiles natives et cross-platform qui offrent une expérience utilisateur exceptionnelle et répondent aux besoins de votre business."
+      },
+      "features": {
+        "title": "Ce que nous offrons",
+        "subtitle": "Des applications mobiles de haute qualité.",
+        "native": {
+          "title": "Applications natives",
+          "description": "Performance optimale avec développement natif pour iOS et Android."
+        },
+        "ux": {
+          "title": "UX/UI exceptionnelle",
+          "description": "Interfaces intuitives et expériences utilisateur soigneusement conçues."
+        },
+        "performance": {
+          "title": "Performance rapide",
+          "description": "Applications optimisées pour rapidité et fluidité d'utilisation."
+        },
+        "security": {
+          "title": "Sécurité des données",
+          "description": "Protection des informations sensibles et conformité aux normes mobiles."
+        },
+        "collaborative": {
+          "title": "Fonctionnalités collaboratives",
+          "description": "Outils de travail d'équipe et synchronisation en temps réel."
+        },
+        "offline": {
+          "title": "Mode hors ligne",
+          "description": "Fonctionnalité continue même sans connexion internet."
+        }
+      },
+      "technologies": {
+        "title": "Technologies que nous utilisons",
+        "description": "Nous maîtrisons les frameworks et outils les plus performants du développement mobile."
+      },
+      "process": {
+        "title": "Notre processus de développement",
+        "subtitle": "Une approche structurée pour créer des applications mobiles réussies.",
+        "step1": {
+          "title": "Conception UX/UI",
+          "description": "Design de l'expérience utilisateur et de l'interface application."
+        },
+        "step2": {
+          "title": "Développement",
+          "description": "Codage de l'application avec les meilleures pratiques mobiles."
+        },
+        "step3": {
+          "title": "Tests et validation",
+          "description": "Tests sur différents appareils et validation fonctionnelle."
+        },
+        "step4": {
+          "title": "Publication et maintenance",
+          "description": "Déploiement sur les stores et support continu."
+        }
+      }
+    },
+    "management": {
+      "hero": {
+        "eyebrow": "03 · Gestion",
+        "title": "Logiciels de Gestion",
+        "description": "Des outils métier sur mesure pour simplifier vos opérations et fiabiliser vos données.",
+        "cta": "Demander un devis",
+        "back": "Retour aux services"
+      },
+      "overview": {
+        "title": "Expertise en logiciels de gestion",
+        "description": "Nous concevons des solutions ERP, CRM et outils métier personnalisés qui optimisent vos processus et améliorent votre productivité."
+      },
+      "features": {
+        "title": "Ce que nous offrons",
+        "subtitle": "Des solutions de gestion adaptées à votre entreprise.",
+        "custom": {
+          "title": "Solutions sur mesure",
+          "description": "Logiciels personnalisés selon vos processus métier spécifiques."
+        },
+        "integration": {
+          "title": "Intégration facile",
+          "description": "Connexion avec vos outils existants et systèmes tiers."
+        },
+        "security": {
+          "title": "Sécurité des données",
+          "description": "Protection renforcée et contrôle d'accès basé sur les rôles."
+        },
+        "collaborative": {
+          "title": "Travail collaboratif",
+          "description": "Outils permettant à vos équipes de travailler ensemble efficacement."
+        },
+        "analytics": {
+          "title": "Analyses et rapports",
+          "description": "Tableaux de bord et rapports personnalisés pour la prise de décision."
+        },
+        "automation": {
+          "title": "Automatisation des processus",
+          "description": "Réduction des tâches manuelles et gain de temps."
+        }
+      },
+      "technologies": {
+        "title": "Technologies que nous utilisons",
+        "description": "Nous utilisons des technologies robustes et évolutives pour vos logiciels de gestion."
+      },
+      "process": {
+        "title": "Notre processus de développement",
+        "subtitle": "Une méthodologie éprouvée pour vos logiciels métier.",
+        "step1": {
+          "title": "Analyse des processus",
+          "description": "Étude de vos flux de travail actuels et identification des besoins."
+        },
+        "step2": {
+          "title": "Conception de la solution",
+          "description": "Architecture technique et design de l'interface utilisateur."
+        },
+        "step3": {
+          "title": "Développement et tests",
+          "description": "Réalisation de la solution et validation complète."
+        },
+        "step4": {
+          "title": "Déploiement et formation",
+          "description": "Mise en production et formation de vos équipes."
+        }
+      }
+    }
+  }
 }

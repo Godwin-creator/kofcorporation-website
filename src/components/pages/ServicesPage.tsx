@@ -17,10 +17,10 @@ import { Link } from "@/i18n/navigation";
 
 interface ServiceDetail {
   id: string;
-  eyebrow: string;
-  title: string;
-  description: string;
-  benefit: string;
+  eyebrowKey: string;
+  titleKey: string;
+  descriptionKey: string;
+  benefitKey: string;
   tags: string[];
   icon: LucideIcon;
   href: string;
@@ -29,44 +29,40 @@ interface ServiceDetail {
 const SERVICES: ServiceDetail[] = [
   {
     id: "web",
-    eyebrow: "01 · Web",
-    title: "Développement Web & Applications",
-    description:
-      "Des sites vitrines, plateformes web et applications métier conçus autour de vos objectifs.",
-    benefit: "Une présence digitale professionnelle, performante et livrée clé en main.",
+    eyebrowKey: "services.web.eyebrow",
+    titleKey: "services.web.title",
+    descriptionKey: "services.web.description",
+    benefitKey: "services.web.benefit",
     tags: ["Laravel", "Vue.js", "Angular", "Spring Boot", "Firebase"],
     icon: Globe,
     href: "/services/developpement-web",
   },
   {
     id: "mobile",
-    eyebrow: "02 · Mobile",
-    title: "Applications Mobiles",
-    description:
-      "Des expériences Android et iOS fluides, pensées pour vos utilisateurs et votre croissance.",
-    benefit: "Une application robuste et prête à évoluer sur Play Store et App Store.",
+    eyebrowKey: "services.mobile.eyebrow",
+    titleKey: "services.mobile.title",
+    descriptionKey: "services.mobile.description",
+    benefitKey: "services.mobile.benefit",
     tags: ["Flutter", "Firebase", "Ionic", "Kotlin", "Java"],
     icon: Smartphone,
     href: "/services/applications-mobiles",
   },
   {
     id: "management",
-    eyebrow: "03 · Gestion",
-    title: "Logiciels de Gestion",
-    description:
-      "Des outils métier sur mesure pour simplifier vos opérations et fiabiliser vos données.",
-    benefit: "Un système adapté à vos processus, sans vous imposer une solution standard.",
+    eyebrowKey: "services.management.eyebrow",
+    titleKey: "services.management.title",
+    descriptionKey: "services.management.description",
+    benefitKey: "services.management.benefit",
     tags: ["ERP", "CRM", "RH", "Facturation", "Spring Boot"],
     icon: Monitor,
     href: "/services/logiciels-gestion",
   },
   {
     id: "training",
-    eyebrow: "04 · Transmission",
-    title: "Formations & Coaching Tech",
-    description:
-      "Des parcours concrets pour développer les compétences numériques de vos équipes et talents.",
-    benefit: "Une montée en compétence progressive, en présentiel, en ligne ou en hybride.",
+    eyebrowKey: "services.training.eyebrow",
+    titleKey: "services.training.title",
+    descriptionKey: "services.training.description",
+    benefitKey: "services.training.benefit",
     tags: ["Academy", "Présentiel", "En ligne", "Hybride"],
     icon: GraduationCap,
     href: "https://academy.kofcorporation.com/",
@@ -100,6 +96,7 @@ const cardVariants = {
 
 export default function ServicesPage() {
   const t = useTranslations("pages");
+  const tServices = useTranslations("servicesPage");
   return (
     <>
       <div className="services-page">
@@ -120,11 +117,10 @@ export default function ServicesPage() {
               </span>
             </h1>
             <p className="services-page__hero-description">
-              De la première idée au produit en production, nous construisons
-              des solutions digitales utiles, durables et adaptées à votre réalité.
+              {tServices("hero.description")}
             </p>
             <Link className="services-page__hero-link" href="#expertises">
-              Explorer nos services
+              {tServices("hero.cta")}
               <ArrowRight size={18} strokeWidth={1.8} aria-hidden="true" />
             </Link>
           </div>
@@ -137,13 +133,12 @@ export default function ServicesPage() {
         >
           <div className="services-page__container">
             <header className="services-page__section-header">
-              <p className="services-page__eyebrow">Ce que nous faisons</p>
+              <p className="services-page__eyebrow">{tServices("expertises.eyebrow")}</p>
               <h2 id="expertises-title">
-                Une équipe pour chaque étape de votre transformation digitale.
+                {tServices("expertises.title")}
               </h2>
               <p>
-                Notre expertise full-stack locale nous permet de vous accompagner
-                avec une seule équipe, de la stratégie au déploiement.
+                {tServices("expertises.description")}
               </p>
             </header>
 
@@ -154,40 +149,43 @@ export default function ServicesPage() {
               whileInView="visible"
               viewport={{ once: true, amount: 0.15 }}
             >
-              {SERVICES.map(({ id, eyebrow, title, description, benefit, tags, icon: Icon, href }) => (
-                <motion.article
-                  className={`services-detail-card services-detail-card--${id}`}
-                  key={id}
-                  variants={cardVariants}
-                >
-                  <div className="services-detail-card__topline">
-                    <span className="services-detail-card__icon" aria-hidden="true">
-                      <Icon size={25} strokeWidth={1.7} />
-                    </span>
-                    <span className="services-detail-card__eyebrow">{eyebrow}</span>
-                  </div>
-                  <h3>{title}</h3>
-                  <p className="services-detail-card__description">{description}</p>
-                  <p className="services-detail-card__benefit">
-                    <Check size={17} strokeWidth={2} aria-hidden="true" />
-                    {benefit}
-                  </p>
-                  <ul aria-label={`Technologies et formats pour ${title}`}>
-                    {tags.map((tag) => (
-                      <li key={tag}>{tag}</li>
-                    ))}
-                  </ul>
-                  <Link
-                    className="services-detail-card__link"
-                    href={href}
-                    target={href.startsWith("http") ? "_blank" : undefined}
-                    rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+              {SERVICES.map(({ id, eyebrowKey, titleKey, descriptionKey, benefitKey, tags, icon: Icon, href }) => {
+                const title = tServices(titleKey);
+                return (
+                  <motion.article
+                    className={`services-detail-card services-detail-card--${id}`}
+                    key={id}
+                    variants={cardVariants}
                   >
-                    Découvrir l&apos;expertise
-                    <ArrowRight size={17} strokeWidth={1.8} aria-hidden="true" />
-                  </Link>
-                </motion.article>
-              ))}
+                    <div className="services-detail-card__topline">
+                      <span className="services-detail-card__icon" aria-hidden="true">
+                        <Icon size={25} strokeWidth={1.7} />
+                      </span>
+                      <span className="services-detail-card__eyebrow">{tServices(eyebrowKey)}</span>
+                    </div>
+                    <h3>{title}</h3>
+                    <p className="services-detail-card__description">{tServices(descriptionKey)}</p>
+                    <p className="services-detail-card__benefit">
+                      <Check size={17} strokeWidth={2} aria-hidden="true" />
+                      {tServices(benefitKey)}
+                    </p>
+                    <ul aria-label={`Technologies et formats pour ${title}`}>
+                      {tags.map((tag) => (
+                        <li key={tag}>{tag}</li>
+                      ))}
+                    </ul>
+                    <Link
+                      className="services-detail-card__link"
+                      href={href}
+                      target={href.startsWith("http") ? "_blank" : undefined}
+                      rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    >
+                      {tServices("card.cta")}
+                      <ArrowRight size={17} strokeWidth={1.8} aria-hidden="true" />
+                    </Link>
+                  </motion.article>
+                );
+              })}
             </motion.div>
           </div>
         </section>
@@ -202,29 +200,29 @@ export default function ServicesPage() {
         >
           <div className="services-page__method-inner">
             <div>
-              <p className="services-page__eyebrow">Notre méthode</p>
-              <h2 id="method-title">Un accompagnement simple, de l&apos;idée à l&apos;impact.</h2>
+              <p className="services-page__eyebrow">{tServices("method.eyebrow")}</p>
+              <h2 id="method-title">{tServices("method.title")}</h2>
             </div>
             <ol className="services-page__steps">
               <li>
                 <span>01</span>
                 <div>
-                  <h3>Comprendre</h3>
-                  <p>Nous clarifions vos objectifs, vos utilisateurs et vos priorités.</p>
+                  <h3>{tServices("method.step1.title")}</h3>
+                  <p>{tServices("method.step1.description")}</p>
                 </div>
               </li>
               <li>
                 <span>02</span>
                 <div>
-                  <h3>Construire</h3>
-                  <p>Nous concevons, développons et testons une solution utile.</p>
+                  <h3>{tServices("method.step2.title")}</h3>
+                  <p>{tServices("method.step2.description")}</p>
                 </div>
               </li>
               <li>
                 <span>03</span>
                 <div>
-                  <h3>Faire évoluer</h3>
-                  <p>Nous restons à vos côtés pour mesurer, améliorer et transmettre.</p>
+                  <h3>{tServices("method.step3.title")}</h3>
+                  <p>{tServices("method.step3.description")}</p>
                 </div>
               </li>
             </ol>
