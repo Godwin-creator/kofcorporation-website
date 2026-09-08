@@ -20,11 +20,11 @@ import { Link } from "@/i18n/navigation";
 
 interface Project {
   id: string;
-  title: string;
-  sector: string;
-  client: string;
-  description: string;
-  features: string;
+  titleKey: string;
+  sectorKey: string;
+  clientKey: string;
+  descriptionKey: string;
+  featuresKey: string;
   tags: string[];
   url: string;
   icon: LucideIcon;
@@ -33,72 +33,66 @@ interface Project {
 const PROJECTS: Project[] = [
   {
     id: "aoa-togo",
-    title: "AOA Togo",
-    sector: "ONG",
-    client: "ONG AOA",
-    description:
-      "Une présence digitale claire pour mieux présenter les actions et l'impact de l'organisation.",
-    features: "Site vitrine, CMS headless et déploiement continu.",
+    titleKey: "aoaTogo.title",
+    sectorKey: "aoaTogo.sector",
+    clientKey: "aoaTogo.client",
+    descriptionKey: "aoaTogo.description",
+    featuresKey: "aoaTogo.features",
     tags: ["React 19", "Tailwind", "Sanity CMS", "Vercel"],
     url: "https://aoa-togo.org",
     icon: Heart,
   },
   {
     id: "jeunesse-plus",
-    title: "JeunessePlus",
-    sector: "Santé",
-    client: "Jhpiego",
-    description:
-      "Une plateforme accessible pour informer et accompagner les jeunes sur leur santé sexuelle et reproductive.",
-    features: "Quiz, forum, contenus éducatifs et ligne verte.",
+    titleKey: "jeunessePlus.title",
+    sectorKey: "jeunessePlus.sector",
+    clientKey: "jeunessePlus.client",
+    descriptionKey: "jeunessePlus.description",
+    featuresKey: "jeunessePlus.features",
     tags: ["Laravel", "Flutter", "Firebase", "MySQL"],
     url: "https://jeunesse-plus.com",
     icon: HeartPulse,
   },
   {
     id: "elycha",
-    title: "Elycha",
-    sector: "Immobilier / Auto",
-    client: "Elycha",
-    description:
-      "Une expérience de recherche fluide pour trouver, sauvegarder et suivre des annonces.",
-    features: "Annonces, favoris et notifications en temps réel.",
+    titleKey: "elycha.title",
+    sectorKey: "elycha.sector",
+    clientKey: "elycha.client",
+    descriptionKey: "elycha.description",
+    featuresKey: "elycha.features",
     tags: ["Laravel", "Flutter", "Firebase", "MySQL"],
     url: "https://elycha.com",
     icon: Home,
   },
   {
     id: "golden-group",
-    title: "Golden Group Technologies",
-    sector: "Services tech",
-    client: "Golden Group Technologies SARL",
-    description:
-      "Des outils numériques pour structurer l'activité et soutenir le développement commercial.",
-    features: "Centre d'appel, étude de marché et formation commerciale.",
+    titleKey: "goldenGroup.title",
+    sectorKey: "goldenGroup.sector",
+    clientKey: "goldenGroup.client",
+    descriptionKey: "goldenGroup.description",
+    featuresKey: "goldenGroup.features",
     tags: ["React", "Spring Boot", "PostgreSQL"],
     url: "https://goldengrouptechnologies.com",
     icon: Building2,
   },
   {
     id: "muslim-togo",
-    title: "Muslim Togo",
-    sector: "Communautaire",
-    client: "KofCorporation",
-    description:
-      "Une application mobile pensée pour accompagner les pratiques quotidiennes de sa communauté.",
-    features: "Coran audio, horaires de prière, Qibla et calendrier islamique.",
+    titleKey: "muslimTogo.title",
+    sectorKey: "muslimTogo.sector",
+    clientKey: "muslimTogo.client",
+    descriptionKey: "muslimTogo.description",
+    featuresKey: "muslimTogo.features",
     tags: ["Flutter", "Firebase", "Mobile"],
     url: "https://muslimtogo.kofcorporation.com",
     icon: Smartphone,
   },
   {
     id: "groupe-cat",
-    title: "Groupe CAT",
-    sector: "Juridique",
-    client: "Groupe CAT",
-    description:
-      "Un site institutionnel qui rend les expertises juridiques plus lisibles et accessibles.",
-    features: "Services juridiques, audits et formations.",
+    titleKey: "groupeCat.title",
+    sectorKey: "groupeCat.sector",
+    clientKey: "groupeCat.client",
+    descriptionKey: "groupeCat.description",
+    featuresKey: "groupeCat.features",
     tags: ["WordPress", "PHP", "MySQL"],
     url: "https://group-cat.com",
     icon: Landmark,
@@ -121,6 +115,7 @@ const cardVariants = {
 
 export default function RealisationsPage() {
   const t = useTranslations("pages");
+  const tProjects = useTranslations("projectsPage");
   return (
     <>
       <div className="realisations-page">
@@ -141,11 +136,10 @@ export default function RealisationsPage() {
               </span>
             </h1>
             <p>
-              Nous concevons des expériences digitales qui répondent à des
-              besoins réels et créent un impact durable pour leurs utilisateurs.
+              {tProjects("hero.description")}
             </p>
             <Link href="#projets" className="realisations-page__hero-link">
-              Voir les projets
+              {tProjects("hero.cta")}
               <ArrowUpRight size={18} strokeWidth={1.8} aria-hidden="true" />
             </Link>
           </div>
@@ -159,15 +153,13 @@ export default function RealisationsPage() {
           <div className="realisations-page__container">
             <header className="realisations-page__section-header">
               <div>
-                <p className="realisations-page__eyebrow">Portfolio</p>
+                <p className="realisations-page__eyebrow">{tProjects("portfolio.eyebrow")}</p>
                 <h2 id="projects-page-title">
-                  Des projets pensés pour durer.
+                  {tProjects("portfolio.title")}
                 </h2>
               </div>
               <p>
-                Chaque projet commence par l&apos;écoute et se construit avec
-                une attention particulière portée à l&apos;usage, à la clarté et
-                à la qualité technique.
+                {tProjects("portfolio.description")}
               </p>
             </header>
 
@@ -179,47 +171,50 @@ export default function RealisationsPage() {
               viewport={{ once: true, amount: 0.1 }}
             >
               {PROJECTS.map(
-                ({ id, title, sector, client, description, features, tags, url, icon: Icon }) => (
-                  <motion.article
-                    className={`realisation-card realisation-card--${id}`}
-                    key={id}
-                    variants={cardVariants}
-                  >
-                    <div className="realisation-card__visual">
-                      <span className="realisation-card__icon" aria-hidden="true">
-                        <Icon size={48} strokeWidth={1.35} />
-                      </span>
-                      <span className="realisation-card__sector">{sector}</span>
-                    </div>
-                    <div className="realisation-card__body">
-                      <div className="realisation-card__meta">
-                        <span>Client</span>
-                        <strong>{client}</strong>
+                ({ id, titleKey, sectorKey, clientKey, descriptionKey, featuresKey, tags, url, icon: Icon }) => {
+                  const title = tProjects(titleKey);
+                  return (
+                    <motion.article
+                      className={`realisation-card realisation-card--${id}`}
+                      key={id}
+                      variants={cardVariants}
+                    >
+                      <div className="realisation-card__visual">
+                        <span className="realisation-card__icon" aria-hidden="true">
+                          <Icon size={48} strokeWidth={1.35} />
+                        </span>
+                        <span className="realisation-card__sector">{tProjects(sectorKey)}</span>
                       </div>
-                      <div className="realisation-card__title-row">
-                        <h3>{title}</h3>
-                        <a
-                          href={url}
-                          target="_blank"
-                          rel="noreferrer"
-                          aria-label={`Visiter le site de ${title}`}
-                        >
-                          <ExternalLink size={18} strokeWidth={1.8} aria-hidden="true" />
-                        </a>
+                      <div className="realisation-card__body">
+                        <div className="realisation-card__meta">
+                          <span>{tProjects("card.client")}</span>
+                          <strong>{tProjects(clientKey)}</strong>
+                        </div>
+                        <div className="realisation-card__title-row">
+                          <h3>{title}</h3>
+                          <a
+                            href={url}
+                            target="_blank"
+                            rel="noreferrer"
+                            aria-label={`${tProjects("card.visit")} ${title}`}
+                          >
+                            <ExternalLink size={18} strokeWidth={1.8} aria-hidden="true" />
+                          </a>
+                        </div>
+                        <p className="realisation-card__description">{tProjects(descriptionKey)}</p>
+                        <p className="realisation-card__features">
+                          <MessagesSquare size={16} strokeWidth={1.8} aria-hidden="true" />
+                          {tProjects(featuresKey)}
+                        </p>
+                        <ul aria-label={`${tProjects("card.technologies")} ${title}`}>
+                          {tags.map((tag) => (
+                            <li key={tag}>{tag}</li>
+                          ))}
+                        </ul>
                       </div>
-                      <p className="realisation-card__description">{description}</p>
-                      <p className="realisation-card__features">
-                        <MessagesSquare size={16} strokeWidth={1.8} aria-hidden="true" />
-                        {features}
-                      </p>
-                      <ul aria-label={`Technologies utilisées pour ${title}`}>
-                        {tags.map((tag) => (
-                          <li key={tag}>{tag}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </motion.article>
-                ),
+                    </motion.article>
+                  );
+                }
               )}
             </motion.div>
           </div>

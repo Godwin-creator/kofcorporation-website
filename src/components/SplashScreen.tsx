@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 /**
  * SplashScreen — Écran de chargement initial de KofCorporation.
  *
- * - Apparaît au premier rendu, disparaît après 1200 ms.
+ * - Apparaît au premier rendu, disparaît après 2000 ms.
  * - Utilise AnimatePresence de Framer Motion pour l'animation de sortie.
  * - SSR-safe : attend le montage client avant de s'afficher.
  */
@@ -16,12 +16,19 @@ export default function SplashScreen() {
 
   useEffect(() => {
     const showTimer = window.setTimeout(() => setIsVisible(true), 0);
-    const hideTimer = window.setTimeout(() => setIsVisible(false), 1200);
+    const hideTimer = window.setTimeout(() => setIsVisible(false), 2000);
     return () => {
       window.clearTimeout(showTimer);
       window.clearTimeout(hideTimer);
     };
   }, []);
+
+  // Remove splash-active class when splash is no longer visible
+  useEffect(() => {
+    if (!isVisible) {
+      document.documentElement.classList.remove('splash-active');
+    }
+  }, [isVisible]);
 
   return (
     <AnimatePresence>

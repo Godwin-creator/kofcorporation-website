@@ -2,9 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import Threads from "./Threads";
 import "./Hero.css";
 import { Link } from "@/i18n/navigation";
 
@@ -14,15 +12,6 @@ export default function Hero() {
     <section className="hero">
       <div className="hero__inner">
         <div className="hero__content">
-          <div className="hero__threads" aria-hidden="true">
-            <Threads
-              color={[0.32, 0.15, 1]}
-              amplitude={2}
-              distance={0.7}
-              enableMouseInteraction={false}
-            />
-          </div>
-
           <motion.h1
             className="hero__title"
             initial={{ opacity: 0, y: 20 }}
@@ -57,25 +46,6 @@ export default function Hero() {
             </Link>
           </motion.div>
         </div>
-
-        <motion.div
-          className="hero__visual"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-        >
-          <div className="hero__image">
-            <Image
-              src="/images/hero-team.png"
-              alt={t("imageAlt")}
-              fill
-              sizes="(max-width: 767px) 0px, (max-width: 1023px) 100vw, 45vw"
-              className="hero__image-content"
-              priority
-            />
-            <div className="hero__image-overlay" aria-hidden="true" />
-          </div>
-        </motion.div>
       </div>
     </section>
   );

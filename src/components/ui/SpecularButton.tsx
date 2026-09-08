@@ -336,9 +336,13 @@ const SpecularButton = ({
       renderer.render({ scene: mesh });
     };
 
-    animationFrame = requestAnimationFrame(update);
+    // Delay animation start to avoid fast initial frames
+    const startTimer = window.setTimeout(() => {
+      animationFrame = requestAnimationFrame(update);
+    }, 500);
 
     return () => {
+      window.clearTimeout(startTimer);
       cancelAnimationFrame(animationFrame);
       resizeObserver.disconnect();
       button.removeEventListener("pointerenter", handlePointerEnter);

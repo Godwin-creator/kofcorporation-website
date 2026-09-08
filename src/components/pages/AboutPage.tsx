@@ -16,23 +16,23 @@ import { Link } from "@/i18n/navigation";
 
 const VALUES = [
   {
-    title: "Expertise full-stack locale",
-    description: "Web, mobile et logiciel réunis dans une même équipe.",
+    titleKey: "values.expertise.title",
+    descriptionKey: "values.expertise.description",
     icon: Code2,
   },
   {
-    title: "Stack moderne & éprouvée",
-    description: "Des technologies choisies pour leur fiabilité et leur capacité à évoluer.",
+    titleKey: "values.stack.title",
+    descriptionKey: "values.stack.description",
     icon: Layers3,
   },
   {
-    title: "Formation & transmission",
-    description: "Nous livrons des solutions et transmettons les compétences pour les faire vivre.",
+    titleKey: "values.training.title",
+    descriptionKey: "values.training.description",
     icon: GraduationCap,
   },
   {
-    title: "Proximité & réactivité",
-    description: "Une équipe basée à Lomé, disponible et engagée à chaque étape.",
+    titleKey: "values.proximity.title",
+    descriptionKey: "values.proximity.description",
     icon: Handshake,
   },
 ];
@@ -40,21 +40,18 @@ const VALUES = [
 const STORY_STEPS = [
   {
     number: "01",
-    title: "Écouter avant de construire",
-    description:
-      "Nous commençons par comprendre votre activité, vos utilisateurs et les contraintes qui comptent vraiment.",
+    titleKey: "story.listen.title",
+    descriptionKey: "story.listen.description",
   },
   {
     number: "02",
-    title: "Transformer une idée en produit",
-    description:
-      "Nous concevons une expérience claire et développons une solution robuste, adaptée à vos priorités.",
+    titleKey: "story.transform.title",
+    descriptionKey: "story.transform.description",
   },
   {
     number: "03",
-    title: "Grandir avec vous",
-    description:
-      "Notre accompagnement continue après la mise en ligne pour faire évoluer le produit et les équipes.",
+    titleKey: "story.grow.title",
+    descriptionKey: "story.grow.description",
   },
 ];
 
@@ -69,6 +66,7 @@ const sectionVariants = {
 
 export default function AboutPage() {
   const t = useTranslations("pages");
+  const tAbout = useTranslations("about");
   return (
     <>
       <div className="about-page">
@@ -89,12 +87,10 @@ export default function AboutPage() {
               </span>
             </h1>
             <p>
-              KofCorporation est une société informatique togolaise qui conçoit
-              des applications web, mobiles et des logiciels sur mesure pour
-              faire avancer les organisations.
+              {tAbout("hero.description")}
             </p>
             <Link href="#notre-mission" className="about-page__hero-link">
-              Découvrir notre histoire
+              {tAbout("hero.cta")}
               <ArrowRight size={18} strokeWidth={1.8} aria-hidden="true" />
             </Link>
           </div>
@@ -111,22 +107,17 @@ export default function AboutPage() {
         >
           <div className="about-page__container about-page__mission-grid">
             <div>
-              <p className="about-page__eyebrow">Notre mission</p>
+              <p className="about-page__eyebrow">{tAbout("mission.eyebrow")}</p>
               <h2 id="mission-title">
-                Rendre la technologie utile, accessible et durable.
+                {tAbout("mission.title")}
               </h2>
             </div>
             <div className="about-page__mission-copy">
               <p>
-                Nous croyons qu&apos;une bonne solution digitale commence par
-                une compréhension précise du terrain. Notre rôle est de rendre
-                la complexité simple à utiliser, pour les équipes comme pour
-                leurs publics.
+                {tAbout("mission.description1")}
               </p>
               <p>
-                Depuis Lomé, nous accompagnons PME, startups, ONG et institutions
-                avec une approche de bout en bout : conseil, design, développement,
-                déploiement et transmission.
+                {tAbout("mission.description2")}
               </p>
             </div>
           </div>
@@ -136,21 +127,20 @@ export default function AboutPage() {
           <div className="about-page__container">
             <header className="about-page__section-header">
               <div>
-                <p className="about-page__eyebrow">Ce qui nous guide</p>
-                <h2 id="values-title">Une manière de travailler construite sur quatre forces.</h2>
+                <p className="about-page__eyebrow">{tAbout("values.eyebrow")}</p>
+                <h2 id="values-title">{tAbout("values.title")}</h2>
               </div>
               <p>
-                La proximité n&apos;est pas un compromis sur l&apos;exigence :
-                c&apos;est ce qui nous permet de mieux comprendre et mieux livrer.
+                {tAbout("values.subtitle")}
               </p>
             </header>
 
             <div className="about-page__values-grid">
-              {VALUES.map(({ title, description, icon: Icon }) => (
-                <article className="about-value-card" key={title}>
+              {VALUES.map(({ titleKey, descriptionKey, icon: Icon }) => (
+                <article className="about-value-card" key={titleKey}>
                   <Icon size={26} strokeWidth={1.6} aria-hidden="true" />
-                  <h3>{title}</h3>
-                  <p>{description}</p>
+                  <h3>{tAbout(titleKey)}</h3>
+                  <p>{tAbout(descriptionKey)}</p>
                 </article>
               ))}
             </div>
@@ -167,20 +157,19 @@ export default function AboutPage() {
         >
           <div className="about-page__container about-page__story-grid">
             <div>
-              <p className="about-page__eyebrow">Notre façon d&apos;avancer</p>
-              <h2 id="story-title">Du premier échange à l&apos;impact.</h2>
+              <p className="about-page__eyebrow">{tAbout("story.eyebrow")}</p>
+              <h2 id="story-title">{tAbout("story.title")}</h2>
               <p className="about-page__story-intro">
-                Une méthode claire pour garder le cap, prendre les bonnes décisions
-                et construire avec confiance.
+                {tAbout("story.intro")}
               </p>
             </div>
             <ol className="about-page__story-list">
-              {STORY_STEPS.map(({ number, title, description }) => (
+              {STORY_STEPS.map(({ number, titleKey, descriptionKey }) => (
                 <li key={number}>
                   <span>{number}</span>
                   <div>
-                    <h3>{title}</h3>
-                    <p>{description}</p>
+                    <h3>{tAbout(titleKey)}</h3>
+                    <p>{tAbout(descriptionKey)}</p>
                   </div>
                 </li>
               ))}
@@ -194,20 +183,19 @@ export default function AboutPage() {
               <Users size={64} strokeWidth={1.1} />
             </div>
             <div>
-              <p className="about-page__eyebrow">L&apos;équipe</p>
-              <h2 id="team-title">Des profils qui aiment résoudre les vrais problèmes.</h2>
+              <p className="about-page__eyebrow">{tAbout("team.eyebrow")}</p>
+              <h2 id="team-title">{tAbout("team.title")}</h2>
               <p>
-                Notre équipe réunit des développeurs, designers et formateurs
-                engagés à construire des produits utiles depuis Lomé.
+                {tAbout("team.description")}
               </p>
               <div className="about-page__founder">
                 <div>
-                  <strong>Omar Farouk KOUGBADA</strong>
-                  <span>Fondateur &amp; CEO</span>
+                  <strong>{tAbout("team.founder.name")}</strong>
+                  <span>{tAbout("team.founder.role")}</span>
                 </div>
                 <span className="about-page__location">
                   <MapPin size={16} strokeWidth={1.8} aria-hidden="true" />
-                  Lomé, Togo
+                  {tAbout("team.founder.location")}
                 </span>
               </div>
             </div>
@@ -215,7 +203,7 @@ export default function AboutPage() {
         </section>
       </div>
       <Link href="/contact" className="about-page__contact">
-        Parlons de votre projet
+        {tAbout("contact.cta")}
         <ArrowRight size={18} strokeWidth={1.8} aria-hidden="true" />
       </Link>
     </>

@@ -33,7 +33,7 @@ export default async function NotFound() {
             fontFamily: "var(--font-heading)",
             fontSize: "clamp(8rem, 24vw, 16rem)",
             fontWeight: 700,
-            lineHeight: 0.8,
+            lineHeight: 1,
             letterSpacing: "-0.08em",
           }}
         >
