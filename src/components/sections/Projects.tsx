@@ -79,7 +79,7 @@ export default function Projects() {
               {t("title")}
             </h2>
           </div>
-          <a className="projects__all-link" href="#">
+          <a className="projects__all-link" href="/realisations">
             {t("viewAll")} <span aria-hidden="true">→</span>
           </a>
         </header>
