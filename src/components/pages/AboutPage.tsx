@@ -16,23 +16,23 @@ import { Link } from "@/i18n/navigation";
 
 const VALUES = [
   {
-    titleKey: "about.values.expertise.title",
-    descriptionKey: "about.values.expertise.description",
+    titleKey: "values.expertise.title",
+    descriptionKey: "values.expertise.description",
     icon: Code2,
   },
   {
-    titleKey: "about.values.stack.title",
-    descriptionKey: "about.values.stack.description",
+    titleKey: "values.stack.title",
+    descriptionKey: "values.stack.description",
     icon: Layers3,
   },
   {
-    titleKey: "about.values.training.title",
-    descriptionKey: "about.values.training.description",
+    titleKey: "values.training.title",
+    descriptionKey: "values.training.description",
     icon: GraduationCap,
   },
   {
-    titleKey: "about.values.proximity.title",
-    descriptionKey: "about.values.proximity.description",
+    titleKey: "values.proximity.title",
+    descriptionKey: "values.proximity.description",
     icon: Handshake,
   },
 ];
@@ -40,18 +40,18 @@ const VALUES = [
 const STORY_STEPS = [
   {
     number: "01",
-    titleKey: "about.story.listen.title",
-    descriptionKey: "about.story.listen.description",
+    titleKey: "story.listen.title",
+    descriptionKey: "story.listen.description",
   },
   {
     number: "02",
-    titleKey: "about.story.transform.title",
-    descriptionKey: "about.story.transform.description",
+    titleKey: "story.transform.title",
+    descriptionKey: "story.transform.description",
   },
   {
     number: "03",
-    titleKey: "about.story.grow.title",
-    descriptionKey: "about.story.grow.description",
+    titleKey: "story.grow.title",
+    descriptionKey: "story.grow.description",
   },
 ];
 

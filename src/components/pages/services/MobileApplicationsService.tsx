@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
-import { ArrowRight, Check, Smartphone, Layout, Zap, Shield, Users, AppWindow } from "lucide-react";
+import { ArrowRight, Check, Smartphone, Layout, Code, Zap, Shield, Users, AppWindow } from "lucide-react";
 import CallToAction from "@/components/sections/CallToAction";
 import "./MobileApplicationsService.css";
 import { Link } from "@/i18n/navigation";
