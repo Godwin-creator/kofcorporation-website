@@ -1,6 +1,6 @@
 .specular-button {
   --sb-radius: 0px;
-  --sb-tint: #ffffff;
+  --sb-tint: var(--color-surface);
   --sb-tint-opacity: 0;
   --sb-blur: 1px;
   --sb-text-color: var(--color-primary);

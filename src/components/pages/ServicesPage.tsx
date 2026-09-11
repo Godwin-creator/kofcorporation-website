@@ -36,7 +36,7 @@ const SERVICES: ServiceDetail[] = [
     benefit: "Une présence digitale professionnelle, performante et livrée clé en main.",
     tags: ["Laravel", "Vue.js", "Angular", "Spring Boot", "Firebase"],
     icon: Globe,
-    href: "/services/developpement-web",
+    href: "/contact#contact-form",
   },
   {
     id: "mobile",
@@ -47,7 +47,7 @@ const SERVICES: ServiceDetail[] = [
     benefit: "Une application robuste et prête à évoluer sur Play Store et App Store.",
     tags: ["Flutter", "Firebase", "Ionic", "Kotlin", "Java"],
     icon: Smartphone,
-    href: "/services/applications-mobiles",
+    href: "/contact#contact-form",
   },
   {
     id: "management",
@@ -58,7 +58,7 @@ const SERVICES: ServiceDetail[] = [
     benefit: "Un système adapté à vos processus, sans vous imposer une solution standard.",
     tags: ["ERP", "CRM", "RH", "Facturation", "Spring Boot"],
     icon: Monitor,
-    href: "/services/logiciels-gestion",
+    href: "/contact#contact-form",
   },
   {
     id: "training",

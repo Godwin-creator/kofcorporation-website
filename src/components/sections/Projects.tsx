@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { motion, useInView } from "framer-motion";
 import { ExternalLink, Heart, HeartPulse, Home } from "lucide-react";
 import "./Projects.css";
+import { Link } from "@/i18n/navigation";
 
 interface Project {
   id: string;
@@ -79,9 +80,9 @@ export default function Projects() {
               {t("title")}
             </h2>
           </div>
-          <a className="projects__all-link" href="#">
+          <Link className="projects__all-link" href="/realisations">
             {t("viewAll")} <span aria-hidden="true">→</span>
-          </a>
+          </Link>
         </header>
 
         <motion.div

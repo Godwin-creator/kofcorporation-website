@@ -18,6 +18,7 @@
   --color-accent:        #0CACE8;
   --color-accent-mid:    #1A85BD;
   --color-accent-dark:   #1C71AA;
+  --color-on-primary:    #FFFFFF;
 
   /* Backgrounds & Surfaces */
   --color-bg:          #F8F9FA;
@@ -42,6 +43,7 @@
   --color-text-muted:  #94A3B8;
   --color-border:      #1E293B;
   --color-primary:     #E8F0FE;
+  --color-on-primary:  #FFFFFF;
 }
 
 /* 4. BASE STYLES */

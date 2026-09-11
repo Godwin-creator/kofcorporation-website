@@ -79,13 +79,14 @@ export default async function NotFound() {
               justifyContent: "center",
               gap: "0.5rem",
               padding: "0.8rem 1.25rem",
-              color: "#ffffff",
-              background: "linear-gradient(135deg, #0CACE8 0%, #1C71AA 100%)",
+              color: "var(--color-on-primary)",
+              background:
+                "linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%)",
               fontFamily: "var(--font-body)",
               fontSize: "0.9375rem",
               fontWeight: 500,
               textDecoration: "none",
-              boxShadow: "0 2px 12px rgba(12, 172, 232, 0.25)",
+              boxShadow: "0 2px 12px color-mix(in srgb, var(--color-accent) 25%, transparent)",
             }}
           >
             <Home size={18} aria-hidden="true" />

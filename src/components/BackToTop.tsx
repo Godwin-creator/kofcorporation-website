@@ -50,7 +50,6 @@ export default function BackToTop() {
       onClick={scrollToTop}
       aria-label="Retour en haut de la page"
     >
-      {/* <ChevronUp aria-hidden="true" strokeWidth={2} /> */}
       <span className="back-to-top__icon" aria-hidden="true">
         <ChevronUp size={20} strokeWidth={2.5} />
       </span>

@@ -58,8 +58,8 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
 
   const specularColors = {
-    textColor: isDark ? "#E8F0FE" : "#2F3974",
-    baseColor: isDark ? "#2C417A" : "#FFFFFF",
+    textColor: "var(--color-primary)",
+    baseColor: "var(--color-surface)",
   };
 
   /* --- Scroll detection for sticky glass effect ------------------- */
@@ -130,10 +130,10 @@ export default function Header() {
                     href={item.href}
                     size="sm"
                     radius={0}
-                    tint="#000000"
+                    tint="var(--color-surface)"
                     tintOpacity={0}
                     blur={0}
-                    lineColor="#0CACE8"
+                    lineColor="var(--color-accent)"
                     {...specularColors}
                     intensity={1}
                     shineSize={44}
@@ -160,10 +160,10 @@ export default function Header() {
               onClick={toggleTheme}
               size="sm"
               radius={0}
-              tint="#000000"
+              tint="var(--color-surface)"
               tintOpacity={0}
               blur={0}
-              lineColor="#0CACE8"
+              lineColor="var(--color-accent)"
               {...specularColors}
               intensity={1}
               shineSize={44}
@@ -212,10 +212,10 @@ export default function Header() {
                 }}
                 size="sm"
                 radius={0}
-                tint="#000000"
+                tint="var(--color-surface)"
                 tintOpacity={0}
                 blur={0}
-                lineColor="#0CACE8"
+                lineColor="var(--color-accent)"
                 {...specularColors}
                 intensity={1}
                 shineSize={44}
@@ -334,7 +334,9 @@ export default function Header() {
                   >
                     <Link
                       href={item.href}
-                      className="mobile-nav__link"
+                      className={`mobile-nav__link ${
+                        pathname === item.href ? "mobile-nav__link--active" : ""
+                      }`}
                       onClick={() => setMobileOpen(false)}
                     >
                       {navT(item.key)}

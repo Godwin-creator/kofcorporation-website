@@ -52,7 +52,7 @@
 
 .back-to-top:hover,
 .back-to-top:focus-visible {
-  background: rgba(12, 172, 232, 0.1);
+  background: color-mix(in srgb, var(--color-accent) 10%, transparent);
 }
 
 .back-to-top:hover svg,

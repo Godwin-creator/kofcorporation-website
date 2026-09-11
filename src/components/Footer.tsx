@@ -77,17 +77,17 @@ export default function Footer() {
             <h3 className="footer__title">{t("expertise")}</h3>
             <ul className="footer__list">
               <li>
-                <Link href="/services/developpement-web" className="footer__link">
+                <Link href="/services" className="footer__link">
                   {t("web")}
                 </Link>
               </li>
               <li>
-                <Link href="/services/applications-mobiles" className="footer__link">
+                <Link href="/services" className="footer__link">
                   {t("mobile")}
                 </Link>
               </li>
               <li>
-                <Link href="/services/logiciels-gestion" className="footer__link">
+                <Link href="/services" className="footer__link">
                   {t("management")}
                 </Link>
               </li>

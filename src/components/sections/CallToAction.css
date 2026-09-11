@@ -1,7 +1,7 @@
 .call-to-action {
   width: 100%;
   background-color: var(--color-primary);
-  color: #ffffff;
+  color: var(--color-on-primary);
 }
 
 [data-theme="dark"] .call-to-action {
@@ -18,7 +18,7 @@
 
 .call-to-action__title {
   margin: 0;
-  color: #ffffff;
+  color: var(--color-on-primary);
   font-family: var(--font-heading);
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 700;
@@ -28,7 +28,7 @@
 
 .call-to-action__subtitle {
   margin: 1.25rem auto 0;
-  color: rgba(255, 255, 255, 0.8);
+  color: color-mix(in srgb, var(--color-on-primary) 80%, transparent);
   font-family: var(--font-body);
   font-size: 1.05rem;
   line-height: 1.5;
@@ -64,36 +64,36 @@
 
 .call-to-action__button--primary {
   color: var(--color-primary);
-  background-color: #ffffff;
+  background-color: var(--color-on-primary);
 }
 
 .call-to-action__button--primary:hover,
 .call-to-action__button--primary:focus-visible {
   color: var(--color-primary);
-  background-color: #e8f0fe;
+  background-color: color-mix(in srgb, var(--color-on-primary) 90%, var(--color-primary));
 }
 
 [data-theme="dark"] .call-to-action__button--primary,
 [data-theme="dark"] .call-to-action__button--primary:hover,
 [data-theme="dark"] .call-to-action__button--primary:focus-visible {
-  color: #2f3974;
+  color: var(--color-primary);
 }
 
 .call-to-action__button--secondary {
-  border-color: rgba(255, 255, 255, 0.75);
-  color: #ffffff;
+  border-color: color-mix(in srgb, var(--color-on-primary) 75%, transparent);
+  color: var(--color-on-primary);
   background-color: transparent;
 }
 
 .call-to-action__button--secondary:hover,
 .call-to-action__button--secondary:focus-visible {
-  border-color: #ffffff;
+  border-color: var(--color-on-primary);
   color: var(--color-primary);
-  background-color: #ffffff;
+  background-color: var(--color-on-primary);
 }
 
 .call-to-action__button:focus-visible {
-  outline: 2px solid #ffffff;
+  outline: 2px solid var(--color-on-primary);
   outline-offset: 3px;
 }
 

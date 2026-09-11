@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { motion, useInView } from "framer-motion";
 import { Globe, GraduationCap, Monitor, Smartphone } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 import "./Services.css";
 
 interface Service {
@@ -100,9 +101,9 @@ export default function Services() {
                   <li key={tag}>{tag}</li>
                 ))}
               </ul>
-              <a className="service-card__link" href="#">
+              <Link className="service-card__link" href="/services">
                 {t("learnMore")} <span aria-hidden="true">→</span>
-              </a>
+              </Link>
             </motion.article>
             );
           })}

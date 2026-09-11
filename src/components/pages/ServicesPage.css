@@ -54,7 +54,7 @@
 }
 
 .services-page__hero-title-highlight {
-  background: linear-gradient(135deg, #0cace8 0%, #1c71aa 100%);
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

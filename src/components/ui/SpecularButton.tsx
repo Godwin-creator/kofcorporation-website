@@ -132,11 +132,11 @@ const SpecularButton = ({
   children,
   size = "lg",
   radius = 0,
-  tint = "#ffffff",
+  tint = "var(--color-surface)",
   tintOpacity = 0,
   blur = 1,
   textColor,
-  lineColor = "#0CACE8",
+  lineColor = "var(--color-accent)",
   baseColor,
   intensity = 1,
   shineSize = 10,
@@ -206,6 +206,7 @@ const SpecularButton = ({
     }
 
     const dpr = window.devicePixelRatio || 1;
+    const isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
     const renderer = new Renderer({
       alpha: true,
       premultipliedAlpha: true,
@@ -310,10 +311,12 @@ const SpecularButton = ({
       const props = propsRef.current;
 
       idleAngle += props.speed * delta;
-      const targetAngle = isHovered && props.followMouse && pointerAngle !== null ? pointerAngle : idleAngle;
+      const followsPointer = !isCoarsePointer && props.followMouse;
+      const targetAngle =
+        isHovered && followsPointer && pointerAngle !== null ? pointerAngle : idleAngle;
       const angleDifference = ((targetAngle - angle + Math.PI * 3) % (Math.PI * 2)) - Math.PI;
       angle += angleDifference * (1 - Math.exp(-delta * 7));
-      const targetBrightness = isHovered && props.followMouse && pointerAngle !== null ? 1 : 0;
+      const targetBrightness = isHovered && followsPointer ? 1 : 0;
       brightness += (targetBrightness - brightness) * (1 - Math.exp(-delta * 8));
 
       lineColorValue.set(resolveColor(props.lineColor, "--color-accent", "--color-accent", "#0CACE8"));
