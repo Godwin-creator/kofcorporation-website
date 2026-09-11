@@ -1,3 +1,7 @@
+"use client";
+
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import "./Partners.css";
 import Image from "next/image";
 
@@ -40,11 +44,29 @@ const PARTNERS: Partner[] = [
   },
 ];
 
+const sectionVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" as const },
+  },
+};
+
 export default function Partners() {
   const marqueeItems = [...PARTNERS, ...PARTNERS];
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
-    <section className="partners" aria-label="Nos partenaires et clients">
+    <motion.section 
+      ref={sectionRef}
+      className="partners" 
+      aria-label="Nos partenaires et clients"
+      variants={sectionVariants}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+    >
       <div className="partners__inner">
         <h2 className="partners__title">Ils nous font confiance</h2>
 
@@ -68,6 +90,6 @@ export default function Partners() {
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

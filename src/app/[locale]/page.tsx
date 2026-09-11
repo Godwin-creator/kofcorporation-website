@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import VideoPresentation from "@/components/sections/VideoPresentation";
 import Partners from "@/components/Partners";
 import SplashScreen from "@/components/SplashScreen";
 import Services from "@/components/sections/Services";
@@ -13,6 +14,7 @@ export default function Home() {
       <SplashScreen />
       <main>
         <Hero />
+        <VideoPresentation />
         <Services />
         <Stats />
         <Projects />
