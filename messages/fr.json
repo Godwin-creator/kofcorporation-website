@@ -18,6 +18,7 @@
     "homeAria": "Accueil KofCorporation"
   },
   "hero": {
+    "eyebrow": "Studio de développement",
     "headline": "Votre vision,",
     "headlineHighlight": "notre code.",
     "description": "KofCorporation conçoit des applications web, mobiles et des logiciels sur mesure pour accélérer la croissance de votre entreprise.",
@@ -25,6 +26,19 @@
     "discoverServices": "Découvrir nos services",
     "discoverProjects": "Découvrir nos réalisations",
     "imageAlt": "L'équipe KofCorporation au travail"
+  },
+  "videoPresentation": {
+    "eyebrow": "À propos de nous",
+    "title": "KofCorporation en 2 minutes",
+    "description": "Découvrez en quelques minutes qui nous sommes, ce que nous construisons, et pourquoi des entreprises togolaises nous font confiance pour développer leurs produits digitaux.",
+    "ceoName": "Omar Farouk KOUGBADA",
+    "ceoRole": "Fondateur & CEO",
+    "videoComingSoon": "Vidéo bientôt disponible",
+    "playAria": "Lire la vidéo de présentation",
+    "closeAria": "Fermer la vidéo",
+    "mute": "Couper le son",
+    "unmute": "Activer le son",
+    "expand": "Agrandir la vidéo"
   },
   "stats": {
     "title": "KofCorporation en chiffres",

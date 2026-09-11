@@ -46,31 +46,48 @@ const SERVICES: Service[] = [
   },
 ];
 
+const sectionVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" as const },
+  },
+};
+
 const containerVariants = {
   hidden: {},
   visible: {
     transition: {
       staggerChildren: 0.1,
+      delayChildren: 0.2,
     },
   },
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 40 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: "easeOut" as const },
+    transition: { duration: 0.6, ease: "easeOut" as const },
   },
 };
 
 export default function Services() {
   const t = useTranslations("services");
-  const servicesRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(servicesRef, { once: true, amount: 0.2 });
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
-    <section className="services" aria-labelledby="services-title">
+    <motion.section 
+      ref={sectionRef}
+      className="services" 
+      aria-labelledby="services-title"
+      variants={sectionVariants}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+    >
       <div className="services__inner">
         <header className="services__header">
           <p className="services__eyebrow">{t("eyebrow")}</p>
@@ -80,7 +97,6 @@ export default function Services() {
         </header>
 
         <motion.div
-          ref={servicesRef}
           className="services__grid"
           variants={containerVariants}
           initial="hidden"
@@ -108,6 +124,6 @@ export default function Services() {
           })}
         </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }

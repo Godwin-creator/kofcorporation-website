@@ -46,31 +46,48 @@ const PROJECTS: Project[] = [
   },
 ];
 
+const sectionVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" as const },
+  },
+};
+
 const containerVariants = {
   hidden: {},
   visible: {
     transition: {
       staggerChildren: 0.1,
+      delayChildren: 0.2,
     },
   },
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 40 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: "easeOut" as const },
+    transition: { duration: 0.6, ease: "easeOut" as const },
   },
 };
 
 export default function Projects() {
   const t = useTranslations("projects");
-  const projectsRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(projectsRef, { once: true, amount: 0.2 });
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
-    <section className="projects" aria-labelledby="projects-title">
+    <motion.section 
+      ref={sectionRef}
+      className="projects" 
+      aria-labelledby="projects-title"
+      variants={sectionVariants}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+    >
       <div className="projects__inner">
         <header className="projects__header">
           <div className="projects__heading">
@@ -85,7 +102,6 @@ export default function Projects() {
         </header>
 
         <motion.div
-          ref={projectsRef}
           className="projects__grid"
           variants={containerVariants}
           initial="hidden"
@@ -125,6 +141,6 @@ export default function Projects() {
           ))}
         </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }

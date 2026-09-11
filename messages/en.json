@@ -18,13 +18,27 @@
     "homeAria": "KofCorporation home"
   },
   "hero": {
+    "eyebrow": "Development Studio",
     "headline": "Your vision,",
     "headlineHighlight": "our code.",
-    "description": "KofCorporation designs custom web, mobile and software solutions to accelerate your business growth.",
+    "description": "KofCorporation builds custom web, mobile, and software applications to accelerate your business growth.",
     "bookMeeting": "Book a meeting",
     "discoverServices": "Discover our services",
     "discoverProjects": "Discover our projects",
-    "imageAlt": "The KofCorporation team at work"
+    "imageAlt": "KofCorporation team at work"
+  },
+  "videoPresentation": {
+    "eyebrow": "About us",
+    "title": "KofCorporation in 2 minutes",
+    "description": "Discover in a few minutes who we are, what we build, and why Togolese companies trust us to develop their digital products.",
+    "ceoName": "Omar Farouk KOUGBADA",
+    "ceoRole": "Founder & CEO",
+    "videoComingSoon": "Video coming soon",
+    "playAria": "Play presentation video",
+    "closeAria": "Close video",
+    "mute": "Mute",
+    "unmute": "Unmute",
+    "expand": "Expand video"
   },
   "stats": {
     "title": "KofCorporation in numbers",

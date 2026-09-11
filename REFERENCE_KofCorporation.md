@@ -1,6 +1,6 @@
 # Document de Référence — Refonte Site KofCorporation
 > **Statut** : En cours — champs `[À confirmer]` à valider lors de la présentation v1  
-> **Dernière mise à jour** : 6 septembre 2026  
+> **Dernière mise à jour** : 8 septembre 2026  
 > **Responsable projet** : Komi Godwin EDOH BEDI — Stagiaire Développement Web
 > **État réel du projet** : site vitrine fonctionnel, pages métiers terminées, direction visuelle stabilisée, thème par défaut en mode clair
 
@@ -16,7 +16,7 @@
 | **Couleur primaire** | Bleu foncé (à extraire via DevTools — site actuel) |
 | **Couleur secondaire** | Cyan / Bleu électrique (à extraire) |
 | **Logo** | Disponible — fichiers dans `/KofCorporation/Images/` (OneDrive) |
-| **Favicon** | ✅ Disponible — dossier `/KofCorporation/Images/favicon/` (favicon.svg, favicon.ico, apple-touch-icon.png, 96x96, 192x192, 512x512) |
+| **Favicon** | Disponible — dossier `/KofCorporation/Images/favicon/` (favicon.svg, favicon.ico, apple-touch-icon.png, 96x96, 192x192, 512x512) |
 | **Typographie** | [À identifier via DevTools sur le site actuel] |
 
 ---

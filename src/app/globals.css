@@ -131,9 +131,15 @@ a:hover {
   color: var(--color-accent-mid);
 }
 
-/* Images */
 img,
 video {
   max-width: 100%;
   display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -62,27 +62,67 @@ function AnimatedValue({ value, suffix }: Pick<Stat, "value" | "suffix">) {
   );
 }
 
+const sectionVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" as const },
+  },
+};
+
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" as const },
+  },
+};
+
 export default function Stats() {
   const t = useTranslations("stats");
   const labels = ["experience", "projects", "satisfaction", "training"] as const;
   const suffixes = [t("years"), "+", "%", "+"];
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+
   return (
-    <section className="stats" aria-labelledby="stats-title">
+    <motion.section 
+      ref={sectionRef}
+      className="stats" 
+      aria-labelledby="stats-title"
+      variants={sectionVariants}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+    >
       <div className="stats__inner">
         <h2 id="stats-title" className="stats__title">
           {t("title")}
         </h2>
 
-        <div className="stats__grid">
+        <motion.div 
+          className="stats__grid"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
           {STATS.map(({ id, value, icon: Icon }, index) => (
-            <article className="stats__item" key={id}>
+            <motion.article className="stats__item" key={id} variants={itemVariants}>
               <Icon className="stats__icon" size={24} strokeWidth={1.6} aria-hidden="true" />
               <AnimatedValue value={value} suffix={suffixes[index]} />
               <p className="stats__label">{t(labels[index])}</p>
-            </article>
+            </motion.article>
           ))}
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }
