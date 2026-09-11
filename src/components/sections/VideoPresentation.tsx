@@ -14,6 +14,7 @@ interface VideoPresentationProps {
 }
 
 export default function VideoPresentation({
+  // ajouter l'id de la vidéo youtube. Ex: youtubeId = "EUqP5zr7h2g",
   youtubeId,
   videoSrc = "/videos/presentation.mp4",
 }: VideoPresentationProps) {
@@ -30,10 +31,25 @@ export default function VideoPresentation({
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
+  // ── Ouvrir la modale : pause la vidéo inline ────────────────────────────
+  const openModal = useCallback(() => {
+    if (videoRef.current) videoRef.current.pause();
+    setIsModalOpen(true);
+  }, []);
+
+  // ── Fermer la modale : reprend la vidéo inline ──────────────────────────
+  const closeModal = useCallback(() => {
+    setIsModalOpen(false);
+    // Petit délai pour laisser la modale se fermer (AnimatePresence 0.3s)
+    setTimeout(() => {
+      if (videoRef.current) videoRef.current.play().catch(() => {});
+    }, 320);
+  }, []);
+
   // ── Keyboard handler ──────────────────────────────────────────────────────
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setIsModalOpen(false);
+      if (e.key === "Escape") closeModal();
     };
     if (isModalOpen) {
       document.body.style.overflow = "hidden";
@@ -45,7 +61,7 @@ export default function VideoPresentation({
       document.body.style.overflow = "";
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isModalOpen]);
+  }, [isModalOpen, closeModal]);
 
   // ── Sync mute state with video element ───────────────────────────────────
   const toggleMute = useCallback(() => {
@@ -144,7 +160,7 @@ export default function VideoPresentation({
                 <button
                   type="button"
                   className="video-presentation__expand-btn"
-                  onClick={() => setIsModalOpen(true)}
+                  onClick={openModal}
                   aria-label={t("expand")}
                 >
                   <Maximize2 size={18} />
@@ -161,7 +177,7 @@ export default function VideoPresentation({
                 <button
                   type="button"
                   className="video-presentation__play-btn"
-                  onClick={() => setIsModalOpen(true)}
+                  onClick={openModal}
                   aria-label={t("playAria")}
                 >
                   <Play className="fill-current ml-1" size={32} />
@@ -184,7 +200,7 @@ export default function VideoPresentation({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            onClick={() => setIsModalOpen(false)}
+            onClick={closeModal}
           >
             <motion.div
               className="video-modal__container"
@@ -198,7 +214,7 @@ export default function VideoPresentation({
               <button
                 type="button"
                 className="video-modal__close-btn"
-                onClick={() => setIsModalOpen(false)}
+                onClick={closeModal}
                 aria-label={t("closeAria")}
               >
                 <X size={28} />
