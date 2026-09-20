@@ -118,12 +118,12 @@
   display: flex;
   flex-direction: column;
   gap: 0.15em;
-  font-size: clamp(2.25rem, 4.5vw, 4rem);
+  font-size: clamp(3rem, 6vw, 5.5rem);
   font-weight: 700;
-  line-height: 0.96;
+  line-height: 0.92;
   color: var(--color-text);
   margin: 0;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.04em;
 }
 
 .hero__title-line {
@@ -252,7 +252,7 @@
     );
   filter: blur(1px);
   opacity: 1;
-  animation: borderShimmer 10s linear infinite;
+  animation: borderShimmer 4s linear infinite;
   z-index: -1;
 }
 
@@ -298,12 +298,10 @@
   background: radial-gradient(circle at var(--pointer-x) var(--pointer-y), rgba(255,255,255,0.42), rgba(0, 0, 0, 0.12) 28%, transparent 62%);
   filter: blur(26px);
   opacity: 0.9;
-  z-index: 0;
+  z-index: 1;
   pointer-events: none;
 }
-.hero__image-glow.hero__cta--primary:hover {
-  z-index: 1;
-}
+
 
 @keyframes borderFlow {
   0% {

@@ -1,20 +1,28 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import "./Hero.css";
 import { Link } from "@/i18n/navigation";
 import HeroImageSlider from "@/components/ui/HeroImageSlider";
 
-const SLOGANS = [
-  { lineOne: "Votre vision", lineTwo: "notre code" },
-  { lineOne: "Votre idée", lineTwo: "notre impact" },
-];
+const SLOGANS = {
+  fr: [
+    { lineOne: "Votre vision", lineTwo: "notre code" },
+    { lineOne: "Votre idée", lineTwo: "notre impact" },
+  ],
+  en: [
+    { lineOne: "Your vision", lineTwo: "our code" },
+    { lineOne: "Your idea", lineTwo: "our impact" },
+  ],
+};
 
 export default function Hero() {
   const t = useTranslations("hero");
+  const locale = useLocale();
+  const sloganSet = SLOGANS[locale as keyof typeof SLOGANS] ?? SLOGANS.fr;
 
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 300], [0, -60]);
@@ -26,7 +34,7 @@ export default function Hero() {
   const [cursorVisible, setCursorVisible] = useState(true);
 
   useEffect(() => {
-    const activeSlogan = SLOGANS[sloganIndex];
+    const activeSlogan = sloganSet[sloganIndex];
     const totalTypingMs = 6500;
     const totalChars = activeSlogan.lineOne.length + activeSlogan.lineTwo.length;
     const stepMs = totalTypingMs / totalChars;
@@ -69,7 +77,7 @@ export default function Hero() {
       window.setTimeout(() => setCursorVisible(false), flashPattern.length * 180 + 80);
 
       holdTimeout = window.setTimeout(() => {
-        setSloganIndex((current) => (current + 1) % SLOGANS.length);
+        setSloganIndex((current) => (current + 1) % sloganSet.length);
       }, 8000);
     };
 
@@ -81,13 +89,13 @@ export default function Hero() {
         window.clearTimeout(holdTimeout);
       }
     };
-  }, [sloganIndex]);
+  }, [sloganIndex, sloganSet]);
 
   const surtitreDelay = 0;
   const headlineDelay = 0.3;
   const sousTitreDelay = 1.2;
   const ctaDelay = 1.45;
-  const activeSlogan = SLOGANS[sloganIndex];
+  const activeSlogan = sloganSet[sloganIndex];
   const showCursorOnFirstLine = typedProgress <= activeSlogan.lineOne.length && cursorVisible;
   const showCursorOnSecondLine = typedProgress > activeSlogan.lineOne.length && cursorVisible;
 
