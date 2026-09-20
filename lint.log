@@ -1,0 +1,21 @@
+
+> kofcorporation-website@0.1.0 lint
+> eslint
+
+
+C:\Users\Godwin\Documents\kofcorporation-website\src\components\Hero.tsx
+   7:10  warning  'Link' is defined but never used                  @typescript-eslint/no-unused-vars
+  61:9   warning  'cursorBlink' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Godwin\Documents\kofcorporation-website\src\components\HeroImage.tsx
+  45:9  warning  'layerBack' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Godwin\Documents\kofcorporation-website\src\components\pages\services\MobileApplicationsService.tsx
+  5:49  warning  'Code' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Godwin\Documents\kofcorporation-website\src\components\sections\Projects.tsx
+  99:11  error  Do not use an `<a>` element to navigate to `/realisations/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
+  99:11  error  Do not use an `<a>` element to navigate to `/realisations/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
+
+✖ 6 problems (2 errors, 4 warnings)
+

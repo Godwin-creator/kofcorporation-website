@@ -1,0 +1,41 @@
+
+> kofcorporation-website@0.1.0 build
+> next build
+
+▲ Next.js 16.3.4 (Turbopack)
+✓ Running next.config.ts took 300ms
+
+⚠ The "middleware" file convention is deprecated. Please use "proxy" instead.
+
+  To migrate automatically, run:
+  npx @next/codemod@canary middleware-to-proxy .
+
+  Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+  Creating an optimized production build ...
+✓ Compiled successfully in 4.3s
+  Running TypeScript ...
+  Finished TypeScript in 7.4s ...
+  Collecting page data using 7 workers ...
+  Generating static pages using 7 workers (0/3) ...
+✓ Generating static pages using 7 workers (3/3) in 385ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /_not-found
+├ ƒ /[locale]
+├ ƒ /[locale]/[...rest]
+├ ƒ /[locale]/contact
+├ ƒ /[locale]/mentions-legales
+├ ƒ /[locale]/qui-sommes-nous
+├ ƒ /[locale]/realisations
+├ ƒ /[locale]/services
+├ ƒ /[locale]/services/applications-mobiles
+├ ƒ /[locale]/services/developpement-web
+└ ƒ /[locale]/services/logiciels-gestion
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

@@ -5,10 +5,11 @@ import { useTranslations } from "next-intl";
 import { ArrowRight } from "lucide-react";
 import "./Hero.css";
 import { Link } from "@/i18n/navigation";
+import HeroImageSlider from "@/components/ui/HeroImageSlider";
 
 export default function Hero() {
   const t = useTranslations("hero");
-  
+
   // Parallax on scroll
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 300], [0, -60]);
@@ -18,7 +19,7 @@ export default function Hero() {
   const highlightChars = t("headlineHighlight").split("");
   const totalChars = headlineChars.length + highlightChars.length;
   const charDelay = 0.04;
-  
+
   // Timings
   const surtitreDelay = 0;
   const headlineDelay = 0.3;
@@ -61,9 +62,8 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: surtitreDelay }}
-            style={{ display: "inline-block", marginBottom: "1rem", color: "var(--color-accent)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em", fontSize: "0.875rem" }}
           >
-            {t.has("eyebrow") ? t("eyebrow") : "Development Studio"}
+            {t("eyebrow")}
           </motion.span>
 
           <h1 className="hero__title">
@@ -91,17 +91,21 @@ export default function Hero() {
                 </motion.span>
               ))}
             </motion.span>
-            
+
             <motion.span
               className="hero__cursor"
               initial={{ opacity: 0 }}
               animate={{ opacity: [0, 1, 0, 1, 0, 1, 0, 0] }}
               transition={{
                 delay: headlineDelay + totalChars * charDelay,
-                duration: 1,
-                times: [0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1],
+                duration: 2,
+                times: [0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2],
               }}
-              style={{ display: "inline-block", marginLeft: "4px", color: "var(--color-text)" }}
+              style={{
+                display: "inline-block",
+                marginLeft: "4px",
+                color: "var(--color-text)",
+              }}
             >
               |
             </motion.span>
@@ -111,7 +115,7 @@ export default function Hero() {
             className="hero__description"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: sousTitreDelay }}
+            transition={{ duration: 1, delay: sousTitreDelay }}
           >
             {t("description")}
           </motion.p>
@@ -126,12 +130,25 @@ export default function Hero() {
               {t("discoverServices")}
               <ArrowRight size={18} strokeWidth={2} />
             </Link>
-            <Link href="/realisations" className="hero__cta hero__cta--secondary">
+            <Link
+              href="/realisations"
+              className="hero__cta hero__cta--secondary"
+            >
               {t("discoverProjects")}
             </Link>
           </motion.div>
+        </motion.div>
+
+        <motion.div
+          className="hero__visual"
+          initial={{ opacity: 0, scale: 0.95, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          <HeroImageSlider />
         </motion.div>
       </div>
     </section>
   );
 }
+

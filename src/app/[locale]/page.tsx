@@ -8,20 +8,20 @@ import Projects from "@/components/sections/Projects";
 import Testimonials from "@/components/sections/Testimonials";
 import CallToAction from "@/components/sections/CallToAction";
 
+const ENABLE_SPLASH = true;
+
 export default function Home() {
   return (
     <>
-      <SplashScreen />
-      <main>
-        <Hero />
-        <VideoPresentation />
-        <Services />
-        <Stats />
-        <Projects />
-        <Partners />
-        <Testimonials />
-        <CallToAction />
-      </main>
+      {ENABLE_SPLASH && <SplashScreen />}
+      <Hero />
+      <VideoPresentation />
+      <Services />
+      <Stats />
+      <Projects />
+      <Partners />
+      <Testimonials />
+      <CallToAction />
     </>
   );
 }

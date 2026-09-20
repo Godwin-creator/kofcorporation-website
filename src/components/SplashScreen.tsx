@@ -1,86 +1,104 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useAnimate } from "framer-motion";
 
-/**
- * SplashScreen — Écran de chargement initial de KofCorporation.
- *
- * - Apparaît au premier rendu, disparaît après 2000 ms.
- * - Utilise AnimatePresence de Framer Motion pour l'animation de sortie.
- * - SSR-safe : attend le montage client avant de s'afficher.
- */
+function getThemeBackground(): string {
+  if (typeof window === "undefined") return "#F8F9FA";
+  return document.documentElement.getAttribute("data-theme") === "dark"
+    ? "#1A1E3A"
+    : "#F8F9FA";
+}
+
 export default function SplashScreen() {
-  const [isVisible, setIsVisible] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [themeBackground, setThemeBackground] = useState("#F8F9FA");
+  const [scope, animate] = useAnimate();
 
   useEffect(() => {
-    const showTimer = window.setTimeout(() => setIsVisible(true), 0);
-    const hideTimer = window.setTimeout(() => setIsVisible(false), 2000);
-    return () => {
-      window.clearTimeout(showTimer);
-      window.clearTimeout(hideTimer);
-    };
+    if (typeof window === "undefined") return;
+
+    setThemeBackground(getThemeBackground());
+    document.documentElement.classList.add("splash-active");
+    setVisible(true);
   }, []);
 
-  // Remove splash-active class when splash is no longer visible
   useEffect(() => {
-    if (!isVisible) {
-      document.documentElement.classList.remove('splash-active');
+    if (!visible || typeof window === "undefined") return;
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    const runAnimation = async () => {
+      if (!scope.current) return;
+
+      if (prefersReducedMotion) {
+        await animate(
+          scope.current,
+          { scale: 1.2, opacity: [1, 0] },
+          { duration: 0.8, ease: "easeIn" }
+        );
+
+        setVisible(false);
+        return;
+      }
+
+      await animate(
+        scope.current,
+        {
+          scale: [1, 1.5, 2],
+          opacity: [1, 0.5, 0],
+        },
+        { duration: 1.5, ease: "easeIn" }
+      );
+
+      setVisible(false);
+    };
+
+    void runAnimation();
+  }, [animate, scope, visible]);
+
+  useEffect(() => {
+    if (!visible) {
+      document.documentElement.classList.remove("splash-active");
+
+      const timer = window.setTimeout(() => {
+        const event = new Event("kof:splash-complete", { bubbles: true });
+        window.dispatchEvent(event);
+      }, 150);
+
+      return () => window.clearTimeout(timer);
     }
-  }, [isVisible]);
+  }, [visible]);
 
   return (
     <AnimatePresence>
-      {isVisible && (
+      {visible && (
         <motion.div
           key="splash"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1, transition: { duration: 0.6 } }}
-          exit={{ opacity: 0, transition: { duration: 0.4 } }}
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 9999,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "1.25rem",
-            backgroundColor: "#1A1A2E",
-          }}
+          className="splash"
+          style={{ background: themeBackground }}
+          initial={{ opacity: 1 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.15 }}
           aria-hidden="true"
         >
-          {/* Logo */}
-          <motion.div
-            initial={{ scale: 0.85, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1, transition: { duration: 0.6, delay: 0.1 } }}
-          >
-            <Image
-              src="/images/logo.svg"
-              alt="KofCorporation"
-              width={120}
-              height={120}
-              style={{ objectFit: "contain", height: "auto" }}
-              priority
-            />
-          </motion.div>
-
-          {/* Nom de la marque */}
-          <motion.span
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.25 } }}
+          <motion.img
+            ref={scope}
+            src="/images/logo.svg"
+            alt="KofCorporation"
+            width={120}
+            height={120}
             style={{
-              fontFamily: "'Inter Tight', sans-serif",
-              fontSize: "1rem",
-              fontWeight: 600,
-              letterSpacing: "0.35em",
-              color: "#0CACE8",
-              textTransform: "uppercase",
+              display: "block",
+              width: 120,
+              height: 120,
+              transformOrigin: "center center",
+              willChange: "transform, opacity",
             }}
-          >
-            KOFCORPORATION
-          </motion.span>
+          />
         </motion.div>
       )}
     </AnimatePresence>

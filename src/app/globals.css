@@ -56,7 +56,7 @@
 html {
   /* 5. FIREFOX SCROLLBAR */
   scrollbar-width: thin;
-  scrollbar-color: #0CACE8 transparent;
+  scrollbar-color: var(--color-accent) transparent;
 }
 
 body {
@@ -84,12 +84,12 @@ main {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #0CACE8;
+  background: var(--color-accent);
   border-radius: 0;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #1A85BD;
+  background: var(--color-accent-mid);
 }
 
 /* 6. TEXT SELECTION */
@@ -111,6 +111,15 @@ h6 {
 }
 
 /* 8. SPLASH SCREEN */
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .splash-active main {
   opacity: 0;
 }

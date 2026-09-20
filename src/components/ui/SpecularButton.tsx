@@ -136,7 +136,7 @@ const SpecularButton = ({
   tintOpacity = 0,
   blur = 1,
   textColor,
-  lineColor = "#0CACE8",
+  lineColor = "var(--color-accent)",
   baseColor,
   intensity = 1,
   shineSize = 10,
@@ -264,6 +264,7 @@ const SpecularButton = ({
 
     let isHovered = false;
     let pointerAngle: number | null = null;
+    const finePointerQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
     const updatePointerAngle = (event: PointerEvent) => {
       const rect = button.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
@@ -276,14 +277,14 @@ const SpecularButton = ({
         normalizedY * 0.15;
     };
     const handlePointerEnter = (event: PointerEvent) => {
-      if (event.pointerType === "touch") {
+      if (!finePointerQuery.matches || event.pointerType === "touch") {
         return;
       }
       isHovered = true;
       updatePointerAngle(event);
     };
     const handlePointerMove = (event: PointerEvent) => {
-      if (isHovered && event.pointerType !== "touch") {
+      if (isHovered && finePointerQuery.matches && event.pointerType !== "touch") {
         updatePointerAngle(event);
       }
     };
@@ -310,10 +311,11 @@ const SpecularButton = ({
       const props = propsRef.current;
 
       idleAngle += props.speed * delta;
-      const targetAngle = isHovered && props.followMouse && pointerAngle !== null ? pointerAngle : idleAngle;
+      const canFollowMouse = props.followMouse && finePointerQuery.matches;
+      const targetAngle = isHovered && canFollowMouse && pointerAngle !== null ? pointerAngle : idleAngle;
       const angleDifference = ((targetAngle - angle + Math.PI * 3) % (Math.PI * 2)) - Math.PI;
       angle += angleDifference * (1 - Math.exp(-delta * 7));
-      const targetBrightness = isHovered && props.followMouse && pointerAngle !== null ? 1 : 0;
+      const targetBrightness = isHovered && canFollowMouse && pointerAngle !== null ? 1 : 0;
       brightness += (targetBrightness - brightness) * (1 - Math.exp(-delta * 8));
 
       lineColorValue.set(resolveColor(props.lineColor, "--color-accent", "--color-accent", "#0CACE8"));
