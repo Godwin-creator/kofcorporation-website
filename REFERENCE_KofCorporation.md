@@ -1,8 +1,30 @@
 # Document de Référence — Refonte Site KofCorporation
-> **Statut** : En cours — champs `[À confirmer]` à valider lors de la présentation v1  
-> **Dernière mise à jour** : 8 septembre 2026  
-> **Responsable projet** : Komi Godwin EDOH BEDI — Stagiaire Développement Web
-> **État réel du projet** : site vitrine fonctionnel, pages métiers terminées, direction visuelle stabilisée, thème par défaut en mode clair
+> **Statut** : En cours — refonte visuelle validée, finalisation UI / cohérence thème et motion  
+> **Dernière mise à jour** : 20 septembre 2026  
+> **Responsable projet** : Komi Godwin EDOH BEDI — Stagiaire Développement Web  
+> **État réel du projet** : site vitrine fonctionnel, pages métiers terminées, direction visuelle stabilisée, thème clair/sombre persistant, splash screen cohérent avec le dernier thème utilisé, hero enrichi avec fond hexagonal et alternance de slogans
+
+---
+
+## Progression validée — septembre 2026
+
+### UI & thématique
+- **Thème clair / sombre centralisé** dans le hook `useTheme.ts` pour éviter la duplication et garantir une source unique de vérité.
+- **Persistance du thème** dans `localStorage` : la page récupère le dernier thème utilisé au chargement et réapplique immédiatement `data-theme`.
+- **Splash screen cohérent** : le fond du splash suit le dernier thème de l’utilisateur, sans flash visuel ni incohérence de rendu.
+- **Mode sombre appliqué au bon niveau** : surcouche sombre uniquement dans le mode dark, sans voile en mode clair.
+- **Transition de thème premium** : animation de diffusion/rapprochement depuis et vers le bouton de changement de thème.
+
+### Hero / marketing
+- **Section hero enrichie** avec fond géométrique inspiré d’un motif hexagonal discret et premium.
+- **Alternance infinie de slogans** sur deux lignes avec saisie progressive et texte coloré sur la seconde ligne.
+- **Curseur typewriter** : suit la saisie, puis clignote 3 fois avant de disparaître.
+- **Cohérence visuelle** sur les deux modes, avec fond de section respectant le thème actif.
+
+### Points de vigilance actuels
+- Vérifier les visuels et les textes en production réelle sur navigation complète.
+- Valider la cohérence globale sur mobile/desktop après final review.
+- Préparer la mise à jour de certains contenus marketing et le choix final des CTA.
 
 ---
 

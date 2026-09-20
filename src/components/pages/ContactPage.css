@@ -175,9 +175,9 @@
 
 [data-theme="dark"] .contact-form__submit,
 [data-theme="dark"] .contact-page__success button {
-  border-color: #e8f0fe;
-  color: #2f3974;
-  background-color: #e8f0fe;
+  border-color: var(--color-primary);
+  color: var(--color-surface-alt);
+  background-color: var(--color-primary);
 }
 
 [data-theme="dark"] .contact-form__submit:hover,
@@ -185,7 +185,7 @@
 [data-theme="dark"] .contact-page__success button:hover,
 [data-theme="dark"] .contact-page__success button:focus-visible {
   border-color: #ffffff;
-  color: #2f3974;
+  color: var(--color-surface-alt);
   background-color: #ffffff;
 }
 

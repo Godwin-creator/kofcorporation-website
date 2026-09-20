@@ -8,11 +8,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import InlineScript from "@/components/InlineScript";
-import { Geist } from "next/font/google";
-import { cn } from "@/lib/utils";
 import { routing } from "@/i18n/routing";
-
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
   title: "KofCorporation — Société informatique d'édition de logiciels",
@@ -77,12 +73,12 @@ async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} suppressHydrationWarning={true} className={cn("font-sans", geist.variable)}>
+    <html lang={locale} suppressHydrationWarning={true}>
       <head>
         {/* Injection du thème avant le premier paint — évite le flash */}
         <InlineScript html={themeInitScript} />
       </head>
-      <body className="font-sans min-h-full flex flex-col" style={{ paddingTop: 64 }}>
+      <body style={{ paddingTop: 64, minHeight: "100dvh", display: "flex", flexDirection: "column" }}>
         <NextIntlClientProvider messages={messages}>
             <Header />
             <main style={{ flex: 1 }}>{children}</main>

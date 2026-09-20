@@ -1,109 +1,138 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { ArrowRight } from "lucide-react";
+import { useEffect, useState } from "react";
 import "./Hero.css";
 import { Link } from "@/i18n/navigation";
+import HeroImageSlider from "@/components/ui/HeroImageSlider";
+
+const SLOGANS = {
+  fr: [
+    { lineOne: "Votre vision", lineTwo: "notre code" },
+    { lineOne: "Votre idée", lineTwo: "notre impact" },
+  ],
+  en: [
+    { lineOne: "Your vision", lineTwo: "our code" },
+    { lineOne: "Your idea", lineTwo: "our impact" },
+  ],
+};
 
 export default function Hero() {
   const t = useTranslations("hero");
-  
-  // Parallax on scroll
+  const locale = useLocale();
+  const sloganSet = SLOGANS[locale as keyof typeof SLOGANS] ?? SLOGANS.fr;
+
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 300], [0, -60]);
 
-  // Typewriter setup
-  const headlineChars = t("headline").split("");
-  const highlightChars = t("headlineHighlight").split("");
-  const totalChars = headlineChars.length + highlightChars.length;
-  const charDelay = 0.04;
-  
-  // Timings
+  const [sloganIndex, setSloganIndex] = useState(0);
+  const [typedLineOne, setTypedLineOne] = useState("");
+  const [typedLineTwo, setTypedLineTwo] = useState("");
+  const [typedProgress, setTypedProgress] = useState(0);
+  const [cursorVisible, setCursorVisible] = useState(true);
+
+  useEffect(() => {
+    const activeSlogan = sloganSet[sloganIndex];
+    const totalTypingMs = 6500;
+    const totalChars = activeSlogan.lineOne.length + activeSlogan.lineTwo.length;
+    const stepMs = totalTypingMs / totalChars;
+    let rafId = 0;
+    let holdTimeout: number | undefined;
+    const start = performance.now();
+    setTypedProgress(0);
+    setCursorVisible(true);
+
+    const updateTyping = (now: number) => {
+      const elapsed = now - start;
+      const typedCount = Math.min(totalChars, Math.floor(elapsed / stepMs));
+      setTypedProgress(typedCount);
+
+      const nextLineOne = activeSlogan.lineOne.slice(
+        0,
+        Math.min(typedCount, activeSlogan.lineOne.length),
+      );
+      const nextLineTwo =
+        typedCount > activeSlogan.lineOne.length
+          ? activeSlogan.lineTwo.slice(
+              0,
+              typedCount - activeSlogan.lineOne.length,
+            )
+          : "";
+
+      setTypedLineOne(nextLineOne);
+      setTypedLineTwo(nextLineTwo);
+
+      if (typedCount < totalChars) {
+        rafId = requestAnimationFrame(updateTyping);
+        return;
+      }
+
+      const flashPattern = [true, false, true, false, true, false];
+      flashPattern.forEach((isOn, index) => {
+        window.setTimeout(() => setCursorVisible(isOn), index * 180);
+      });
+
+      window.setTimeout(() => setCursorVisible(false), flashPattern.length * 180 + 80);
+
+      holdTimeout = window.setTimeout(() => {
+        setSloganIndex((current) => (current + 1) % sloganSet.length);
+      }, 8000);
+    };
+
+    rafId = requestAnimationFrame(updateTyping);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      if (holdTimeout) {
+        window.clearTimeout(holdTimeout);
+      }
+    };
+  }, [sloganIndex, sloganSet]);
+
   const surtitreDelay = 0;
   const headlineDelay = 0.3;
-  const sousTitreDelay = headlineDelay + totalChars * charDelay + 0.3; // wait until typewriter is done
-  const ctaDelay = sousTitreDelay + 0.15;
-
-  const typewriterContainer = {
-    hidden: { opacity: 1 },
-    visible: {
-      opacity: 1,
-      transition: {
-        delayChildren: headlineDelay,
-        staggerChildren: charDelay,
-      },
-    },
-  };
-
-  const highlightContainer = {
-    hidden: { opacity: 1 },
-    visible: {
-      opacity: 1,
-      transition: {
-        delayChildren: headlineDelay + headlineChars.length * charDelay,
-        staggerChildren: charDelay,
-      },
-    },
-  };
-
-  const typewriterChar = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1 },
-  };
+  const sousTitreDelay = 1.2;
+  const ctaDelay = 1.45;
+  const activeSlogan = sloganSet[sloganIndex];
+  const showCursorOnFirstLine = typedProgress <= activeSlogan.lineOne.length && cursorVisible;
+  const showCursorOnSecondLine = typedProgress > activeSlogan.lineOne.length && cursorVisible;
 
   return (
     <section className="hero">
       <div className="hero__inner">
         <motion.div className="hero__content" style={{ y }}>
-          <motion.span
+          {/* <motion.span
             className="hero__tag"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: surtitreDelay }}
-            style={{ display: "inline-block", marginBottom: "1rem", color: "var(--color-accent)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em", fontSize: "0.875rem" }}
           >
-            {t.has("eyebrow") ? t("eyebrow") : "Development Studio"}
-          </motion.span>
+            {t("eyebrow")}
+          </motion.span> */}
 
-          <h1 className="hero__title">
+          <h1 className="hero__title" aria-live="polite">
             <motion.span
-              variants={typewriterContainer}
-              initial="hidden"
-              animate="visible"
+              className="hero__title-line hero__title-line--primary"
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: headlineDelay }}
             >
-              {headlineChars.map((char, index) => (
-                <motion.span key={`h1-${index}`} variants={typewriterChar}>
-                  {char}
-                </motion.span>
-              ))}
+              {typedLineOne}
+              {showCursorOnFirstLine && (
+                <span className="hero__cursor">|</span>
+              )}
             </motion.span>
-            <br />
+
             <motion.span
-              className="hero__title-highlight"
-              variants={highlightContainer}
-              initial="hidden"
-              animate="visible"
+              className="hero__title-line hero__title-line--secondary"
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: headlineDelay + 0.2 }}
             >
-              {highlightChars.map((char, index) => (
-                <motion.span key={`h2-${index}`} variants={typewriterChar}>
-                  {char}
-                </motion.span>
-              ))}
-            </motion.span>
-            
-            <motion.span
-              className="hero__cursor"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: [0, 1, 0, 1, 0, 1, 0, 0] }}
-              transition={{
-                delay: headlineDelay + totalChars * charDelay,
-                duration: 1,
-                times: [0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1],
-              }}
-              style={{ display: "inline-block", marginLeft: "4px", color: "var(--color-text)" }}
-            >
-              |
+              {typedLineTwo}
+              {showCursorOnSecondLine && <span className="hero__cursor">|</span>}
             </motion.span>
           </h1>
 
@@ -111,7 +140,7 @@ export default function Hero() {
             className="hero__description"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: sousTitreDelay }}
+            transition={{ duration: 1, delay: sousTitreDelay }}
           >
             {t("description")}
           </motion.p>
@@ -126,12 +155,25 @@ export default function Hero() {
               {t("discoverServices")}
               <ArrowRight size={18} strokeWidth={2} />
             </Link>
-            <Link href="/realisations" className="hero__cta hero__cta--secondary">
+            <Link
+              href="/realisations"
+              className="hero__cta hero__cta--secondary"
+            >
               {t("discoverProjects")}
             </Link>
           </motion.div>
+        </motion.div>
+
+        <motion.div
+          className="hero__visual"
+          initial={{ opacity: 0, scale: 0.95, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          <HeroImageSlider />
         </motion.div>
       </div>
     </section>
   );
 }
+

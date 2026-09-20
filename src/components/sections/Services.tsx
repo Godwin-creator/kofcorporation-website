@@ -6,43 +6,41 @@ import { motion, useInView } from "framer-motion";
 import { Globe, GraduationCap, Monitor, Smartphone } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import "./Services.css";
+import { Link } from "@/i18n/navigation";
 
 interface Service {
   id: string;
-  title: string;
-  description: string;
   tags: string[];
   icon: LucideIcon;
+  href: string;
+  external?: boolean;
 }
 
 const SERVICES: Service[] = [
   {
     id: "web",
-    title: "Développement Web & Applications",
-    description: "Sites vitrines, plateformes web et applications métier sur mesure.",
     tags: ["Laravel", "Vue.js", "Spring Boot", "Firebase"],
     icon: Globe,
+    href: "/services/developpement-web",
   },
   {
     id: "mobile",
-    title: "Applications Mobiles",
-    description: "Applications Android/iOS natives et cross-platform, pensées pour durer.",
     tags: ["Flutter", "Firebase", "Ionic", "Kotlin"],
     icon: Smartphone,
+    href: "/services/applications-mobiles",
   },
   {
     id: "management",
-    title: "Logiciels de Gestion",
-    description: "Logiciels métier sur mesure pour l'ERP, le CRM, les RH et la facturation.",
     tags: ["JavaFX", "Spring Boot", "MySQL", "Oracle"],
     icon: Monitor,
+    href: "/services/logiciels-gestion",
   },
   {
     id: "training",
-    title: "Formations & Coaching Tech",
-    description: "Formation en développement web, mobile et outils numériques pour chaque parcours.",
     tags: ["Academy", "Présentiel", "En ligne", "Hybride"],
     icon: GraduationCap,
+    href: "https://academy.kofcorporation.com/",
+    external: true,
   },
 ];
 
@@ -102,8 +100,13 @@ export default function Services() {
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
         >
-          {SERVICES.map(({ id, tags, icon: Icon }) => {
+          {SERVICES.map(({ id, tags, icon: Icon, href, external }) => {
             const title = t(`items.${id}.title`);
+            const linkLabel = (
+              <>
+                {t("learnMore")} <span aria-hidden="true">→</span>
+              </>
+            );
             return (
             <motion.article className="service-card" key={id} variants={cardVariants}>
               <div className="service-card__icon" aria-hidden="true">
@@ -116,9 +119,20 @@ export default function Services() {
                   <li key={tag}>{tag}</li>
                 ))}
               </ul>
-              <a className="service-card__link" href="#">
-                {t("learnMore")} <span aria-hidden="true">→</span>
-              </a>
+              {external ? (
+                <a
+                  className="service-card__link"
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {linkLabel}
+                </a>
+              ) : (
+                <Link className="service-card__link" href={href}>
+                  {linkLabel}
+                </Link>
+              )}
             </motion.article>
             );
           })}
