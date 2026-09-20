@@ -2,14 +2,30 @@
 
 import { useEffect, useState } from "react";
 
-type Theme = "light" | "dark";
+export type Theme = "light" | "dark";
+
+export function applyTheme(theme: Theme) {
+  if (typeof window === "undefined") return;
+
+  document.documentElement.setAttribute("data-theme", theme);
+  localStorage.setItem("theme", theme);
+
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) {
+    meta.setAttribute("content", theme === "dark" ? "#1A1E3A" : "#F8F9FA");
+  }
+}
+
+export function getThemeBackground(theme: Theme): string {
+  return theme === "dark" ? "#1A1E3A" : "#F8F9FA";
+}
 
 /**
  * Lit le thème courant depuis le DOM (attribut data-theme appliqué par le
  * script inline du layout) ou depuis localStorage. Côté SSR on renvoie
  * toujours 'light' pour garantir un affichage clair par défaut.
  */
-function getInitialTheme(): Theme {
+export function getInitialTheme(): Theme {
   if (typeof window === "undefined") return "light";
 
   // Priorité 1 : attribut déjà positionné par le script anti-flash
@@ -52,26 +68,13 @@ export function useTheme(): {
   // Propagation des changements vers le DOM et localStorage
   useEffect(() => {
     if (typeof window === "undefined") return;
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
-    const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) {
-      meta.setAttribute("content", theme === "dark" ? "#1A1E3A" : "#F8F9FA");
-    }
+    applyTheme(theme);
   }, [theme]);
 
   const toggleTheme = () => {
     const newTheme = theme === "dark" ? "light" : "dark";
     setTheme(newTheme);
-    document.documentElement.setAttribute("data-theme", newTheme);
-    localStorage.setItem("theme", newTheme);
-    const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) {
-      meta.setAttribute(
-        "content",
-        newTheme === "dark" ? "#1A1E3A" : "#F8F9FA"
-      );
-    }
+    applyTheme(newTheme);
   };
 
   return { theme, toggleTheme, isDark: theme === "dark" };

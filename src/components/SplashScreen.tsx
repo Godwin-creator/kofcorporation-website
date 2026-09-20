@@ -2,23 +2,25 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useAnimate } from "framer-motion";
-
-function getThemeBackground(): string {
-  if (typeof window === "undefined") return "#F8F9FA";
-  return document.documentElement.getAttribute("data-theme") === "dark"
-    ? "#1A1E3A"
-    : "#F8F9FA";
-}
+import {
+  applyTheme,
+  getInitialTheme,
+  getThemeBackground,
+} from "@/hooks/useTheme";
 
 export default function SplashScreen() {
   const [visible, setVisible] = useState(false);
-  const [themeBackground, setThemeBackground] = useState("#F8F9FA");
+  const [themeBackground, setThemeBackground] = useState(() =>
+    getThemeBackground(getInitialTheme())
+  );
   const [scope, animate] = useAnimate();
 
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    setThemeBackground(getThemeBackground());
+    const theme = getInitialTheme();
+    applyTheme(theme);
+    setThemeBackground(getThemeBackground(theme));
     document.documentElement.classList.add("splash-active");
     setVisible(true);
   }, []);
