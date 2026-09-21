@@ -14,6 +14,7 @@
 - **Splash screen cohérent** : le fond du splash suit le dernier thème de l’utilisateur, sans flash visuel ni incohérence de rendu.
 - **Mode sombre appliqué au bon niveau** : surcouche sombre uniquement dans le mode dark, sans voile en mode clair.
 - **Transition de thème premium** : animation de diffusion/rapprochement depuis et vers le bouton de changement de thème.
+- **Direction typographique validée** : titres en `Manrope`, texte courant en `Inter` pour un rendu plus premium, lisible et équilibré.
 
 ### Hero / marketing
 - **Section hero enrichie** avec fond géométrique inspiré d’un motif hexagonal discret et premium.

@@ -36,6 +36,7 @@ const themeInitScript = `
     var theme = stored === 'dark' || stored === 'light'
       ? stored
       : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.classList.remove('splash-active');
     document.documentElement.setAttribute('data-theme', theme);
     var themeColorMeta = document.querySelector('meta[name="theme-color"]');
     if (themeColorMeta) {
@@ -44,8 +45,6 @@ const themeInitScript = `
         theme === 'dark' ? '#1A1E3A' : '#F8F9FA'
       );
     }
-    // Add splash-active class to hide main content initially
-    document.documentElement.classList.add('splash-active');
   } catch (e) {}
 })();
 `.trim();
