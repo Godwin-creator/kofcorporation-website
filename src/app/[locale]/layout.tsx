@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     title: "KofCorporation — Société informatique d'édition de logiciels",
     description:
       "KofCorporation conçoit des applications web, mobiles et logiciels sur mesure pour les entreprises et startups au Togo.",
-    url: "https://kofcorporation.com",
+    url: "/",
     siteName: "KofCorporation",
     images: [
       {
-        url: "https://kofcorporation.com/og-image.png",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "KofCorporation — Société informatique au Togo",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     title: "KofCorporation — Société informatique d'édition de logiciels",
     description:
       "KofCorporation conçoit des applications web, mobiles et logiciels sur mesure pour les entreprises et startups au Togo.",
-    images: ["https://kofcorporation.com/og-image.png"],
+    images: ["/og-image.png"],
   },
 };
 
