@@ -99,29 +99,7 @@ export default function VideoPresentation({
     <section ref={sectionRef} className="video-presentation" id="about">
       <div className="video-presentation__inner">
 
-        {/* ── Colonne gauche : texte ──────────────────────────────────────── */}
-        <motion.div
-          className="video-presentation__content"
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          variants={textVariants}
-        >
-          <span className="video-presentation__eyebrow">{t("eyebrow")}</span>
-          <h2 className="video-presentation__title">{t("title")}</h2>
-          <p className="video-presentation__description">{t("description")}</p>
-
-          <div className="video-presentation__ceo-block">
-            <div className="video-presentation__separator" />
-            <p className="video-presentation__ceo-text">
-              {t("ceoName")} —{" "}
-              <span className="video-presentation__ceo-role">
-                {t("ceoRole")}
-              </span>
-            </p>
-          </div>
-        </motion.div>
-
-        {/* ── Colonne droite : lecteur ────────────────────────────────────── */}
+        {/* ── Colonne gauche : lecteur ────────────────────────────────────── */}
         <motion.div
           className="video-presentation__media-wrapper"
           initial="hidden"
@@ -187,6 +165,29 @@ export default function VideoPresentation({
 
           </div>
         </motion.div>
+
+        {/* ── Colonne droite : texte ──────────────────────────────────────── */}
+        <motion.div
+          className="video-presentation__content"
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          variants={textVariants}
+        >
+          <span className="video-presentation__eyebrow">{t("eyebrow")}</span>
+          <h2 className="video-presentation__title">{t("title")}</h2>
+          <p className="video-presentation__description">{t("description")}</p>
+
+          <div className="video-presentation__ceo-block">
+            <div className="video-presentation__separator" />
+            <p className="video-presentation__ceo-text">
+              {t("ceoName")} —{" "}
+              <span className="video-presentation__ceo-role">
+                {t("ceoRole")}
+              </span>
+            </p>
+          </div>
+        </motion.div>
+
       </div>
 
       {/* ══════════════════════════════════════════════════════════════════
