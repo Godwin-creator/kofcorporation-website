@@ -158,6 +158,13 @@ export async function POST(request: Request) {
   try {
     const resend = getResend()
 
+    if (!resend) {
+      return NextResponse.json(
+        { error: 'Le service d’email n’est pas configuré pour l’envoi de messages.' },
+        { status: 503 }
+      )
+    }
+
     await resend.emails.send({
       from: resendFrom,
       to: [adminRecipient],

@@ -1,53 +1,39 @@
-import type { Metadata, Viewport } from "next";
 import { hasLocale } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
-import "../globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
-import InlineScript from "@/components/InlineScript";
 import { routing } from "@/i18n/routing";
 
 export const metadata: Metadata = {
-  title: "KofCorporation — Société informatique d'édition de logiciels",
-  description:
-    "KofCorporation conçoit des applications web, mobiles et logiciels sur mesure pour les entreprises et startups au Togo.",
-  icons: [
-    { rel: "icon", url: "/favicon.svg", type: "image/svg+xml" },
-    { rel: "icon", url: "/favicon.ico" },
-    { rel: "apple-touch-icon", url: "/apple-touch-icon.png" },
-  ],
+  openGraph: {
+    title: "KofCorporation — Société informatique d'édition de logiciels",
+    description:
+      "KofCorporation conçoit des applications web, mobiles et logiciels sur mesure pour les entreprises et startups au Togo.",
+    url: "https://kofcorporation.com",
+    siteName: "KofCorporation",
+    images: [
+      {
+        url: "https://kofcorporation.com/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "KofCorporation — Société informatique au Togo",
+      },
+    ],
+    locale: "fr_FR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "KofCorporation — Société informatique d'édition de logiciels",
+    description:
+      "KofCorporation conçoit des applications web, mobiles et logiciels sur mesure pour les entreprises et startups au Togo.",
+    images: ["https://kofcorporation.com/og-image.png"],
+  },
 };
-
-export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#F8F9FA" },
-    { media: "(prefers-color-scheme: dark)", color: "#1A1E3A" },
-  ],
-};
-
-/** Script inline exécuté avant le rendu pour éviter le flash de thème. */
-const themeInitScript = `
-(function () {
-  try {
-    var stored = localStorage.getItem('theme');
-    var theme = stored === 'dark' || stored === 'light'
-      ? stored
-      : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    document.documentElement.classList.remove('splash-active');
-    document.documentElement.setAttribute('data-theme', theme);
-    var themeColorMeta = document.querySelector('meta[name="theme-color"]');
-    if (themeColorMeta) {
-      themeColorMeta.setAttribute(
-        'content',
-        theme === 'dark' ? '#1A1E3A' : '#F8F9FA'
-      );
-    }
-  } catch (e) {}
-})();
-`.trim();
 
 export default function RootLayout({
   children,
@@ -72,19 +58,13 @@ async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} suppressHydrationWarning={true}>
-      <head>
-        {/* Injection du thème avant le premier paint — évite le flash */}
-        <InlineScript html={themeInitScript} />
-      </head>
-      <body style={{ paddingTop: 64, minHeight: "100dvh", display: "flex", flexDirection: "column" }}>
-        <NextIntlClientProvider messages={messages}>
-            <Header />
-            <main style={{ flex: 1 }}>{children}</main>
-            <Footer />
-            <BackToTop />
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider messages={messages}>
+      <div style={{paddingTop: 64, minHeight: "100dvh", display: "flex", flexDirection: "column"}}>
+        <Header />
+        <main style={{flex: 1}}>{children}</main>
+        <Footer />
+        <BackToTop />
+      </div>
+    </NextIntlClientProvider>
   );
 }
