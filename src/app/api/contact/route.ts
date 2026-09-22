@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 
-import { resend } from '@/lib/resend'
+import { getResend } from '@/lib/resend'
 import { contactSchema } from '@/lib/validators/contact'
 import type { ContactForm } from '@/types/contact'
 
@@ -156,6 +156,8 @@ export async function POST(request: Request) {
   const submittedAt = formatDateTime()
 
   try {
+    const resend = getResend()
+
     await resend.emails.send({
       from: resendFrom,
       to: [adminRecipient],
