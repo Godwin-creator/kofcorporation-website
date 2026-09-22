@@ -103,6 +103,9 @@ NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=
 # reCAPTCHA v3
 NEXT_PUBLIC_RECAPTCHA_SITE_KEY=
 RECAPTCHA_SECRET_KEY=
+
+# Open Graph / URL publique du site
+NEXT_PUBLIC_SITE_URL=https://kofcorporation.com
 ```
 
 ---
