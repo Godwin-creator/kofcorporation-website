@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
+import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import "./HeroImageSlider.css";
@@ -141,19 +141,13 @@ export default function HeroImageSlider() {
       return undefined;
     }
 
-    if (phase === "puzzle1") {
-      setPuzzleIndex(0);
-      setPieces(createPieces());
-    }
+    const timer = window.setTimeout(() => {
+      setDraggedId(null);
+      setHoveredSlot(null);
+      setDragPosition({ x: 0, y: 0 });
+    }, 0);
 
-    if (phase === "puzzle2") {
-      setPuzzleIndex(1);
-      setPieces(createPieces());
-    }
-
-    setDraggedId(null);
-    setHoveredSlot(null);
-    setDragPosition({ x: 0, y: 0 });
+    return () => window.clearTimeout(timer);
   }, [phase, isMobile]);
 
   const handlePointerDown = (event: ReactPointerEvent<HTMLButtonElement>, piece: Piece) => {

@@ -20,9 +20,14 @@ export default function SplashScreen() {
 
     const theme = getInitialTheme();
     applyTheme(theme);
-    setThemeBackground(getThemeBackground(theme));
     document.documentElement.classList.add("splash-active");
-    setVisible(true);
+
+    const timer = window.setTimeout(() => {
+      setThemeBackground(getThemeBackground(theme));
+      setVisible(true);
+    }, 0);
+
+    return () => window.clearTimeout(timer);
   }, []);
 
   useEffect(() => {
