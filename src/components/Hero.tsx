@@ -41,8 +41,6 @@ export default function Hero() {
     let rafId = 0;
     let holdTimeout: number | undefined;
     const start = performance.now();
-    setTypedProgress(0);
-    setCursorVisible(true);
 
     const updateTyping = (now: number) => {
       const elapsed = now - start;
@@ -81,7 +79,13 @@ export default function Hero() {
       }, 8000);
     };
 
-    rafId = requestAnimationFrame(updateTyping);
+    rafId = requestAnimationFrame((now) => {
+      setTypedProgress(0);
+      setTypedLineOne("");
+      setTypedLineTwo("");
+      setCursorVisible(true);
+      updateTyping(now);
+    });
 
     return () => {
       cancelAnimationFrame(rafId);
@@ -91,7 +95,6 @@ export default function Hero() {
     };
   }, [sloganIndex, sloganSet]);
 
-  const surtitreDelay = 0;
   const headlineDelay = 0.3;
   const sousTitreDelay = 1.2;
   const ctaDelay = 1.45;
