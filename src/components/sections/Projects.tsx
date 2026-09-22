@@ -13,6 +13,6 @@ const FALLBACK_PROJECTS: ProjectItem[] = [
 export default async function Projects() {
   const locale = await getLocale()
   const projects = await client.fetch<SanityProject[]>(FEATURED_PROJECTS_QUERY).catch(() => [])
-  const items = projects.length ? projects.map((project) => ({id: project._id, title: project.title ?? '', sector: project.sector ?? project.category ?? '', description: locale === 'en' ? project.descriptionEn ?? project.description ?? '' : project.description ?? '', tags: project.technologies ?? [], url: project.url ?? '#', category: project.category ?? 'web', imageUrl: project.image ? urlFor(project.image).width(900).height(500).url() : undefined})) : FALLBACK_PROJECTS
+  const items = projects.length ? projects.map((project: SanityProject) => ({id: project._id, title: project.title ?? '', sector: project.sector ?? project.category ?? '', description: locale === 'en' ? project.descriptionEn ?? project.description ?? '' : project.description ?? '', tags: project.technologies ?? [], url: project.url ?? '#', category: project.category ?? 'web', imageUrl: project.image ? urlFor(project.image).width(900).height(500).url() : undefined})) : FALLBACK_PROJECTS
   return <ProjectsClient projects={items} />
 }

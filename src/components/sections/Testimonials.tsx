@@ -12,6 +12,6 @@ const FALLBACK_TESTIMONIALS: TestimonialItem[] = [
 
 export default async function Testimonials() {
   const locale = await getLocale(); const testimonials = await client.fetch<SanityTestimonial[]>(TESTIMONIALS_QUERY).catch(() => [])
-  const items = testimonials.length ? testimonials.map((item) => ({id: item._id, quote: locale === 'en' ? item.quoteEn ?? item.quote ?? '' : item.quote ?? '', name: item.name ?? '', role: locale === 'en' ? item.roleEn ?? item.role ?? '' : item.role ?? '', rating: item.rating ?? 5})) : FALLBACK_TESTIMONIALS
+  const items = testimonials.length ? testimonials.map((item: SanityTestimonial) => ({id: item._id, quote: locale === 'en' ? item.quoteEn ?? item.quote ?? '' : item.quote ?? '', name: item.name ?? '', role: locale === 'en' ? item.roleEn ?? item.role ?? '' : item.role ?? '', rating: item.rating ?? 5})) : FALLBACK_TESTIMONIALS
   return <TestimonialsClient testimonials={items} />
 }

@@ -9,6 +9,6 @@ const FALLBACK_PARTNERS: PartnerItem[] = [
 
 export default async function Partners() {
   const partners = await client.fetch<SanityPartner[]>(PARTNERS_QUERY).catch(() => [])
-  const items = partners.length ? partners.map((partner) => ({id: partner._id, name: partner.name ?? '', logo: partner.logo ? urlFor(partner.logo).width(320).height(128).url() : '', url: partner.url})) : FALLBACK_PARTNERS
+  const items = partners.length ? partners.map((partner: SanityPartner) => ({id: partner._id, name: partner.name ?? '', logo: partner.logo ? urlFor(partner.logo).width(320).height(128).url() : '', url: partner.url})) : FALLBACK_PARTNERS
   return <PartnersClient partners={items} />
 }

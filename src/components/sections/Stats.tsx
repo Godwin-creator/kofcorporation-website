@@ -16,7 +16,7 @@ export default async function Stats() {
   const t = await getTranslations('stats')
   const sanityStats = await client.fetch<SanityStat[]>(STATS_QUERY).catch(() => [])
   const source = sanityStats.length > 0 ? sanityStats : FALLBACK_STATS
-  const stats: StatItem[] = source.map((stat, index) => {
+  const stats: StatItem[] = source.map((stat: SanityStat | typeof FALLBACK_STATS[number], index: number) => {
     const value = stat.value ?? '0'
     const match = value.match(/^(\d+)(.*)$/)
     const id = '_id' in stat ? stat._id : undefined
