@@ -2,11 +2,11 @@ import type {Metadata, Viewport} from 'next'
 import InlineScript from '@/components/InlineScript'
 import './globals.css'
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://kofcorporation-website.vercel.app'
+
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ||
-      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000')
-  ),
+  metadataBase: new URL(siteUrl),
   title: "KofCorporation - Societe informatique d'edition de logiciels",
   description: 'KofCorporation concoit des applications web, mobiles et logiciels sur mesure pour les entreprises et startups au Togo.',
   icons: [

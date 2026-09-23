@@ -8,16 +8,20 @@ import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import { routing } from "@/i18n/routing";
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://kofcorporation-website.vercel.app';
+const ogImageUrl = new URL('/og-image.png', siteUrl).toString();
+
 export const metadata: Metadata = {
   openGraph: {
     title: "KofCorporation — Société informatique d'édition de logiciels",
     description:
       "KofCorporation conçoit des applications web, mobiles et logiciels sur mesure pour les entreprises et startups au Togo.",
-    url: "/",
+    url: siteUrl,
     siteName: "KofCorporation",
     images: [
       {
-        url: "/og-image.png",
+        url: ogImageUrl,
         width: 1200,
         height: 630,
         alt: "KofCorporation — Société informatique au Togo",
@@ -31,7 +35,7 @@ export const metadata: Metadata = {
     title: "KofCorporation — Société informatique d'édition de logiciels",
     description:
       "KofCorporation conçoit des applications web, mobiles et logiciels sur mesure pour les entreprises et startups au Togo.",
-    images: ["/og-image.png"],
+    images: [ogImageUrl],
   },
 };
 
