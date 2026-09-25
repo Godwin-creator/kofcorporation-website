@@ -14,7 +14,7 @@ const ogImageUrl = new URL('/og-image.png', siteUrl).toString();
 
 export const metadata: Metadata = {
   openGraph: {
-    title: "KofCorporation — Société informatique d'édition de logiciels",
+    title: "KofCorporation - Société informatique d'édition de logiciels",
     description:
       "KofCorporation conçoit des applications web, mobiles et logiciels sur mesure pour les entreprises et startups au Togo.",
     url: siteUrl,
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
         url: ogImageUrl,
         width: 1200,
         height: 630,
-        alt: "KofCorporation — Société informatique au Togo",
+        alt: "KofCorporation - Société informatique au Togo",
       },
     ],
     locale: "fr_FR",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "KofCorporation — Société informatique d'édition de logiciels",
+    title: "KofCorporation - Société informatique d'édition de logiciels",
     description:
       "KofCorporation conçoit des applications web, mobiles et logiciels sur mesure pour les entreprises et startups au Togo.",
     images: [ogImageUrl],

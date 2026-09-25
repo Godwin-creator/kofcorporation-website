@@ -220,6 +220,8 @@
 }
 
 .about-page__team-mark {
+  position: relative;
+  overflow: hidden;
   display: flex;
   min-height: 280px;
   align-items: center;
@@ -227,6 +229,13 @@
   border-radius: 0;
   color: #ffffff;
   background: linear-gradient(135deg, #2f3974, #1c71aa);
+}
+
+.about-page__team-photo {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
 }
 
 .about-page__team-grid > div:last-child > p:not(.about-page__eyebrow) {

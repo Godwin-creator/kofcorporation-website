@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import "./Hero.css";
 import { Link } from "@/i18n/navigation";
 import HeroImageSlider from "@/components/ui/HeroImageSlider";
+import type {CompanySettings} from "@/types/sanity";
 
 const SLOGANS = {
   fr: [
@@ -19,10 +20,13 @@ const SLOGANS = {
   ],
 };
 
-export default function Hero() {
+export default function Hero({settings}: {settings?: CompanySettings | null}) {
   const t = useTranslations("hero");
   const locale = useLocale();
-  const sloganSet = SLOGANS[locale as keyof typeof SLOGANS] ?? SLOGANS.fr;
+  const cmsTitle = locale === "en" ? settings?.heroTitleEn : settings?.heroTitle;
+  const cmsSlogan = cmsTitle ? [{lineOne: cmsTitle, lineTwo: ""}] : null;
+  const sloganSet = cmsSlogan ?? (SLOGANS[locale as keyof typeof SLOGANS] ?? SLOGANS.fr);
+  const description = (locale === "en" ? settings?.heroSubtitleEn : settings?.heroSubtitle) ?? t("description");
 
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 300], [0, -60]);
@@ -145,7 +149,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: sousTitreDelay }}
           >
-            {t("description")}
+            {description}
           </motion.p>
 
           <motion.div

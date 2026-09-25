@@ -59,7 +59,7 @@ const verifyRecaptcha = async (token: string) => {
 
 const buildInternalEmailHtml = (payload: ContactForm & { submittedAt: string }) => `
   <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #1a1a2e; max-width: 640px; margin: 0 auto;">
-    <h2 style="margin: 0 0 16px; color: #2f3974;">Nouveau message — ${escapeHtml(payload.subject)}</h2>
+    <h2 style="margin: 0 0 16px; color: #2f3974;">Nouveau message - ${escapeHtml(payload.subject)}</h2>
     <p style="margin: 0 0 12px;"><strong>Nom :</strong> ${escapeHtml(payload.fullName)}</p>
     <p style="margin: 0 0 12px;"><strong>Email :</strong> ${escapeHtml(payload.email)}</p>
     <p style="margin: 0 0 12px;"><strong>Sujet :</strong> ${escapeHtml(payload.subject)}</p>
@@ -158,7 +158,7 @@ export async function POST(request: Request) {
     await transporter.sendMail({
       from: EMAIL_FROM,
       to: [adminRecipient],
-      subject: `Nouveau message — ${sanitizedForm.subject}`,
+      subject: `Nouveau message - ${sanitizedForm.subject}`,
       html: buildInternalEmailHtml({
         ...sanitizedForm,
         submittedAt,

@@ -1,7 +1,7 @@
 {
   "name": "KofCorporation",
   "short_name": "KofCorp",
-  "description": "KofCorporation — Société informatique d'édition de logiciels",
+  "description": "KofCorporation - Société informatique d'édition de logiciels",
   "icons": [
     {
       "src": "/pwa-icon-192.png",

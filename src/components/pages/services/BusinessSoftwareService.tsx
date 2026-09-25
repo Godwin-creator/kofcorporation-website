@@ -6,6 +6,7 @@ import { ArrowRight, Check, Monitor, Layout, Database, Shield, Users, BarChart }
 import CallToAction from "@/components/sections/CallToAction";
 import "./BusinessSoftwareService.css";
 import { Link } from "@/i18n/navigation";
+import EmptyState from "@/components/ui/EmptyState";
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 24 },
@@ -49,20 +50,7 @@ const features = [
   },
 ];
 
-const technologies = [
-  "Spring Boot",
-  "Laravel",
-  "React",
-  "Vue.js",
-  "PostgreSQL",
-  "MySQL",
-  "MongoDB",
-  "REST API",
-  "Docker",
-  "AWS",
-];
-
-export default function BusinessSoftwareService() {
+export default function BusinessSoftwareService({technologies = []}: {technologies?: string[]}) {
   const t = useTranslations("servicesDetail.management");
   return (
     <>
@@ -143,14 +131,14 @@ export default function BusinessSoftwareService() {
               <p>{t("technologies.description")}</p>
             </header>
 
-            <div className="business-software-service__technologies-grid">
+            {technologies.length ? <div className="business-software-service__technologies-grid">
               {technologies.map((tech) => (
                 <div key={tech} className="business-software-technology-tag">
                   <Check size={16} strokeWidth={2} aria-hidden="true" />
                   {tech}
                 </div>
               ))}
-            </div>
+            </div> : <EmptyState message={t("technologies.empty")} />}
           </div>
         </section>
 

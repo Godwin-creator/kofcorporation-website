@@ -5,6 +5,7 @@ import {useLocale, useTranslations} from 'next-intl'
 import {animate, motion, useInView, useMotionValue, useTransform} from 'framer-motion'
 import {Clock, FolderCheck, GraduationCap, Star} from 'lucide-react'
 import './Stats.css'
+import EmptyState from '@/components/ui/EmptyState'
 
 export interface StatItem { id: string; value: number; suffix: string; label: string; labelEn: string; icon: string }
 const ICONS = {Clock, FolderCheck, GraduationCap, Star}
@@ -34,7 +35,7 @@ export default function StatsClient({stats}: {stats: StatItem[]}) {
   return <motion.section ref={sectionRef} className="stats" aria-labelledby="stats-title" variants={sectionVariants} initial="hidden" animate={isInView ? 'visible' : 'hidden'}>
     <div className="stats__inner"><h2 id="stats-title" className="stats__title">{t('title')}</h2>
       <motion.div className="stats__grid" variants={containerVariants} initial="hidden" animate={isInView ? 'visible' : 'hidden'}>
-        {stats.map((stat) => { const Icon = ICONS[stat.icon as keyof typeof ICONS] ?? Star; return <motion.article className="stats__item" key={stat.id} variants={itemVariants}><Icon className="stats__icon" size={24} strokeWidth={1.6} aria-hidden="true" /><AnimatedValue value={stat.value} suffix={stat.suffix} /><p className="stats__label">{locale === 'en' ? stat.labelEn : stat.label}</p></motion.article> })}
+        {stats.length ? stats.map((stat) => { const Icon = ICONS[stat.icon as keyof typeof ICONS] ?? Star; return <motion.article className="stats__item" key={stat.id} variants={itemVariants}><Icon className="stats__icon" size={24} strokeWidth={1.6} aria-hidden="true" /><AnimatedValue value={stat.value} suffix={stat.suffix} /><p className="stats__label">{locale === 'en' ? stat.labelEn : stat.label}</p></motion.article> }) : <EmptyState message={t('empty')} />}
       </motion.div>
     </div>
   </motion.section>

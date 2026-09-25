@@ -64,7 +64,7 @@ const sectionVariants = {
   },
 };
 
-export default function AboutPage() {
+export default function AboutPage({teamPhotoUrl, teamPhotoAlt}: {teamPhotoUrl?: string; teamPhotoAlt?: string}) {
   const t = useTranslations("pages");
   const tAbout = useTranslations("about");
   return (
@@ -179,8 +179,8 @@ export default function AboutPage() {
 
         <section className="about-page__team" aria-labelledby="team-title">
           <div className="about-page__container about-page__team-grid">
-            <div className="about-page__team-mark" aria-hidden="true">
-              <Users size={64} strokeWidth={1.1} />
+            <div className="about-page__team-mark" aria-label={teamPhotoAlt || tAbout("team.photoAlt")}>
+              {teamPhotoUrl ? <div className="about-page__team-photo" style={{backgroundImage: `url(${teamPhotoUrl})`}} /> : <Users size={64} strokeWidth={1.1} aria-hidden="true" />}
             </div>
             <div>
               <p className="about-page__eyebrow">{tAbout("team.eyebrow")}</p>

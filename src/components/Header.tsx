@@ -319,7 +319,7 @@ export default function Header() {
               </AnimatePresence>
             </div>
 
-            {/* CTA — Desktop */}
+            {/* CTA - Desktop */}
             <Link href="/contact#contact-form" className="header__cta">
               <CalendarCheck size={16} strokeWidth={2} />
               {t("bookMeeting")}

@@ -1,27 +1,42 @@
 export const STATS_QUERY = `
-  *[_type == "stat"] | order(order asc) { _id, value, label, labelEn, icon }
+  *[_type == "stat"] | order(order asc) { _id, value, label, labelEn, icon, order }
 `
 
 export const PROJECTS_QUERY = `
-  *[_type == "project"] | order(order asc) {
+  *[_type == "project" && (status == "published" || !defined(status))] | order(publishedAt desc, order asc) {
     _id, title, slug, category, client, sector, description, descriptionEn,
-    technologies, image, url, featured
+    shortDescription, shortDescriptionEn, technologies, image, url, featured, publishedAt, status, order
   }
 `
 
 export const FEATURED_PROJECTS_QUERY = `
-  *[_type == "project" && featured == true] | order(order asc)[0...3] {
+  *[_type == "project" && featured == true && (status == "published" || !defined(status))] | order(publishedAt desc, order asc)[0...3] {
     _id, title, slug, category, client, sector, description, descriptionEn,
-    technologies, image, url
+    shortDescription, shortDescriptionEn, technologies, image, url, featured, publishedAt, status, order
   }
 `
 
 export const TESTIMONIALS_QUERY = `
   *[_type == "testimonial"] | order(order asc) {
-    _id, name, role, roleEn, company, quote, quoteEn, rating
+    _id, name, role, roleEn, company, quote, quoteEn, rating, avatar, isVerified, order
   }
 `
 
 export const PARTNERS_QUERY = `
-  *[_type == "partner"] | order(order asc) { _id, name, logo, url }
+  *[_type == "partner"] | order(order asc) { _id, name, logo, url, order }
+`
+
+export const SERVICES_QUERY = `
+  *[_type == "service" && active == true] | order(order asc) {
+    _id, title, titleEn, slug, summary, summaryEn, description, descriptionEn, icon, stack, order, active
+  }
+`
+
+export const SETTINGS_QUERY = `
+  *[_type == "companySettings"][0] {
+    companyName, phone, email, address, openingHours, openingHoursEn,
+    foundedYear, heroTitle, heroTitleEn, heroSubtitle, heroSubtitleEn,
+    presentationVideoUrl, "presentationVideoFileUrl": presentationVideoFile.asset->url,
+    teamPhoto
+  }
 `

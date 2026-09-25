@@ -7,16 +7,34 @@ import { Play, X, Volume2, VolumeX, Maximize2 } from "lucide-react";
 import "./VideoPresentation.css";
 
 interface VideoPresentationProps {
-  /** ID YouTube — si fourni, affiche la miniature + bouton Play → modal embed */
+  /** ID YouTube - si fourni, affiche la miniature + bouton Play → modal embed */
   youtubeId?: string;
-  /** Chemin vidéo locale — lecture inline muted en boucle (défaut) */
+  /** Chemin vidéo locale - lecture inline muted en boucle (défaut) */
   videoSrc?: string;
+  presentationVideoUrl?: string;
+  presentationVideoFileUrl?: string;
 }
+
+const getYoutubeId = (value?: string) => {
+  if (!value) return undefined;
+  try {
+    const url = new URL(value);
+    if (url.hostname === "youtu.be") return url.pathname.slice(1) || undefined;
+    if (url.hostname.includes("youtube.com")) {
+      return url.searchParams.get("v") || url.pathname.split("/").filter(Boolean).pop();
+    }
+  } catch {
+    return value;
+  }
+  return undefined;
+};
 
 export default function VideoPresentation({
   // ajouter l'id de la vidéo youtube. Ex: youtubeId = "EUqP5zr7h2g",
   youtubeId,
   videoSrc = "/videos/presentation.mp4",
+  presentationVideoUrl,
+  presentationVideoFileUrl,
 }: VideoPresentationProps) {
   const t = useTranslations("videoPresentation");
 
@@ -91,8 +109,11 @@ export default function VideoPresentation({
   };
 
   // ── YouTube thumbnail ─────────────────────────────────────────────────────
-  const youtubeThumbnail = youtubeId
-    ? `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`
+  const cmsYoutubeId = getYoutubeId(presentationVideoUrl);
+  const activeYoutubeId = cmsYoutubeId || youtubeId;
+  const activeVideoSrc = presentationVideoFileUrl || videoSrc;
+  const youtubeThumbnail = activeYoutubeId
+    ? `https://img.youtube.com/vi/${activeYoutubeId}/maxresdefault.jpg`
     : null;
 
   return (
@@ -108,14 +129,14 @@ export default function VideoPresentation({
         >
           <div className="video-presentation__player-card">
 
-            {/* ── CAS 1 : Vidéo locale — autoplay muted loop ── */}
-            {!youtubeId && (
+            {/* ── CAS 1 : Vidéo locale - autoplay muted loop ── */}
+            {!activeYoutubeId && (
               <>
                 {/* Élément vidéo inline */}
                 <video
                   ref={videoRef}
                   className="video-presentation__inline-video"
-                  src={videoSrc}
+                  src={activeVideoSrc}
                   autoPlay
                   muted
                   loop
@@ -124,7 +145,7 @@ export default function VideoPresentation({
                   aria-label={t("playAria")}
                 />
 
-                {/* Bouton mute / unmute — coin bas-gauche */}
+                {/* Bouton mute / unmute - coin bas-gauche */}
                 <button
                   type="button"
                   className="video-presentation__mute-btn"
@@ -134,7 +155,7 @@ export default function VideoPresentation({
                   {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
                 </button>
 
-                {/* Bouton agrandir — coin bas-droit */}
+                {/* Bouton agrandir - coin bas-droit */}
                 <button
                   type="button"
                   className="video-presentation__expand-btn"
@@ -146,8 +167,8 @@ export default function VideoPresentation({
               </>
             )}
 
-            {/* ── CAS 2 : YouTube — miniature + bouton Play custom ── */}
-            {youtubeId && (
+            {/* ── CAS 2 : YouTube - miniature + bouton Play custom ── */}
+            {activeYoutubeId && (
               <div
                 className="video-presentation__yt-thumb"
                 style={{ backgroundImage: `url(${youtubeThumbnail})` }}
@@ -180,7 +201,7 @@ export default function VideoPresentation({
           <div className="video-presentation__ceo-block">
             <div className="video-presentation__separator" />
             <p className="video-presentation__ceo-text">
-              {t("ceoName")} —{" "}
+              {t("ceoName")} -{" "}
               <span className="video-presentation__ceo-role">
                 {t("ceoRole")}
               </span>
@@ -222,16 +243,16 @@ export default function VideoPresentation({
               </button>
 
               <div className="video-modal__video-frame">
-                {youtubeId ? (
+                {activeYoutubeId ? (
                   <iframe
-                    src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1`}
+                    src={`https://www.youtube.com/embed/${activeYoutubeId}?autoplay=1`}
                     title={t("title")}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                   />
                 ) : (
                   <video
-                    src={videoSrc}
+                    src={activeVideoSrc}
                     controls
                     autoPlay
                     playsInline

@@ -6,6 +6,7 @@ import { ArrowRight, Check, Smartphone, Layout, Zap, Shield, Users, AppWindow } 
 import CallToAction from "@/components/sections/CallToAction";
 import "./MobileApplicationsService.css";
 import { Link } from "@/i18n/navigation";
+import EmptyState from "@/components/ui/EmptyState";
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 24 },
@@ -49,20 +50,7 @@ const features = [
   },
 ];
 
-const technologies = [
-  "Flutter",
-  "React Native",
-  "Kotlin",
-  "Swift",
-  "Firebase",
-  "Dart",
-  "Java",
-  "Objective-C",
-  "SQLite",
-  "REST API",
-];
-
-export default function MobileApplicationsService() {
+export default function MobileApplicationsService({technologies = []}: {technologies?: string[]}) {
   const t = useTranslations("servicesDetail.mobile");
   return (
     <>
@@ -143,14 +131,14 @@ export default function MobileApplicationsService() {
               <p>{t("technologies.description")}</p>
             </header>
 
-            <div className="mobile-applications-service__technologies-grid">
+            {technologies.length ? <div className="mobile-applications-service__technologies-grid">
               {technologies.map((tech) => (
                 <div key={tech} className="mobile-applications-technology-tag">
                   <Check size={16} strokeWidth={2} aria-hidden="true" />
                   {tech}
                 </div>
               ))}
-            </div>
+            </div> : <EmptyState message={t("technologies.empty")} />}
           </div>
         </section>
 

@@ -44,9 +44,9 @@ export function getInitialTheme(): Theme {
 /**
  * Hook de gestion du thème clair / sombre pour KofCorporation.
  *
- * @returns `theme`        — valeur courante : 'light' | 'dark'
- * @returns `toggleTheme`  — bascule le thème et persiste en localStorage
- * @returns `isDark`       — raccourci booléen
+ * @returns `theme`        - valeur courante : 'light' | 'dark'
+ * @returns `toggleTheme`  - bascule le thème et persiste en localStorage
+ * @returns `isDark`       - raccourci booléen
  */
 export function useTheme(): {
   theme: Theme;

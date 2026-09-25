@@ -46,13 +46,15 @@
     "projects": "projects delivered",
     "satisfaction": "client satisfaction",
     "training": "students trained",
-    "years": " years"
+    "years": " years",
+    "empty": "No key figures published yet."
   },
   "services": {
     "eyebrow": "Our expertise",
     "title": "Digital solutions that move your business forward",
     "learnMore": "Learn more",
     "technologies": "Technologies for {title}",
+    "empty": "No services published yet.",
     "items": {
       "web": {
         "title": "Web Development & Applications",
@@ -78,7 +80,16 @@
     "viewAll": "View all projects",
     "preview": "Preview of {title}",
     "visit": "Visit the {title} website",
-    "technologies": "Technologies used for {title}"
+    "technologies": "Technologies used for {title}",
+    "details": "View details",
+    "empty": "No published projects yet."
+  },
+  "projectModal": {
+    "close": "Close project dialog",
+    "client": "Client",
+    "sector": "Sector",
+    "technologies": "Project technologies",
+    "visit": "Visit project"
   },
   "testimonials": {
     "eyebrow": "Trusted by our clients",
@@ -87,7 +98,13 @@
     "next": "Next testimonial",
     "rating": "5 out of 5 stars",
     "select": "Select a testimonial",
-    "show": "Show testimonial {number}"
+    "show": "Show testimonial {number}",
+    "empty": "No testimonials published yet."
+  },
+  "partners": {
+    "ariaLabel": "Our partners and clients",
+    "title": "Trusted by our clients",
+    "empty": "No partners published yet."
   },
   "cta": {
     "title": "Let's build something useful, together.",
@@ -222,6 +239,7 @@
       "eyebrow": "The team",
       "title": "Profiles who love solving real problems.",
       "description": "Our team brings together developers, designers and trainers committed to building useful products from Lomé.",
+      "photoAlt": "KofCorporation team photo",
       "founder": {
         "name": "Omar Farouk KOUGBADA",
         "role": "Founder & CEO",
@@ -296,6 +314,18 @@
       "title": "Projects built to last.",
       "description": "Each project starts with listening and is built with particular attention to usage, clarity and technical quality."
     },
+    "filters": {
+      "label": "Filter projects",
+      "all": "All",
+      "web": "Web",
+      "mobile": "Mobile",
+      "logiciel": "Software",
+      "formation": "Training"
+    },
+    "details": "View details",
+    "loadMore": "View more",
+    "empty": "No published projects yet.",
+    "emptyFilter": "No project matches this filter.",
     "card": {
       "client": "Client",
       "visit": "Visit the ",
@@ -387,7 +417,8 @@
       },
       "technologies": {
         "title": "Technologies we use",
-        "description": "We work with the most recent and reliable technologies on the market."
+        "description": "We work with the most recent and reliable technologies on the market.",
+        "empty": "No technologies published for this service."
       },
       "process": {
         "title": "Our development process",
@@ -452,7 +483,8 @@
       },
       "technologies": {
         "title": "Technologies we use",
-        "description": "We master the most performant frameworks and tools in mobile development."
+        "description": "We master the most performant frameworks and tools in mobile development.",
+        "empty": "No technologies published for this service."
       },
       "process": {
         "title": "Our development process",
@@ -517,7 +549,8 @@
       },
       "technologies": {
         "title": "Technologies we use",
-        "description": "We use robust and scalable technologies for your business software."
+        "description": "We use robust and scalable technologies for your business software.",
+        "empty": "No technologies published for this service."
       },
       "process": {
         "title": "Our development process",

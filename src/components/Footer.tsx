@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import {
   MapPin,
@@ -7,11 +7,18 @@ import {
 } from "lucide-react";
 import "./Footer.css";
 import { Link } from "@/i18n/navigation";
+import {client} from "@/lib/sanity";
+import {SETTINGS_QUERY} from "@/lib/queries";
+import type {CompanySettings} from "@/types/sanity";
 
 const currentYear = new Date().getFullYear();
 
-export default function Footer() {
-  const t = useTranslations("footer");
+export default async function Footer() {
+  const t = await getTranslations("footer");
+  const settings = await client.fetch<CompanySettings | null>(SETTINGS_QUERY, {}, {next: {tags: ["settings"]}}).catch(() => null);
+  const phones = settings?.phone?.length ? settings.phone : ["+228 70 44 16 36", "+228 93 55 47 40"];
+  const email = settings?.email || "contact@kofcorporation.com";
+  const address = settings?.address || t("address");
   return (
     <footer className="footer">
       <div className="footer__top">
@@ -143,21 +150,19 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="footer__link footer__location-link"
                 >
-                  {t("address")}
+                  {address}
                 </a>
               </li>
               <li>
                 <Phone size={18} className="footer__icon" />
                 <div className="footer__phones">
-                  <a href="tel:+22870441636">+228 70 44 16 36</a>
-                  <span>/</span>
-                  <a href="tel:+22893554740">+228 93 55 47 40</a>
+                  {phones.map((phone, index) => <span key={phone}><a href={`tel:${phone.replace(/[^+\d]/g, "")}`}>{phone}</a>{index < phones.length - 1 && <span> / </span>}</span>)}
                 </div>
               </li>
               <li>
                 <Mail size={18} className="footer__icon" />
-                <a href="mailto:contact@kofcorporation.com">
-                  contact@kofcorporation.com
+                <a href={`mailto:${email}`}>
+                  {email}
                 </a>
               </li>
             </ul>

@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 import "./ContactPage.css";
 import type { ContactForm } from "@/types/contact";
+import {useLocale} from "next-intl";
+import type {CompanySettings} from "@/types/sanity";
 
 type ContactField = "fullName" | "email" | "subject" | "message";
 type FormErrors = Partial<Record<ContactField, string>>;
@@ -26,8 +28,13 @@ const initialForm: ContactForm = {
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export default function ContactPage() {
+export default function ContactPage({settings}: {settings?: CompanySettings | null}) {
   const t = useTranslations("contact");
+  const locale = useLocale();
+  const phones = settings?.phone?.length ? settings.phone : ["+228 70 44 16 36", "+228 93 55 47 40"];
+  const email = settings?.email || "contact@kofcorporation.com";
+  const address = settings?.address || t("address");
+  const openingHours = (locale === "en" ? settings?.openingHoursEn : settings?.openingHours) || t("hours");
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -288,22 +295,21 @@ export default function ContactPage() {
               <ul>
                 <li>
                   <MapPin size={20} strokeWidth={1.7} aria-hidden="true" />
-                  <span>{t("address")}</span>
+                  <span>{address}</span>
                 </li>
                 <li>
                   <Phone size={20} strokeWidth={1.7} aria-hidden="true" />
                   <span>
-                    <a href="tel:+22870441636">+228 70 44 16 36</a>
-                    <a href="tel:+22893554740">+228 93 55 47 40</a>
+                    {phones.map((phone) => <a key={phone} href={`tel:${phone.replace(/[^+\d]/g, "")}`}>{phone}</a>)}
                   </span>
                 </li>
                 <li>
                   <Mail size={20} strokeWidth={1.7} aria-hidden="true" />
-                  <a href="mailto:contact@kofcorporation.com">contact@kofcorporation.com</a>
+                  <a href={`mailto:${email}`}>{email}</a>
                 </li>
                 <li>
                   <Clock3 size={20} strokeWidth={1.7} aria-hidden="true" />
-                  <span>{t("hours")}</span>
+                  <span>{openingHours}</span>
                 </li>
               </ul>
             </div>

@@ -3,7 +3,7 @@ import { Link } from "@/i18n/navigation";
 import { getTranslations } from "next-intl/server";
 
 export const metadata: Metadata = {
-  title: "Mentions légales — KofCorporation",
+  title: "Mentions légales - KofCorporation",
   description:
     "Mentions légales, conditions générales d'utilisation et politique de confidentialité de KofCorporation.",
 };

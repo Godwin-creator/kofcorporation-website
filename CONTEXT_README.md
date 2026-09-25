@@ -1,15 +1,15 @@
-# KofCorporation — Context projet
+# KofCorporation - Context projet
 
 > Dernière mise à jour : 8 septembre 2026
 > État réel : site vitrine fonctionnel, pages métiers validées, direction visuelle stabilisée, thème par défaut en mode clair.
 
 ## Composants réalisés
 
-- [x] Page /services — page métier complète avec hero dédié, grille des services, section méthode et CTA finale.
-- [x] Page /qui-sommes-nous — contenu institutionnel, valeurs et présentation de l'agence.
-- [x] Page /realisations — portfolio structuré avec mises en avant des projets.
-- [x] Page /contact — formulaire, coordonnées, intégration Google Maps et cadrage visuel cohérent.
-- [x] Direction visuelle stabilisée — animation `Threads` appliquée uniquement dans le Hero ; le reste du site reste sobre et sans fond animé.
+- [x] Page /services - page métier complète avec hero dédié, grille des services, section méthode et CTA finale.
+- [x] Page /qui-sommes-nous - contenu institutionnel, valeurs et présentation de l'agence.
+- [x] Page /realisations - portfolio structuré avec mises en avant des projets.
+- [x] Page /contact - formulaire, coordonnées, intégration Google Maps et cadrage visuel cohérent.
+- [x] Direction visuelle stabilisée - animation `Threads` appliquée uniquement dans le Hero ; le reste du site reste sobre et sans fond animé.
 - [x] Thème par défaut validé en `light` avec support du mode sombre conservé comme variante.
 - [x] Stabilisation des composants visuels et corrections de lint sur `Hero.tsx` et `useTheme.ts`.
 - [x] Implémentation du design system global : palette, typographie, cards, boutons, CTA, sections et hiérarchie visuelle.

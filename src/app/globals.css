@@ -1,12 +1,12 @@
 /* ============================================================
-   KofCorporation — Design System
+   KofCorporation - Design System
    globals.css
    ============================================================ */
 
 /* 1. GOOGLE FONTS */
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 
-/* 2. CSS CUSTOM PROPERTIES — Light Mode */
+/* 2. CSS CUSTOM PROPERTIES - Light Mode */
 :root {
   /* Typography */
   --font-heading: 'Manrope', sans-serif;
@@ -35,7 +35,7 @@
   --color-border: #E2E8F0;
 }
 
-/* 3. CSS CUSTOM PROPERTIES — Dark Mode */
+/* 3. CSS CUSTOM PROPERTIES - Dark Mode */
 [data-theme="dark"] {
   --color-bg:          #1A1E3A;
   --color-surface:     #2C417A;
@@ -76,7 +76,7 @@ main {
   background-color: var(--color-bg);
 }
 
-/* 5. CUSTOM SCROLLBAR — WebKit */
+/* 5. CUSTOM SCROLLBAR - WebKit */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -127,7 +127,7 @@ h6 {
   opacity: 0;
 }
 
-/* Sections — angles droits, pas de border-radius */
+/* Sections - angles droits, pas de border-radius */
 section {
   border-radius: 0;
 }

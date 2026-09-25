@@ -46,13 +46,15 @@
     "projects": "projets réalisés",
     "satisfaction": "de satisfaction client",
     "training": "étudiants formés",
-    "years": " ans"
+    "years": " ans",
+    "empty": "Aucun chiffre clé publié pour le moment."
   },
   "services": {
     "eyebrow": "Notre savoir-faire",
     "title": "Des solutions digitales qui font avancer votre activité",
     "learnMore": "En savoir plus",
     "technologies": "Technologies pour {title}",
+    "empty": "Aucun service publié pour le moment.",
     "items": {
       "web": {
         "title": "Développement Web & Applications",
@@ -78,7 +80,16 @@
     "viewAll": "Voir tous les projets",
     "preview": "Aperçu de {title}",
     "visit": "Visiter le site de {title}",
-    "technologies": "Technologies utilisées pour {title}"
+    "technologies": "Technologies utilisées pour {title}",
+    "details": "Voir les détails",
+    "empty": "Aucun projet publié pour le moment."
+  },
+  "projectModal": {
+    "close": "Fermer la fenêtre du projet",
+    "client": "Client",
+    "sector": "Secteur",
+    "technologies": "Technologies du projet",
+    "visit": "Visiter le projet"
   },
   "testimonials": {
     "eyebrow": "Ils nous font confiance",
@@ -87,7 +98,13 @@
     "next": "Témoignage suivant",
     "rating": "5 étoiles sur 5",
     "select": "Sélectionner un témoignage",
-    "show": "Afficher le témoignage {number}"
+    "show": "Afficher le témoignage {number}",
+    "empty": "Aucun témoignage publié pour le moment."
+  },
+  "partners": {
+    "ariaLabel": "Nos partenaires et clients",
+    "title": "Ils nous font confiance",
+    "empty": "Aucun partenaire publié pour le moment."
   },
   "cta": {
     "title": "Construisons quelque chose d'utile, ensemble.",
@@ -222,6 +239,7 @@
       "eyebrow": "L'équipe",
       "title": "Des profils qui aiment résoudre les vrais problèmes.",
       "description": "Notre équipe réunit des développeurs, designers et formateurs engagés à construire des produits utiles depuis Lomé.",
+      "photoAlt": "Photo de l'équipe KofCorporation",
       "founder": {
         "name": "Omar Farouk KOUGBADA",
         "role": "Fondateur & CEO",
@@ -296,6 +314,18 @@
       "title": "Des projets pensés pour durer.",
       "description": "Chaque projet commence par l'écoute et se construit avec une attention particulière portée à l'usage, à la clarté et à la qualité technique."
     },
+    "filters": {
+      "label": "Filtrer les projets",
+      "all": "Tous",
+      "web": "Web",
+      "mobile": "Mobile",
+      "logiciel": "Logiciels",
+      "formation": "Formation"
+    },
+    "details": "Voir les détails",
+    "loadMore": "Voir plus",
+    "empty": "Aucun projet publié pour le moment.",
+    "emptyFilter": "Aucun projet ne correspond à ce filtre.",
     "card": {
       "client": "Client",
       "visit": "Visiter le site de ",
@@ -387,7 +417,8 @@
       },
       "technologies": {
         "title": "Technologies que nous utilisons",
-        "description": "Nous travaillons avec les technologies les plus récentes et les plus fiables du marché."
+        "description": "Nous travaillons avec les technologies les plus récentes et les plus fiables du marché.",
+        "empty": "Aucune technologie publiée pour ce service."
       },
       "process": {
         "title": "Notre processus de développement",
@@ -452,7 +483,8 @@
       },
       "technologies": {
         "title": "Technologies que nous utilisons",
-        "description": "Nous maîtrisons les frameworks et outils les plus performants du développement mobile."
+        "description": "Nous maîtrisons les frameworks et outils les plus performants du développement mobile.",
+        "empty": "Aucune technologie publiée pour ce service."
       },
       "process": {
         "title": "Notre processus de développement",
@@ -517,7 +549,8 @@
       },
       "technologies": {
         "title": "Technologies que nous utilisons",
-        "description": "Nous utilisons des technologies robustes et évolutives pour vos logiciels de gestion."
+        "description": "Nous utilisons des technologies robustes et évolutives pour vos logiciels de gestion.",
+        "empty": "Aucune technologie publiée pour ce service."
       },
       "process": {
         "title": "Notre processus de développement",

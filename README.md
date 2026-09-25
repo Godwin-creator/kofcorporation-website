@@ -1,8 +1,8 @@
-# KofCorporation — Site Vitrine Officiel
+# KofCorporation - Site Vitrine Officiel
 
 Site web institutionnel de **KofCorporation**, entreprise informatique basée à Lomé, Togo. Refonte complète du site existant vers une stack moderne, performante et maintenable.
 
-> Conçu et développé dans le cadre d'un stage d'insertion professionnelle — Août/Septembre 2026.
+> Conçu et développé dans le cadre d'un stage d'insertion professionnelle - Août/Septembre 2026.
 
 ---
 
@@ -10,27 +10,27 @@ Site web institutionnel de **KofCorporation**, entreprise informatique basée à
 
 | Élément | Technologie |
 |---|---|
-| Framework | [Next.js 14+](https://nextjs.org/) — App Router |
+| Framework | [Next.js 14+](https://nextjs.org/) - App Router |
 | Styling | [Tailwind CSS v4](https://tailwindcss.com/) |
 | Animations | [Framer Motion](https://www.framer.com/motion/) |
 | Icônes | [Lucide React](https://lucide.dev/) |
 | CMS | [Sanity CMS](https://www.sanity.io/) |
 | Formulaire | React Hook Form + reCAPTCHA v3 |
-| i18n | [next-intl](https://next-intl-docs.vercel.app/) — FR / EN |
+| i18n | [next-intl](https://next-intl-docs.vercel.app/) - FR / EN |
 | Déploiement | [Vercel](https://vercel.com/) |
 
 ---
 
 ## Fonctionnalités
 
--  Mode clair / sombre — persisté en `localStorage`, respecte `prefers-color-scheme`
--  Multilingue — Français (défaut) et Anglais
--  Splash screen léger — fade-in logo, max 1,2s
--  Carte Google Maps intégrée — page Contact
+-  Mode clair / sombre - persisté en `localStorage`, respecte `prefers-color-scheme`
+-  Multilingue - Français (défaut) et Anglais
+-  Splash screen léger - fade-in logo, max 1,2s
+-  Carte Google Maps intégrée - page Contact
 -  Page 404 personnalisée
--  Entièrement responsive — mobile first
--  Accessibilité WCAG AA — aria-labels, contrastes, sémantique HTML5
--  Formulaire de contact sécurisé — reCAPTCHA v3
+-  Entièrement responsive - mobile first
+-  Accessibilité WCAG AA - aria-labels, contrastes, sémantique HTML5
+-  Formulaire de contact sécurisé - reCAPTCHA v3
 -  Scrollbar et sélection de texte personnalisées
 
 ---
@@ -63,7 +63,7 @@ Site web institutionnel de **KofCorporation**, entreprise informatique basée à
 | Background | `#F8F9FA` | `#1A1E3A` |
 | Surface | `#FFFFFF` | `#2C417A` |
 
-**Philosophie visuelle** — sections pleine largeur à angles droits, border-radius uniquement sur les éléments UI internes (cards, boutons, badges).
+**Philosophie visuelle** - sections pleine largeur à angles droits, border-radius uniquement sur les éléments UI internes (cards, boutons, badges).
 
 ---
 
@@ -132,7 +132,7 @@ Preview automatique sur chaque Pull Request.
 ## Auteur
 
 **Komi Godwin EDOH BEDI**
-Stagiaire Développement Web — KofCorporation, Lomé, Togo
+Stagiaire Développement Web - KofCorporation, Lomé, Togo
 
 [![GitHub](https://img.shields.io/badge/GitHub-Godwin--creator-181717?logo=github)](https://github.com/Godwin-creator)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-gwin--edohbedi-0077B5?logo=linkedin)](https://www.linkedin.com/in/gwin-edohbedi)
@@ -141,4 +141,4 @@ Stagiaire Développement Web — KofCorporation, Lomé, Togo
 
 ## Licence
 
-MIT — voir [LICENSE](./LICENSE)
+MIT - voir [LICENSE](./LICENSE)

@@ -6,6 +6,7 @@ import { ArrowRight, Check, Globe, Layout, Code, Smartphone, Zap, Shield, Globe2
 import CallToAction from "@/components/sections/CallToAction";
 import "./WebDevelopmentService.css";
 import { Link } from "@/i18n/navigation";
+import EmptyState from "@/components/ui/EmptyState";
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 24 },
@@ -49,20 +50,7 @@ const features = [
   },
 ];
 
-const technologies = [
-  "Laravel",
-  "Vue.js",
-  "React",
-  "Angular",
-  "Spring Boot",
-  "Next.js",
-  "Tailwind CSS",
-  "Firebase",
-  "PostgreSQL",
-  "MySQL",
-];
-
-export default function WebDevelopmentService() {
+export default function WebDevelopmentService({technologies = []}: {technologies?: string[]}) {
   const t = useTranslations("servicesDetail.web");
   return (
     <>
@@ -143,14 +131,14 @@ export default function WebDevelopmentService() {
               <p>{t("technologies.description")}</p>
             </header>
 
-            <div className="web-development-service__technologies-grid">
+            {technologies.length ? <div className="web-development-service__technologies-grid">
               {technologies.map((tech) => (
                 <div key={tech} className="web-development-technology-tag">
                   <Check size={16} strokeWidth={2} aria-hidden="true" />
                   {tech}
                 </div>
               ))}
-            </div>
+            </div> : <EmptyState message={t("technologies.empty")} />}
           </div>
         </section>
 
