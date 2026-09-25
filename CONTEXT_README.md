@@ -33,8 +33,9 @@
 
 >Priorité 1 - Formulaire contact (backend réel)
   - Route Handler Next.js : POST /api/contact
-  - Intégration Resend (envoi email)
-  - Variables d'env : RESEND_API_KEY
+  - Intégration Nodemailer + SMTP VPS (envoi email)
+  - Variables d'env : SMTP_HOST, SMTP_PORT, SMTP_USERNAME, SMTP_PASSWORD,
+    SMTP_USE_SSL, EMAIL_FROM_ADDRESS
   - Email de destination : contact@kofcorporation.com
   - Email de confirmation automatique à l'expéditeur
   - reCAPTCHA v3 : NEXT_PUBLIC_RECAPTCHA_SITE_KEY 

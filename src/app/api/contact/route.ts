@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 
-import { getResend } from '@/lib/resend'
+import { transporter, EMAIL_FROM } from '@/lib/mailer'
 import { contactSchema } from '@/lib/validators/contact'
 import type { ContactForm } from '@/types/contact'
 
@@ -20,7 +20,6 @@ const formatDateTime = (date = new Date()) =>
     timeStyle: 'short',
   }).format(date)
 
-const resendFrom = process.env.RESEND_FROM || 'KofCorporation <noreply@kofcorporation.com>'
 const adminRecipient = process.env.CONTACT_TO || 'contact@kofcorporation.com'
 
 const verifyRecaptcha = async (token: string) => {
@@ -156,17 +155,8 @@ export async function POST(request: Request) {
   const submittedAt = formatDateTime()
 
   try {
-    const resend = getResend()
-
-    if (!resend) {
-      return NextResponse.json(
-        { error: 'Le service d’email n’est pas configuré pour l’envoi de messages.' },
-        { status: 503 }
-      )
-    }
-
-    await resend.emails.send({
-      from: resendFrom,
+    await transporter.sendMail({
+      from: EMAIL_FROM,
       to: [adminRecipient],
       subject: `Nouveau message — ${sanitizedForm.subject}`,
       html: buildInternalEmailHtml({
@@ -175,8 +165,8 @@ export async function POST(request: Request) {
       }),
     })
 
-    await resend.emails.send({
-      from: resendFrom,
+    await transporter.sendMail({
+      from: EMAIL_FROM,
       to: [sanitizedForm.email],
       subject: 'Nous avons bien reçu votre message',
       html: buildConfirmationEmailHtml({

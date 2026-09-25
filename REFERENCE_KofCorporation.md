@@ -197,10 +197,23 @@ kofcorporation.com/
 | **Animations** | Framer Motion | Déjà utilisé sur ChainCacao |
 | **CMS** | **Sanity CMS** | Déjà maîtrisé sur AOA — le chef pourra mettre à jour chiffres, projets, témoignages sans code |
 | **Formulaire contact** | React Hook Form + reCAPTCHA v3 | Remplacement du calcul arithmétique actuel |
+| **Envoi d'emails** | Nodemailer + SMTP VPS | Notification interne et confirmation expéditeur |
 | **Images** | next/image | Optimisation automatique WebP/AVIF |
 | **Fonts** | next/font | Pas de flash, chargement optimisé |
 | **Déploiement** | Vercel | Même setup qu'AOA, déploiement continu depuis GitHub |
 | **Carte** | Google Maps embed | Avec clé API restreinte au domaine |
+
+### Variables d'environnement
+
+- `SMTP_HOST`
+- `SMTP_PORT`
+- `SMTP_USERNAME`
+- `SMTP_PASSWORD`
+- `SMTP_USE_SSL`
+- `EMAIL_FROM_ADDRESS`
+- `CONTACT_TO`
+- `RECAPTCHA_SECRET_KEY`
+- `NEXT_PUBLIC_RECAPTCHA_SITE_KEY`
 
 ---
 
