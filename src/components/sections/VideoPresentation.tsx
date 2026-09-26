@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Play, X, Volume2, VolumeX, Maximize2 } from "lucide-react";
 import "./VideoPresentation.css";
+import SectionBadge from "@/components/ui/SectionBadge";
 
 interface VideoPresentationProps {
   /** ID YouTube - si fourni, affiche la miniature + bouton Play → modal embed */
@@ -118,6 +119,7 @@ export default function VideoPresentation({
 
   return (
     <section ref={sectionRef} className="video-presentation" id="about">
+      <SectionBadge title="À propos de nous" sectionId="about" />
       <div className="video-presentation__inner">
 
         {/* ── Colonne gauche : lecteur ────────────────────────────────────── */}
@@ -194,7 +196,6 @@ export default function VideoPresentation({
           animate={isInView ? "visible" : "hidden"}
           variants={textVariants}
         >
-          <span className="video-presentation__eyebrow">{t("eyebrow")}</span>
           <h2 className="video-presentation__title">{t("title")}</h2>
           <p className="video-presentation__description">{t("description")}</p>
 

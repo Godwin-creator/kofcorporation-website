@@ -6,6 +6,7 @@ import {animate, motion, useInView, useMotionValue, useTransform} from 'framer-m
 import {Clock, FolderCheck, GraduationCap, Star} from 'lucide-react'
 import './Stats.css'
 import EmptyState from '@/components/ui/EmptyState'
+import SectionBadge from '@/components/ui/SectionBadge'
 
 export interface StatItem { id: string; value: number; suffix: string; label: string; labelEn: string; icon: string }
 const ICONS = {Clock, FolderCheck, GraduationCap, Star}
@@ -32,7 +33,8 @@ export default function StatsClient({stats}: {stats: StatItem[]}) {
   const locale = useLocale()
   const sectionRef = useRef<HTMLElement>(null)
   const isInView = useInView(sectionRef, {once: true, margin: '-100px'})
-  return <motion.section ref={sectionRef} className="stats" aria-labelledby="stats-title" variants={sectionVariants} initial="hidden" animate={isInView ? 'visible' : 'hidden'}>
+  return <motion.section ref={sectionRef} id="stats" className="stats" aria-labelledby="stats-title" variants={sectionVariants} initial="hidden" animate={isInView ? 'visible' : 'hidden'}>
+    <SectionBadge title="Nos chiffres" sectionId="stats" />
     <div className="stats__inner"><h2 id="stats-title" className="stats__title">{t('title')}</h2>
       <motion.div className="stats__grid" variants={containerVariants} initial="hidden" animate={isInView ? 'visible' : 'hidden'}>
         {stats.length ? stats.map((stat) => { const Icon = ICONS[stat.icon as keyof typeof ICONS] ?? Star; return <motion.article className="stats__item" key={stat.id} variants={itemVariants}><Icon className="stats__icon" size={24} strokeWidth={1.6} aria-hidden="true" /><AnimatedValue value={stat.value} suffix={stat.suffix} /><p className="stats__label">{locale === 'en' ? stat.labelEn : stat.label}</p></motion.article> }) : <EmptyState message={t('empty')} />}
