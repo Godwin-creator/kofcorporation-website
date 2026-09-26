@@ -190,3 +190,32 @@
 .footer__bottom-links a:hover {
   color: var(--color-accent);
 }
+
+/* Style pour le texte en arrière-plan du footer */
+.footer__bg-text {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Story Script', cursive;
+  font-size: clamp(4rem, 15vw, 12rem);
+  font-weight: 400;
+  font-style: normal;
+  color: rgba(12, 172, 232, 0.05);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  z-index: 0;
+  line-height: 1;
+}
+
+.footer {
+  position: relative;
+  overflow: hidden;
+}
+
+.footer__top {
+  position: relative;
+  z-index: 1;
+}
+

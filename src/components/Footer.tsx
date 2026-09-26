@@ -21,6 +21,7 @@ export default async function Footer() {
   const address = settings?.address || t("address");
   return (
     <footer className="footer">
+      <span className="footer__bg-text" aria-hidden="true">KOFCORPORATION</span>
       <div className="footer__top">
         <div className="footer__inner">
           
