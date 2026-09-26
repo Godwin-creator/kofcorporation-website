@@ -13,6 +13,10 @@ import {
   ChevronDown,
   Globe,
   CalendarCheck,
+  Code2,
+  Smartphone,
+  Monitor,
+  GraduationCap,
 } from "lucide-react";
 import { useTheme } from "@/hooks/useTheme";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
@@ -55,6 +59,9 @@ export default function Header() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const servicesHoverRef = useRef<HTMLLIElement>(null);
   const [scrolled, setScrolled] = useState(false);
   const [themeSweep, setThemeSweep] = useState<{
     key: number;
@@ -94,6 +101,16 @@ export default function Header() {
       document.body.style.overflow = "";
     };
   }, [mobileOpen]);
+
+  /* --- Close services mega menu when cursor leaves ------------- */
+  useEffect(() => {
+    const el = servicesHoverRef.current;
+    if (!el) return;
+    const leave = () => setServicesOpen(false);
+    el.addEventListener("mouseenter", () => setServicesOpen(true));
+    el.addEventListener("mouseleave", leave);
+    return () => el.removeEventListener("mouseleave", leave);
+  }, []);
 
   /* --- Close language dropdown on outside click ------------------- */
   const closeLangDropdown = useCallback(() => setLangOpen(false), []);
@@ -178,32 +195,101 @@ export default function Header() {
           {/* ---- Desktop Navigation ---- */}
           <nav className="header__nav" aria-label={t("mainNavigation")}>
             <ul className="header__nav-list">
-              {NAV_ITEMS.map((item) => (
-                <li key={item.href}>
-                  <SpecularButton
-                    href={item.href}
-                    size="sm"
-                    radius={0}
-                    tint="#000000"
-                    tintOpacity={0}
-                    blur={0}
-                    lineColor="var(--color-accent)"
-                    {...specularColors}
-                    intensity={1}
-                    shineSize={44}
-                    shineFade={40}
-                    thickness={2.5}
-                    speed={1.2}
-                    followMouse
-                    proximity={250}
-                    className={`header__specular-button ${
-                      pathname === item.href ? "header__nav-link--active" : ""
-                    }`}
-                  >
-                    {navT(item.key)}
-                  </SpecularButton>
-                </li>
-              ))}
+              {NAV_ITEMS.map((item) => {
+                const isActive = pathname === item.href;
+                const isServices = item.key === "services";
+
+                if (isServices) {
+                  return (
+                    <li
+                      key={item.href}
+                      ref={servicesHoverRef}
+                      className="header__nav-item--mega"
+                      onMouseEnter={() => setServicesOpen(true)}
+                      onMouseLeave={() => setServicesOpen(false)}
+                    >
+                      <SpecularButton
+                        href={item.href}
+                        size="sm"
+                        radius={0}
+                        tint="#000000"
+                        tintOpacity={0}
+                        blur={0}
+                        lineColor="var(--color-accent)"
+                        {...specularColors}
+                        intensity={1}
+                        shineSize={44}
+                        shineFade={40}
+                        thickness={2.5}
+                        speed={1.2}
+                        followMouse
+                        proximity={250}
+                        className={`header__specular-button ${isActive ? "header__nav-link--active" : ""}`}
+                      >
+                        {navT(item.key)}
+                        <ChevronDown size={13} strokeWidth={2.2} className={`header__chevron ${servicesOpen ? "header__chevron--open" : ""}`} />
+                      </SpecularButton>
+                      <AnimatePresence>
+                        {servicesOpen && (
+                          <motion.div
+                            className="header__mega-menu"
+                            initial={{ opacity: 0, y: 8 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 8 }}
+                            transition={{ duration: 0.18, ease: "easeOut" }}
+                          >
+                            <div className="header__mega-menu-grid">
+                              {[
+                                { id: "web", icon: Code2, titleKey: "servicesSub.web.title", descKey: "servicesSub.web.desc", href: "/services/developpement-web" },
+                                { id: "mobile", icon: Smartphone, titleKey: "servicesSub.mobile.title", descKey: "servicesSub.mobile.desc", href: "/services/applications-mobiles" },
+                                { id: "management", icon: Monitor, titleKey: "servicesSub.management.title", descKey: "servicesSub.management.desc", href: "/services/logiciels-gestion" },
+                                { id: "training", icon: GraduationCap, titleKey: "servicesSub.training.title", descKey: "servicesSub.training.desc", href: "https://academy.kofcorporation.com/" },
+                              ].map((svc) => {
+                                const Icon = svc.icon;
+                                return (
+                                  <a key={svc.id} href={svc.href} target={svc.id === "training" ? "_blank" : undefined} rel={svc.id === "training" ? "noopener noreferrer" : undefined} className="header__mega-card">
+                                    <div className="header__mega-card-icon"><Icon size={22} strokeWidth={1.7} /></div>
+                                    <div>
+                                      <p className="header__mega-card-title">{navT(svc.titleKey)}</p>
+                                      <p className="header__mega-card-desc">{navT(svc.descKey)}</p>
+                                    </div>
+                                    <ArrowRight size={15} strokeWidth={2} className="header__mega-card-arrow" aria-hidden="true" />
+                                  </a>
+                                );
+                              })}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </li>
+                  );
+                }
+
+                return (
+                  <li key={item.href}>
+                    <SpecularButton
+                      href={item.href}
+                      size="sm"
+                      radius={0}
+                      tint="#000000"
+                      tintOpacity={0}
+                      blur={0}
+                      lineColor="var(--color-accent)"
+                      {...specularColors}
+                      intensity={1}
+                      shineSize={44}
+                      shineFade={40}
+                      thickness={2.5}
+                      speed={1.2}
+                      followMouse
+                      proximity={250}
+                      className={`header__specular-button ${isActive ? "header__nav-link--active" : ""}`}
+                    >
+                      {navT(item.key)}
+                    </SpecularButton>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
 
@@ -381,24 +467,80 @@ export default function Header() {
               aria-label={t("mobileNavigation")}
             >
               <ul className="mobile-nav__list">
-                {NAV_ITEMS.map((item, i) => (
-                  <motion.li
-                    key={item.href}
-                    initial={{ opacity: 0, x: 40 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.05 * i, duration: 0.25 }}
-                  >
-                    <Link
-                      href={item.href}
-                      className={`mobile-nav__link${
-                        pathname === item.href ? " mobile-nav__link--active" : ""
-                      }`}
-                      onClick={() => setMobileOpen(false)}
+                {NAV_ITEMS.map((item, i) => {
+                  const isServices = item.key === "services";
+                  if (isServices) {
+                    return (
+                      <motion.li
+                        key={item.href}
+                        initial={{ opacity: 0, x: 40 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.05 * i, duration: 0.25 }}
+                      >
+                        <button
+                          type="button"
+                          className="mobile-nav__link mobile-nav__link--chevron"
+                          onClick={() => setMobileServicesOpen((prev) => !prev)}
+                          aria-expanded={mobileServicesOpen}
+                        >
+                          {navT(item.key)}
+                          <ChevronDown size={16} strokeWidth={2} className={`mobile-nav__chevron ${mobileServicesOpen ? "mobile-nav__chevron--open" : ""}`} />
+                        </button>
+                        <AnimatePresence>
+                          {mobileServicesOpen && (
+                            <motion.ul
+                              className="mobile-nav__sub-list"
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.25 }}
+                            >
+                              {[
+                                { id: "web", titleKey: "servicesSub.web.title", href: "/services/developpement-web" },
+                                { id: "mobile", titleKey: "servicesSub.mobile.title", href: "/services/applications-mobiles" },
+                                { id: "management", titleKey: "servicesSub.management.title", href: "/services/logiciels-gestion" },
+                                { id: "training", titleKey: "servicesSub.training.title", href: "https://academy.kofcorporation.com/" },
+                              ].map((svc, j) => (
+                                <motion.li
+                                  key={svc.id}
+                                  initial={{ opacity: 0, x: -10 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  transition={{ delay: 0.05 * j, duration: 0.2 }}
+                                >
+                                  <Link
+                                    href={svc.href}
+                                    target={svc.id === "training" ? "_blank" : undefined}
+                                    rel={svc.id === "training" ? "noopener noreferrer" : undefined}
+                                    className="mobile-nav__sub-link"
+                                    onClick={() => setMobileOpen(false)}
+                                  >
+                                    {navT(svc.titleKey)}
+                                  </Link>
+                                </motion.li>
+                              ))}
+                            </motion.ul>
+                          )}
+                        </AnimatePresence>
+                      </motion.li>
+                    );
+                  }
+                  return (
+                    <motion.li
+                      key={item.href}
+                      initial={{ opacity: 0, x: 40 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.05 * i, duration: 0.25 }}
                     >
-                      {navT(item.key)}
-                    </Link>
-                  </motion.li>
-                ))}
+                      <Link
+                        href={item.href}
+                        className={`mobile-nav__link${pathname === item.href ? " mobile-nav__link--active" : ""}`}
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        {navT(item.key)}
+                      </Link>
+                    </motion.li>
+                  );
+                })}
               </ul>
 
               {/* Mobile CTA */}

@@ -14,6 +14,7 @@ import {
 import "./AboutPage.css";
 import { Link } from "@/i18n/navigation";
 import Watermark from "@/components/ui/Watermark";
+import ScrollWordReveal from "@/components/ui/ScrollWordReveal";
 
 const VALUES = [
   {
@@ -124,6 +125,8 @@ export default function AboutPage({teamPhotoUrl, teamPhotoAlt}: {teamPhotoUrl?: 
             </div>
           </div>
         </motion.section>
+
+        <ScrollWordReveal textKey="aboutStatement" />
 
         <section className="about-page__values" aria-labelledby="values-title">
           <div className="about-page__container">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { motion, useInView } from "framer-motion";
 import { ExternalLink, Heart, HeartPulse, Home } from "lucide-react";
@@ -10,6 +10,7 @@ import ProjectModal from "@/components/ui/ProjectModal";
 import EmptyState from "@/components/ui/EmptyState";
 import type { SanityProject } from "@/types/sanity";
 import Watermark from "@/components/ui/Watermark";
+import LoadingDots from "@/components/ui/LoadingDots";
 
 export interface ProjectItem {
   id: string;
@@ -61,6 +62,8 @@ export default function ProjectsClient({
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(
     null,
   );
+  const [loaded, setLoaded] = useState(false);
+  useEffect(() => { setLoaded(true); }, []);
   return (
     <motion.section
       ref={sectionRef}
@@ -71,7 +74,7 @@ export default function ProjectsClient({
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
     >
-      <Watermark id="projects" />
+      {!loaded ? <LoadingDots /> : <Watermark id="projects" />}
       <div className="projects__inner">
         <header className="projects__header">
           <div className="projects__heading">

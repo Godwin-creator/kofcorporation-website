@@ -3,12 +3,10 @@
    ============================================================ */
 
 .business-software-service {
-  background-color: var(--color-bg);
-  position: relative;
-}
   width: 100%;
   min-height: 100vh;
   background-color: var(--color-bg);
+  position: relative;
 }
 
 /* ---- Hero Section ---- */

@@ -4,7 +4,13 @@
     "services": "Services",
     "projects": "Projects",
     "about": "About us",
-    "contact": "Contact"
+    "contact": "Contact",
+    "servicesSub": {
+      "web": { "title": "Web Development", "desc": "Custom websites, e-commerce and web applications" },
+      "mobile": { "title": "Mobile Applications", "desc": "High-performance and intuitive iOS and Android apps" },
+      "management": { "title": "Business Software", "desc": "Custom ERP, CRM and business tool solutions" },
+      "training": { "title": "Training & Coaching", "desc": "Technical skill development and mentorship" }
+    }
   },
   "header": {
     "mainNavigation": "Main navigation",
@@ -153,6 +159,11 @@
     "description": "The page you are looking for does not exist or has been moved.",
     "home": "Back to home",
     "contact": "Contact us"
+  },
+  "scrollReveal": {
+    "homeStatement": "We transform your ideas into powerful and elegant digital solutions.",
+    "aboutStatement": "Our technical expertise at the service of your ambition for over ten years.",
+    "servicesStatement": "Custom solutions designed to propel your business to new heights."
   },
   "watermarks": {
     "hero": "KOF",

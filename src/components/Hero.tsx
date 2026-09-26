@@ -8,7 +8,7 @@ import "./Hero.css";
 import { Link } from "@/i18n/navigation";
 import HeroImageSlider from "@/components/ui/HeroImageSlider";
 import type {CompanySettings} from "@/types/sanity";
-import Watermark from "@/components/ui/Watermark";
+
 
 const SLOGANS = {
   fr: [
@@ -109,7 +109,6 @@ export default function Hero({settings}: {settings?: CompanySettings | null}) {
 
   return (
     <section className="hero">
-      <Watermark id="hero" />
       <div className="hero__inner">
         <motion.div className="hero__content" style={{ y }}>
           {/* <motion.span

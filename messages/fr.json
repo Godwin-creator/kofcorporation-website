@@ -4,7 +4,13 @@
     "services": "Services",
     "projects": "Réalisations",
     "about": "Qui sommes-nous",
-    "contact": "Contact"
+    "contact": "Contact",
+    "servicesSub": {
+      "web": { "title": "Développement Web", "desc": "Sites vitrines, e-commerce et applications web sur mesure" },
+      "mobile": { "title": "Applications Mobiles", "desc": "Apps iOS et Android performantes et intuitives" },
+      "management": { "title": "Logiciels de Gestion", "desc": "Solutions ERP, CRM et outils métier personnalisés" },
+      "training": { "title": "Formations & Coaching", "desc": "Montée en compétence technique et accompagnement" }
+    }
   },
   "header": {
     "mainNavigation": "Navigation principale",
@@ -153,6 +159,11 @@
     "description": "La page que vous cherchez n'existe pas ou a été déplacée.",
     "home": "Retour à l'accueil",
     "contact": "Nous contacter"
+  },
+  "scrollReveal": {
+    "homeStatement": "Nous transformons vos idées en solutions numériques puissantes et élégantes.",
+    "aboutStatement": "Notre expertise technique au service de votre ambition depuis plus de dix ans.",
+    "servicesStatement": "Des solutions sur mesure conçues pour propulser votre activité vers de nouveaux sommets."
   },
   "watermarks": {
     "hero": "KOF",

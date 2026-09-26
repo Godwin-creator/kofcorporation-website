@@ -7,6 +7,7 @@ import {ChevronLeft, ChevronRight, Star} from 'lucide-react'
 import './Testimonials.css'
 import EmptyState from '@/components/ui/EmptyState'
 import Watermark from '@/components/ui/Watermark'
+import LoadingDots from '@/components/ui/LoadingDots'
 
 export interface TestimonialItem {id: string; quote: string; name: string; role: string; rating: number}
 const slideVariants = {enter: (direction: number) => ({opacity: 0, x: direction > 0 ? 56 : -56}), center: {opacity: 1, x: 0, transition: {duration: 0.45, ease: 'easeOut' as const}}, exit: (direction: number) => ({opacity: 0, x: direction > 0 ? -56 : 56, transition: {duration: 0.3, ease: 'easeIn' as const}})}
@@ -19,6 +20,8 @@ export default function TestimonialsClient({testimonials}: {testimonials: Testim
   const [isPaused, setIsPaused] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
   const isInView = useInView(sectionRef, {once: true, margin: '-100px'})
+  const [loaded, setLoaded] = useState(false)
+  useEffect(() => { setLoaded(true); }, [])
   const active = testimonials[activeIndex]
 
   useEffect(() => {
@@ -37,6 +40,7 @@ export default function TestimonialsClient({testimonials}: {testimonials: Testim
 
   if (!testimonials.length) return (
     <motion.section ref={sectionRef} id="testimonials" className="testimonials" aria-labelledby="testimonials-title" variants={sectionVariants} initial="hidden" animate={isInView ? 'visible' : 'hidden'}>
+      {!loaded ? <LoadingDots /> : <Watermark id="testimonials" />}
       <div className="testimonials__inner">
         <header className="testimonials__header">
           <h2 id="testimonials-title" className="testimonials__title">{t('title')}</h2>
@@ -57,7 +61,7 @@ export default function TestimonialsClient({testimonials}: {testimonials: Testim
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      <Watermark id="testimonials" />
+      {!loaded ? <LoadingDots /> : <Watermark id="testimonials" />}
       <div className="testimonials__inner">
         <header className="testimonials__header">
           <h2 id="testimonials-title" className="testimonials__title">{t('title')}</h2>

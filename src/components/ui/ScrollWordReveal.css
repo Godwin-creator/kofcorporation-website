@@ -1,0 +1,31 @@
+/* ============================================================
+   ScrollWordReveal - Word-by-word reveal animation
+   ============================================================ */
+
+.scroll-reveal {
+  padding: 3rem 1.5rem;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.scroll-reveal__word {
+  font-family: var(--font-heading);
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  transition: color 0.4s ease, text-shadow 0.4s ease;
+  display: inline;
+}
+
+.scroll-reveal__word--active {
+  color: var(--color-text);
+  text-shadow: 0 0 20px color-mix(in srgb, var(--color-accent) 30%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal__word {
+    color: var(--color-text);
+    transition: none;
+  }
+}
