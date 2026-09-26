@@ -8,7 +8,7 @@ import type {LucideIcon} from "lucide-react"
 import {Link} from "@/i18n/navigation"
 import EmptyState from "@/components/ui/EmptyState"
 import "./Services.css"
-import SectionBadge from "@/components/ui/SectionBadge"
+import Watermark from "@/components/ui/Watermark";
 
 export interface ServiceItem {
   id: string
@@ -30,9 +30,7 @@ export default function ServicesClient({services}: {services: ServiceItem[]}) {
   const sectionRef = useRef<HTMLElement>(null)
   const isInView = useInView(sectionRef, {once: true, margin: "-100px"})
 
-  return <motion.section ref={sectionRef} id="services" className="services" aria-labelledby="services-title" variants={sectionVariants} initial="hidden" animate={isInView ? "visible" : "hidden"}>
-    <SectionBadge title="Notre savoir-faire" sectionId="services" />
-    <div className="services__inner">
+  return <motion.section ref={sectionRef} id="services" className="services" aria-labelledby="services-title" variants={sectionVariants} initial="hidden" animate={isInView ? "visible" : "hidden"}><Watermark id="services" /><div className="services__inner">
       <header className="services__header"><h2 id="services-title" className="services__title">{t("title")}</h2></header>
       <motion.div className="services__grid" variants={containerVariants} initial="hidden" animate={isInView ? "visible" : "hidden"}>
         {services.length ? services.map((service) => {

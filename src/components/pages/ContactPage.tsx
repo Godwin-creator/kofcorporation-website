@@ -15,6 +15,7 @@ import "./ContactPage.css";
 import type { ContactForm } from "@/types/contact";
 import {useLocale} from "next-intl";
 import type {CompanySettings} from "@/types/sanity";
+import Watermark from "@/components/ui/Watermark";
 
 type ContactField = "fullName" | "email" | "subject" | "message";
 type FormErrors = Partial<Record<ContactField, string>>;
@@ -166,6 +167,7 @@ export default function ContactPage({settings}: {settings?: CompanySettings | nu
 
   return (
     <div className="contact-page">
+      <Watermark id="contact_page" />
       <motion.section
         className="contact-page__hero"
         aria-labelledby="contact-title"

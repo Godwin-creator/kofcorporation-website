@@ -7,6 +7,7 @@
   padding: 6rem 0;
   background-color: var(--color-bg);
   overflow: hidden;
+  position: relative;
 }
 
 .partners__inner {

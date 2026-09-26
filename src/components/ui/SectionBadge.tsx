@@ -1,7 +1,8 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useSectionContext } from "@/contexts/SectionContext";
 import "./SectionBadge.css";
 
 interface SectionBadgeProps {
@@ -11,7 +12,8 @@ interface SectionBadgeProps {
 
 export default function SectionBadge({ title, sectionId }: SectionBadgeProps) {
   const badgeRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const { activeSection, setActiveSection } = useSectionContext();
+  const isVisible = activeSection === sectionId;
 
   useEffect(() => {
     const section = document.getElementById(sectionId);
@@ -19,26 +21,28 @@ export default function SectionBadge({ title, sectionId }: SectionBadgeProps) {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        setIsVisible(entries[0].isIntersecting);
+        if (entries[0].isIntersecting) {
+          setActiveSection(sectionId);
+        }
       },
-      { threshold: 0.15, rootMargin: "-10% 0px -10% 0px" }
+      { threshold: 0.35, rootMargin: "-30% 0px -30% 0px" }
     );
 
     observer.observe(section);
     return () => observer.disconnect();
-  }, [sectionId]);
+  }, [sectionId, setActiveSection]);
 
   return (
     <motion.div
       ref={badgeRef}
       className={`section-badge${isVisible ? " visible" : ""}`}
       data-section={sectionId}
-      initial={{ x: "-100%", opacity: 0 }}
+      initial={{ x: -40, opacity: 0 }}
       animate={{
-        x: isVisible ? 0 : "-100%",
+        x: isVisible ? 0 : -40,
         opacity: isVisible ? 1 : 0,
       }}
-      transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
     >
       <span className="section-badge__text">{title}</span>
     </motion.div>

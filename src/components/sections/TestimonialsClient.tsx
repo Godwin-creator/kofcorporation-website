@@ -6,7 +6,7 @@ import {AnimatePresence, motion, useInView} from 'framer-motion'
 import {ChevronLeft, ChevronRight, Star} from 'lucide-react'
 import './Testimonials.css'
 import EmptyState from '@/components/ui/EmptyState'
-import SectionBadge from '@/components/ui/SectionBadge'
+import Watermark from '@/components/ui/Watermark'
 
 export interface TestimonialItem {id: string; quote: string; name: string; role: string; rating: number}
 const slideVariants = {enter: (direction: number) => ({opacity: 0, x: direction > 0 ? 56 : -56}), center: {opacity: 1, x: 0, transition: {duration: 0.45, ease: 'easeOut' as const}}, exit: (direction: number) => ({opacity: 0, x: direction > 0 ? -56 : 56, transition: {duration: 0.3, ease: 'easeIn' as const}})}
@@ -57,7 +57,7 @@ export default function TestimonialsClient({testimonials}: {testimonials: Testim
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      <SectionBadge title="Témoignages" sectionId="testimonials" />
+      <Watermark id="testimonials" />
       <div className="testimonials__inner">
         <header className="testimonials__header">
           <h2 id="testimonials-title" className="testimonials__title">{t('title')}</h2>

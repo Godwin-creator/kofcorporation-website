@@ -6,7 +6,7 @@ import { motion, useInView } from "framer-motion";
 import { CalendarCheck, Mail } from "lucide-react";
 import "./CallToAction.css";
 import { Link } from "@/i18n/navigation";
-import SectionBadge from "@/components/ui/SectionBadge";
+import Watermark from "@/components/ui/Watermark";
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 40 },
@@ -32,7 +32,7 @@ export default function CallToAction() {
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
     >
-      <SectionBadge title="联系我们" sectionId="cta" />
+      <Watermark id="cta" />
       <div className="call-to-action__inner">
         <h2 id="call-to-action-title" className="call-to-action__title">
           {t("title")}

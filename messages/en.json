@@ -154,6 +154,24 @@
     "home": "Back to home",
     "contact": "Contact us"
   },
+  "watermarks": {
+    "hero": "KOF",
+    "about": "About us",
+    "services": "Services",
+    "stats": "Numbers",
+    "projects": "Projects",
+    "testimonials": "Testimonials",
+    "partners": "Partners",
+    "cta": "Contact",
+    "contact_page": "Contact",
+    "about_page": "About us",
+    "realisations_page": "Projects",
+    "services_page": "Services",
+    "web_dev": "Web",
+    "mobile_dev": "Mobile",
+    "management": "Software",
+    "legal": "Legal"
+  },
   "contact": {
     "eyebrow": "Contact us",
     "headline": "Let's talk about \"WHAT\"",

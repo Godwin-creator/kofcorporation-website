@@ -132,6 +132,28 @@ section {
   border-radius: 0;
 }
 
+/* Watermark - vertical text along section edges */
+/* Watermark - vertical text along left edge */
+.section-watermark {
+  position: absolute;
+  left: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-family: 'Story Script', cursive;
+  font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--color-text-muted);
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+  white-space: nowrap;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+}
+
 /* Links */
 a {
   color: var(--color-accent);

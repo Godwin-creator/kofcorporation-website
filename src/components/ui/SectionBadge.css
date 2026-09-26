@@ -1,82 +1,21 @@
-/* Floating Section Badge - Fixed Left Side */
-.section-badge {
-  position: fixed;
-  left: 0;
+/* Section watermark - vertical text along right edge, matching footer style */
+.section-watermark {
+  position: absolute;
+  right: 0;
   top: 50%;
-  transform: translateY(-50%);
-  background: linear-gradient(135deg, #0ca8c1 0%, #0891b2 100%);
-  color: #ffffff;
-  padding: 1.25rem 0.5rem;
+  transform: translateY(-50%) rotate(180deg);
   writing-mode: vertical-rl;
   text-orientation: mixed;
-  font-family: var(--font-heading);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  box-shadow: 2px 0 16px rgba(12, 168, 193, 0.25), 1px 0 4px rgba(0, 0, 0, 0.1);
-  z-index: 9999;
-  cursor: pointer;
-  min-height: 120px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-right: 3px solid rgba(255, 255, 255, 0.2);
-  opacity: 0;
-}
-
-.section-badge.visible {
-  opacity: 1;
-}
-
-.section-badge:hover {
-  background: linear-gradient(135deg, #0891b2 0%, #0ca8c1 100%);
-  box-shadow: 2px 0 24px rgba(12, 168, 193, 0.4), 1px 0 8px rgba(0, 0, 0, 0.15);
-}
-
-.section-badge__text {
+  font-family: 'Story Script', cursive;
+  font-size: clamp(3.5rem, 12vw, 10rem);
+  font-weight: 40;
+  font-style: normal;
+  color: rgba(12, 172, 232, 0.06);
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
   white-space: nowrap;
-  padding: 0.25rem;
-  display: block;
-}
-
-/* Mobile: bottom fixed badge */
-@media (max-width: 767px) {
-  .section-badge {
-    position: fixed;
-    left: 50%;
-    bottom: 0;
-    right: auto;
-    top: auto;
-    transform: translateX(-50%);
-    writing-mode: horizontal-tb;
-    flex-direction: row;
-    padding: 0.75rem 1.25rem;
-    border-right: none;
-    border-top: 3px solid rgba(255, 255, 255, 0.3);
-    min-height: auto;
-    width: 90%;
-    max-width: 360px;
-    justify-content: center;
-    gap: 0.5rem;
-    border-radius: 12px 12px 0 0;
-  }
-
-  .section-badge__text {
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-  }
-}
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .section-badge {
-    transition: none;
-  }
-}
-
-/* Hide eyebrow text when SectionBadge is present */
-.section-badge + * header .section__eyebrow,
-.section-badge ~ header .section__eyebrow {
-  display: none;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  line-height: 1;
 }

@@ -154,6 +154,24 @@
     "home": "Retour à l'accueil",
     "contact": "Nous contacter"
   },
+  "watermarks": {
+    "hero": "KOF",
+    "about": "À propos",
+    "services": "Services",
+    "stats": "Chiffres",
+    "projects": "Réalisations",
+    "testimonials": "Témoignages",
+    "partners": "Partenaires",
+    "cta": "Contact",
+    "contact_page": "Contact",
+    "about_page": "Qui sommes-nous",
+    "realisations_page": "Réalisations",
+    "services_page": "Services",
+    "web_dev": "Web",
+    "mobile_dev": "Mobile",
+    "management": "Gestion",
+    "legal": "Mentions"
+  },
   "contact": {
     "eyebrow": "Nous contacter",
     "headline": "Parlons de \"QUOI\"",

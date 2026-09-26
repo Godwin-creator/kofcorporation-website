@@ -1,6 +1,7 @@
 .projects {
   width: 100%;
   background-color: var(--color-bg);
+  position: relative;
 }
 
 .projects__inner {

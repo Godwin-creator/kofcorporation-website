@@ -3,6 +3,7 @@
   overflow: hidden;
   background-color: var(--color-bg);
   color: var(--color-text);
+  position: relative;
 }
 
 .testimonials__inner {

@@ -10,6 +10,7 @@ import type {SanityProject, ProjectCategory} from "@/types/sanity"
 import ProjectModal from "@/components/ui/ProjectModal"
 import EmptyState from "@/components/ui/EmptyState"
 import "./RealisationsPage.css"
+import Watermark from "@/components/ui/Watermark";
 
 export interface RealisationItem {
   project: SanityProject
@@ -39,6 +40,7 @@ export default function RealisationsClient({projects}: {projects: RealisationIte
 
   return <>
     <div className="realisations-page">
+      <Watermark id="realisations_page" />
       <motion.section className="realisations-page__hero" aria-labelledby="realisations-title" initial={{opacity: 0, y: 24}} animate={{opacity: 1, y: 0}} transition={{duration: 0.6, ease: "easeOut"}}>
         <div className="realisations-page__hero-inner"><p className="realisations-page__eyebrow">{t("projectsEyebrow")}</p><h1 id="realisations-title"><span className="realisations-page__hero-title-line">{t("projectsTitle")}</span><br /><span className="realisations-page__hero-title-line realisations-page__hero-title-highlight">{t("projectsHighlight")}</span></h1><p>{tProjects("hero.description")}</p><Link href="#projets" className="realisations-page__hero-link">{tProjects("hero.cta")}<ArrowUpRight size={18} strokeWidth={1.8} aria-hidden="true" /></Link></div>
       </motion.section>

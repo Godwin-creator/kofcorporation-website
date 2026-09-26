@@ -6,6 +6,7 @@ import { NextIntlClientProvider } from "next-intl";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
+import { SectionProvider } from "@/contexts/SectionContext";
 import { routing } from "@/i18n/routing";
 
 const siteUrl =
@@ -63,12 +64,14 @@ async function LocaleLayout({
 
   return (
     <NextIntlClientProvider messages={messages}>
-      <div style={{paddingTop: 64, minHeight: "100dvh", display: "flex", flexDirection: "column"}}>
-        <Header />
-        <main style={{flex: 1}}>{children}</main>
-        <Footer />
-        <BackToTop />
-      </div>
+      <SectionProvider>
+        <div style={{paddingTop: 64, minHeight: "100dvh", display: "flex", flexDirection: "column"}}>
+          <Header />
+          <main style={{flex: 1}}>{children}</main>
+          <Footer />
+          <BackToTop />
+        </div>
+      </SectionProvider>
     </NextIntlClientProvider>
   );
 }

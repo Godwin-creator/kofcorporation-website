@@ -1,6 +1,7 @@
 .about-page {
   background-color: var(--color-bg);
   color: var(--color-text);
+  position: relative;
 }
 
 .about-page__hero {
