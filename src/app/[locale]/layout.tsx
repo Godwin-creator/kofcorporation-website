@@ -10,7 +10,7 @@ import { SectionProvider } from "@/contexts/SectionContext";
 import { routing } from "@/i18n/routing";
 import dynamic from "next/dynamic";
 
-const Cursor = dynamic(() => import("@/components/ui/Cursor"), {
+const AnimatedCursor = dynamic(() => import("@/components/ui/AnimatedCursor"), {
   loading: () => null,
 });
 
@@ -76,7 +76,7 @@ async function LocaleLayout({
           <Footer />
           <BackToTop />
         </div>
-        <Cursor />
+        <AnimatedCursor />
       </SectionProvider>
     </NextIntlClientProvider>
   );

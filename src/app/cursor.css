@@ -1,0 +1,50 @@
+/* ============================================================
+   Cursor — hide native cursor globally
+   ============================================================ */
+
+*,
+*::before,
+*::after,
+html,
+body,
+a,
+button,
+input,
+textarea,
+select,
+[role="button"] {
+  cursor: none !important;
+}
+
+/* Allow the native cursor back on touch devices and reduced-motion */
+@media (pointer: coarse) {
+  *,
+  *::before,
+  *::after,
+  html,
+  body,
+  a,
+  button,
+  input,
+  textarea,
+  select,
+  [role="button"] {
+    cursor: auto !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after,
+  html,
+  body,
+  a,
+  button,
+  input,
+  textarea,
+  select,
+  [role="button"] {
+    cursor: auto !important;
+  }
+}
