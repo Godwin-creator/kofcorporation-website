@@ -8,6 +8,11 @@ import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import { SectionProvider } from "@/contexts/SectionContext";
 import { routing } from "@/i18n/routing";
+import dynamic from "next/dynamic";
+
+const Cursor = dynamic(() => import("@/components/ui/Cursor"), {
+  loading: () => null,
+});
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || 'https://kofcorporation-website.vercel.app';
@@ -71,6 +76,7 @@ async function LocaleLayout({
           <Footer />
           <BackToTop />
         </div>
+        <Cursor />
       </SectionProvider>
     </NextIntlClientProvider>
   );
