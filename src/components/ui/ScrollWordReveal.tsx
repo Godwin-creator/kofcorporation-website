@@ -20,7 +20,7 @@ export default function ScrollWordReveal({ textKey, className = "" }: ScrollWord
   const t = useTranslations("scrollReveal");
   const text = t(textKey);
   const words = text.split(" ");
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLParagraphElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.4 });
   const [visibleCount, setVisibleCount] = useState(0);
 

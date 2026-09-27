@@ -9,6 +9,7 @@ import {
   Sun,
   Moon,
   Menu,
+  ArrowRight,
   X,
   ChevronDown,
   Globe,
@@ -240,10 +241,10 @@ export default function Header() {
                           >
                             <div className="header__mega-menu-grid">
                               {[
-                                { id: "web", icon: Code2, titleKey: "servicesSub.web.title", descKey: "servicesSub.web.desc", href: "/services/developpement-web" },
-                                { id: "mobile", icon: Smartphone, titleKey: "servicesSub.mobile.title", descKey: "servicesSub.mobile.desc", href: "/services/applications-mobiles" },
-                                { id: "management", icon: Monitor, titleKey: "servicesSub.management.title", descKey: "servicesSub.management.desc", href: "/services/logiciels-gestion" },
-                                { id: "training", icon: GraduationCap, titleKey: "servicesSub.training.title", descKey: "servicesSub.training.desc", href: "https://academy.kofcorporation.com/" },
+                                { id: "web", icon: Code2, titleKey: "servicesSub.web.title", href: "/services/developpement-web" },
+                                { id: "mobile", icon: Smartphone, titleKey: "servicesSub.mobile.title", href: "/services/applications-mobiles" },
+                                { id: "management", icon: Monitor, titleKey: "servicesSub.management.title", href: "/services/logiciels-gestion" },
+                                { id: "training", icon: GraduationCap, titleKey: "servicesSub.training.title", href: "https://academy.kofcorporation.com/" },
                               ].map((svc) => {
                                 const Icon = svc.icon;
                                 return (
@@ -251,7 +252,6 @@ export default function Header() {
                                     <div className="header__mega-card-icon"><Icon size={22} strokeWidth={1.7} /></div>
                                     <div>
                                       <p className="header__mega-card-title">{navT(svc.titleKey)}</p>
-                                      <p className="header__mega-card-desc">{navT(svc.descKey)}</p>
                                     </div>
                                     <ArrowRight size={15} strokeWidth={2} className="header__mega-card-arrow" aria-hidden="true" />
                                   </a>

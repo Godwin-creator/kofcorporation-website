@@ -8,7 +8,7 @@ const dotVariants = {
     transition: {
       duration: 1.2,
       repeat: Infinity,
-      ease: "easeInOut",
+      ease: "easeInOut" as const,
     },
   },
 };
