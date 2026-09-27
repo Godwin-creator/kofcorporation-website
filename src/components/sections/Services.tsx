@@ -1,13 +1,12 @@
 import {getLocale} from 'next-intl/server'
-import {client} from '@/lib/sanity'
-import {SERVICES_QUERY} from '@/lib/queries'
+import {fetchServices} from '@/lib/queries'
 import type {SanityService} from '@/types/sanity'
 import ServicesClient, {type ServiceItem} from './ServicesClient'
 
 export default async function Services() {
   const locale = await getLocale()
-  const services = await client.fetch<SanityService[]>(SERVICES_QUERY, {}, {next: {tags: ['services']}}).catch(() => [])
-  const items: ServiceItem[] = services.map((service) => ({
+  const services = (await fetchServices()) ?? []
+  const items: ServiceItem[] = (services as SanityService[]).map((service) => ({
         id: service._id,
         title: locale === 'en' ? service.titleEn : service.title,
         summary: locale === 'en' ? service.summaryEn : service.summary,

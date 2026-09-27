@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import BusinessSoftwareService from "@/components/pages/services/BusinessSoftwareService";
-import {client} from "@/lib/sanity";
-import {SERVICES_QUERY} from "@/lib/queries";
-import type {SanityService} from "@/types/sanity";
+import { fetchServices } from "@/lib/queries";
+import type { SanityService } from "@/types/sanity";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -13,7 +12,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function BusinessSoftwarePage() {
-  const services = await client.fetch<SanityService[]>(SERVICES_QUERY, {}, {next: {tags: ["services"]}}).catch(() => []);
-  const service = services.find((item) => item.slug?.current === "logiciels-gestion");
+  const services = await fetchServices();
+  const service = services?.find(
+    (item) => item.slug?.current === "logiciels-gestion"
+  );
   return <BusinessSoftwareService technologies={service?.stack} />;
 }

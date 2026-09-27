@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import ContactPage from "@/components/pages/ContactPage";
-import {client} from "@/lib/sanity";
-import {SETTINGS_QUERY} from "@/lib/queries";
-import type {CompanySettings} from "@/types/sanity";
+import { fetchSettings } from "@/lib/queries";
+import type { CompanySettings } from "@/types/sanity";
 
 export const metadata: Metadata = {
   title: "Contact - KofCorporation",
@@ -11,6 +10,6 @@ export const metadata: Metadata = {
 };
 
 export default async function ContactRoute() {
-  const settings = await client.fetch<CompanySettings | null>(SETTINGS_QUERY, {}, {next: {tags: ["settings"]}}).catch(() => null);
+  const settings = await fetchSettings();
   return <ContactPage settings={settings} />;
 }

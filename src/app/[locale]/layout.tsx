@@ -9,6 +9,7 @@ import BackToTop from "@/components/BackToTop";
 import { SectionProvider } from "@/contexts/SectionContext";
 import { routing } from "@/i18n/routing";
 import dynamic from "next/dynamic";
+import { SanityLive } from "@/sanity/lib/live";
 
 const AnimatedCursor = dynamic(() => import("@/components/ui/AnimatedCursor"), {
   loading: () => null,
@@ -77,6 +78,7 @@ async function LocaleLayout({
           <BackToTop />
         </div>
         <AnimatedCursor />
+        <SanityLive />
       </SectionProvider>
     </NextIntlClientProvider>
   );
