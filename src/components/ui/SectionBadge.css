@@ -1,0 +1,21 @@
+/* Section watermark - vertical text along right edge, matching footer style */
+.section-watermark {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%) rotate(180deg);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-family: 'Story Script', cursive;
+  font-size: clamp(3.5rem, 12vw, 10rem);
+  font-weight: 40;
+  font-style: normal;
+  color: rgba(12, 172, 232, 0.06);
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+  white-space: nowrap;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}

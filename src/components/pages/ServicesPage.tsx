@@ -14,6 +14,7 @@ import type { LucideIcon } from "lucide-react";
 import CallToAction from "@/components/sections/CallToAction";
 import "./ServicesPage.css";
 import { Link } from "@/i18n/navigation";
+import Watermark from "@/components/ui/Watermark";
 
 interface ServiceDetail {
   id: string;
@@ -100,6 +101,7 @@ export default function ServicesPage() {
   return (
     <>
       <div className="services-page">
+        <Watermark id="services_page" />
         <motion.section
           className="services-page__hero"
           aria-labelledby="services-page-title"

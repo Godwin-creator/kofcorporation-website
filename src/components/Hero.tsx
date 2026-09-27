@@ -9,6 +9,7 @@ import { Link } from "@/i18n/navigation";
 import HeroImageSlider from "@/components/ui/HeroImageSlider";
 import type {CompanySettings} from "@/types/sanity";
 
+
 const SLOGANS = {
   fr: [
     { lineOne: "Votre vision", lineTwo: "notre code" },

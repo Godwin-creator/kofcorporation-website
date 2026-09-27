@@ -6,6 +6,7 @@ import { motion, useInView } from "framer-motion";
 import { CalendarCheck, Mail } from "lucide-react";
 import "./CallToAction.css";
 import { Link } from "@/i18n/navigation";
+import Watermark from "@/components/ui/Watermark";
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 40 },
@@ -22,14 +23,16 @@ export default function CallToAction() {
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
-    <motion.section 
+    <motion.section
       ref={sectionRef}
-      className="call-to-action" 
+      id="cta"
+      className="call-to-action"
       aria-labelledby="call-to-action-title"
       variants={sectionVariants}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
     >
+      <Watermark id="cta" />
       <div className="call-to-action__inner">
         <h2 id="call-to-action-title" className="call-to-action__title">
           {t("title")}

@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 import "./AboutPage.css";
 import { Link } from "@/i18n/navigation";
+import Watermark from "@/components/ui/Watermark";
+import ScrollWordReveal from "@/components/ui/ScrollWordReveal";
 
 const VALUES = [
   {
@@ -70,6 +72,7 @@ export default function AboutPage({teamPhotoUrl, teamPhotoAlt}: {teamPhotoUrl?: 
   return (
     <>
       <div className="about-page">
+        <Watermark id="about_page" />
         <motion.section
           className="about-page__hero"
           aria-labelledby="about-title"
@@ -122,6 +125,8 @@ export default function AboutPage({teamPhotoUrl, teamPhotoAlt}: {teamPhotoUrl?: 
             </div>
           </div>
         </motion.section>
+
+        <ScrollWordReveal textKey="aboutStatement" />
 
         <section className="about-page__values" aria-labelledby="values-title">
           <div className="about-page__container">

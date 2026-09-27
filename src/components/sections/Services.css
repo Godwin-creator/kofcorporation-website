@@ -1,6 +1,7 @@
 .services {
   width: 100%;
   background-color: var(--color-bg);
+  position: relative;
 }
 
 .services__inner {

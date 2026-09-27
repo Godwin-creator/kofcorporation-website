@@ -7,6 +7,7 @@ import CallToAction from "@/components/sections/CallToAction";
 import "./BusinessSoftwareService.css";
 import { Link } from "@/i18n/navigation";
 import EmptyState from "@/components/ui/EmptyState";
+import Watermark from "@/components/ui/Watermark";
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 24 },
@@ -55,6 +56,7 @@ export default function BusinessSoftwareService({technologies = []}: {technologi
   return (
     <>
       <div className="business-software-service">
+        <Watermark id="management" />
         <motion.section
           className="business-software-service__hero"
           aria-labelledby="business-software-title"

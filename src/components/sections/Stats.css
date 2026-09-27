@@ -3,6 +3,7 @@
   background-color: var(--color-bg);
   color: var(--color-text);
   overflow: hidden;
+  position: relative;
 }
 
 .stats__inner {

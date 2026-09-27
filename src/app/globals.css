@@ -4,7 +4,7 @@
    ============================================================ */
 
 /* 1. GOOGLE FONTS */
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Story+Script&display=swap');
 
 /* 2. CSS CUSTOM PROPERTIES - Light Mode */
 :root {
@@ -130,6 +130,40 @@ h6 {
 /* Sections - angles droits, pas de border-radius */
 section {
   border-radius: 0;
+}
+
+/* Watermark - vertical text along left edge */
+.section-watermark {
+  position: absolute;
+  left: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-family: 'Story Script', cursive;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--color-text-muted);
+  opacity: 0.18;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+  white-space: nowrap;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  animation: watermarkIn 0.8s ease-out both;
+}
+
+@keyframes watermarkIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50%) translateX(-8px);
+  }
+  to {
+    opacity: 0.18;
+    transform: translateY(-50%) translateX(0);
+  }
 }
 
 /* Links */

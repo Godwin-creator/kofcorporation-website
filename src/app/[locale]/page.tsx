@@ -1,5 +1,6 @@
 import Hero from "@/components/Hero";
 import VideoPresentation from "@/components/sections/VideoPresentation";
+import ScrollWordReveal from "@/components/ui/ScrollWordReveal";
 import Partners from "@/components/Partners";
 import SplashScreen from "@/components/SplashScreen";
 import Services from "@/components/sections/Services";
@@ -20,6 +21,7 @@ export default async function Home() {
       {ENABLE_SPLASH && <SplashScreen />}
       <Hero settings={settings} />
       <VideoPresentation presentationVideoUrl={settings?.presentationVideoUrl} presentationVideoFileUrl={settings?.presentationVideoFileUrl} />
+      <ScrollWordReveal textKey="homeStatement" />
       <Services />
       <Stats />
       <Projects />
