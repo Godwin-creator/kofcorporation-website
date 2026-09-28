@@ -44,7 +44,7 @@ export default function RootLayout({children}: Readonly<{children: React.ReactNo
       <head>
         <InlineScript html={themeInitScript} />
       </head>
-      <body>{children}</body>
+      <body suppressHydrationWarning>{children}</body>
     </html>
   )
 }
