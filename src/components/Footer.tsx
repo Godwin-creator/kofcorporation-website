@@ -7,7 +7,6 @@ import {
 } from "lucide-react";
 import "./Footer.css";
 import { Link } from "@/i18n/navigation";
-import { Link } from "@/i18n/navigation";
 import { fetchSettings } from "@/lib/queries";
 import type {CompanySettings} from "@/types/sanity";
 
