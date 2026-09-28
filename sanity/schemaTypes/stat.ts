@@ -35,7 +35,7 @@ export const stat = defineType({
       type: 'string',
       description: 'Choisissez l\'icône qui représente le mieux ce chiffre',
       options: {
-        list: iconOptions,
+        list: [...iconOptions],
         layout: 'radio',
       },
     }),

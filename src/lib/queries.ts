@@ -1,5 +1,6 @@
 import { defineQuery } from "next-sanity";
 import { sanityFetch } from "@/sanity/lib/live";
+import type { CompanySettings, SanityProject, SanityTestimonial, SanityPartner, SanityService } from "@/types/sanity";
 
 // ─────────────────────────────────────────────
 // Queries (GROQ strings) — imported by components
@@ -64,30 +65,30 @@ export async function fetchStats() {
 
 export async function fetchProjects() {
   const { data } = await sanityFetch({ query: PROJECTS_QUERY });
-  return data as Awaited<ReturnType<typeof sanityFetch>>["data"] | undefined;
+  return data as SanityProject[] | undefined;
 }
 
 export async function fetchFeaturedProjects() {
   const { data } = await sanityFetch({ query: FEATURED_PROJECTS_QUERY });
-  return data as Awaited<ReturnType<typeof sanityFetch>>["data"] | undefined;
+  return data as SanityProject[] | undefined;
 }
 
 export async function fetchTestimonials() {
   const { data } = await sanityFetch({ query: TESTIMONIALS_QUERY });
-  return data as Awaited<ReturnType<typeof sanityFetch>>["data"] | undefined;
+  return data as SanityTestimonial[] | undefined;
 }
 
 export async function fetchPartners() {
   const { data } = await sanityFetch({ query: PARTNERS_QUERY });
-  return data as Awaited<ReturnType<typeof sanityFetch>>["data"] | undefined;
+  return data as SanityPartner[] | undefined;
 }
 
 export async function fetchServices() {
   const { data } = await sanityFetch({ query: SERVICES_QUERY });
-  return data as Awaited<ReturnType<typeof sanityFetch>>["data"] | undefined;
+  return data as SanityService[] | undefined;
 }
 
 export async function fetchSettings() {
   const { data } = await sanityFetch({ query: SETTINGS_QUERY });
-  return data as Awaited<ReturnType<typeof sanityFetch>>["data"] | undefined;
+  return data as CompanySettings | undefined;
 }

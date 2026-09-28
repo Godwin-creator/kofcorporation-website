@@ -73,7 +73,7 @@ export const service = defineType({
       type: 'string',
       description: "Icône représentant ce service — choisissez celle qui correspond le mieux",
       options: {
-        list: iconOptions,
+        list: [...iconOptions],
         layout: 'radio',
       },
     }),
