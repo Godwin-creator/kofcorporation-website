@@ -476,14 +476,26 @@ export default function Header() {
                         initial={{ opacity: 0, x: 40 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.05 * i, duration: 0.25 }}
+                        className="mobile-nav__item--has-children"
                       >
-                        <button
-                          type="button"
-                          className="mobile-nav__link mobile-nav__link--chevron"
-                          onClick={() => setMobileServicesOpen((prev) => !prev)}
-                          aria-expanded={mobileServicesOpen}
+                        <Link
+                          href={item.href}
+                          className={`mobile-nav__link${pathname === item.href ? " mobile-nav__link--active" : ""}`}
+                          onClick={() => setMobileOpen(false)}
                         >
                           {navT(item.key)}
+                        </Link>
+                        <button
+                          type="button"
+                          className="mobile-nav__chevron-btn"
+                          aria-label={mobileServicesOpen ? t("collapseServices") : t("expandServices")}
+                          aria-expanded={mobileServicesOpen}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            setMobileServicesOpen((prev) => !prev);
+                          }}
+                        >
                           <ChevronDown size={16} strokeWidth={2} className={`mobile-nav__chevron ${mobileServicesOpen ? "mobile-nav__chevron--open" : ""}`} />
                         </button>
                         <AnimatePresence>

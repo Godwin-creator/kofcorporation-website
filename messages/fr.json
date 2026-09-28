@@ -21,6 +21,8 @@
     "bookMeeting": "Prendre RDV",
     "openMenu": "Ouvrir le menu",
     "closeMenu": "Fermer le menu",
+    "expandServices": "Développer les services",
+    "collapseServices": "Réduire les services",
     "homeAria": "Accueil KofCorporation"
   },
   "hero": {

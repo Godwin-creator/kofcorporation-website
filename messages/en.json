@@ -21,6 +21,8 @@
     "bookMeeting": "Book a meeting",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
+    "expandServices": "Expand services",
+    "collapseServices": "Collapse services",
     "homeAria": "KofCorporation home"
   },
   "hero": {
