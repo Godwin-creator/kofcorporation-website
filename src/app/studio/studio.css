@@ -1,0 +1,34 @@
+/* ============================================================
+   Studio Cursor Reset
+   Ensures the system/default cursor is restored on /studio
+   ============================================================ */
+
+html,
+body,
+#sanity,
+#sanity *,
+#sanity *::before,
+#sanity *::after,
+[data-sanity],
+[data-sanity] * {
+  cursor: auto !important;
+}
+
+#sanity a,
+#sanity button,
+#sanity [role="button"],
+#sanity input[type="button"],
+#sanity input[type="submit"],
+[data-sanity] a,
+[data-sanity] button,
+[data-sanity] [role="button"] {
+  cursor: pointer !important;
+}
+
+#sanity input,
+#sanity textarea,
+#sanity [contenteditable="true"],
+[data-sanity] input,
+[data-sanity] textarea {
+  cursor: text !important;
+}
