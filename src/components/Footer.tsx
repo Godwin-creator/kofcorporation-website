@@ -7,15 +7,14 @@ import {
 } from "lucide-react";
 import "./Footer.css";
 import { Link } from "@/i18n/navigation";
-import {client} from "@/lib/sanity";
-import {SETTINGS_QUERY} from "@/lib/queries";
+import { fetchSettings } from "@/lib/queries";
 import type {CompanySettings} from "@/types/sanity";
 
 const currentYear = new Date().getFullYear();
 
 export default async function Footer() {
   const t = await getTranslations("footer");
-  const settings = await client.fetch<CompanySettings | null>(SETTINGS_QUERY, {}, {next: {tags: ["settings"]}}).catch(() => null);
+  const settings = await fetchSettings();
   const phones = settings?.phone?.length ? settings.phone : ["+228 70 44 16 36", "+228 93 55 47 40"];
   const email = settings?.email || "contact@kofcorporation.com";
   const address = settings?.address || t("address");

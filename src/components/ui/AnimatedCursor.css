@@ -1,0 +1,28 @@
+/* ============================================================
+   Animated Cursor
+   ============================================================ */
+
+.acursor {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+}
+
+.acursor__dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: #ffffff;
+  border-radius: 50%;
+}
+
+.acursor__ring {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid #ffffff;
+  border-radius: 50%;
+  background-color: transparent;
+}

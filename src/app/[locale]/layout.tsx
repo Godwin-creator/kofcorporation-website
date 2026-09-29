@@ -8,6 +8,12 @@ import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import { SectionProvider } from "@/contexts/SectionContext";
 import { routing } from "@/i18n/routing";
+import dynamic from "next/dynamic";
+import { SanityLive } from "@/sanity/lib/live";
+
+const AnimatedCursor = dynamic(() => import("@/components/ui/AnimatedCursor"), {
+  loading: () => null,
+});
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || 'https://kofcorporation-website.vercel.app';
@@ -71,6 +77,8 @@ async function LocaleLayout({
           <Footer />
           <BackToTop />
         </div>
+        <AnimatedCursor />
+        <SanityLive />
       </SectionProvider>
     </NextIntlClientProvider>
   );
