@@ -6,7 +6,7 @@ export const structure: StructureResolver = (S) =>
     .items([
       // SINGLETON — toujours en premier
       S.listItem()
-        .title('⚙️ Paramètres de l\'entreprise')
+        .title('Paramètres de l\'entreprise')
         .id('companySettings')
         .child(
           S.document()
@@ -18,27 +18,27 @@ export const structure: StructureResolver = (S) =>
 
       // CONTENU DYNAMIQUE
       S.listItem()
-        .title('📊 Chiffres clés')
+        .title('Chiffres clés')
         .schemaType('stat')
         .child(S.documentTypeList('stat').title('Chiffres clés')),
 
       S.listItem()
-        .title('🚀 Projets réalisés')
+        .title('Projets réalisés')
         .schemaType('project')
         .child(S.documentTypeList('project').title('Projets')),
 
       S.listItem()
-        .title('💬 Témoignages')
+        .title('Témoignages')
         .schemaType('testimonial')
         .child(S.documentTypeList('testimonial').title('Témoignages')),
 
       S.listItem()
-        .title('🤝 Partenaires')
+        .title('Partenaires')
         .schemaType('partner')
         .child(S.documentTypeList('partner').title('Partenaires')),
 
       S.listItem()
-        .title('🛠️ Services')
+        .title('Services')
         .schemaType('service')
         .child(S.documentTypeList('service').title('Services')),
     ])
