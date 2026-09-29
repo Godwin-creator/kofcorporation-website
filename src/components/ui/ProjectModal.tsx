@@ -53,12 +53,32 @@ export default function ProjectModal({project, imageUrl, isOpen, onClose}: Proje
         <button ref={closeButtonRef} className="project-modal__close" type="button" onClick={onClose} aria-label={t("close")}><X size={22} aria-hidden="true" /></button>
         {imageUrl && <div className="project-modal__image" style={{backgroundImage: `url(${imageUrl})`}} aria-label={project.image?.alt || project.title} />}
         <div className="project-modal__body">
-          <p className="project-modal__category">{project.category}</p>
+          <div className="project-modal__categories">
+            {(project.categories?.length ? project.categories : (project.category ? [project.category] : [])).map(c => (
+              <span key={c} className="project-modal__category">{c}</span>
+            ))}
+          </div>
           <h2 id="project-modal-title">{project.title}</h2>
-          <dl className="project-modal__meta"><div><dt>{t("client")}</dt><dd>{project.client}</dd></div><div><dt>{t("sector")}</dt><dd>{project.sector}</dd></div></dl>
+          <dl className="project-modal__meta">
+            <div><dt>{t("client")}</dt><dd>{project.client}</dd></div>
+            <div><dt>{t("sector")}</dt><dd>{project.sector}</dd></div>
+            {project.year && <div><dt>Année</dt><dd>{project.year}</dd></div>}
+            {project.duration && <div><dt>Durée</dt><dd>{locale === 'en' ? project.durationEn ?? project.duration : project.duration}</dd></div>}
+          </dl>
           <p className="project-modal__description">{locale === "en" ? project.descriptionEn ?? project.description : project.description}</p>
-          <ul className="project-modal__tags" aria-label={t("technologies")}>{project.technologies.map((technology) => <li key={technology}>{technology}</li>)}</ul>
-          {project.url && <a className="project-modal__link" href={project.url} target="_blank" rel="noopener noreferrer">{t("visit")} <ExternalLink size={17} aria-hidden="true" /></a>}
+          <ul className="project-modal__tags" aria-label={t("technologies")}>{project.technologies?.map((technology) => <li key={technology}>{technology}</li>)}</ul>
+          
+          <div className="project-modal__links">
+            {project.links && project.links.length > 0 ? (
+              project.links.map(link => (
+                <a key={link._key} className="project-modal__link" href={link.url} target="_blank" rel="noopener noreferrer">
+                  {link.label} <ExternalLink size={17} aria-hidden="true" />
+                </a>
+              ))
+            ) : project.url ? (
+              <a className="project-modal__link" href={project.url} target="_blank" rel="noopener noreferrer">{t("visit")} <ExternalLink size={17} aria-hidden="true" /></a>
+            ) : null}
+          </div>
         </div>
       </motion.div>
     </motion.div>}

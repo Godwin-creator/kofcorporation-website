@@ -13,18 +13,18 @@ export const STATS_QUERY = defineQuery(`
 export const PROJECTS_QUERY = defineQuery(`
   *[_type == "project" && (status == "published" || !defined(status))]
     | order(publishedAt desc, order asc) {
-      _id, title, slug, category, client, sector, description, descriptionEn,
-      shortDescription, shortDescriptionEn, technologies, image, url, featured,
-      publishedAt, status, order
+      _id, title, slug, category, categories, client, sector, description, descriptionEn,
+      shortDescription, shortDescriptionEn, technologies, image, gallery, url, links,
+      year, duration, durationEn, featured, publishedAt, status, order
     }
 `);
 
 export const FEATURED_PROJECTS_QUERY = defineQuery(`
   *[_type == "project" && featured == true && (status == "published" || !defined(status))]
     | order(publishedAt desc, order asc)[0...3] {
-      _id, title, slug, category, client, sector, description, descriptionEn,
-      shortDescription, shortDescriptionEn, technologies, image, url, featured,
-      publishedAt, status, order
+      _id, title, slug, category, categories, client, sector, description, descriptionEn,
+      shortDescription, shortDescriptionEn, technologies, image, gallery, url, links,
+      year, duration, durationEn, featured, publishedAt, status, order
     }
 `);
 
@@ -59,36 +59,71 @@ export const SETTINGS_QUERY = defineQuery(`
 // ─────────────────────────────────────────────
 
 export async function fetchStats() {
-  const { data } = await sanityFetch({ query: STATS_QUERY });
-  return data as { _id: string; value: string; label: string; labelEn?: string; icon?: string; order: number }[] | undefined;
+  try {
+    const { data } = await sanityFetch({ query: STATS_QUERY });
+    return data as { _id: string; value: string; label: string; labelEn?: string; icon?: string; order: number }[] | undefined;
+  } catch (error) {
+    console.error('[Sanity] fetchStats failed:', error);
+    return [];
+  }
 }
 
 export async function fetchProjects() {
-  const { data } = await sanityFetch({ query: PROJECTS_QUERY });
-  return data as SanityProject[] | undefined;
+  try {
+    const { data } = await sanityFetch({ query: PROJECTS_QUERY });
+    return data as SanityProject[] | undefined;
+  } catch (error) {
+    console.error('[Sanity] fetchProjects failed:', error);
+    return [];
+  }
 }
 
 export async function fetchFeaturedProjects() {
-  const { data } = await sanityFetch({ query: FEATURED_PROJECTS_QUERY });
-  return data as SanityProject[] | undefined;
+  try {
+    const { data } = await sanityFetch({ query: FEATURED_PROJECTS_QUERY });
+    return data as SanityProject[] | undefined;
+  } catch (error) {
+    console.error('[Sanity] fetchFeaturedProjects failed:', error);
+    return [];
+  }
 }
 
 export async function fetchTestimonials() {
-  const { data } = await sanityFetch({ query: TESTIMONIALS_QUERY });
-  return data as SanityTestimonial[] | undefined;
+  try {
+    const { data } = await sanityFetch({ query: TESTIMONIALS_QUERY });
+    return data as SanityTestimonial[] | undefined;
+  } catch (error) {
+    console.error('[Sanity] fetchTestimonials failed:', error);
+    return [];
+  }
 }
 
 export async function fetchPartners() {
-  const { data } = await sanityFetch({ query: PARTNERS_QUERY });
-  return data as SanityPartner[] | undefined;
+  try {
+    const { data } = await sanityFetch({ query: PARTNERS_QUERY });
+    return data as SanityPartner[] | undefined;
+  } catch (error) {
+    console.error('[Sanity] fetchPartners failed:', error);
+    return [];
+  }
 }
 
 export async function fetchServices() {
-  const { data } = await sanityFetch({ query: SERVICES_QUERY });
-  return data as SanityService[] | undefined;
+  try {
+    const { data } = await sanityFetch({ query: SERVICES_QUERY });
+    return data as SanityService[] | undefined;
+  } catch (error) {
+    console.error('[Sanity] fetchServices failed:', error);
+    return [];
+  }
 }
 
 export async function fetchSettings() {
-  const { data } = await sanityFetch({ query: SETTINGS_QUERY });
-  return data as CompanySettings | undefined;
+  try {
+    const { data } = await sanityFetch({ query: SETTINGS_QUERY });
+    return data as CompanySettings | undefined;
+  } catch (error) {
+    console.error('[Sanity] fetchSettings failed:', error);
+    return undefined;
+  }
 }

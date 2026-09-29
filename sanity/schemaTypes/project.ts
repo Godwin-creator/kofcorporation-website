@@ -20,11 +20,14 @@ export const project = defineType({
       options: {source: 'title'},
       validation: (Rule) => Rule.required().error('Le slug est obligatoire'),
     }),
+
+    // ── Catégories (multi-select) ──────────────────────────────────────────
     defineField({
-      name: 'category',
-      title: 'Catégorie',
-      type: 'string',
-      description: 'Type de projet — utilisé pour le filtrage sur la page Réalisations',
+      name: 'categories',
+      title: 'Catégories',
+      type: 'array',
+      of: [{type: 'string'}],
+      description: 'Types de projet — un projet peut appartenir à plusieurs catégories (ex: Web + Mobile). Utilisé pour le filtrage sur la page Réalisations.',
       options: {
         list: [
           {title: 'Web', value: 'web'},
@@ -33,8 +36,18 @@ export const project = defineType({
           {title: 'Formation', value: 'formation'},
         ],
       },
-      validation: (Rule) => Rule.required().error('La catégorie est obligatoire'),
+      validation: (Rule) => Rule.required().min(1).error('Au moins une catégorie est obligatoire'),
     }),
+
+    // ── Ancien champ category (lecture seule, rétro-compatibilité) ─────────
+    defineField({
+      name: 'category',
+      title: '⚠️ Catégorie (ancien — ne plus utiliser)',
+      type: 'string',
+      description: 'Ancien champ à catégorie unique. Utilisez "Catégories" ci-dessus à la place. Ce champ sera supprimé ultérieurement.',
+      hidden: true,
+    }),
+
     defineField({
       name: 'client',
       title: 'Client',
@@ -94,12 +107,106 @@ export const project = defineType({
         defineField({name: 'alt', title: 'Texte alternatif', type: 'string'}),
       ],
     }),
+
+    // ── Galerie d'images secondaires ───────────────────────────────────────
+    defineField({
+      name: 'gallery',
+      title: 'Galerie d\'images',
+      type: 'array',
+      of: [
+        {
+          type: 'image',
+          options: {hotspot: true},
+          fields: [
+            defineField({name: 'alt', title: 'Texte alternatif', type: 'string'}),
+          ],
+        },
+      ],
+      description: 'Images supplémentaires du projet (captures d\'écran, maquettes…). Affichées dans la modale de détail.',
+    }),
+
+    // ── Liens multiples (remplace l'ancien champ url) ─────────────────────
+    defineField({
+      name: 'links',
+      title: 'Liens du projet',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          name: 'projectLink',
+          title: 'Lien',
+          fields: [
+            defineField({
+              name: 'label',
+              title: 'Libellé',
+              type: 'string',
+              description: 'Texte affiché pour ce lien. Exemples : "Voir le site", "Play Store", "App Store"',
+              validation: (Rule) => Rule.required().error('Le libellé est obligatoire'),
+            }),
+            defineField({
+              name: 'url',
+              title: 'URL',
+              type: 'url',
+              description: 'Adresse du lien. Exemple : https://play.google.com/store/apps/details?id=...',
+              validation: (Rule) => Rule.required().error('L\'URL est obligatoire'),
+            }),
+            defineField({
+              name: 'type',
+              title: 'Type de lien',
+              type: 'string',
+              description: 'Catégorie du lien — détermine l\'icône affichée sur le site',
+              options: {
+                list: [
+                  {title: '🌐 Site web', value: 'website'},
+                  {title: '📱 Google Play Store', value: 'playstore'},
+                  {title: '🍎 Apple App Store', value: 'appstore'},
+                  {title: '💻 Code source (GitHub)', value: 'github'},
+                  {title: '🎮 Démo en ligne', value: 'demo'},
+                  {title: '📎 Autre', value: 'other'},
+                ],
+              },
+              initialValue: 'website',
+              validation: (Rule) => Rule.required().error('Le type de lien est obligatoire'),
+            }),
+          ],
+          preview: {
+            select: {title: 'label', subtitle: 'url'},
+          },
+        },
+      ],
+      description: 'Liens vers le projet : site web, Play Store, App Store, code source, démo… Ajoutez autant de liens que nécessaire.',
+    }),
+
+    // ── Ancien champ url (rétro-compatibilité) ────────────────────────────
     defineField({
       name: 'url',
-      title: 'URL du projet',
+      title: '⚠️ URL (ancien — ne plus utiliser)',
       type: 'url',
-      description: 'Lien vers le projet en ligne (si disponible et public). Exemple : https://example.com',
+      description: 'Ancien champ URL unique. Utilisez "Liens du projet" ci-dessus à la place.',
+      hidden: true,
     }),
+
+    // ── Année et durée ────────────────────────────────────────────────────
+    defineField({
+      name: 'year',
+      title: 'Année de réalisation',
+      type: 'number',
+      description: 'Année de réalisation ou livraison du projet. Exemple : 2024',
+      validation: (Rule) => Rule.min(2000).max(2100),
+    }),
+    defineField({
+      name: 'duration',
+      title: 'Durée du projet (FR)',
+      type: 'string',
+      description: 'Durée approximative en français. Exemples : "3 mois", "6 semaines", "1 an"',
+    }),
+    defineField({
+      name: 'durationEn',
+      title: 'Durée du projet (EN)',
+      type: 'string',
+      description: 'Version anglaise de la durée. Exemples : "3 months", "6 weeks", "1 year"',
+    }),
+
     defineField({
       name: 'featured',
       title: 'Mis en avant sur l\'accueil',
@@ -139,14 +246,17 @@ export const project = defineType({
       title: 'title',
       subtitle: 'client',
       media: 'image',
+      categories: 'categories',
       category: 'category',
       featured: 'featured',
     },
-    prepare({title, subtitle, media, category, featured}) {
-      const badges = [category, featured ? '⭐ Accueil' : ''].filter(Boolean).join(' · ')
+    prepare({title, subtitle, media, categories, category, featured}) {
+      // Rétro-compatibilité : utiliser categories[] ou l'ancien category
+      const cats = categories?.length ? categories.join(', ') : category ?? ''
+      const badges = [cats, featured ? '⭐ Accueil' : ''].filter(Boolean).join(' · ')
       return {
         title,
-        subtitle: `${subtitle ?? ''} — ${badges}`.trim() || category,
+        subtitle: `${subtitle ?? ''} — ${badges}`.trim() || cats,
         media,
       }
     },
