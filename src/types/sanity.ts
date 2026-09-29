@@ -16,11 +16,21 @@ export interface SanityStat {
 export type ProjectCategory = 'web' | 'mobile' | 'logiciel' | 'formation'
 export type ProjectStatus = 'published' | 'draft' | 'archived'
 
+export type ProjectLinkType = 'website' | 'playstore' | 'appstore' | 'github' | 'demo' | 'other'
+
+export interface ProjectLink {
+  _key: string
+  label: string
+  url: string
+  type: ProjectLinkType
+}
+
 export interface SanityProject {
   _id: string
   title: string
   slug: { current: string }
-  category: ProjectCategory
+  category?: ProjectCategory // Deprecated
+  categories?: ProjectCategory[]
   client: string
   sector: string
   description: string
@@ -29,7 +39,12 @@ export interface SanityProject {
   shortDescriptionEn?: string
   technologies: string[]
   image?: SanityImage
-  url?: string
+  gallery?: SanityImage[]
+  url?: string // Deprecated
+  links?: ProjectLink[]
+  year?: number
+  duration?: string
+  durationEn?: string
   featured: boolean
   publishedAt?: string
   status?: ProjectStatus
