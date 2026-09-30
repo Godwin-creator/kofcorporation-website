@@ -1,6 +1,7 @@
 .hero-image-slider {
   position: relative;
-  display: block;
+  display: flex;
+  justify-content: flex-end;
   width: 100%;
   height: 100%;
   min-height: 360px;
@@ -10,6 +11,7 @@
 .hero-image-slider__frame {
   position: relative;
   width: min(100%, 480px);
+  margin-inline-start: auto;
   aspect-ratio: 3 / 4;
   overflow: hidden;
   background: linear-gradient(135deg, rgba(12, 172, 232, 0.12), rgba(255, 255, 255, 0.74), rgba(12, 172, 232, 0.12));
@@ -63,10 +65,18 @@
   pointer-events: none;
 }
 
+.hero-image-slider__frame--puzzle {
+  cursor: grab !important;
+}
+
+.hero-image-slider__frame--dragging {
+  cursor: grabbing !important;
+}
+
 .hero-image-slider__piece {
   z-index: 5;
   border: 1px solid rgba(255, 255, 255, 0.28);
-  cursor: grab;
+  cursor: grab !important;
   background-repeat: no-repeat;
   background-position: center;
   box-shadow: inset 0 0 22px rgba(255, 255, 255, 0.08), 0 8px 18px rgba(0, 0, 0, 0.1);
@@ -82,8 +92,9 @@
   box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.08), 0 0 0 1px rgba(110, 255, 177, 0.32);
 }
 
+.hero-image-slider__piece:active,
 .hero-image-slider__piece--dragging {
-  cursor: grabbing;
+  cursor: grabbing !important;
   filter: drop-shadow(0 18px 18px rgba(0, 0, 0, 0.18));
 }
 
@@ -106,8 +117,13 @@
 
 @media (max-width: 1023px) {
   .hero-image-slider {
-    display: block;
+    display: flex;
+    justify-content: center;
     min-height: 320px;
+  }
+
+  .hero-image-slider__frame {
+    margin-inline: auto;
   }
 
   .hero-image-slider__frame--mobile {

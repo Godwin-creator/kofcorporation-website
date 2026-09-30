@@ -28,9 +28,18 @@ export default function AnimatedCursor() {
     if (window.matchMedia("(pointer: coarse)").matches) return;
 
     const syncHoverState = (target: HTMLElement | null) => {
-      const hovering = !!target?.closest(
-        'a, button, input, textarea, select, [role="button"], [data-cursor="hover"], .cursor-hover'
+      const isNative = !!target?.closest(
+        '.hero-image-slider__frame--puzzle, [data-native-cursor], #sanity, [data-sanity]'
       );
+      if (containerRef.current) {
+        containerRef.current.classList.toggle("acursor--hidden", isNative);
+      }
+
+      const hovering =
+        !isNative &&
+        !!target?.closest(
+          'a, button, input, textarea, select, [role="button"], [data-cursor="hover"], .cursor-hover'
+        );
       if (isHovering.current !== hovering) {
         isHovering.current = hovering;
         if (containerRef.current) {
@@ -46,6 +55,7 @@ export default function AnimatedCursor() {
         shown.current = true;
         setVisible(true);
       }
+      syncHoverState(e.target as HTMLElement);
     };
 
     const onMouseDown = () => {
