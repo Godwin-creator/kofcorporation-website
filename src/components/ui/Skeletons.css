@@ -1,0 +1,63 @@
+.skeleton-section {
+  padding: 5rem 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.skeleton-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
+
+.skeleton-header {
+  height: 2rem;
+  width: 15rem;
+  margin: 0 auto 2rem;
+  border-radius: 9999px;
+}
+
+.skeleton-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
+}
+@media (min-width: 768px) {
+  .skeleton-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.skeleton-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+@media (min-width: 1024px) {
+  .skeleton-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.skeleton-card {
+  height: 20rem;
+  width: 100%;
+}
+
+.skeleton-stat {
+  height: 10rem;
+  width: 100%;
+}

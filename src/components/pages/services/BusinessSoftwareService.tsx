@@ -3,6 +3,8 @@
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { ArrowRight, Check, Monitor, Layout, Database, Shield, Users, BarChart } from "lucide-react";
+import { useEffect, useState } from "react";
+import Image from "next/image";
 import CallToAction from "@/components/sections/CallToAction";
 import "./BusinessSoftwareService.css";
 import "./ServiceHero.css";
@@ -54,6 +56,20 @@ const features = [
 
 export default function BusinessSoftwareService({technologies = []}: {technologies?: string[]}) {
   const t = useTranslations("servicesDetail.management");
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+
+  useEffect(() => {
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    const isReducedData = window.matchMedia("(prefers-reduced-data: reduce)").matches;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const connection = (navigator as any).connection;
+    const isSlow = connection ? (connection.saveData || ["slow-2g", "2g", "3g"].includes(connection.effectiveType)) : false;
+    
+    if (!isMobile && !isReducedData && !isSlow) {
+      setShouldLoadVideo(true);
+    }
+  }, []);
+
   return (
     <>
       <div className="business-software-service">
@@ -65,18 +81,30 @@ export default function BusinessSoftwareService({technologies = []}: {technologi
           animate="visible"
           variants={sectionVariants}
         >
-          {/* Background video */}
-          <video
-            className="service-hero__video"
-            src="/videos/logicielGestion-banner.mp4"
-            poster="/images/services/logicielGestion-poster.webp"
-            preload="metadata"
-            autoPlay
-            muted
-            loop
-            playsInline
-            aria-hidden="true"
-          />
+          {/* Background video or fallback image */}
+          {shouldLoadVideo ? (
+            <video
+              className="service-hero__video"
+              src="/videos/logicielGestion-banner.mp4"
+              poster="/images/services/logicielGestion-poster.webp"
+              preload="metadata"
+              autoPlay
+              muted
+              loop
+              playsInline
+              aria-hidden="true"
+            />
+          ) : (
+            <Image
+              src="/images/services/logicielGestion-poster.webp"
+              alt=""
+              fill
+              priority
+              className="service-hero__video"
+              style={{ objectFit: "cover" }}
+              sizes="100vw"
+            />
+          )}
           {/* Overlay */}
           <div className="service-hero__overlay" aria-hidden="true" />
           {/* Content */}
