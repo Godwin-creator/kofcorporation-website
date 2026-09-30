@@ -39,6 +39,7 @@ export default function ContactPage({settings}: {settings?: CompanySettings | nu
   const email = settings?.email || "contact@kofcorporation.com";
   const address = settings?.address || t("address");
   const openingHours = (locale === "en" ? settings?.openingHoursEn : settings?.openingHours) || t("hours");
+  const mapsEmbedUrl = settings?.mapsEmbedUrl || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1200!2d1.1903082352326708!3d6.222112510720469!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1021599db15d7109%3A0xd3dd99c055cdec10!2sKofCorporation!5e1!3m2!1sen!2stg!4v1788719337955!5m2!1sen!2stg";
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -327,7 +328,7 @@ export default function ContactPage({settings}: {settings?: CompanySettings | nu
             <div className="contact-page__map">
               <iframe
                 title={t("map")}
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1200!2d1.1903082352326708!3d6.222112510720469!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1021599db15d7109%3A0xd3dd99c055cdec10!2sKofCorporation!5e1!3m2!1sen!2stg!4v1788719337955!5m2!1sen!2stg"
+                src={mapsEmbedUrl}
                 loading="lazy"
                 referrerPolicy="strict-origin-when-cross-origin"
                 allowFullScreen

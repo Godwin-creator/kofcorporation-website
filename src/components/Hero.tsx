@@ -32,9 +32,26 @@ const CHAR_DELAYS = (index: number, total: number) => {
 export default function Hero({ settings }: { settings?: CompanySettings | null }) {
   const t = useTranslations("hero");
   const locale = useLocale();
-  const cmsTitle = locale === "en" ? settings?.heroTitleEn : settings?.heroTitle;
-  const cmsSlogan = cmsTitle ? [{ lineOne: cmsTitle, lineTwo: "" }] : null;
-  const sloganSet = cmsSlogan ?? (SLOGANS[locale as keyof typeof SLOGANS] ?? SLOGANS.fr);
+
+  // Build slogan set: CMS heroSlogans > legacy heroTitle > hardcoded fallback
+  const buildSloganSet = () => {
+    // 1. New CMS heroSlogans array (preferred)
+    if (settings?.heroSlogans?.length) {
+      return settings.heroSlogans.map((s) => ({
+        lineOne: locale === "en" ? s.lineOneEn : s.lineOneFr,
+        lineTwo: locale === "en" ? s.lineTwoEn : s.lineTwoFr,
+      }));
+    }
+    // 2. Legacy single heroTitle field
+    const cmsTitle = locale === "en" ? settings?.heroTitleEn : settings?.heroTitle;
+    if (cmsTitle) {
+      return [{ lineOne: cmsTitle, lineTwo: "" }];
+    }
+    // 3. Hardcoded fallback
+    return SLOGANS[locale as keyof typeof SLOGANS] ?? SLOGANS.fr;
+  };
+  const sloganSet = buildSloganSet();
+
   const description = (locale === "en" ? settings?.heroSubtitleEn : settings?.heroSubtitle) ?? t("description");
 
   const { scrollY } = useScroll();
