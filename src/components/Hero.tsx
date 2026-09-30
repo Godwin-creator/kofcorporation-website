@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
 import { ArrowRight } from "lucide-react";
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import "./Hero.css";
 import { Link } from "@/i18n/navigation";
 import HeroImageSlider from "@/components/ui/HeroImageSlider";
@@ -28,8 +28,6 @@ const CHAR_DELAYS = (index: number, total: number) => {
   if (progress < 0.85) return 60;
   return 110;
 };
-
-type Phase = "typing-l1" | "pause-mid" | "typing-l2" | "hold" | "erasing" | "transition";
 
 export default function Hero({ settings }: { settings?: CompanySettings | null }) {
   const t = useTranslations("hero");
