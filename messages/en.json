@@ -355,6 +355,7 @@
     },
     "details": "View details",
     "loadMore": "View more",
+    "showLess": "Show less",
     "empty": "No published projects yet.",
     "emptyFilter": "No project matches this filter.",
     "card": {
