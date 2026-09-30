@@ -107,5 +107,5 @@ export const companySettings = Object.assign(
       }),
     ],
   }),
-  {__experimental_actions: ['update', 'publish'] as const}
+  {__experimental_actions: ['create', 'update', 'publish'] as const}
 )

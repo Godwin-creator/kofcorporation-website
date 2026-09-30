@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import "./HeroImageSlider.css";
 
-const IMAGES = ["/images/hero-image.png", "/images/hero-image1.png"] as const;
+const IMAGES = ["/images/images-puzzle/hero-image.png", "/images/images-puzzle/hero-image1.png"] as const;
 const GRID_COLUMNS = 3;
 const GRID_ROWS = 4;
 const TOTAL_PIECES = GRID_COLUMNS * GRID_ROWS;

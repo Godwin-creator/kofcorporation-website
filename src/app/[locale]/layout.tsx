@@ -17,7 +17,7 @@ const AnimatedCursor = dynamic(() => import("@/components/ui/AnimatedCursor"), {
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || 'https://kofcorporation-website.vercel.app';
-const ogImageUrl = new URL('/og-image.png', siteUrl).toString();
+const ogImageUrl = new URL('/og-image.jpeg', siteUrl).toString();
 
 export const metadata: Metadata = {
   openGraph: {
