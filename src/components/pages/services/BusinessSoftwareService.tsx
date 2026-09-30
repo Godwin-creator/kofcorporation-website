@@ -69,6 +69,7 @@ export default function BusinessSoftwareService({technologies = []}: {technologi
           <video
             className="service-hero__video"
             src="/videos/logicielGestion-banner.mp4"
+            poster="/images/services/logicielGestion-poster.webp"
             autoPlay
             muted
             loop

@@ -69,6 +69,7 @@ export default function MobileApplicationsService({technologies = []}: {technolo
           <video
             className="service-hero__video"
             src="/videos/devMobile-banner.mp4"
+            poster="/images/services/devMobile-poster.webp"
             autoPlay
             muted
             loop
