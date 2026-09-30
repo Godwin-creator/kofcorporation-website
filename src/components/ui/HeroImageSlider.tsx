@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { useLocale } from "next-intl";
 import "./HeroImageSlider.css";
 
-const IMAGES = ["/images/images-puzzle/hero-image.png", "/images/images-puzzle/hero-image1.png"] as const;
+const IMAGES = ["/images/images-puzzle/hero-image.webp", "/images/images-puzzle/hero-image1.webp"] as const;
 const GRID_COLUMNS = 3;
 const GRID_ROWS = 4;
 const TOTAL_PIECES = GRID_COLUMNS * GRID_ROWS;
