@@ -32,7 +32,7 @@ export default function PartnersClient({
   const t = useTranslations("partners");
   const marqueeItems = [...partners, ...partners];
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const isInView = useInView(sectionRef, { once: true, margin: "0px" });
   const [loaded, setLoaded] = useState(false);
   useEffect(() => { setLoaded(true); }, []);
   return (
@@ -41,8 +41,8 @@ export default function PartnersClient({
       className="partners"
       aria-label={t("ariaLabel")}
       variants={sectionVariants}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
+      initial={partners.length ? "hidden" : "visible"}
+      animate={isInView || !partners.length ? "visible" : "hidden"}
     >
       {!loaded ? <LoadingDots /> : <Watermark id="partners" />}
       <div className="partners__inner">

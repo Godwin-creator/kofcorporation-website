@@ -50,7 +50,7 @@ export const stat = defineType({
   preview: {
     select: {title: 'value', subtitle: 'label'},
     prepare({title, subtitle}) {
-      return {title: `${title} — ${subtitle}`, subtitle: ''}
+      return {title: `${title} - ${subtitle}`, subtitle: ''}
     },
   },
 })

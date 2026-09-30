@@ -45,7 +45,7 @@ export const testimonial = defineType({
       title: 'Citation (FR)',
       type: 'text',
       rows: 3,
-      description: 'Citation en français — ce que la personne dit de KofCorporation. Soyez précis et concret.',
+      description: 'Citation en français - ce que la personne dit de KofCorporation. Soyez précis et concret.',
       validation: (Rule) => Rule.required().error('La citation est obligatoire'),
     }),
     defineField({

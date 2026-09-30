@@ -525,7 +525,7 @@
   transform: translateX(0);
 }
 
-/* Invisible hover bridge — extends hover area below the button */
+/* Invisible hover bridge - extends hover area below the button */
 .header__nav-item--mega::after {
   content: "";
   position: absolute;

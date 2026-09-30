@@ -17,7 +17,10 @@ import {useLocale} from "next-intl";
 import type {CompanySettings} from "@/types/sanity";
 import Watermark from "@/components/ui/Watermark";
 
+import CustomSelect from "@/components/ui/CustomSelect";
+
 type ContactField = "fullName" | "email" | "subject" | "message";
+
 type FormErrors = Partial<Record<ContactField, string>>;
 
 const initialForm: ContactForm = {
@@ -245,19 +248,24 @@ export default function ContactPage({settings}: {settings?: CompanySettings | nu
 
                 <label className={errors.subject ? "contact-form__field contact-form__field--error" : "contact-form__field"}>
                   {t("subject")}
-                  <select
+                  <CustomSelect
                     name="subject"
                     value={form.subject}
-                    onChange={handleFieldChange("subject")}
-                    aria-invalid={Boolean(errors.subject)}
-                  >
-                    <option value="">{t("chooseSubject")}</option>
-                    <option value="web">{t("web")}</option>
-                    <option value="mobile">{t("mobile")}</option>
-                    <option value="software">{t("software")}</option>
-                    <option value="training">{t("training")}</option>
-                    <option value="other">{t("other")}</option>
-                  </select>
+                    onChange={(value) => {
+                      setForm((current) => ({ ...current, subject: value }));
+                      setErrors((current) => ({ ...current, subject: undefined }));
+                      setError("");
+                    }}
+                    placeholder={t("chooseSubject")}
+                    options={[
+                      { value: "web", label: t("web") },
+                      { value: "mobile", label: t("mobile") },
+                      { value: "software", label: t("software") },
+                      { value: "training", label: t("training") },
+                      { value: "other", label: t("other") },
+                    ]}
+                    error={errors.subject}
+                  />
                   {errors.subject && <span className="contact-form__field-error">{errors.subject}</span>}
                 </label>
 
