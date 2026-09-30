@@ -29,7 +29,7 @@ export interface RealisationItem {
 
 const ICONS: Record<string, LucideIcon> = {Heart, HeartPulse, Home, Building2, Smartphone, Landmark}
 const CATEGORIES: Array<ProjectCategory | "all"> = ["all", "web", "mobile", "logiciel", "formation"]
-const containerVariants = {hidden: {}, visible: {transition: {staggerChildren: 0.08}}}
+const containerVariants = {hidden: {}, visible: {transition: {staggerChildren: 0.1}}}
 const cardVariants = {hidden: {opacity: 0, y: 24}, visible: {opacity: 1, y: 0, transition: {duration: 0.5, ease: "easeOut" as const}}}
 
 export default function RealisationsClient({projects}: {projects: RealisationItem[]}) {
@@ -53,7 +53,27 @@ export default function RealisationsClient({projects}: {projects: RealisationIte
         <div className="realisations-page__container"><header className="realisations-page__section-header"><div><p className="realisations-page__eyebrow">{tProjects("portfolio.eyebrow")}</p><h2 id="projects-page-title">{tProjects("portfolio.title")}</h2></div><p>{tProjects("portfolio.description")}</p></header>
           <div className="realisations-page__filters" role="group" aria-label={tProjects("filters.label")}>{CATEGORIES.map((value) => <button key={value} type="button" className={category === value ? "is-active" : ""} onClick={() => {setCategory(value); setVisibleCount(6)}}>{tProjects(`filters.${value}`)}</button>)}</div>
           {visibleProjects.length ? <motion.div className="realisations-page__grid" variants={containerVariants} initial="hidden" animate="visible">{visibleProjects.map((project) => {const Icon = ICONS[project.icon] ?? Heart; return <motion.article className={`realisation-card realisation-card--${project.project._id}`} key={project.project._id} variants={cardVariants}><div className="realisation-card__visual" style={project.imageUrl ? {backgroundImage: `url(${project.imageUrl})`, backgroundSize: "cover", backgroundPosition: "center"} : undefined}><span className="realisation-card__icon" aria-hidden="true"><Icon size={48} strokeWidth={1.35} /></span><span className="realisation-card__sector">{project.sector}</span></div><div className="realisation-card__body"><div className="realisation-card__meta"><span>{tProjects("card.client")}</span><strong>{project.client}</strong></div><div className="realisation-card__title-row"><h3>{project.title}</h3>{project.url !== "#" && <a href={project.url} target="_blank" rel="noreferrer" aria-label={`${tProjects("card.visit")}${project.title}`}><ExternalLink size={18} strokeWidth={1.8} aria-hidden="true" /></a>}</div><p className="realisation-card__description">{project.description}</p>{project.features && <p className="realisation-card__features"><MessagesSquare size={16} strokeWidth={1.8} aria-hidden="true" />{project.features}</p>}<ul aria-label={`${tProjects("card.technologies")}${project.title}`}>{project.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul><button type="button" className="realisation-card__details" onClick={() => setSelectedProject(project)}>{tProjects("details")}</button></div></motion.article>})}</motion.div> : <EmptyState message={projects.length ? tProjects("emptyFilter") : tProjects("empty")} />}
-          {visibleCount < filteredProjects.length && <button type="button" className="realisations-page__load-more" onClick={() => setVisibleCount((count) => count + 3)}>{tProjects("loadMore")}</button>}
+          {(visibleCount < filteredProjects.length || visibleCount > 6) && (
+            <div className="realisations-page__actions">
+              {visibleCount < filteredProjects.length && (
+                <button type="button" className="realisations-page__load-more" onClick={() => setVisibleCount((count) => count + 6)}>
+                  {tProjects("loadMore")}
+                </button>
+              )}
+              {visibleCount > 6 && (
+                <button
+                  type="button"
+                  className="realisations-page__show-less"
+                  onClick={() => {
+                    setVisibleCount(6);
+                    document.getElementById("projets")?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                >
+                  {tProjects("showLess")}
+                </button>
+              )}
+            </div>
+          )}
         </div>
       </section>
     </div>
