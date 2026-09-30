@@ -96,6 +96,22 @@ export interface SanityBlock {
   style?: string
 }
 
+export interface SocialLinks {
+  facebook?: string
+  twitter?: string
+  instagram?: string
+  linkedin?: string
+  tiktok?: string
+}
+
+export interface HeroSlogan {
+  _key?: string
+  lineOneFr: string
+  lineTwoFr: string
+  lineOneEn: string
+  lineTwoEn: string
+}
+
 export interface CompanySettings {
   companyName: string
   phone: string[]
@@ -111,5 +127,9 @@ export interface CompanySettings {
   presentationVideoUrl?: string
   presentationVideoFileUrl?: string
   teamPhoto?: SanityImage
+  socialLinks?: SocialLinks
+  heroSlogans?: HeroSlogan[]
+  mapsUrl?: string
+  mapsEmbedUrl?: string
 }
 

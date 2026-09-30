@@ -100,6 +100,62 @@ export const companySettings = Object.assign(
           defineField({name: 'alt', title: 'Texte alternatif', type: 'string'}),
         ],
       }),
+
+      // ── Réseaux sociaux ──────────────────────────────
+      defineField({
+        name: 'socialLinks',
+        title: 'Réseaux sociaux',
+        type: 'object',
+        description: 'Liens vers les profils de réseaux sociaux. Laissez vide pour masquer un réseau.',
+        fields: [
+          defineField({name: 'facebook', title: 'Facebook', type: 'url', description: 'URL de la page Facebook'}),
+          defineField({name: 'twitter', title: 'X (Twitter)', type: 'url', description: 'URL du profil X / Twitter'}),
+          defineField({name: 'instagram', title: 'Instagram', type: 'url', description: 'URL du profil Instagram'}),
+          defineField({name: 'linkedin', title: 'LinkedIn', type: 'url', description: 'URL de la page LinkedIn'}),
+          defineField({name: 'tiktok', title: 'TikTok', type: 'url', description: 'URL du profil TikTok'}),
+        ],
+      }),
+
+      // ── Slogans Hero (typewriter) ────────────────────
+      defineField({
+        name: 'heroSlogans',
+        title: 'Slogans du Hero (Typewriter)',
+        type: 'array',
+        description: 'Phrases alternées affichées dans l\'animation typewriter du Hero. Chaque slogan a deux lignes (ex: "Votre vision" / "notre code"). Si vide, les slogans par défaut sont utilisés.',
+        of: [
+          {
+            type: 'object',
+            name: 'slogan',
+            title: 'Slogan',
+            fields: [
+              defineField({name: 'lineOneFr', title: 'Ligne 1 (FR)', type: 'string', validation: (Rule) => Rule.required()}),
+              defineField({name: 'lineTwoFr', title: 'Ligne 2 (FR)', type: 'string', validation: (Rule) => Rule.required()}),
+              defineField({name: 'lineOneEn', title: 'Ligne 1 (EN)', type: 'string', validation: (Rule) => Rule.required()}),
+              defineField({name: 'lineTwoEn', title: 'Ligne 2 (EN)', type: 'string', validation: (Rule) => Rule.required()}),
+            ],
+            preview: {
+              select: {title: 'lineOneFr', subtitle: 'lineTwoFr'},
+              prepare({title, subtitle}: {title?: string; subtitle?: string}) {
+                return {title: `${title ?? ''} — ${subtitle ?? ''}`}
+              },
+            },
+          },
+        ],
+      }),
+
+      // ── Google Maps ──────────────────────────────────
+      defineField({
+        name: 'mapsUrl',
+        title: 'Lien Google Maps',
+        type: 'url',
+        description: 'Lien Google Maps cliquable (ex: https://maps.app.goo.gl/xxx). Utilisé dans le footer.',
+      }),
+      defineField({
+        name: 'mapsEmbedUrl',
+        title: 'URL iframe Google Maps (Embed)',
+        type: 'url',
+        description: 'URL d\'intégration Google Maps pour l\'iframe de la page Contact. Copier depuis Google Maps → Partager → Intégrer une carte → copier l\'URL du src.',
+      }),
     ],
   }),
   {__experimental_actions: ['create', 'update', 'publish'] as const}

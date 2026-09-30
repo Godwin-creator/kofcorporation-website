@@ -22,11 +22,11 @@ export default function ScrollWordReveal({ textKey, className = "" }: ScrollWord
   const text = t(textKey);
   const words = text.split(" ");
 
-  // Triggers only when section is roughly centered on screen
+  // Triggers smoothly with an asymmetric margin to prevent flickering on reverse scroll
   const ref = useRef<HTMLParagraphElement>(null);
   const isInView = useInView(ref, {
     once: false,
-    margin: "-40% 0px -40% 0px",
+    margin: "-30% 0px -20% 0px",
   });
 
   return (

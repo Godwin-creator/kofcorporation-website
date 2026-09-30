@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
 import { ArrowRight } from "lucide-react";
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import "./Hero.css";
 import { Link } from "@/i18n/navigation";
 import HeroImageSlider from "@/components/ui/HeroImageSlider";
@@ -29,14 +29,29 @@ const CHAR_DELAYS = (index: number, total: number) => {
   return 110;
 };
 
-type Phase = "typing-l1" | "pause-mid" | "typing-l2" | "hold" | "erasing" | "transition";
-
 export default function Hero({ settings }: { settings?: CompanySettings | null }) {
   const t = useTranslations("hero");
   const locale = useLocale();
-  const cmsTitle = locale === "en" ? settings?.heroTitleEn : settings?.heroTitle;
-  const cmsSlogan = cmsTitle ? [{ lineOne: cmsTitle, lineTwo: "" }] : null;
-  const sloganSet = cmsSlogan ?? (SLOGANS[locale as keyof typeof SLOGANS] ?? SLOGANS.fr);
+
+  // Build slogan set: CMS heroSlogans > legacy heroTitle > hardcoded fallback
+  const buildSloganSet = () => {
+    // 1. New CMS heroSlogans array (preferred)
+    if (settings?.heroSlogans?.length) {
+      return settings.heroSlogans.map((s) => ({
+        lineOne: locale === "en" ? s.lineOneEn : s.lineOneFr,
+        lineTwo: locale === "en" ? s.lineTwoEn : s.lineTwoFr,
+      }));
+    }
+    // 2. Legacy single heroTitle field
+    const cmsTitle = locale === "en" ? settings?.heroTitleEn : settings?.heroTitle;
+    if (cmsTitle) {
+      return [{ lineOne: cmsTitle, lineTwo: "" }];
+    }
+    // 3. Hardcoded fallback
+    return SLOGANS[locale as keyof typeof SLOGANS] ?? SLOGANS.fr;
+  };
+  const sloganSet = buildSloganSet();
+
   const description = (locale === "en" ? settings?.heroSubtitleEn : settings?.heroSubtitle) ?? t("description");
 
   const { scrollY } = useScroll();

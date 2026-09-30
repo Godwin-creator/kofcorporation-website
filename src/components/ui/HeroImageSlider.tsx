@@ -3,9 +3,10 @@
 import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useLocale } from "next-intl";
 import "./HeroImageSlider.css";
 
-const IMAGES = ["/images/images-puzzle/hero-image.png", "/images/images-puzzle/hero-image1.png"] as const;
+const IMAGES = ["/images/images-puzzle/hero-image.webp", "/images/images-puzzle/hero-image1.webp"] as const;
 const GRID_COLUMNS = 3;
 const GRID_ROWS = 4;
 const TOTAL_PIECES = GRID_COLUMNS * GRID_ROWS;
@@ -44,6 +45,7 @@ function createPieces() {
 }
 
 export default function HeroImageSlider() {
+  const locale = useLocale();
   const [pieces, setPieces] = useState<Piece[]>(() => createPieces());
   const [draggedId, setDraggedId] = useState<number | null>(null);
   const [dragOrigin, setDragOrigin] = useState({ x: 0, y: 0 });
@@ -91,18 +93,28 @@ export default function HeroImageSlider() {
     }
 
     if (phase === "initial") {
-      const timer = window.setTimeout(() => setPhase("puzzle1"), 10000);
+      const timer = window.setTimeout(() => setPhase("puzzle1"), 15000);
       return () => window.clearTimeout(timer);
     }
 
     if (phase === "puzzle1" || phase === "puzzle2") {
-      if (!isSolved) {
-        return undefined;
+      if (isSolved) {
+        const nextPhase = phase === "puzzle1" ? "result1" : "result2";
+        const timer = window.setTimeout(() => setPhase(nextPhase), 450);
+        return () => window.clearTimeout(timer);
       }
 
-      const nextPhase = phase === "puzzle1" ? "result1" : "result2";
-      const timer = window.setTimeout(() => setPhase(nextPhase), 0);
-      return () => window.clearTimeout(timer);
+      // Auto-résolution si l'utilisateur ne résout pas et ne manipule aucune pièce
+      if (draggedId === null) {
+        const autoSolveTimer = window.setTimeout(() => {
+          setPieces((prev) =>
+            prev.map((p) => ({ ...p, currentIndex: p.targetIndex }))
+          );
+        }, 18000);
+        return () => window.clearTimeout(autoSolveTimer);
+      }
+
+      return undefined;
     }
 
     if (phase === "result1") {
@@ -134,7 +146,7 @@ export default function HeroImageSlider() {
     }
 
     return undefined;
-  }, [phase, isMobile, isSolved]);
+  }, [phase, isMobile, isSolved, draggedId]);
 
   useEffect(() => {
     if (isMobile) {
@@ -346,6 +358,16 @@ export default function HeroImageSlider() {
             />
           );
         })}
+
+        {/* Indice visuel interactif */}
+        {(phase === "puzzle1" || phase === "puzzle2") && !isSolved && (
+          <div
+            className={`hero-image-slider__hint ${draggedId !== null ? "hero-image-slider__hint--hidden" : ""}`}
+            aria-hidden="true"
+          >
+            <span>{locale === "en" ? "Drag the pieces to solve the puzzle" : "Glissez les pièces pour reconstituer l'image"}</span>
+          </div>
+        )}
       </div>
     </div>
   );

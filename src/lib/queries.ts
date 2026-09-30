@@ -50,7 +50,7 @@ export const SETTINGS_QUERY = defineQuery(`
     companyName, phone, email, address, openingHours, openingHoursEn,
     foundedYear, heroTitle, heroTitleEn, heroSubtitle, heroSubtitleEn,
     presentationVideoUrl, "presentationVideoFileUrl": presentationVideoFile.asset->url,
-    teamPhoto
+    teamPhoto, socialLinks, heroSlogans, mapsUrl, mapsEmbedUrl
   }
 `);
 

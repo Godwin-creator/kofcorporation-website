@@ -1,34 +1,26 @@
 # Document de Référence - Refonte Site KofCorporation
-> **Statut** : V1 fonctionnelle - intégration CMS Sanity opérationnelle, audit V2 documenté  
-> **Dernière mise à jour** : 25 septembre 2026  
+> **Statut** : V1.2 stabilisée - animations cinématiques, services avec bannières vidéo, puzzle interactif et CMS opérationnels  
+> **Dernière mise à jour** : 30 septembre 2026  
 > **Responsable projet** : Komi Godwin EDOH BEDI - Stagiaire Développement Web  
-> **État réel du projet** : site vitrine fonctionnel, Next.js App Router, i18n FR/EN, thème clair/sombre persistant, formulaire contact sécurisé par reCAPTCHA et SMTP VPS, Studio Sanity intégré, contenus principaux pilotables depuis Sanity, états vides prévus lorsque le CMS ne contient aucun contenu.
+> **État réel du projet** : site vitrine fonctionnel, Next.js App Router (v16, React 19), i18n FR/EN, thème clair/sombre persistant sans flash, formulaire contact sécurisé par reCAPTCHA et SMTP VPS, Studio Sanity intégré, services de base codés en dur (`STATIC_SERVICES`) avec vidéos immersives dédiées, animations d'entrée et scroll reveal bidirectionnels, curseur interactif adaptatif.
 
-## 0. État de référence au 25 septembre 2026
+## 0. État de référence au 30 septembre 2026
 
 ### Réalisé et validé
 
-- Migration de Resend vers **Nodemailer + SMTP VPS**.
-- Formulaire contact avec validation serveur, reCAPTCHA v3 et double envoi : notification interne + confirmation expéditeur.
-- Studio Sanity intégré dans Next.js à `/studio`.
-- Projet Sanity configuré avec le dataset `production`.
-- Schémas Sanity pour statistiques, projets, témoignages, partenaires, services et paramètres de l'entreprise.
-- Page d'accueil connectée à Sanity pour les services, statistiques, projets mis en avant, partenaires et témoignages.
-- Page `/realisations` connectée à Sanity avec filtrage par catégorie, affichage progressif et modal projet.
-- Paramètres globaux Sanity connectés au hero, footer, page Contact, vidéo de présentation et photo d'équipe.
-- Technologies des pages Web, Mobile et Logiciels de gestion gérées par le champ `service.stack`.
-- Webhook Sanity vers `/api/revalidate` avec tags de cache : `stats`, `projects`, `testimonials`, `partners`, `services`, `settings`.
-- Suppression des fallbacks de démonstration pour les projets, services, statistiques, partenaires et témoignages.
-- États vides avec icône Lucide affichés lorsqu'aucun contenu Sanity n'est publié ou lorsqu'un filtre ne retourne aucun résultat.
-- Build et lint validés après les dernières intégrations.
-
-### État partiel
-
-- La page `/services` utilise encore une structure et des textes issus des traductions, même si les pages d'accueil et détaillées utilisent Sanity pour certaines données.
-- Les pages détaillées des services utilisent Sanity pour les technologies, mais leurs textes, fonctionnalités et étapes restent dans les fichiers de traduction.
-- La page « Qui sommes-nous » utilise Sanity pour la photo d'équipe, mais sa mission, ses valeurs, son histoire et ses textes restent statiques.
-- Les mentions légales restent principalement écrites dans le code.
-- Les métadonnées SEO sont principalement définies dans les routes Next.js.
+- **Services de base stabilisés** : codés en dur (`STATIC_SERVICES` dans `ServicesClient.tsx`) pour garantir un affichage instantané et fiable des 3 expertises phares (Web, Mobile, Logiciels de gestion), bilingues FR/EN avec technologies associées.
+- **Bannières vidéo héro pour chaque service** : intégration de vidéos MP4 en autoplay/loop/muted (`devWeb-banner.mp4`, `devMobile-banner.mp4`, `logicielGestion-banner.mp4`) avec overlay sombre garantissant une parfaite lisibilité du texte.
+- **Hero cinématique & interactif** :
+  - **Typewriting fluide bicolore** : machine d'état asynchrone pour la saisie et l'effacement des slogans sur 2 lignes sans blocage de cycle de rendu React.
+  - **Curseur typewriter** : curseur stylisé avec animation dédiée (frappe, maintien, effacement).
+  - **Puzzle interactif desktop** : drag & drop des pièces du puzzle avec détection de grille, alternance automatique et adaptation responsive (cross-fade sur mobile).
+  - **Curseur système intelligent** : restauration automatique du curseur système `grab` et `grabbing` sur la zone du puzzle lorsqu'il est segmenté, et masquage synchronisé du curseur personnalisé `AnimatedCursor`.
+  - **Arrière-plan Hero optimisé** : image `hero-fond/0.jpg` avec voile translucide adapté au mode clair/sombre, espacement central élargi et élévation visuelle des blocs.
+- **Scroll Word Reveal bidirectionnel** : animation mot par mot avec flou et mise à l'échelle (`scale: 0.9 → 1`), déclenchée au centre de l'écran (`margin: -40%`) et réversible en montant (`once: false`).
+- **Framer Motion harmonisé** : toutes les sections majeures se déclenchent de manière bien visible lorsque la section atteint environ le milieu de la fenêtre de visualisation.
+- **Sanity CMS & Studio** : Studio intégré à `/studio`, schémas pour statistiques, projets, témoignages, partenaires, services et `companySettings` mis à jour avec actions `create`, `update`, `publish`.
+- **Formulaire de contact** : Nodemailer + SMTP VPS avec validation serveur, reCAPTCHA v3 et double email (notification + confirmation).
+- **Thème clair / sombre persistant** : géré de manière centralisée via `useTheme.ts` et `InlineScript` dans le layout, sans flash au chargement.
 
 ### Règle éditoriale importante
 
@@ -36,26 +28,16 @@ Les contenus d'exemple ne doivent pas être ajoutés au frontend comme fallback.
 
 ---
 
-## Progression validée - septembre 2026
+## Progression validée - fin septembre 2026
 
-### UI & thématique
-- **Thème clair / sombre centralisé** dans le hook `useTheme.ts` pour éviter la duplication et garantir une source unique de vérité.
-- **Persistance du thème** dans `localStorage` : la page récupère le dernier thème utilisé au chargement et réapplique immédiatement `data-theme`.
-- **Splash screen cohérent** : le fond du splash suit le dernier thème de l’utilisateur, sans flash visuel ni incohérence de rendu.
-- **Mode sombre appliqué au bon niveau** : surcouche sombre uniquement dans le mode dark, sans voile en mode clair.
-- **Transition de thème premium** : animation de diffusion/rapprochement depuis et vers le bouton de changement de thème.
-- **Direction typographique validée** : titres en `Manrope`, texte courant en `Inter` pour un rendu plus premium, lisible et équilibré.
-
-### Hero / marketing
-- **Section hero enrichie** avec fond géométrique inspiré d’un motif hexagonal discret et premium.
-- **Alternance infinie de slogans** sur deux lignes avec saisie progressive et texte coloré sur la seconde ligne.
-- **Curseur typewriter** : suit la saisie, puis clignote 3 fois avant de disparaître.
-- **Cohérence visuelle** sur les deux modes, avec fond de section respectant le thème actif.
+### UI & Interactions immersives
+- **Gestion du curseur hybride** : combinaison d'un curseur personnalisé avec suivi d'inertie (lerp) sur l'ensemble du site et d'une détection fine pour basculer sur les curseurs natifs (`grab`/`grabbing`, `text`, etc.) sur les composants interactifs complexes.
+- **Direction typographique** : titres en `Manrope`, texte courant en `Inter`, touches d'accentuation en `Story Script`.
+- **Ambiance visuelle des services** : chaque page service dispose d'un univers vidéo dynamique contextualisé.
 
 ### Points de vigilance actuels
-- Vérifier les visuels et les textes en production réelle sur navigation complète.
-- Valider la cohérence globale sur mobile/desktop après final review.
-- Préparer la mise à jour de certains contenus marketing et le choix final des CTA.
+- Vérifier les performances de lecture vidéo sur les connexions mobiles lentes.
+- Assurer la complétion des contenus institutionnels et projets dans Sanity Studio avant le déploiement public.
 
 ---
 
@@ -633,4 +615,5 @@ Sanity doit gérer le contenu et les choix éditoriaux, pas les secrets, la logi
 | 8 septembre 2026 | V0 | Structure du projet, pages principales et premières priorités |
 | 20 septembre 2026 | V1 design | Design system, thème, motion et cohérence visuelle |
 | 25 septembre 2026 | V1 CMS | Nodemailer SMTP, Sanity connecté, revalidation, états vides, vidéo, équipe et technologies |
+| 30 septembre 2026 | V1.2 Motion & Services | Services socles avec vidéo, puzzle interactif, curseurs hybrides, typewriter & scroll reveal |
 | À planifier | V2 CMS | Services complets, page À propos, légal, SEO, médias et gouvernance éditoriale |

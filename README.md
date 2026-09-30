@@ -10,12 +10,12 @@ Site web institutionnel de **KofCorporation**, entreprise informatique basée à
 
 | Élément | Technologie |
 |---|---|
-| Framework | [Next.js 14+](https://nextjs.org/) - App Router |
-| Styling | [Tailwind CSS v4](https://tailwindcss.com/) |
+| Framework | [Next.js 16](https://nextjs.org/) (App Router, React 19) |
+| Styling | Design System sur-mesure (CSS Custom Properties & BEM/Moderne) |
 | Animations | [Framer Motion](https://www.framer.com/motion/) |
 | Icônes | [Lucide React](https://lucide.dev/) |
-| CMS | [Sanity CMS](https://www.sanity.io/) |
-| Formulaire | React Hook Form + reCAPTCHA v3 |
+| CMS | [Sanity CMS v5](https://www.sanity.io/) (Next-Sanity Live) |
+| Formulaire | Validation Zod + Nodemailer (SMTP VPS) + reCAPTCHA v3 |
 | i18n | [next-intl](https://next-intl-docs.vercel.app/) - FR / EN |
 | Déploiement | [Vercel](https://vercel.com/) |
 
@@ -23,47 +23,55 @@ Site web institutionnel de **KofCorporation**, entreprise informatique basée à
 
 ## Fonctionnalités
 
--  Mode clair / sombre - persisté en `localStorage`, respecte `prefers-color-scheme`
--  Multilingue - Français (défaut) et Anglais
--  Splash screen léger - fade-in logo, max 1,2s
--  Carte Google Maps intégrée - page Contact
--  Page 404 personnalisée
--  Entièrement responsive - mobile first
--  Accessibilité WCAG AA - aria-labels, contrastes, sémantique HTML5
--  Formulaire de contact sécurisé - reCAPTCHA v3
--  Scrollbar et sélection de texte personnalisées
+-  **Mode clair / sombre** - persistant en `localStorage`, sans flash au chargement (`InlineScript` dans le `<head>`), respecte `prefers-color-scheme`.
+-  **Multilingue (FR / EN)** - routing internationalisé avec `next-intl`.
+-  **Hero interactif & cinématique** :
+  - Machine d'état typewriter à deux lignes avec rythme de frappe humain, curseur dédié et effacement automatique.
+  - Puzzle interactif desktop avec drag & drop, détection de grille et restauration intelligente du curseur natif (`grab` / `grabbing`).
+  - Déclinaison mobile fluide en cross-fade d'images.
+  - Arrière-plan optimisé avec superposition subtile adaptée au thème actif.
+-  **Scroll reveal dynamique & bidirectionnel** - animation cinématique mot par mot qui s'anime et se rétracte en fonction du défilement haut/bas.
+-  **Curseur animé personnalisé** - anneau interactif fluide (lerp) avec masque automatique sur les éléments nécessitant le curseur système.
+-  **Pages services enrichies** - bannières vidéo dédiées en fond (`devWeb-banner.mp4`, `devMobile-banner.mp4`, `logicielGestion-banner.mp4`).
+-  **Studio Sanity CMS intégré** - accessible à `/studio` pour piloter statistiques, projets phares, témoignages et réglages d'entreprise.
+-  **Formulaire de contact sécurisé** - protection reCAPTCHA v3, validation côté serveur et double notification par email via SMTP dédié.
+-  **Carte interactive Google Maps** - intégrée sur la page Contact.
+-  **Accessibilité & performance** - sémantique HTML5, respect WCAG AA, balises Open Graph dynamiques et chargement optimisé via `next/image`.
 
 ---
 
 ## Structure des pages
 
 ```
-/                     → Accueil
-/services             → Vue d'ensemble des services
-/services/[slug]      → Page détaillée par service
-/realisations         → Portfolio des projets (via Sanity)
-/qui-sommes-nous      → L'équipe, l'histoire, les valeurs
-/contact              → Formulaire + Google Maps
-/mentions-legales     → CGU + Politique de confidentialité
+/                     → Accueil (Hero interactif, Vidéo, Services, Stats, Réalisations, Témoignages)
+/services             → Présentation générale des expertises
+/services/[slug]      → Pages dédiées avec bandeau vidéo immersif
+/realisations         → Portfolio complet avec filtres et modales (Sanity)
+/qui-sommes-nous      → Histoire, valeurs et équipe
+/contact              → Formulaire sécurisé + carte Google Maps
+/mentions-legales     → CGU & politique de confidentialité
+/studio               → Sanity Studio pour la gestion de contenus
 ```
 
 ---
 
-## Design system
+## Design System
 
 **Typographie**
-- Titres : `Inter Tight` (700 hero / 600 sections)
-- Corps & UI : `Geist` (400 corps / 500 labels)
+- Titres : `Manrope` (700 à 800)
+- Corps & UI : `Inter` (400 à 600)
+- Accents : `Story Script`
 
-**Palette**
-| Token | Clair | Sombre |
-|---|---|---|
-| Primary | `#2F3974` | `#E8F0FE` |
-| Accent | `#0CACE8` | `#0CACE8` |
-| Background | `#F8F9FA` | `#1A1E3A` |
-| Surface | `#FFFFFF` | `#2C417A` |
+**Palette de couleurs**
+| Token | Rôle | Clair | Sombre |
+|---|---|---|---|
+| `--color-primary` | Couleur primaire | `#2F3974` | `#E8F0FE` |
+| `--color-accent` | Accentuation & CTA | `#0CACE8` | `#0CACE8` |
+| `--color-bg` | Fond de page | `#F8F9FA` | `#1A1E3A` |
+| `--color-surface` | Cartes & panneaux | `#FFFFFF` | `#2C417A` |
+| `--color-border` | Lignes & bordures | `#E2E8F0` | `#1E293B` |
 
-**Philosophie visuelle** - sections pleine largeur à angles droits, border-radius uniquement sur les éléments UI internes (cards, boutons, badges).
+**Philosophie visuelle** : Approche moderne, épurée et géométrique (« zero rounded » sur les grands blocs), contrastes soignés, animations non intrusives basées sur le défilement.
 
 ---
 
