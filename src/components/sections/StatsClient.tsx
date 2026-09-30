@@ -46,23 +46,24 @@ function AnimatedValue({ value, suffix }: Pick<StatItem, "value" | "suffix">) {
 }
 
 const sectionVariants = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 60 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut" as const },
+    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] as [number,number,number,number] },
   },
 };
 const containerVariants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
+  visible: { transition: { staggerChildren: 0.13, delayChildren: 0.25 } },
 };
 const itemVariants = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 50, scale: 0.95 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut" as const },
+    scale: 1,
+    transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] as [number,number,number,number] },
   },
 };
 
@@ -70,7 +71,7 @@ export default function StatsClient({ stats }: { stats: StatItem[] }) {
   const t = useTranslations("stats");
   const locale = useLocale();
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "0px" });
+  const isInView = useInView(sectionRef, { once: true, margin: "-30% 0px -30% 0px" });
   const [loaded, setLoaded] = useState(false);
   useEffect(() => { setLoaded(true); }, []);
   return (

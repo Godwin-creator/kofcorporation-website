@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import "./HeroImageSlider.css";
 
-const IMAGES = ["/images/hero-image.png", "/images/hero-image1.png"] as const;
+const IMAGES = ["/images/images-puzzle/hero-image.png", "/images/images-puzzle/hero-image1.png"] as const;
 const GRID_COLUMNS = 3;
 const GRID_ROWS = 4;
 const TOTAL_PIECES = GRID_COLUMNS * GRID_ROWS;
@@ -291,7 +291,14 @@ export default function HeroImageSlider() {
 
   return (
     <div className="hero-image-slider" aria-label="Puzzle image">
-      <div className="hero-image-slider__frame" ref={boardRef} onPointerMove={handleBoardPointerMove} onPointerUp={handleBoardPointerUp} onPointerLeave={handleBoardPointerUp}>
+      <div
+        className={`hero-image-slider__frame hero-image-slider__frame--puzzle ${draggedId !== null ? "hero-image-slider__frame--dragging" : ""}`}
+        data-native-cursor="true"
+        ref={boardRef}
+        onPointerMove={handleBoardPointerMove}
+        onPointerUp={handleBoardPointerUp}
+        onPointerLeave={handleBoardPointerUp}
+      >
         <div className="hero-image-slider__background">
           <Image src={baseImage} alt="" fill className="hero-image-slider__img" priority sizes="(max-width: 1023px) 0px, 500px" />
         </div>
@@ -324,6 +331,7 @@ export default function HeroImageSlider() {
             <button
               key={piece.id}
               type="button"
+              data-native-cursor="true"
               className={`hero-image-slider__piece ${piece.currentIndex === piece.targetIndex ? "hero-image-slider__piece--locked" : ""} ${isDragging ? "hero-image-slider__piece--dragging" : ""}`}
               onPointerDown={(event) => handlePointerDown(event, piece)}
               style={{

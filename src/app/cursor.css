@@ -46,6 +46,21 @@ body:has(#sanity),
   cursor: text !important;
 }
 
+/* Restore system/default hand cursor for puzzle game when blocks are segmented */
+.hero-image-slider__frame--puzzle,
+.hero-image-slider__frame--puzzle *,
+.hero-image-slider__piece {
+  cursor: grab !important;
+}
+
+.hero-image-slider__frame--puzzle:active,
+.hero-image-slider__frame--dragging,
+.hero-image-slider__frame--dragging *,
+.hero-image-slider__piece--dragging,
+.hero-image-slider__piece:active {
+  cursor: grabbing !important;
+}
+
 /* Allow the native cursor back on touch devices and reduced-motion */
 @media (pointer: coarse) {
   *,

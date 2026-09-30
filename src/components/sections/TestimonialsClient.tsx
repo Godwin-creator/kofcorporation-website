@@ -10,8 +10,8 @@ import Watermark from '@/components/ui/Watermark'
 import LoadingDots from '@/components/ui/LoadingDots'
 
 export interface TestimonialItem {id: string; quote: string; name: string; role: string; rating: number}
-const slideVariants = {enter: (direction: number) => ({opacity: 0, x: direction > 0 ? 56 : -56}), center: {opacity: 1, x: 0, transition: {duration: 0.45, ease: 'easeOut' as const}}, exit: (direction: number) => ({opacity: 0, x: direction > 0 ? -56 : 56, transition: {duration: 0.3, ease: 'easeIn' as const}})}
-const sectionVariants = {hidden: {opacity: 0, y: 40}, visible: {opacity: 1, y: 0, transition: {duration: 0.6, ease: 'easeOut' as const}}}
+const slideVariants = {enter: (direction: number) => ({opacity: 0, x: direction > 0 ? 56 : -56}), center: {opacity: 1, x: 0, transition: {duration: 0.55, ease: 'easeOut' as const}}, exit: (direction: number) => ({opacity: 0, x: direction > 0 ? -56 : 56, transition: {duration: 0.35, ease: 'easeIn' as const}})}
+const sectionVariants = {hidden: {opacity: 0, y: 60}, visible: {opacity: 1, y: 0, transition: {duration: 0.9, ease: [0.22, 1, 0.36, 1] as [number,number,number,number]}}}
 
 export default function TestimonialsClient({testimonials}: {testimonials: TestimonialItem[]}) {
   const t = useTranslations('testimonials')
@@ -19,7 +19,7 @@ export default function TestimonialsClient({testimonials}: {testimonials: Testim
   const [direction, setDirection] = useState(1)
   const [isPaused, setIsPaused] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
-  const isInView = useInView(sectionRef, {once: true, margin: '0px'})
+  const isInView = useInView(sectionRef, {once: true, margin: '-30% 0px -30% 0px'})
   const [loaded, setLoaded] = useState(false)
   useEffect(() => { setLoaded(true); }, [])
   const active = testimonials[activeIndex]

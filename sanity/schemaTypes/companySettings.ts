@@ -1,11 +1,6 @@
 import {defineField, defineType} from 'sanity'
 import {iconOptions} from './shared/iconOptions'
 
-const richText = {
-  type: 'array',
-  of: [{type: 'block'}],
-}
-
 export const companySettings = Object.assign(
   defineType({
     name: 'companySettings',
@@ -107,5 +102,5 @@ export const companySettings = Object.assign(
       }),
     ],
   }),
-  {__experimental_actions: ['update', 'publish'] as const}
+  {__experimental_actions: ['create', 'update', 'publish'] as const}
 )

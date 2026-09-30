@@ -69,3 +69,9 @@
   opacity: 0.6;
 }
 
+/* Hidden state when native system cursor is active */
+.acursor.acursor--hidden {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
