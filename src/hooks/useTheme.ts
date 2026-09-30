@@ -12,12 +12,12 @@ export function applyTheme(theme: Theme) {
 
   const meta = document.querySelector('meta[name="theme-color"]');
   if (meta) {
-    meta.setAttribute("content", theme === "dark" ? "#1A1E3A" : "#F8F9FA");
+    meta.setAttribute("content", theme === "dark" ? "#1A1E3A" : "#E0F2FE");
   }
 }
 
 export function getThemeBackground(theme: Theme): string {
-  return theme === "dark" ? "#1A1E3A" : "#F8F9FA";
+  return theme === "dark" ? "#1A1E3A" : "#E0F2FE";
 }
 
 /**

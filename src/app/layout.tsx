@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    {media: '(prefers-color-scheme: light)', color: '#F8F9FA'},
+    {media: '(prefers-color-scheme: light)', color: '#E0F2FE'},
     {media: '(prefers-color-scheme: dark)', color: '#1A1E3A'},
   ],
 }
@@ -33,7 +33,7 @@ const themeInitScript = `
     document.documentElement.classList.remove('splash-active');
     document.documentElement.setAttribute('data-theme', theme);
     var themeColorMeta = document.querySelector('meta[name="theme-color"]');
-    if (themeColorMeta) themeColorMeta.setAttribute('content', theme === 'dark' ? '#1A1E3A' : '#F8F9FA');
+    if (themeColorMeta) themeColorMeta.setAttribute('content', theme === 'dark' ? '#1A1E3A' : '#E0F2FE');
   } catch (e) {}
 })();
 `.trim()
