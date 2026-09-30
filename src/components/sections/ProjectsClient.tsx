@@ -58,7 +58,7 @@ export default function ProjectsClient({
   const t = useTranslations("projects");
   const locale = useLocale();
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const isInView = useInView(sectionRef, { once: true, margin: "0px" });
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(
     null,
   );
@@ -71,8 +71,8 @@ export default function ProjectsClient({
       className="projects"
       aria-labelledby="projects-title"
       variants={sectionVariants}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
+      initial={projects.length ? "hidden" : "visible"}
+      animate={isInView || !projects.length ? "visible" : "hidden"}
     >
       {!loaded ? <LoadingDots /> : <Watermark id="projects" />}
       <div className="projects__inner">

@@ -3,8 +3,8 @@
 import {useEffect, useRef} from "react"
 import {AnimatePresence, motion} from "framer-motion"
 import {useLocale, useTranslations} from "next-intl"
-import {ExternalLink, X} from "lucide-react"
-import type {SanityProject} from "@/types/sanity"
+import {ExternalLink, Globe, Smartphone, Code2, X} from "lucide-react"
+import type {SanityProject, ProjectLink} from "@/types/sanity"
 import "./ProjectModal.css"
 
 interface ProjectModalProps {
@@ -12,6 +12,37 @@ interface ProjectModalProps {
   imageUrl?: string
   isOpen: boolean
   onClose: () => void
+}
+
+function getLinkIcon(type: string) {
+  switch (type) {
+    case "web":
+    case "website":
+      return Globe
+    case "playstore":
+    case "appstore":
+      return Smartphone
+    case "github":
+      return Code2
+    default:
+      return ExternalLink
+  }
+}
+
+function getDefaultLinkLabel(type: string) {
+  switch (type) {
+    case "web":
+    case "website":
+      return "Site web"
+    case "playstore":
+      return "Play Store"
+    case "appstore":
+      return "App Store"
+    case "github":
+      return "GitHub"
+    default:
+      return "Visiter"
+  }
 }
 
 export default function ProjectModal({project, imageUrl, isOpen, onClose}: ProjectModalProps) {
@@ -70,13 +101,17 @@ export default function ProjectModal({project, imageUrl, isOpen, onClose}: Proje
           
           <div className="project-modal__links">
             {project.links && project.links.length > 0 ? (
-              project.links.map(link => (
-                <a key={link._key} className="project-modal__link" href={link.url} target="_blank" rel="noopener noreferrer">
-                  {link.label} <ExternalLink size={17} aria-hidden="true" />
-                </a>
-              ))
+              project.links.map((link: ProjectLink, idx: number) => {
+                const IconComponent = getLinkIcon(link.type)
+                const labelText = link.label || getDefaultLinkLabel(link.type)
+                return (
+                  <a key={link._key || idx} className="project-modal__link" href={link.url} target="_blank" rel="noopener noreferrer">
+                    <IconComponent size={17} aria-hidden="true" /> {labelText}
+                  </a>
+                )
+              })
             ) : project.url ? (
-              <a className="project-modal__link" href={project.url} target="_blank" rel="noopener noreferrer">{t("visit")} <ExternalLink size={17} aria-hidden="true" /></a>
+              <a className="project-modal__link" href={project.url} target="_blank" rel="noopener noreferrer"><Globe size={17} aria-hidden="true" /> {t("visit")}</a>
             ) : null}
           </div>
         </div>

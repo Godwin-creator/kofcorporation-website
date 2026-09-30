@@ -11,7 +11,7 @@ import CallToAction from "@/components/sections/CallToAction";
 import { fetchSettings } from "@/lib/queries";
 import type { CompanySettings } from "@/types/sanity";
 
-const ENABLE_SPLASH = true;
+const ENABLE_SPLASH = false;
 
 export default async function Home() {
   const settings = await fetchSettings();

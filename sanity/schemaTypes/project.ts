@@ -16,7 +16,7 @@ export const project = defineType({
       name: 'slug',
       title: 'Slug (URL)',
       type: 'slug',
-      description: 'Identifiant URL généré automatiquement depuis le titre — cliquez sur "Générer" si nécessaire',
+      description: 'Identifiant URL généré automatiquement depuis le titre - cliquez sur "Générer" si nécessaire',
       options: {source: 'title'},
       validation: (Rule) => Rule.required().error('Le slug est obligatoire'),
     }),
@@ -24,10 +24,10 @@ export const project = defineType({
     // ── Catégories (multi-select) ──────────────────────────────────────────
     defineField({
       name: 'categories',
-      title: 'Catégories',
+      title: 'Catégories du projet',
       type: 'array',
       of: [{type: 'string'}],
-      description: 'Types de projet — un projet peut appartenir à plusieurs catégories (ex: Web + Mobile). Utilisé pour le filtrage sur la page Réalisations.',
+      description: 'Types de projet - un projet peut appartenir à plusieurs catégories (ex: Web + Mobile). Utilisé pour le filtrage sur la page Réalisations.',
       options: {
         list: [
           {title: 'Web', value: 'web'},
@@ -35,16 +35,17 @@ export const project = defineType({
           {title: 'Logiciel', value: 'logiciel'},
           {title: 'Formation', value: 'formation'},
         ],
+        layout: 'grid',
       },
-      validation: (Rule) => Rule.required().min(1).error('Au moins une catégorie est obligatoire'),
+      validation: (Rule) => Rule.required().min(1).error('Sélectionnez au moins une catégorie'),
     }),
 
     // ── Ancien champ category (lecture seule, rétro-compatibilité) ─────────
     defineField({
       name: 'category',
-      title: '⚠️ Catégorie (ancien — ne plus utiliser)',
+      title: '⚠️ Ancienne catégorie (dépréciée)',
       type: 'string',
-      description: 'Ancien champ à catégorie unique. Utilisez "Catégories" ci-dessus à la place. Ce champ sera supprimé ultérieurement.',
+      description: 'Ne plus utiliser - remplacé par "categories"',
       hidden: true,
     }),
 
@@ -101,7 +102,7 @@ export const project = defineType({
       name: 'image',
       title: 'Image principale',
       type: 'image',
-      description: 'Capture d\'écran ou visuel représentatif du projet (format 16:9 recommandé). Cliquez sur le bouton "Hotspot" pour définir la zone importante.',
+      description: 'Capture d\'écran ou visuel représentatif du projet (format 16:9 recommandé). Double-cliquez sur l\'image ou cliquez sur le bouton "Hotspot" pour définir la zone importante.',
       options: {hotspot: true},
       fields: [
         defineField({name: 'alt', title: 'Texte alternatif', type: 'string'}),
@@ -130,6 +131,7 @@ export const project = defineType({
       name: 'links',
       title: 'Liens du projet',
       type: 'array',
+      description: 'Ajoutez tous les liens pertinents : site web, Play Store, App Store, etc.',
       of: [
         {
           type: 'object',
@@ -137,50 +139,47 @@ export const project = defineType({
           title: 'Lien',
           fields: [
             defineField({
-              name: 'label',
-              title: 'Libellé',
+              name: 'type',
+              title: 'Type de lien',
               type: 'string',
-              description: 'Texte affiché pour ce lien. Exemples : "Voir le site", "Play Store", "App Store"',
-              validation: (Rule) => Rule.required().error('Le libellé est obligatoire'),
+              options: {
+                list: [
+                  {title: 'Site web', value: 'web'},
+                  {title: 'Google Play Store', value: 'playstore'},
+                  {title: 'Apple App Store', value: 'appstore'},
+                  {title: 'GitHub', value: 'github'},
+                  {title: 'Autre', value: 'other'},
+                ],
+              },
+              validation: (Rule) => Rule.required(),
             }),
             defineField({
               name: 'url',
               title: 'URL',
               type: 'url',
-              description: 'Adresse du lien. Exemple : https://play.google.com/store/apps/details?id=...',
-              validation: (Rule) => Rule.required().error('L\'URL est obligatoire'),
+              validation: (Rule) => Rule.required().uri({scheme: ['http', 'https']}),
             }),
             defineField({
-              name: 'type',
-              title: 'Type de lien',
+              name: 'label',
+              title: 'Libellé personnalisé (optionnel)',
               type: 'string',
-              description: 'Catégorie du lien — détermine l\'icône affichée sur le site',
-              options: {
-                list: [
-                  {title: '🌐 Site web', value: 'website'},
-                  {title: '📱 Google Play Store', value: 'playstore'},
-                  {title: '🍎 Apple App Store', value: 'appstore'},
-                  {title: '💻 Code source (GitHub)', value: 'github'},
-                  {title: '🎮 Démo en ligne', value: 'demo'},
-                  {title: '📎 Autre', value: 'other'},
-                ],
-              },
-              initialValue: 'website',
-              validation: (Rule) => Rule.required().error('Le type de lien est obligatoire'),
+              description: 'Si vide, le libellé par défaut du type sera utilisé',
             }),
           ],
           preview: {
-            select: {title: 'label', subtitle: 'url'},
+            select: {type: 'type', url: 'url', label: 'label'},
+            prepare({type, url, label}) {
+              return {title: label || type, subtitle: url}
+            },
           },
         },
       ],
-      description: 'Liens vers le projet : site web, Play Store, App Store, code source, démo… Ajoutez autant de liens que nécessaire.',
     }),
 
     // ── Ancien champ url (rétro-compatibilité) ────────────────────────────
     defineField({
       name: 'url',
-      title: '⚠️ URL (ancien — ne plus utiliser)',
+      title: '⚠️ URL (ancien - ne plus utiliser)',
       type: 'url',
       description: 'Ancien champ URL unique. Utilisez "Liens du projet" ci-dessus à la place.',
       hidden: true,
@@ -218,7 +217,7 @@ export const project = defineType({
       name: 'publishedAt',
       title: 'Date de publication',
       type: 'datetime',
-      description: 'Date de mise en ligne du projet — utilisée pour le tri chronologique',
+      description: 'Date de mise en ligne du projet - utilisée pour le tri chronologique',
     }),
     defineField({
       name: 'status',
@@ -253,10 +252,10 @@ export const project = defineType({
     prepare({title, subtitle, media, categories, category, featured}) {
       // Rétro-compatibilité : utiliser categories[] ou l'ancien category
       const cats = categories?.length ? categories.join(', ') : category ?? ''
-      const badges = [cats, featured ? '⭐ Accueil' : ''].filter(Boolean).join(' · ')
+      const badges = [cats, featured ? 'Accueil' : ''].filter(Boolean).join(' · ')
       return {
         title,
-        subtitle: `${subtitle ?? ''} — ${badges}`.trim() || cats,
+        subtitle: `${subtitle ?? ''} - ${badges}`.trim() || cats,
         media,
       }
     },

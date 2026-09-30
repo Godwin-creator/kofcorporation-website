@@ -1,12 +1,15 @@
-import {getLocale} from 'next-intl/server'
-import {client, urlFor} from '@/lib/sanity'
-import {fetchFeaturedProjects} from '@/lib/queries'
-import type {SanityProject} from '@/types/sanity'
-import ProjectsClient, {type ProjectItem} from './ProjectsClient'
+import { getLocale } from 'next-intl/server'
+import { client, urlFor } from '@/lib/sanity'
+import { fetchFeaturedProjects } from '@/lib/queries'
+import type { SanityProject } from '@/types/sanity'
+import ProjectsClient, { type ProjectItem } from './ProjectsClient'
 
 export default async function Projects() {
   const locale = await getLocale()
   const projects = await fetchFeaturedProjects() ?? []
+  if (!projects.length) {
+    console.warn('[Sanity] Aucune donnée trouvée pour le type "project" (featured=true) - vérifier le Studio')
+  }
   const items: ProjectItem[] = (projects as SanityProject[]).map((project: SanityProject) => ({
     id: project._id,
     title: project.title,

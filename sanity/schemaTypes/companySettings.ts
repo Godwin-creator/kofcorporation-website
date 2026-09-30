@@ -74,7 +74,7 @@ export const companySettings = Object.assign(
         name: 'heroSubtitle',
         title: 'Sous-titre Hero (FR)',
         type: 'text',
-        description: 'Sous-titre du Hero (FR) — 1 à 2 phrases maximum. Présentez brièvement l\'activité de l\'entreprise.',
+        description: 'Sous-titre du Hero (FR) - 1 à 2 phrases maximum. Présentez brièvement l\'activité de l\'entreprise.',
       }),
       defineField({
         name: 'heroSubtitleEn',
@@ -100,7 +100,7 @@ export const companySettings = Object.assign(
         title: 'Photo de l\'équipe',
         type: 'image',
         options: {hotspot: true},
-        description: 'Photo de l\'équipe ou du bureau — utilisée dans la section Vidéo si pas de vidéo disponible',
+        description: 'Photo de l\'équipe ou du bureau - utilisée dans la section Vidéo si pas de vidéo disponible',
         fields: [
           defineField({name: 'alt', title: 'Texte alternatif', type: 'string'}),
         ],

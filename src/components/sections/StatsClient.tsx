@@ -70,7 +70,7 @@ export default function StatsClient({ stats }: { stats: StatItem[] }) {
   const t = useTranslations("stats");
   const locale = useLocale();
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const isInView = useInView(sectionRef, { once: true, margin: "0px" });
   const [loaded, setLoaded] = useState(false);
   useEffect(() => { setLoaded(true); }, []);
   return (
@@ -80,8 +80,8 @@ export default function StatsClient({ stats }: { stats: StatItem[] }) {
       className="stats"
       aria-labelledby="stats-title"
       variants={sectionVariants}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
+      initial={stats.length ? "hidden" : "visible"}
+      animate={isInView || !stats.length ? "visible" : "hidden"}
     >
       {!loaded ? <LoadingDots /> : <Watermark id="stats" />}
       <div className="stats__inner">

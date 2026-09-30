@@ -3,7 +3,7 @@ import { sanityFetch } from "@/sanity/lib/live";
 import type { CompanySettings, SanityProject, SanityTestimonial, SanityPartner, SanityService } from "@/types/sanity";
 
 // ─────────────────────────────────────────────
-// Queries (GROQ strings) — imported by components
+// Queries (GROQ strings) - imported by components
 // ─────────────────────────────────────────────
 
 export const STATS_QUERY = defineQuery(`

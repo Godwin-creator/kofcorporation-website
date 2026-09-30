@@ -4,7 +4,7 @@ export const structure: StructureResolver = (S) =>
   S.list()
     .title('KofCorporation CMS')
     .items([
-      // SINGLETON — toujours en premier
+      // SINGLETON - toujours en premier
       S.listItem()
         .title('Paramètres de l\'entreprise')
         .id('companySettings')

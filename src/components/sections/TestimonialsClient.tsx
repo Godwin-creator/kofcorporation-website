@@ -19,7 +19,7 @@ export default function TestimonialsClient({testimonials}: {testimonials: Testim
   const [direction, setDirection] = useState(1)
   const [isPaused, setIsPaused] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
-  const isInView = useInView(sectionRef, {once: true, margin: '-100px'})
+  const isInView = useInView(sectionRef, {once: true, margin: '0px'})
   const [loaded, setLoaded] = useState(false)
   useEffect(() => { setLoaded(true); }, [])
   const active = testimonials[activeIndex]
@@ -39,7 +39,7 @@ export default function TestimonialsClient({testimonials}: {testimonials: Testim
   }
 
   if (!testimonials.length) return (
-    <motion.section ref={sectionRef} id="testimonials" className="testimonials" aria-labelledby="testimonials-title" variants={sectionVariants} initial="hidden" animate={isInView ? 'visible' : 'hidden'}>
+    <motion.section ref={sectionRef} id="testimonials" className="testimonials" aria-labelledby="testimonials-title" variants={sectionVariants} initial="visible" animate="visible">
       {!loaded ? <LoadingDots /> : <Watermark id="testimonials" />}
       <div className="testimonials__inner">
         <header className="testimonials__header">

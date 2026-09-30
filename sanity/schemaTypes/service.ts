@@ -29,7 +29,7 @@ export const service = defineType({
       name: 'slug',
       title: 'Slug (URL)',
       type: 'slug',
-      description: 'Identifiant URL — cliquez sur "Générer" après avoir saisi le titre',
+      description: 'Identifiant URL - cliquez sur "Générer" après avoir saisi le titre',
       options: {source: 'title'},
       validation: (Rule) => Rule.required().error('Le slug est obligatoire'),
     }),
@@ -59,7 +59,7 @@ export const service = defineType({
       name: 'description',
       title: 'Description complète (FR)',
       ...richText,
-      description: 'Description détaillée avec titres et paragraphes — visible sur la page service dédiée',
+      description: 'Description détaillée avec titres et paragraphes - visible sur la page service dédiée',
     }),
     defineField({
       name: 'descriptionEn',
@@ -71,7 +71,7 @@ export const service = defineType({
       name: 'icon',
       title: 'Icône',
       type: 'string',
-      description: "Icône représentant ce service — choisissez celle qui correspond le mieux",
+      description: "Icône représentant ce service - choisissez celle qui correspond le mieux",
       options: {
         list: [...iconOptions],
         layout: 'radio',
