@@ -70,6 +70,7 @@ export default function WebDevelopmentService({technologies = []}: {technologies
             className="service-hero__video"
             src="/videos/devWeb-banner.mp4"
             poster="/images/services/devWeb-poster.webp"
+            preload="metadata"
             autoPlay
             muted
             loop
