@@ -13,7 +13,7 @@ export default async function Stats() {
   const stats: StatItem[] = sanityStats.map((stat: SanityStat) => {
     const value = stat.value ?? '0'
     const match = value.match(/^(\d+)(.*)$/)
-    return { id: stat._id, value: Number(match?.[1] ?? 0), suffix: match?.[2] || t('years'), label: stat.label, labelEn: stat.labelEn ?? stat.label, icon: stat.icon ?? 'Star' }
+    return { id: stat._id, value: Number(match?.[1] ?? 0), suffix: match?.[2] || '', label: stat.label, labelEn: stat.labelEn ?? stat.label, icon: stat.icon ?? 'Star' }
   })
   return <StatsClient stats={stats} />
 }
