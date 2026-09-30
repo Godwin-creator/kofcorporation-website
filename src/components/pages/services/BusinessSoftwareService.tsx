@@ -5,16 +5,17 @@ import { motion } from "framer-motion";
 import { ArrowRight, Check, Monitor, Layout, Database, Shield, Users, BarChart } from "lucide-react";
 import CallToAction from "@/components/sections/CallToAction";
 import "./BusinessSoftwareService.css";
+import "./ServiceHero.css";
 import { Link } from "@/i18n/navigation";
 import EmptyState from "@/components/ui/EmptyState";
 import Watermark from "@/components/ui/Watermark";
 
 const sectionVariants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 60 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut" as const },
+    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] as [number,number,number,number] },
   },
 };
 
@@ -58,33 +59,37 @@ export default function BusinessSoftwareService({technologies = []}: {technologi
       <div className="business-software-service">
         <Watermark id="management" />
         <motion.section
-          className="business-software-service__hero"
+          className="service-hero business-software-service__hero"
           aria-labelledby="business-software-title"
           initial="hidden"
           animate="visible"
           variants={sectionVariants}
         >
-          <div className="business-software-service__hero-inner">
-            <div className="business-software-service__hero-content">
-              <div className="business-software-service__hero-icon">
-                <Monitor size={48} strokeWidth={1.5} />
-              </div>
-              <p className="business-software-service__eyebrow">{t("hero.eyebrow")}</p>
-              <h1 id="business-software-title">
-                {t("hero.title")}
-              </h1>
-              <p className="business-software-service__hero-description">
-                {t("hero.description")}
-              </p>
-              <div className="business-software-service__hero-cta">
-                <Link href="/contact#contact-form" className="business-software-service__cta business-software-service__cta--primary">
-                  {t("hero.cta")}
-                  <ArrowRight size={18} strokeWidth={1.8} aria-hidden="true" />
-                </Link>
-                <Link href="/services" className="business-software-service__cta business-software-service__cta--secondary">
-                  {t("hero.back")}
-                </Link>
-              </div>
+          {/* Background video */}
+          <video
+            className="service-hero__video"
+            src="/videos/logicielGestion-banner.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            aria-hidden="true"
+          />
+          {/* Overlay */}
+          <div className="service-hero__overlay" aria-hidden="true" />
+          {/* Content */}
+          <div className="service-hero__content">
+            {/* <p className="service-hero__eyebrow">{t("hero.eyebrow")}</p> */}
+            <h1 id="business-software-title">{t("hero.title")}</h1>
+            <p className="service-hero__description">{t("hero.description")}</p>
+            <div className="service-hero__cta-row">
+              <Link href="/contact#contact-form" className="service-hero__cta--primary">
+                {t("hero.cta")}
+                <ArrowRight size={18} strokeWidth={1.8} aria-hidden="true" />
+              </Link>
+              <Link href="/services" className="service-hero__cta--secondary">
+                {t("hero.back")}
+              </Link>
             </div>
           </div>
         </motion.section>
@@ -110,10 +115,10 @@ export default function BusinessSoftwareService({technologies = []}: {technologi
                 <motion.div
                   className="business-software-feature-card"
                   key={key}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.5, ease: "easeOut" as const }}
+                  initial={{ opacity: 0, y: 50, scale: 0.95 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, margin: "-30% 0px -30% 0px" }}
+                  transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] as [number,number,number,number] }}
                 >
                   <div className="business-software-feature-card__icon">
                     <Icon size={28} strokeWidth={1.6} />

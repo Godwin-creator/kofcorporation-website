@@ -2,19 +2,20 @@
 
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
-import { ArrowRight, Check, Globe, Layout, Code, Smartphone, Zap, Shield, Globe2 } from "lucide-react";
+import { ArrowRight, Check, Layout, Code, Smartphone, Zap, Shield, Globe2 } from "lucide-react";
 import CallToAction from "@/components/sections/CallToAction";
 import "./WebDevelopmentService.css";
+import "./ServiceHero.css";
 import { Link } from "@/i18n/navigation";
 import EmptyState from "@/components/ui/EmptyState";
 import Watermark from "@/components/ui/Watermark";
 
 const sectionVariants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 60 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut" as const },
+    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] as [number,number,number,number] },
   },
 };
 
@@ -58,33 +59,37 @@ export default function WebDevelopmentService({technologies = []}: {technologies
       <div className="web-development-service">
         <Watermark id="web_dev" />
         <motion.section
-          className="web-development-service__hero"
+          className="service-hero web-development-service__hero"
           aria-labelledby="web-dev-title"
           initial="hidden"
           animate="visible"
           variants={sectionVariants}
         >
-          <div className="web-development-service__hero-inner">
-            <div className="web-development-service__hero-content">
-              <div className="web-development-service__hero-icon">
-                <Globe size={48} strokeWidth={1.5} />
-              </div>
-              <p className="web-development-service__eyebrow">{t("hero.eyebrow")}</p>
-              <h1 id="web-dev-title">
-                {t("hero.title")}
-              </h1>
-              <p className="web-development-service__hero-description">
-                {t("hero.description")}
-              </p>
-              <div className="web-development-service__hero-cta">
-                <Link href="/contact#contact-form" className="web-development-service__cta web-development-service__cta--primary">
-                  {t("hero.cta")}
-                  <ArrowRight size={18} strokeWidth={1.8} aria-hidden="true" />
-                </Link>
-                <Link href="/services" className="web-development-service__cta web-development-service__cta--secondary">
-                  {t("hero.back")}
-                </Link>
-              </div>
+          {/* Background video */}
+          <video
+            className="service-hero__video"
+            src="/videos/devWeb-banner.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            aria-hidden="true"
+          />
+          {/* Overlay */}
+          <div className="service-hero__overlay" aria-hidden="true" />
+          {/* Content */}
+          <div className="service-hero__content">
+            {/* <p className="service-hero__eyebrow">{t("hero.eyebrow")}</p> */}
+            <h1 id="web-dev-title">{t("hero.title")}</h1>
+            <p className="service-hero__description">{t("hero.description")}</p>
+            <div className="service-hero__cta-row">
+              <Link href="/contact#contact-form" className="service-hero__cta--primary">
+                {t("hero.cta")}
+                <ArrowRight size={18} strokeWidth={1.8} aria-hidden="true" />
+              </Link>
+              <Link href="/services" className="service-hero__cta--secondary">
+                {t("hero.back")}
+              </Link>
             </div>
           </div>
         </motion.section>
@@ -110,10 +115,10 @@ export default function WebDevelopmentService({technologies = []}: {technologies
                 <motion.div
                   className="web-development-feature-card"
                   key={key}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.5, ease: "easeOut" as const }}
+                  initial={{ opacity: 0, y: 50, scale: 0.95 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, margin: "-30% 0px -30% 0px" }}
+                  transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] as [number,number,number,number] }}
                 >
                   <div className="web-development-feature-card__icon">
                     <Icon size={28} strokeWidth={1.6} />

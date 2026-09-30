@@ -1,30 +1,42 @@
 /* ============================================================
-   ScrollWordReveal - Word-by-word reveal animation
+   ScrollWordReveal - Cinematic word-by-word reveal animation
    ============================================================ */
 
 .scroll-reveal {
-  padding: 3rem 1.5rem;
+  padding: 3.5rem 1.5rem;
   text-align: center;
-  max-width: 900px;
+  max-width: 960px;
   margin: 0 auto;
+  /* Prevent layout shift while words animate */
+  min-height: 8rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  line-height: 1.4;
 }
 
 .scroll-reveal__word {
   font-family: var(--font-heading);
-  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  font-size: clamp(1.35rem, 2.8vw, 2rem);
   font-weight: 600;
   color: var(--color-text-muted);
-  transition: color 0.4s ease, text-shadow 0.4s ease;
-  display: inline;
+  display: inline-block;
+  will-change: transform, opacity, filter;
 }
 
-.scroll-reveal__word--active {
-  color: var(--color-text);
-  text-shadow: 0 0 20px color-mix(in srgb, var(--color-accent) 30%, transparent);
+/* Accent words: first, last, and after commas */
+.scroll-reveal__word--accent {
+  color: var(--color-accent);
+  font-weight: 700;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .scroll-reveal__word {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
     color: var(--color-text);
     transition: none;
   }

@@ -3,12 +3,11 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
 import { ArrowRight } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import "./Hero.css";
 import { Link } from "@/i18n/navigation";
 import HeroImageSlider from "@/components/ui/HeroImageSlider";
-import type {CompanySettings} from "@/types/sanity";
-
+import type { CompanySettings } from "@/types/sanity";
 
 const SLOGANS = {
   fr: [
@@ -21,11 +20,22 @@ const SLOGANS = {
   ],
 };
 
-export default function Hero({settings}: {settings?: CompanySettings | null}) {
+/** Easing cubic variable for a more human-like typing rhythm */
+const CHAR_DELAYS = (index: number, total: number) => {
+  // Slow start, speed up in the middle, slow at the end
+  const progress = index / total;
+  if (progress < 0.15) return 120;
+  if (progress < 0.85) return 60;
+  return 110;
+};
+
+type Phase = "typing-l1" | "pause-mid" | "typing-l2" | "hold" | "erasing" | "transition";
+
+export default function Hero({ settings }: { settings?: CompanySettings | null }) {
   const t = useTranslations("hero");
   const locale = useLocale();
   const cmsTitle = locale === "en" ? settings?.heroTitleEn : settings?.heroTitle;
-  const cmsSlogan = cmsTitle ? [{lineOne: cmsTitle, lineTwo: ""}] : null;
+  const cmsSlogan = cmsTitle ? [{ lineOne: cmsTitle, lineTwo: "" }] : null;
   const sloganSet = cmsSlogan ?? (SLOGANS[locale as keyof typeof SLOGANS] ?? SLOGANS.fr);
   const description = (locale === "en" ? settings?.heroSubtitleEn : settings?.heroSubtitle) ?? t("description");
 
@@ -33,103 +43,96 @@ export default function Hero({settings}: {settings?: CompanySettings | null}) {
   const y = useTransform(scrollY, [0, 300], [0, -60]);
 
   const [sloganIndex, setSloganIndex] = useState(0);
-  const [typedLineOne, setTypedLineOne] = useState("");
-  const [typedLineTwo, setTypedLineTwo] = useState("");
-  const [typedProgress, setTypedProgress] = useState(0);
-  const [cursorVisible, setCursorVisible] = useState(true);
+  const [displayedL1, setDisplayedL1] = useState("");
+  const [displayedL2, setDisplayedL2] = useState("");
+  const [cursorLine, setCursorLine] = useState<1 | 2>(1);
+  const [isHolding, setIsHolding] = useState(false);
+  const [isErasing, setIsErasing] = useState(false);
+
+  const activeSlogan = sloganSet[sloganIndex];
 
   useEffect(() => {
-    const activeSlogan = sloganSet[sloganIndex];
-    const totalTypingMs = 6500;
-    const totalChars = activeSlogan.lineOne.length + activeSlogan.lineTwo.length;
-    const stepMs = totalTypingMs / totalChars;
-    let rafId = 0;
-    let holdTimeout: number | undefined;
-    const start = performance.now();
+    let isCancelled = false;
 
-    const updateTyping = (now: number) => {
-      const elapsed = now - start;
-      const typedCount = Math.min(totalChars, Math.floor(elapsed / stepMs));
-      setTypedProgress(typedCount);
+    const runTypewriter = async () => {
+      const l1 = activeSlogan.lineOne;
+      const l2 = activeSlogan.lineTwo;
+      const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
-      const nextLineOne = activeSlogan.lineOne.slice(
-        0,
-        Math.min(typedCount, activeSlogan.lineOne.length),
-      );
-      const nextLineTwo =
-        typedCount > activeSlogan.lineOne.length
-          ? activeSlogan.lineTwo.slice(
-              0,
-              typedCount - activeSlogan.lineOne.length,
-            )
-          : "";
+      setDisplayedL1("");
+      setDisplayedL2("");
+      setCursorLine(1);
+      setIsHolding(false);
+      setIsErasing(false);
 
-      setTypedLineOne(nextLineOne);
-      setTypedLineTwo(nextLineTwo);
-
-      if (typedCount < totalChars) {
-        rafId = requestAnimationFrame(updateTyping);
-        return;
+      // Typing line 1
+      for (let i = 1; i <= l1.length; i++) {
+        if (isCancelled) return;
+        setDisplayedL1(l1.slice(0, i));
+        await delay(CHAR_DELAYS(i, l1.length));
       }
 
-      const flashPattern = [true, false, true, false, true, false];
-      flashPattern.forEach((isOn, index) => {
-        window.setTimeout(() => setCursorVisible(isOn), index * 180);
-      });
+      if (isCancelled) return;
+      await delay(650);
+      setCursorLine(2);
 
-      window.setTimeout(() => setCursorVisible(false), flashPattern.length * 180 + 80);
+      // Typing line 2
+      for (let i = 1; i <= l2.length; i++) {
+        if (isCancelled) return;
+        setDisplayedL2(l2.slice(0, i));
+        await delay(CHAR_DELAYS(i, l2.length));
+      }
 
-      holdTimeout = window.setTimeout(() => {
-        setSloganIndex((current) => (current + 1) % sloganSet.length);
-      }, 8000);
+      if (isCancelled) return;
+      setIsHolding(true);
+      await delay(2200);
+      setIsHolding(false);
+      setIsErasing(true);
+
+      // Erasing
+      const totalChars = l1.length + l2.length;
+      for (let i = totalChars; i > 0; i--) {
+        if (isCancelled) return;
+        
+        if (i > l1.length) {
+          setDisplayedL2(l2.slice(0, i - l1.length - 1));
+        } else {
+          setDisplayedL2("");
+          setDisplayedL1(l1.slice(0, i - 1));
+          setCursorLine(1);
+        }
+        await delay(CHAR_DELAYS(totalChars - i, totalChars) / 3);
+      }
+
+      if (isCancelled) return;
+      await delay(280);
+      setSloganIndex((cur) => (cur + 1) % sloganSet.length);
     };
 
-    rafId = requestAnimationFrame((now) => {
-      setTypedProgress(0);
-      setTypedLineOne("");
-      setTypedLineTwo("");
-      setCursorVisible(true);
-      updateTyping(now);
-    });
+    runTypewriter();
 
     return () => {
-      cancelAnimationFrame(rafId);
-      if (holdTimeout) {
-        window.clearTimeout(holdTimeout);
-      }
+      isCancelled = true;
     };
-  }, [sloganIndex, sloganSet]);
-
-  const headlineDelay = 0.3;
-  const sousTitreDelay = 1.2;
-  const ctaDelay = 1.45;
-  const activeSlogan = sloganSet[sloganIndex];
-  const showCursorOnFirstLine = typedProgress <= activeSlogan.lineOne.length && cursorVisible;
-  const showCursorOnSecondLine = typedProgress > activeSlogan.lineOne.length && cursorVisible;
+  }, [sloganIndex, activeSlogan, sloganSet.length]);
 
   return (
     <section className="hero">
       <div className="hero__inner">
         <motion.div className="hero__content" style={{ y }}>
-          {/* <motion.span
-            className="hero__tag"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: surtitreDelay }}
-          >
-            {t("eyebrow")}
-          </motion.span> */}
-
-          <h1 className="hero__title" aria-live="polite">
+          <h1 className="hero__title" aria-live="polite" aria-label={`${activeSlogan.lineOne} ${activeSlogan.lineTwo}`}>
             <motion.span
               className="hero__title-line hero__title-line--primary"
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: headlineDelay }}
+              transition={{ duration: 0.5, delay: 0.3 }}
             >
-              {typedLineOne}
-              {showCursorOnFirstLine && (
-                <span className="hero__cursor">|</span>
+              {displayedL1}
+              {cursorLine === 1 && (
+                <span
+                  className={`hero__cursor${isHolding ? " hero__cursor--blink" : ""}${isErasing ? " hero__cursor--erase" : ""}`}
+                  aria-hidden="true"
+                />
               )}
             </motion.span>
 
@@ -137,10 +140,15 @@ export default function Hero({settings}: {settings?: CompanySettings | null}) {
               className="hero__title-line hero__title-line--secondary"
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: headlineDelay + 0.2 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
             >
-              {typedLineTwo}
-              {showCursorOnSecondLine && <span className="hero__cursor">|</span>}
+              {displayedL2}
+              {cursorLine === 2 && (
+                <span
+                  className={`hero__cursor${isHolding ? " hero__cursor--blink" : ""}${isErasing ? " hero__cursor--erase" : ""}`}
+                  aria-hidden="true"
+                />
+              )}
             </motion.span>
           </h1>
 
@@ -148,7 +156,7 @@ export default function Hero({settings}: {settings?: CompanySettings | null}) {
             className="hero__description"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: sousTitreDelay }}
+            transition={{ duration: 1, delay: 1.2 }}
           >
             {description}
           </motion.p>
@@ -157,16 +165,13 @@ export default function Hero({settings}: {settings?: CompanySettings | null}) {
             className="hero__actions"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: ctaDelay }}
+            transition={{ duration: 0.5, delay: 1.45 }}
           >
             <Link href="/services" className="hero__cta hero__cta--primary">
               {t("discoverServices")}
               <ArrowRight size={18} strokeWidth={2} />
             </Link>
-            <Link
-              href="/realisations"
-              className="hero__cta hero__cta--secondary"
-            >
+            <Link href="/realisations" className="hero__cta hero__cta--secondary">
               {t("discoverProjects")}
             </Link>
           </motion.div>
@@ -184,4 +189,3 @@ export default function Hero({settings}: {settings?: CompanySettings | null}) {
     </section>
   );
 }
-

@@ -5,16 +5,17 @@ import { motion } from "framer-motion";
 import { ArrowRight, Check, Smartphone, Layout, Zap, Shield, Users, AppWindow } from "lucide-react";
 import CallToAction from "@/components/sections/CallToAction";
 import "./MobileApplicationsService.css";
+import "./ServiceHero.css";
 import { Link } from "@/i18n/navigation";
 import EmptyState from "@/components/ui/EmptyState";
 import Watermark from "@/components/ui/Watermark";
 
 const sectionVariants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 60 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut" as const },
+    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] as [number,number,number,number] },
   },
 };
 
@@ -58,33 +59,37 @@ export default function MobileApplicationsService({technologies = []}: {technolo
       <div className="mobile-applications-service">
         <Watermark id="mobile_dev" />
         <motion.section
-          className="mobile-applications-service__hero"
+          className="service-hero mobile-applications-service__hero"
           aria-labelledby="mobile-app-title"
           initial="hidden"
           animate="visible"
           variants={sectionVariants}
         >
-          <div className="mobile-applications-service__hero-inner">
-            <div className="mobile-applications-service__hero-content">
-              <div className="mobile-applications-service__hero-icon">
-                <Smartphone size={48} strokeWidth={1.5} />
-              </div>
-              <p className="mobile-applications-service__eyebrow">{t("hero.eyebrow")}</p>
-              <h1 id="mobile-app-title">
-                {t("hero.title")}
-              </h1>
-              <p className="mobile-applications-service__hero-description">
-                {t("hero.description")}
-              </p>
-              <div className="mobile-applications-service__hero-cta">
-                <Link href="/contact#contact-form" className="mobile-applications-service__cta mobile-applications-service__cta--primary">
-                  {t("hero.cta")}
-                  <ArrowRight size={18} strokeWidth={1.8} aria-hidden="true" />
-                </Link>
-                <Link href="/services" className="mobile-applications-service__cta mobile-applications-service__cta--secondary">
-                  {t("hero.back")}
-                </Link>
-              </div>
+          {/* Background video */}
+          <video
+            className="service-hero__video"
+            src="/videos/devMobile-banner.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            aria-hidden="true"
+          />
+          {/* Overlay */}
+          <div className="service-hero__overlay" aria-hidden="true" />
+          {/* Content */}
+          <div className="service-hero__content">
+            {/* <p className="service-hero__eyebrow">{t("hero.eyebrow")}</p> */}
+            <h1 id="mobile-app-title">{t("hero.title")}</h1>
+            <p className="service-hero__description">{t("hero.description")}</p>
+            <div className="service-hero__cta-row">
+              <Link href="/contact#contact-form" className="service-hero__cta--primary">
+                {t("hero.cta")}
+                <ArrowRight size={18} strokeWidth={1.8} aria-hidden="true" />
+              </Link>
+              <Link href="/services" className="service-hero__cta--secondary">
+                {t("hero.back")}
+              </Link>
             </div>
           </div>
         </motion.section>
@@ -110,10 +115,10 @@ export default function MobileApplicationsService({technologies = []}: {technolo
                 <motion.div
                   className="mobile-applications-feature-card"
                   key={key}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.5, ease: "easeOut" as const }}
+                  initial={{ opacity: 0, y: 50, scale: 0.95 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, margin: "-30% 0px -30% 0px" }}
+                  transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] as [number,number,number,number] }}
                 >
                   <div className="mobile-applications-feature-card__icon">
                     <Icon size={28} strokeWidth={1.6} />

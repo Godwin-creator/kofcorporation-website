@@ -145,9 +145,41 @@
 
 .hero__cursor {
   display: inline-block;
-  margin-left: 0.08em;
-  color: var(--color-accent);
-  font-weight: 700;
+  width: 3px;
+  height: 0.85em;
+  background-color: var(--color-accent);
+  margin-left: 0.1em;
+  vertical-align: middle;
+  border-radius: 1px;
+  box-shadow: 0 0 8px color-mix(in srgb, var(--color-accent) 60%, transparent);
+  /* Always blinking by default while typing */
+  animation: cursor-type 0.55s step-end infinite;
+}
+
+/* Slow blink during hold phase */
+.hero__cursor--blink {
+  animation: cursor-hold 0.9s ease-in-out infinite;
+}
+
+/* Rapid flash during erase */
+.hero__cursor--erase {
+  animation: cursor-erase 0.18s step-end infinite;
+  opacity: 0.7;
+}
+
+@keyframes cursor-type {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes cursor-hold {
+  0%, 45% { opacity: 1; }
+  55%, 100% { opacity: 0; }
+}
+
+@keyframes cursor-erase {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 .hero__description {

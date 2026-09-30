@@ -48,7 +48,7 @@ export default function VideoPresentation({
 
   // Section scroll animation
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const isInView = useInView(sectionRef, { once: true, margin: "-30% 0px -30% 0px" });
 
   // ── Ouvrir la modale : pause la vidéo inline ────────────────────────────
   const openModal = useCallback(() => {
