@@ -10,6 +10,7 @@ import { SectionProvider } from "@/contexts/SectionContext";
 import { routing } from "@/i18n/routing";
 import dynamic from "next/dynamic";
 import { SanityLive } from "@/sanity/lib/live";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const AnimatedCursor = dynamic(() => import("@/components/ui/AnimatedCursor"), {
   loading: () => null,
@@ -79,6 +80,7 @@ async function LocaleLayout({
         </div>
         <AnimatedCursor />
         <SanityLive />
+        <SpeedInsights />
       </SectionProvider>
     </NextIntlClientProvider>
   );
