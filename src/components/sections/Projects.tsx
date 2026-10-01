@@ -17,7 +17,6 @@ export default async function Projects() {
     description: locale === 'en' ? project.shortDescriptionEn ?? project.descriptionEn ?? project.description ?? '' : project.shortDescription ?? project.description ?? '',
     tags: project.technologies ?? [],
     url: project.links?.[0]?.url ?? '#',
-    category: project.categories?.[0] ?? 'web',
     imageUrl: project.image?.asset?._ref ? urlFor(project.image).width(900).height(500).url() : undefined,
     project
   }))

@@ -56,20 +56,14 @@ export function useTheme(): {
   // Initialisation SSR-safe : valeur stable avant l'hydratation
   const [theme, setTheme] = useState<Theme>("light");
 
-  // Synchronisation après montage avec ce que le script inline a déjà appliqué
+  // Lire la préférence appliquée par le script inline sans l'écraser par l'état SSR.
   useEffect(() => {
-    const frame = window.requestAnimationFrame(() => {
-      setTheme(getInitialTheme());
-    });
+    const initialTheme = getInitialTheme();
+    applyTheme(initialTheme);
 
+    const frame = window.requestAnimationFrame(() => setTheme(initialTheme));
     return () => window.cancelAnimationFrame(frame);
   }, []);
-
-  // Propagation des changements vers le DOM et localStorage
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    applyTheme(theme);
-  }, [theme]);
 
   const toggleTheme = () => {
     const newTheme = theme === "dark" ? "light" : "dark";

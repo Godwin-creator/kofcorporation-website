@@ -125,19 +125,6 @@
   transform: rotate(-24deg);
 }
 
-.project-card__visual-mark {
-  display: inline-flex;
-  color: rgba(255, 255, 255, 0.92);
-}
-
-.project-card__visual-name {
-  margin-top: 0.75rem;
-  font-family: var(--font-body);
-  font-size: 0.8rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
 .project-card__body {
   padding: 1.5rem;
 }
