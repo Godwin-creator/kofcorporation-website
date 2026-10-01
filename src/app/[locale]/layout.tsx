@@ -6,15 +6,12 @@ import { NextIntlClientProvider } from "next-intl";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
+import SplashScreen from "@/components/SplashScreen";
+import AnimatedCursorLoader from "@/components/ui/AnimatedCursorLoader";
 import { SectionProvider } from "@/contexts/SectionContext";
 import { routing } from "@/i18n/routing";
-import dynamic from "next/dynamic";
 import { SanityLive } from "@/sanity/lib/live";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-
-const AnimatedCursor = dynamic(() => import("@/components/ui/AnimatedCursor"), {
-  loading: () => null,
-});
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || 'https://kofcorporation-website.vercel.app';
@@ -78,7 +75,8 @@ async function LocaleLayout({
           <Footer />
           <BackToTop />
         </div>
-        <AnimatedCursor />
+        <SplashScreen />
+        <AnimatedCursorLoader />
         <SanityLive />
         <SpeedInsights />
       </SectionProvider>

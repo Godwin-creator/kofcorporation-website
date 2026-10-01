@@ -23,6 +23,20 @@ export default function AnimatedCursor() {
 
   const [visible, setVisible] = useState(false);
 
+  function syncDOM() {
+    const dot = dotRef.current;
+    const ring = ringRef.current;
+    if (!dot || !ring) return;
+
+    const cl = isClicking.current;
+    const hx = isHovering.current;
+
+    dot.style.transform = `translate3d(${x.current}px, ${y.current}px, 0) translate(-50%, -50%) scale(${cl ? 0.6 : 1})`;
+
+    const ringScale = hx ? 1.2 : cl ? 0.85 : 1;
+    ring.style.transform = `translate3d(${ringX.current}px, ${ringY.current}px, 0) translate(-50%, -50%) scale(${ringScale})`;
+  }
+
   useEffect(() => {
     // Hide on touch devices
     if (window.matchMedia("(pointer: coarse)").matches) return;
@@ -108,23 +122,6 @@ export default function AnimatedCursor() {
       cancelAnimationFrame(rafId.current);
     };
   }, []);
-
-  // Sync high-frequency transforms directly via DOM - no React re-renders in RAF loop
-  const syncDOM = () => {
-    const dot = dotRef.current;
-    const ring = ringRef.current;
-    if (!dot || !ring) return;
-
-    const cl = isClicking.current;
-    const hx = isHovering.current;
-
-    // Dot snapped to pointer
-    dot.style.transform = `translate3d(${x.current}px, ${y.current}px, 0) translate(-50%, -50%) scale(${cl ? 0.6 : 1})`;
-
-    // Ring smooth-following pointer
-    const ringScale = hx ? 1.2 : cl ? 0.85 : 1;
-    ring.style.transform = `translate3d(${ringX.current}px, ${ringY.current}px, 0) translate(-50%, -50%) scale(${ringScale})`;
-  };
 
   if (!visible) return null;
 

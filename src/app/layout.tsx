@@ -24,6 +24,7 @@ export const viewport: Viewport = {
 }
 
 const themeInitScript = `
+document.documentElement.style.visibility = 'hidden';
 (function () {
   try {
     var stored = localStorage.getItem('theme');
@@ -42,6 +43,9 @@ export default function RootLayout({children}: Readonly<{children: React.ReactNo
   return (
     <html lang="fr" suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://cdn.sanity.io" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <InlineScript html={themeInitScript} />
       </head>
       <body suppressHydrationWarning>{children}</body>

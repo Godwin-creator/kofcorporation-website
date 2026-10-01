@@ -1,16 +1,18 @@
 import { Suspense } from "react";
+import dynamic from "next/dynamic";
 import Hero from "@/components/Hero";
 import VideoPresentation from "@/components/sections/VideoPresentation";
 import ScrollWordReveal from "@/components/ui/ScrollWordReveal";
-import Partners from "@/components/Partners";
 import Services from "@/components/sections/Services";
-import Stats from "@/components/sections/Stats";
-import Projects from "@/components/sections/Projects";
-import Testimonials from "@/components/sections/Testimonials";
-import CallToAction from "@/components/sections/CallToAction";
 import { fetchSettings } from "@/lib/queries";
 import { urlFor } from "@/lib/sanity";
 import { SectionSkeleton } from "@/components/ui/Skeletons";
+
+const Stats = dynamic(() => import("@/components/sections/Stats"));
+const Projects = dynamic(() => import("@/components/sections/Projects"));
+const Partners = dynamic(() => import("@/components/Partners"));
+const Testimonials = dynamic(() => import("@/components/sections/Testimonials"));
+const CallToAction = dynamic(() => import("@/components/sections/CallToAction"));
 
 export default async function Home() {
   const settings = await fetchSettings();
