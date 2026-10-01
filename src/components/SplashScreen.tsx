@@ -36,6 +36,7 @@ export default function SplashScreen() {
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
+    const duration = window.matchMedia("(max-width: 1023px)").matches ? 1.2 : 2;
 
     const runAnimation = async () => {
       if (!scope.current) return;
@@ -58,7 +59,7 @@ export default function SplashScreen() {
           scale: [1, 1.5, 2],
           opacity: [1, 0.5, 0],
         },
-        { duration: 1.5, ease: "easeIn" }
+        { duration, ease: "easeIn" }
       );
 
       document.documentElement.style.visibility = "";
