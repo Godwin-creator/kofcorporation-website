@@ -1,7 +1,7 @@
 import {defineField, defineType} from 'sanity'
 
 export const testimonial = defineType({
-  name: 'testimonial', title: '💬 Témoignages', type: 'document',
+  name: 'testimonial', title: 'Témoignages', type: 'document',
   fields: [
     defineField({name: 'name', title: 'Nom complet', type: 'string', description: 'Prénom et nom de la personne', validation: (Rule) => Rule.required()}),
     defineField({name: 'role', title: 'Poste / Fonction (Français)', type: 'string'}),
@@ -14,5 +14,5 @@ export const testimonial = defineType({
     defineField({name: 'isVerified', title: 'Témoignage vérifié', type: 'boolean', initialValue: false}),
     defineField({name: 'order', title: "Ordre d'affichage", type: 'number'}),
   ],
-  preview: {select: {title: 'name', company: 'company', rating: 'rating', media: 'avatar'}, prepare({title, company, rating, media}) {return {title, subtitle: `${company ?? ''} ${rating ? '★'.repeat(rating) : ''}`.trim(), media}}},
+  preview: {select: {title: 'name', company: 'company', rating: 'rating', media: 'avatar'}, prepare({title, company, rating, media}) {return {title, subtitle: `${company ?? ''} ${rating ? `${rating}/5` : ''}`.trim(), media}}},
 })

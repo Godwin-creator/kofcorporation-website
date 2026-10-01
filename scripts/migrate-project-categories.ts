@@ -5,7 +5,7 @@ const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production';
 const token = process.env.SANITY_API_TOKEN;
 
 if (!token) {
-  console.error('❌ SANITY_API_TOKEN is not defined in environment variables.');
+  console.error('SANITY_API_TOKEN is not defined in environment variables.');
   console.log('Provide SANITY_API_TOKEN=your_token npx tsx scripts/migrate-project-categories.ts');
   process.exit(1);
 }
@@ -19,7 +19,7 @@ const client = createClient({
 });
 
 async function migrate() {
-  console.log('🚀 Starting project categories & links migration...');
+  console.log('Starting project categories & links migration...');
 
   const projects = await client.fetch(`*[_type == "project"]{ _id, title, category, categories, url, links }`);
   console.log(`Found ${projects.length} project(s) to check.`);
@@ -47,16 +47,16 @@ async function migrate() {
     if (Object.keys(patch).length > 0) {
       console.log(`Migrating project "${proj.title}" (${proj._id}):`, patch);
       await client.patch(proj._id).set(patch).commit();
-      console.log(`✅ Project "${proj.title}" updated successfully.`);
+      console.log(`Project "${proj.title}" updated successfully.`);
     } else {
-      console.log(`ℹ️ Project "${proj.title}" already up-to-date.`);
+      console.log(`Project "${proj.title}" already up-to-date.`);
     }
   }
 
-  console.log('🎉 Migration completed successfully!');
+  console.log('Migration completed successfully!');
 }
 
 migrate().catch((err) => {
-  console.error('❌ Migration failed:', err);
+  console.error('Migration failed:', err);
   process.exit(1);
 });

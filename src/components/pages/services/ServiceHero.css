@@ -1,5 +1,5 @@
 /* ============================================================
-   Service Hero Video — Shared styles across all 3 service pages
+  Service Hero Video - Shared styles across all 3 service pages
    ============================================================ */
 
 .service-hero {
@@ -27,7 +27,7 @@
   transform: scale(1.03); /* slight upscale to avoid letterboxing edges */
 }
 
-/* ── Gradient overlay — top-to-bottom darkening ── */
+/* ── Gradient overlay - top-to-bottom darkening ── */
 .service-hero__overlay {
   position: absolute;
   inset: 0;
@@ -41,7 +41,7 @@
   pointer-events: none;
 }
 
-/* Accent colour tint at the bottom — brand reinforcement */
+/* Accent colour tint at the bottom - brand reinforcement */
 .service-hero__overlay::after {
   content: "";
   position: absolute;
@@ -53,7 +53,7 @@
   );
 }
 
-/* ── Content — sits above the overlay ── */
+/* ── Content - sits above the overlay ── */
 .service-hero__content {
   position: relative;
   z-index: 2;

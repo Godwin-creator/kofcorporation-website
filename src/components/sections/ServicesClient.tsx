@@ -10,7 +10,7 @@ import Watermark from "@/components/ui/Watermark"
 import ScrollWordReveal from "@/components/ui/ScrollWordReveal"
 import {SERVICES} from "@/lib/services"
 
-// ─── Hardcoded service data — the `stack` arrays are defaults; they get ──
+// ─── Hardcoded service data - the `stack` arrays are defaults; they get ──
 // ─── overridden by Sanity data when available (via the `sanityStacks` prop). ──
 const sectionVariants = {hidden: {opacity: 0, y: 60}, visible: {opacity: 1, y: 0, transition: {duration: 0.9, ease: [0.22, 1, 0.36, 1] as [number,number,number,number]}}}
 const containerVariants = {hidden: {}, visible: {transition: {staggerChildren: 0.13, delayChildren: 0.25}}}

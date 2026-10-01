@@ -1,7 +1,7 @@
 import {defineField, defineType} from 'sanity'
 
 export const partner = defineType({
-  name: 'partner', title: '🤝 Partenaires', type: 'document',
+  name: 'partner', title: 'Partenaires', type: 'document',
   fields: [
     defineField({name: 'name', title: 'Nom du partenaire', type: 'string', description: "Nom officiel de l'organisation", validation: (Rule) => Rule.required()}),
     defineField({name: 'logo', title: 'Logo', type: 'image', description: 'Logo en PNG ou SVG, fond transparent recommandé', fields: [defineField({name: 'alt', title: 'Texte alternatif', type: 'string', validation: (Rule) => Rule.required()})], validation: (Rule) => Rule.required()}),
