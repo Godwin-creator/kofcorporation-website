@@ -206,7 +206,7 @@
 [data-theme="dark"] .contact-form__submit,
 [data-theme="dark"] .contact-page__success button {
   border-color: var(--color-primary);
-  color: var(--color-surface-alt);
+  color: var(--color-on-accent);
   background-color: var(--color-primary);
 }
 
@@ -214,9 +214,9 @@
 [data-theme="dark"] .contact-form__submit:focus-visible,
 [data-theme="dark"] .contact-page__success button:hover,
 [data-theme="dark"] .contact-page__success button:focus-visible {
-  border-color: #ffffff;
-  color: var(--color-surface-alt);
-  background-color: #ffffff;
+  border-color: var(--color-accent-mid);
+  color: var(--color-on-accent);
+  background-color: var(--color-accent-mid);
 }
 
 .contact-form__note {

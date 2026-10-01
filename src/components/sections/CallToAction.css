@@ -77,7 +77,13 @@
 [data-theme="dark"] .call-to-action__button--primary,
 [data-theme="dark"] .call-to-action__button--primary:hover,
 [data-theme="dark"] .call-to-action__button--primary:focus-visible {
-  color: #2f3974;
+  color: var(--color-on-accent);
+  background-color: var(--color-accent);
+}
+
+[data-theme="dark"] .call-to-action__button--primary:hover,
+[data-theme="dark"] .call-to-action__button--primary:focus-visible {
+  background-color: var(--color-accent-mid);
 }
 
 .call-to-action__button--secondary {
