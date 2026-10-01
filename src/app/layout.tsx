@@ -24,7 +24,9 @@ export const viewport: Viewport = {
 }
 
 const themeInitScript = `
-document.documentElement.style.visibility = 'hidden';
+if (!window.location.pathname.startsWith('/studio')) {
+  document.documentElement.style.visibility = 'hidden';
+}
 (function () {
   try {
     var stored = localStorage.getItem('theme');
