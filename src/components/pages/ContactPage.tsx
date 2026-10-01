@@ -180,7 +180,7 @@ export default function ContactPage({settings}: {settings?: CompanySettings | nu
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
         <div className="contact-page__hero-inner">
-          <p className="contact-page__eyebrow">{t("eyebrow")}</p>
+          {/* <p className="contact-page__eyebrow">{t("eyebrow")}</p> */}
           <h1 id="contact-title">
             <span className="contact-page__hero-title-line">{t("headline")}</span>
             <br />
@@ -205,8 +205,8 @@ export default function ContactPage({settings}: {settings?: CompanySettings | nu
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <p className="contact-page__eyebrow">{t("project")}</p>
-            <h2 id="contact-form-title">{t("formTitle")}</h2>
+            <h2 id="contact-form-title" className="contact-page__section-title">{t("project")}</h2>
+            <p className="contact-page__section-subtitle">{t("formTitle")}</p>
 
             {submitted ? (
               <div className="contact-page__success" role="status">

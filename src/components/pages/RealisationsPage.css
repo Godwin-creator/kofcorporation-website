@@ -324,3 +324,14 @@
     padding: 1.5rem;
   }
 }
+
+.realisations-page__section-title {
+  color: var(--color-accent) !important;
+  margin-bottom: 1rem !important;
+
+}
+
+.realisations-page__section-subtitle {
+  color: var(--color-text);
+  max-width: 30ch;
+}

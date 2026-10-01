@@ -81,7 +81,6 @@ export default function AboutPage({teamPhotoUrl, teamPhotoAlt}: {teamPhotoUrl?: 
           variants={sectionVariants}
         >
           <div className="about-page__hero-inner">
-            <p className="about-page__eyebrow">{t("aboutEyebrow")}</p>
             <h1 id="about-title">
               <span className="about-page__hero-title-line">{t("aboutTitle")}</span>
               <br />
@@ -92,10 +91,6 @@ export default function AboutPage({teamPhotoUrl, teamPhotoAlt}: {teamPhotoUrl?: 
             <p>
               {tAbout("hero.description")}
             </p>
-            <Link href="#notre-mission" className="about-page__hero-link">
-              {tAbout("hero.cta")}
-              <ArrowRight size={18} strokeWidth={1.8} aria-hidden="true" />
-            </Link>
           </div>
         </motion.section>
 
@@ -110,10 +105,12 @@ export default function AboutPage({teamPhotoUrl, teamPhotoAlt}: {teamPhotoUrl?: 
         >
           <div className="about-page__container about-page__mission-grid">
             <div>
-              <p className="about-page__eyebrow">{tAbout("mission.eyebrow")}</p>
-              <h2 id="mission-title">
-                {tAbout("mission.title")}
+              <h2 id="mission-title" className="about-page__section-title">
+                {tAbout("mission.eyebrow")}
               </h2>
+              <p className="about-page__section-subtitle">
+                {tAbout("mission.title")}
+              </p>
             </div>
             <div className="about-page__mission-copy">
               <p>
@@ -132,8 +129,8 @@ export default function AboutPage({teamPhotoUrl, teamPhotoAlt}: {teamPhotoUrl?: 
           <div className="about-page__container">
             <header className="about-page__section-header">
               <div>
-                <p className="about-page__eyebrow">{tAbout("values.eyebrow")}</p>
-                <h2 id="values-title">{tAbout("values.title")}</h2>
+                <h2 id="values-title" className="about-page__section-title">{tAbout("values.eyebrow")}</h2>
+                <p className="about-page__section-subtitle">{tAbout("values.title")}</p>
               </div>
               <p>
                 {tAbout("values.subtitle")}
@@ -162,8 +159,8 @@ export default function AboutPage({teamPhotoUrl, teamPhotoAlt}: {teamPhotoUrl?: 
         >
           <div className="about-page__container about-page__story-grid">
             <div>
-              <p className="about-page__eyebrow">{tAbout("story.eyebrow")}</p>
-              <h2 id="story-title">{tAbout("story.title")}</h2>
+              <h2 id="story-title" className="about-page__section-title">{tAbout("story.eyebrow")}</h2>
+              <p className="about-page__section-subtitle">{tAbout("story.title")}</p>
               <p className="about-page__story-intro">
                 {tAbout("story.intro")}
               </p>

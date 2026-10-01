@@ -115,7 +115,6 @@ export default function ServicesPage({sanityStacks}: {sanityStacks?: Record<stri
           variants={sectionVariants}
         >
           <div className="services-page__hero-inner">
-            <p className="services-page__eyebrow">{t("servicesEyebrow")}</p>
             <h1 id="services-page-title">
               <span className="services-page__hero-title-line">{t("servicesTitle")}</span>
               <br />
@@ -126,10 +125,6 @@ export default function ServicesPage({sanityStacks}: {sanityStacks?: Record<stri
             <p className="services-page__hero-description">
               {tServices("hero.description")}
             </p>
-            <Link className="services-page__hero-link" href="#expertises">
-              {tServices("hero.cta")}
-              <ArrowRight size={18} strokeWidth={1.8} aria-hidden="true" />
-            </Link>
           </div>
         </motion.section>
 
@@ -140,10 +135,8 @@ export default function ServicesPage({sanityStacks}: {sanityStacks?: Record<stri
         >
           <div className="services-page__container">
             <header className="services-page__section-header">
-              <p className="services-page__eyebrow">{tServices("expertises.eyebrow")}</p>
-              <h2 id="expertises-title">
-                {tServices("expertises.title")}
-              </h2>
+              <h2 id="expertises-title" className="services-page__section-title">{tServices("expertises.eyebrow")}</h2>
+              <p className="services-page__section-subtitle">{tServices("expertises.title")}</p>
               <p>
                 {tServices("expertises.description")}
               </p>
@@ -208,8 +201,8 @@ export default function ServicesPage({sanityStacks}: {sanityStacks?: Record<stri
         >
           <div className="services-page__method-inner">
             <div>
-              <p className="services-page__eyebrow">{tServices("method.eyebrow")}</p>
-              <h2 id="method-title">{tServices("method.title")}</h2>
+              <h2 id="method-title" className="services-page__section-title">{tServices("method.eyebrow")}</h2>
+              <p className="services-page__section-subtitle">{tServices("method.title")}</p>
             </div>
             <ol className="services-page__steps">
               <li>

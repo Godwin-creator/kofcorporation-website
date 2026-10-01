@@ -295,3 +295,14 @@
     padding: 1.5rem;
   }
 }
+
+.services-page__section-title {
+  color: var(--color-accent) !important;
+  margin-bottom: 1rem !important;
+}
+
+.services-page__section-subtitle {
+  color: var(--color-text);
+
+  max-width: 30ch;
+}

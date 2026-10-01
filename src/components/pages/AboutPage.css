@@ -103,6 +103,16 @@
   line-height: 1.05;
 }
 
+.about-page__section-title {
+  color: var(--color-accent) !important;
+  margin-bottom: 1rem !important;
+}
+
+.about-page__section-subtitle {
+  color: var(--color-text);
+  max-width: 30ch;
+}
+
 .about-page__mission-copy {
   max-width: 52ch;
   color: var(--color-text-muted);
