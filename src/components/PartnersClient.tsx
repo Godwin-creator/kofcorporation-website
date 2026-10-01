@@ -57,8 +57,8 @@ export default function PartnersClient({
                     className="partner-logo"
                     src={partner.logo}
                     alt={index < partners.length ? partner.name : ""}
-                    width={160}
-                    height={64}
+                    width={240}
+                    height={96}
                   />
                 </div>
               ))}
