@@ -11,6 +11,7 @@ import AnimatedCursorLoader from "@/components/ui/AnimatedCursorLoader";
 import { SectionProvider } from "@/contexts/SectionContext";
 import { routing } from "@/i18n/routing";
 import { SanityLive } from "@/sanity/lib/live";
+import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const siteUrl =
@@ -78,6 +79,7 @@ async function LocaleLayout({
         <SplashScreen />
         <AnimatedCursorLoader />
         <SanityLive />
+        <Analytics />
         <SpeedInsights />
       </SectionProvider>
     </NextIntlClientProvider>
