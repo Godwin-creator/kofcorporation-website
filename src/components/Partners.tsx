@@ -8,6 +8,6 @@ export default async function Partners() {
   if (!partners.length) {
     console.warn('[Sanity] Aucune donnée trouvée pour le type "partner" - vérifier le Studio')
   }
-  const items: PartnerItem[] = (partners as SanityPartner[]).flatMap((partner) => partner.logo?.asset?._ref ? [{ id: partner._id, name: partner.name, logo: urlFor(partner.logo).width(320).height(128).url(), url: partner.url }] : [])
+  const items: PartnerItem[] = (partners as SanityPartner[]).flatMap((partner) => partner.logo?.asset?._ref ? [{ id: partner._id, name: partner.name, logo: urlFor(partner.logo).width(320).url(), url: partner.url }] : [])
   return <PartnersClient partners={items} />
 }
