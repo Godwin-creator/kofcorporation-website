@@ -1,4 +1,4 @@
-import { client, urlFor } from '@/lib/sanity'
+import { urlFor } from '@/lib/sanity'
 import { fetchPartners } from '@/lib/queries'
 import type { SanityPartner } from '@/types/sanity'
 import PartnersClient, { type PartnerItem } from './PartnersClient'

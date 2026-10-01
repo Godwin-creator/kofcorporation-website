@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import AboutPage from "@/components/pages/AboutPage";
-import { client, urlFor } from "@/lib/sanity";
+import { urlFor } from "@/lib/sanity";
 import { fetchSettings } from "@/lib/queries";
-import type { CompanySettings } from "@/types/sanity";
 
 export const metadata: Metadata = {
   title: "Qui sommes-nous ? - KofCorporation",
@@ -12,7 +11,7 @@ export const metadata: Metadata = {
 
 export default async function AboutRoute() {
   const settings = await fetchSettings();
-  const teamPhotoUrl = settings?.teamPhoto
+  const teamPhotoUrl = settings?.teamPhoto?.asset?._ref
     ? urlFor(settings.teamPhoto).width(1200).height(900).url()
     : undefined;
   return (
