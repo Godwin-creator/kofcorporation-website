@@ -85,7 +85,7 @@ export default function ProjectModal({project, imageUrl, isOpen, onClose}: Proje
         {imageUrl && <div className="project-modal__image" style={{backgroundImage: `url(${imageUrl})`}} aria-label={project.image?.alt || project.title} />}
         <div className="project-modal__body">
           <div className="project-modal__categories">
-            {(project.categories?.length ? project.categories : (project.category ? [project.category] : [])).map(c => (
+            {(project.categories ?? []).map(c => (
               <span key={c} className="project-modal__category">{c}</span>
             ))}
           </div>
@@ -94,7 +94,6 @@ export default function ProjectModal({project, imageUrl, isOpen, onClose}: Proje
             <div><dt>{t("client")}</dt><dd>{project.client}</dd></div>
             <div><dt>{t("sector")}</dt><dd>{project.sector}</dd></div>
             {project.year && <div><dt>Année</dt><dd>{project.year}</dd></div>}
-            {project.duration && <div><dt>Durée</dt><dd>{locale === 'en' ? project.durationEn ?? project.duration : project.duration}</dd></div>}
           </dl>
           <p className="project-modal__description">{locale === "en" ? project.descriptionEn ?? project.description : project.description}</p>
           <ul className="project-modal__tags" aria-label={t("technologies")}>{project.technologies?.map((technology) => <li key={technology}>{technology}</li>)}</ul>
@@ -110,8 +109,6 @@ export default function ProjectModal({project, imageUrl, isOpen, onClose}: Proje
                   </a>
                 )
               })
-            ) : project.url ? (
-              <a className="project-modal__link" href={project.url} target="_blank" rel="noopener noreferrer"><Globe size={17} aria-hidden="true" /> {t("visit")}</a>
             ) : null}
           </div>
         </div>

@@ -14,9 +14,9 @@ export default async function Testimonials() {
     id: item._id, 
     quote: locale === 'en' ? item.quoteEn ?? item.quote : item.quote, 
     name: item.name, 
-    role: locale === 'en' ? item.roleEn ?? item.role : item.role, 
+    role: locale === 'en' ? item.roleEn ?? item.role ?? '' : item.role ?? '',
     rating: item.rating ?? 5,
-    avatarUrl: item.avatar ? urlFor(item.avatar).width(120).height(120).url() : undefined
+    avatarUrl: item.avatar?.asset?._ref ? urlFor(item.avatar).width(120).height(120).url() : undefined
   }))
   return <TestimonialsClient testimonials={items} />
 }

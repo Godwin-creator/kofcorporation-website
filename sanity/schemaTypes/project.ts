@@ -1,263 +1,35 @@
 import {defineField, defineType} from 'sanity'
 
+const categoryOptions = [
+  {title: '🌐 Web', value: 'web'}, {title: '📱 Mobile', value: 'mobile'},
+  {title: '🖥️ Logiciel de gestion', value: 'logiciel'}, {title: '🎓 Formation', value: 'formation'},
+]
+const linkOptions = [
+  {title: '🌐 Site web', value: 'web'}, {title: '🤖 Google Play Store', value: 'playstore'},
+  {title: '🍎 Apple App Store', value: 'appstore'}, {title: '💻 GitHub', value: 'github'},
+  {title: '🎬 Démonstration vidéo', value: 'demo'}, {title: '📄 Autre', value: 'other'},
+]
+
 export const project = defineType({
-  name: 'project',
-  title: 'Projet',
-  type: 'document',
+  name: 'project', title: '🚀 Projets réalisés', type: 'document',
   fields: [
-    defineField({
-      name: 'title',
-      title: 'Titre du projet',
-      type: 'string',
-      description: 'Nom officiel du projet tel qu\'il apparaît sur le site',
-      validation: (Rule) => Rule.required().error('Le titre est obligatoire'),
-    }),
-    defineField({
-      name: 'slug',
-      title: 'Slug (URL)',
-      type: 'slug',
-      description: 'Identifiant URL généré automatiquement depuis le titre - cliquez sur "Générer" si nécessaire',
-      options: {source: 'title'},
-      validation: (Rule) => Rule.required().error('Le slug est obligatoire'),
-    }),
-
-    // ── Catégories (multi-select) ──────────────────────────────────────────
-    defineField({
-      name: 'categories',
-      title: 'Catégories du projet',
-      type: 'array',
-      of: [{type: 'string'}],
-      description: 'Types de projet - un projet peut appartenir à plusieurs catégories (ex: Web + Mobile). Utilisé pour le filtrage sur la page Réalisations.',
-      options: {
-        list: [
-          {title: 'Web', value: 'web'},
-          {title: 'Mobile', value: 'mobile'},
-          {title: 'Logiciel', value: 'logiciel'},
-          {title: 'Formation', value: 'formation'},
-        ],
-        layout: 'grid',
-      },
-      validation: (Rule) => Rule.required().min(1).error('Sélectionnez au moins une catégorie'),
-    }),
-
-    // ── Ancien champ category (lecture seule, rétro-compatibilité) ─────────
-    defineField({
-      name: 'category',
-      title: '⚠️ Ancienne catégorie (dépréciée)',
-      type: 'string',
-      description: 'Ne plus utiliser - remplacé par "categories"',
-      hidden: true,
-    }),
-
-    defineField({
-      name: 'client',
-      title: 'Client',
-      type: 'string',
-      description: 'Nom de l\'entreprise ou de l\'organisation cliente',
-    }),
-    defineField({
-      name: 'sector',
-      title: 'Secteur d\'activité',
-      type: 'string',
-      description: 'Secteur d\'activité du client. Exemples : "Santé", "Immobilier", "ONG", "Finance"',
-    }),
-    defineField({
-      name: 'description',
-      title: 'Description complète (FR)',
-      type: 'text',
-      rows: 4,
-      description: 'Description détaillée en français (visible dans la modale de détail). 2-4 paragraphes recommandés.',
-    }),
-    defineField({
-      name: 'descriptionEn',
-      title: 'Description complète (EN)',
-      type: 'text',
-      rows: 4,
-      description: 'Version anglaise de la description complète.',
-    }),
-    defineField({
-      name: 'shortDescription',
-      title: 'Description courte (FR)',
-      type: 'text',
-      rows: 2,
-      description: 'Résumé court (max 150 caractères) affiché sur la carte projet en page d\'accueil',
-      validation: (Rule) => Rule.max(150).error('Maximum 150 caractères'),
-    }),
-    defineField({
-      name: 'shortDescriptionEn',
-      title: 'Description courte (EN)',
-      type: 'text',
-      rows: 2,
-      description: 'Version anglaise du résumé court.',
-      validation: (Rule) => Rule.max(150).error('Maximum 150 caractères'),
-    }),
-    defineField({
-      name: 'technologies',
-      title: 'Technologies',
-      type: 'array',
-      of: [{type: 'string'}],
-      description: 'Liste des technologies utilisées. Appuyez sur Entrée entre chaque technologie. Exemples : "React", "Flutter", "Laravel"',
-    }),
-    defineField({
-      name: 'image',
-      title: 'Image principale',
-      type: 'image',
-      description: 'Capture d\'écran ou visuel représentatif du projet (format 16:9 recommandé). Double-cliquez sur l\'image ou cliquez sur le bouton "Hotspot" pour définir la zone importante.',
-      options: {hotspot: true},
-      fields: [
-        defineField({name: 'alt', title: 'Texte alternatif', type: 'string'}),
-      ],
-    }),
-
-    // ── Galerie d'images secondaires ───────────────────────────────────────
-    defineField({
-      name: 'gallery',
-      title: 'Galerie d\'images',
-      type: 'array',
-      of: [
-        {
-          type: 'image',
-          options: {hotspot: true},
-          fields: [
-            defineField({name: 'alt', title: 'Texte alternatif', type: 'string'}),
-          ],
-        },
-      ],
-      description: 'Images supplémentaires du projet (captures d\'écran, maquettes…). Affichées dans la modale de détail.',
-    }),
-
-    // ── Liens multiples (remplace l'ancien champ url) ─────────────────────
-    defineField({
-      name: 'links',
-      title: 'Liens du projet',
-      type: 'array',
-      description: 'Ajoutez tous les liens pertinents : site web, Play Store, App Store, etc.',
-      of: [
-        {
-          type: 'object',
-          name: 'projectLink',
-          title: 'Lien',
-          fields: [
-            defineField({
-              name: 'type',
-              title: 'Type de lien',
-              type: 'string',
-              options: {
-                list: [
-                  {title: 'Site web', value: 'web'},
-                  {title: 'Google Play Store', value: 'playstore'},
-                  {title: 'Apple App Store', value: 'appstore'},
-                  {title: 'GitHub', value: 'github'},
-                  {title: 'Autre', value: 'other'},
-                ],
-              },
-              validation: (Rule) => Rule.required(),
-            }),
-            defineField({
-              name: 'url',
-              title: 'URL',
-              type: 'url',
-              validation: (Rule) => Rule.required().uri({scheme: ['http', 'https']}),
-            }),
-            defineField({
-              name: 'label',
-              title: 'Libellé personnalisé (optionnel)',
-              type: 'string',
-              description: 'Si vide, le libellé par défaut du type sera utilisé',
-            }),
-          ],
-          preview: {
-            select: {type: 'type', url: 'url', label: 'label'},
-            prepare({type, url, label}) {
-              return {title: label || type, subtitle: url}
-            },
-          },
-        },
-      ],
-    }),
-
-    // ── Ancien champ url (rétro-compatibilité) ────────────────────────────
-    defineField({
-      name: 'url',
-      title: '⚠️ URL (ancien - ne plus utiliser)',
-      type: 'url',
-      description: 'Ancien champ URL unique. Utilisez "Liens du projet" ci-dessus à la place.',
-      hidden: true,
-    }),
-
-    // ── Année et durée ────────────────────────────────────────────────────
-    defineField({
-      name: 'year',
-      title: 'Année de réalisation',
-      type: 'number',
-      description: 'Année de réalisation ou livraison du projet. Exemple : 2024',
-      validation: (Rule) => Rule.min(2000).max(2100),
-    }),
-    defineField({
-      name: 'duration',
-      title: 'Durée du projet (FR)',
-      type: 'string',
-      description: 'Durée approximative en français. Exemples : "3 mois", "6 semaines", "1 an"',
-    }),
-    defineField({
-      name: 'durationEn',
-      title: 'Durée du projet (EN)',
-      type: 'string',
-      description: 'Version anglaise de la durée. Exemples : "3 months", "6 weeks", "1 year"',
-    }),
-
-    defineField({
-      name: 'featured',
-      title: 'Mis en avant sur l\'accueil',
-      type: 'boolean',
-      description: 'Cochez pour afficher ce projet dans la section Réalisations de la page d\'accueil (max 3 projets)',
-      initialValue: false,
-    }),
-    defineField({
-      name: 'publishedAt',
-      title: 'Date de publication',
-      type: 'datetime',
-      description: 'Date de mise en ligne du projet - utilisée pour le tri chronologique',
-    }),
-    defineField({
-      name: 'status',
-      title: 'Statut',
-      type: 'string',
-      description: 'Publié = visible sur le site. Brouillon = non visible. Archivé = masqué définitivement.',
-      options: {
-        list: [
-          {title: 'Publié', value: 'published'},
-          {title: 'Brouillon', value: 'draft'},
-          {title: 'Archivé', value: 'archived'},
-        ],
-      },
-      initialValue: 'published',
-    }),
-    defineField({
-      name: 'order',
-      title: 'Ordre d\'affichage',
-      type: 'number',
-      description: 'Ordre d\'affichage parmi les projets mis en avant (1 = premier). Laissez vide pour un tri automatique.',
-    }),
+    defineField({name: 'title', title: 'Titre du projet', type: 'string', description: "Nom officiel du projet tel qu'il apparaît sur le site", validation: (Rule) => Rule.required()}),
+    defineField({name: 'slug', title: 'Slug (identifiant URL)', type: 'slug', options: {source: 'title'}, description: "Généré automatiquement — cliquez sur 'Générer' après avoir saisi le titre", validation: (Rule) => Rule.required()}),
+    defineField({name: 'categories', title: 'Catégories du projet', type: 'array', of: [{type: 'string'}], description: 'Un projet peut appartenir à plusieurs catégories.', options: {list: categoryOptions, layout: 'grid'}, validation: (Rule) => Rule.required().min(1)}),
+    defineField({name: 'client', title: 'Client', type: 'string', description: "Nom de l'entreprise ou de l'organisation cliente"}),
+    defineField({name: 'sector', title: "Secteur d'activité", type: 'string'}),
+    defineField({name: 'description', title: 'Description complète (Français)', type: 'text', description: 'Description détaillée visible dans la modale de détail du projet. 2 à 4 paragraphes recommandés.', validation: (Rule) => Rule.required()}),
+    defineField({name: 'shortDescription', title: 'Description courte (Français)', type: 'text', validation: (Rule) => Rule.max(150)}),
+    defineField({name: 'descriptionEn', title: 'Description complète (Anglais)', type: 'text'}),
+    defineField({name: 'shortDescriptionEn', title: 'Description courte (Anglais)', type: 'text', validation: (Rule) => Rule.max(150)}),
+    defineField({name: 'technologies', title: 'Technologies utilisées', type: 'array', of: [{type: 'string'}]}),
+    defineField({name: 'image', title: 'Image principale', type: 'image', options: {hotspot: true}, fields: [defineField({name: 'alt', title: 'Texte alternatif', type: 'string', validation: (Rule) => Rule.required()})], validation: (Rule) => Rule.required()}),
+    defineField({name: 'gallery', title: "Galerie d'images", type: 'array', of: [{type: 'image', options: {hotspot: true}, fields: [defineField({name: 'alt', title: 'Texte alternatif', type: 'string'})]}]}),
+    defineField({name: 'links', title: 'Liens du projet', type: 'array', of: [{type: 'object', name: 'projectLink', fields: [defineField({name: 'type', title: 'Type de lien', type: 'string', options: {list: linkOptions}, validation: (Rule) => Rule.required()}), defineField({name: 'url', title: 'URL du lien', type: 'url', validation: (Rule) => Rule.required()}), defineField({name: 'label', title: 'Libellé personnalisé (optionnel)', type: 'string'})], preview: {select: {type: 'type', url: 'url'}, prepare({type, url}) {return {title: `${type} — ${url}`}}}}]}),
+    defineField({name: 'year', title: 'Année de réalisation', type: 'number', validation: (Rule) => Rule.min(2019).max(2030)}),
+    defineField({name: 'featured', title: "Mis en avant sur la page d'accueil", type: 'boolean', initialValue: false}),
+    defineField({name: 'publishedAt', title: 'Date de publication', type: 'datetime'}),
+    defineField({name: 'order', title: "Ordre d'affichage", type: 'number'}),
   ],
-  preview: {
-    select: {
-      title: 'title',
-      subtitle: 'client',
-      media: 'image',
-      categories: 'categories',
-      category: 'category',
-      featured: 'featured',
-    },
-    prepare({title, subtitle, media, categories, category, featured}) {
-      // Rétro-compatibilité : utiliser categories[] ou l'ancien category
-      const cats = categories?.length ? categories.join(', ') : category ?? ''
-      const badges = [cats, featured ? 'Accueil' : ''].filter(Boolean).join(' · ')
-      return {
-        title,
-        subtitle: `${subtitle ?? ''} - ${badges}`.trim() || cats,
-        media,
-      }
-    },
-  },
+  preview: {select: {title: 'title', client: 'client', categories: 'categories', media: 'image', featured: 'featured'}, prepare({title, client, categories, media, featured}) {return {title, subtitle: `${client ?? ''} — ${(categories ?? []).join(' · ')}${featured ? ' · ⭐ Accueil' : ''}`, media}}},
 })

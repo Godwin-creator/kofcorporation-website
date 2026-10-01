@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { fetchServices } from "@/lib/queries";
-import type { SanityService } from "@/types/sanity";
+import { fetchSettings } from "@/lib/queries";
+import { SERVICES } from "@/lib/services";
 import ServicesPage from "@/components/pages/ServicesPage";
 
 export const metadata: Metadata = {
@@ -10,14 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ServicesRoute() {
-  // Fetch Sanity stacks so the ServicesPage can override hardcoded tags
-  const services = (await fetchServices()) ?? [];
-  const sanityStacks: Record<string, string[]> = {};
-  for (const svc of services as SanityService[]) {
-    const key = svc.slug?.current;
-    if (key && svc.stack?.length) {
-      sanityStacks[key] = svc.stack;
-    }
-  }
+  const settings = await fetchSettings();
+  const sanityStacks = Object.fromEntries(SERVICES.map((service) => [service.id, settings?.[service.stackKey] ?? []]));
   return <ServicesPage sanityStacks={sanityStacks} />;
 }

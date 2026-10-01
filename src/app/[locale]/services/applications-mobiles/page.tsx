@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import MobileApplicationsService from "@/components/pages/services/MobileApplicationsService";
-import { fetchServices } from "@/lib/queries";
-import type { SanityService } from "@/types/sanity";
+import { fetchSettings } from "@/lib/queries";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -12,9 +11,6 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function MobileApplicationsPage() {
-  const services = await fetchServices();
-  const service = services?.find(
-    (item) => item.slug?.current === "applications-mobiles"
-  );
-  return <MobileApplicationsService technologies={service?.stack} />;
+  const settings = await fetchSettings();
+  return <MobileApplicationsService technologies={settings?.stackMobile} />;
 }
