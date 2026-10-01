@@ -44,15 +44,17 @@
   font-size: clamp(2rem, 7vw, 6.5rem);
   font-weight: 700;
   letter-spacing: -0.04em;
-  line-height: 0.98;
+  line-height: 1.12;
 }
 
 .about-page__hero-title-line {
   display: inline-block;
+  line-height: 1.12;
   white-space: nowrap;
 }
 
 .about-page__hero-title-highlight {
+  padding-bottom: 0.14em;
   background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
   background-clip: text;
   -webkit-background-clip: text;

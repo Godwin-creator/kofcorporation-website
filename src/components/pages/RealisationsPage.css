@@ -17,7 +17,7 @@
 }
 
 .realisations-page__hero-inner {
-  max-width: 900px;
+  max-width: 1280px;
   text-align: center;
 }
 
@@ -38,21 +38,23 @@
 }
 
 .realisations-page h1 {
-  max-width: 780px;
+  max-width: none;
   margin: 0 auto;
   font-family: var(--font-heading);
   font-size: clamp(2rem, 7vw, 6.5rem);
   font-weight: 700;
   letter-spacing: -0.04em;
-  line-height: 0.98;
+  line-height: 1.12;
 }
 
 .realisations-page__hero-title-line {
   display: inline-block;
+  line-height: 1.12;
   white-space: nowrap;
 }
 
 .realisations-page__hero-title-highlight {
+  padding-bottom: 0.14em;
   background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
   background-clip: text;
   -webkit-background-clip: text;
@@ -161,6 +163,7 @@
 }
 
 .realisation-card__visual {
+  position: relative;
   display: flex;
   min-height: 180px;
   align-items: center;
@@ -201,8 +204,15 @@
 }
 
 .realisation-card__icon {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  z-index: 1;
   display: inline-flex;
-  opacity: 0.92;
+  align-items: center;
+  gap: 0.45rem;
+  color: #ffffff;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.8));
 }
 
 .realisation-card__sector {

@@ -4,13 +4,11 @@ import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import {
-  Building2,
   ExternalLink,
-  Heart,
-  HeartPulse,
-  Home,
-  Landmark,
+  Globe2,
+  GraduationCap,
   MessagesSquare,
+  Monitor,
   Smartphone,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -30,17 +28,15 @@ export interface RealisationItem {
   features: string;
   tags: string[];
   icon: string;
-  categories: string[];
+  categories: ProjectCategory[];
   url: string;
 }
 
-const ICONS: Record<string, LucideIcon> = {
-  Heart,
-  HeartPulse,
-  Home,
-  Building2,
-  Smartphone,
-  Landmark,
+const CATEGORY_ICONS: Record<ProjectCategory, LucideIcon> = {
+  web: Globe2,
+  mobile: Smartphone,
+  logiciel: Monitor,
+  formation: GraduationCap,
 };
 const CATEGORIES: Array<ProjectCategory | "all"> = [
   "all",
@@ -155,7 +151,6 @@ export default function RealisationsClient({
                 animate="visible"
               >
                 {visibleProjects.map((project) => {
-                  const Icon = ICONS[project.icon] ?? Heart;
                   return (
                     <motion.article
                       className={`realisation-card realisation-card--${project.project._id}`}
@@ -174,12 +169,29 @@ export default function RealisationsClient({
                             : undefined
                         }
                       >
-                        <span
-                          className="realisation-card__icon"
-                          aria-hidden="true"
-                        >
-                          <Icon size={48} strokeWidth={1.35} />
-                        </span>
+                        {project.categories.length > 0 && (
+                          <span
+                            className="realisation-card__icon"
+                            role="img"
+                            aria-label={project.categories
+                              .map((projectCategory) =>
+                                tProjects(`filters.${projectCategory}`),
+                              )
+                              .join(", ")}
+                          >
+                            {project.categories.map((projectCategory) => {
+                              const CategoryIcon = CATEGORY_ICONS[projectCategory];
+                              return (
+                                <CategoryIcon
+                                  key={projectCategory}
+                                  size={18}
+                                  strokeWidth={1.8}
+                                  aria-hidden="true"
+                                />
+                              );
+                            })}
+                          </span>
+                        )}
                         <span className="realisation-card__sector">
                           {project.sector}
                         </span>
