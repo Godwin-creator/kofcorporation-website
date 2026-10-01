@@ -47,7 +47,7 @@
   z-index: 10;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 1023px) {
   .hero__inner {
     grid-template-columns: 1fr;
     gap: 3rem;
@@ -256,6 +256,12 @@
   align-items: center;
   justify-content: flex-end;
   margin-inline: auto 0;
+}
+
+@media (max-width: 1023px) {
+  .hero__visual {
+    display: none;
+  }
 }
 
 .hero__image-wrapper {
