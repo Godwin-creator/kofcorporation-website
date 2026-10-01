@@ -109,7 +109,7 @@ export default function AnimatedCursor() {
     };
   }, []);
 
-  // Sync high-frequency transforms directly via DOM — no React re-renders in RAF loop
+  // Sync high-frequency transforms directly via DOM - no React re-renders in RAF loop
   const syncDOM = () => {
     const dot = dotRef.current;
     const ring = ringRef.current;

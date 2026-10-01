@@ -30,6 +30,9 @@ export default async function NotFound() {
           style={{
             margin: 0,
             color: "var(--color-accent)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
             fontFamily: "var(--font-heading)",
             fontSize: "clamp(8rem, 24vw, 16rem)",
             fontWeight: 700,
@@ -37,7 +40,17 @@ export default async function NotFound() {
             letterSpacing: "-0.08em",
           }}
         >
-          Oups, 404
+          <span
+            style={{
+              color: "var(--color-primary)",
+              fontSize: "clamp(2rem, 5vw, 3.25rem)",
+              lineHeight: 1.1,
+              letterSpacing: 0,
+            }}
+          >
+            Oups,
+          </span>
+          <span>404</span>
         </p>
         <h1
           id="not-found-title"
