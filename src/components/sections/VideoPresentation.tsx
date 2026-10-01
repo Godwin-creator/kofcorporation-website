@@ -11,9 +11,9 @@ interface VideoPresentationProps {
   /** ID YouTube - si fourni, affiche la miniature + bouton Play → modal embed */
   youtubeId?: string;
   /** Chemin vidéo locale - lecture inline muted en boucle (défaut) */
-  videoSrc?: string;
   presentationVideoUrl?: string;
   presentationVideoFileUrl?: string;
+  teamPhotoUrl?: string;
 }
 
 const getYoutubeId = (value?: string) => {
@@ -33,9 +33,9 @@ const getYoutubeId = (value?: string) => {
 export default function VideoPresentation({
   // ajouter l'id de la vidéo youtube. Ex: youtubeId = "EUqP5zr7h2g",
   youtubeId,
-  videoSrc = "/videos/presentation.mp4",
   presentationVideoUrl,
   presentationVideoFileUrl,
+  teamPhotoUrl,
 }: VideoPresentationProps) {
   const t = useTranslations("videoPresentation");
 
@@ -112,7 +112,7 @@ export default function VideoPresentation({
   // ── YouTube thumbnail ─────────────────────────────────────────────────────
   const cmsYoutubeId = getYoutubeId(presentationVideoUrl);
   const activeYoutubeId = cmsYoutubeId || youtubeId;
-  const activeVideoSrc = presentationVideoFileUrl || videoSrc;
+  const activeVideoSrc = presentationVideoFileUrl;
   const youtubeThumbnail = activeYoutubeId
     ? `https://img.youtube.com/vi/${activeYoutubeId}/maxresdefault.jpg`
     : null;
@@ -132,7 +132,7 @@ export default function VideoPresentation({
           <div className="video-presentation__player-card">
 
             {/* ── CAS 1 : Vidéo locale - autoplay muted loop ── */}
-            {!activeYoutubeId && (
+            {!activeYoutubeId && activeVideoSrc && (
               <>
                 {/* Élément vidéo inline */}
                 <video
@@ -167,6 +167,10 @@ export default function VideoPresentation({
                   <Maximize2 size={18} />
                 </button>
               </>
+            )}
+
+            {!activeYoutubeId && !activeVideoSrc && teamPhotoUrl && (
+              <img className="video-presentation__inline-video" src={teamPhotoUrl} alt={t("title")} />
             )}
 
             {/* ── CAS 2 : YouTube - miniature + bouton Play custom ── */}

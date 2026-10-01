@@ -13,12 +13,12 @@ export default async function Projects() {
   const items: ProjectItem[] = (projects as SanityProject[]).map((project: SanityProject) => ({
     id: project._id,
     title: project.title,
-    sector: project.sector || (project.categories?.[0] ?? project.category ?? ''),
-    description: locale === 'en' ? project.shortDescriptionEn ?? project.descriptionEn ?? project.description : project.shortDescription ?? project.description,
+    sector: project.sector || (project.categories?.[0] ?? ''),
+    description: locale === 'en' ? project.shortDescriptionEn ?? project.descriptionEn ?? project.description ?? '' : project.shortDescription ?? project.description ?? '',
     tags: project.technologies ?? [],
-    url: project.links?.[0]?.url ?? project.url ?? '#',
-    category: project.categories?.[0] ?? project.category ?? 'web',
-    imageUrl: project.image ? urlFor(project.image).width(900).height(500).url() : undefined,
+    url: project.links?.[0]?.url ?? '#',
+    category: project.categories?.[0] ?? 'web',
+    imageUrl: project.image?.asset?._ref ? urlFor(project.image).width(900).height(500).url() : undefined,
     project
   }))
   return <ProjectsClient projects={items} />

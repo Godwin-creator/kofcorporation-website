@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import WebDevelopmentService from "@/components/pages/services/WebDevelopmentService";
-import { fetchServices } from "@/lib/queries";
-import type { SanityService } from "@/types/sanity";
+import { fetchSettings } from "@/lib/queries";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -12,9 +11,6 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function WebDevelopmentPage() {
-  const services = await fetchServices();
-  const service = services?.find(
-    (item) => item.slug?.current === "developpement-web"
-  );
-  return <WebDevelopmentService technologies={service?.stack} />;
+  const settings = await fetchSettings();
+  return <WebDevelopmentService technologies={settings?.stackWeb} />;
 }

@@ -10,6 +10,7 @@ import Testimonials from "@/components/sections/Testimonials";
 import CallToAction from "@/components/sections/CallToAction";
 import { fetchSettings } from "@/lib/queries";
 import type { CompanySettings } from "@/types/sanity";
+import { urlFor } from "@/lib/sanity";
 import { SectionSkeleton } from "@/components/ui/Skeletons";
 
 export default async function Home() {
@@ -20,6 +21,7 @@ export default async function Home() {
       <VideoPresentation
         presentationVideoUrl={settings?.presentationVideoUrl}
         presentationVideoFileUrl={settings?.presentationVideoFileUrl}
+        teamPhotoUrl={settings?.teamPhoto ? urlFor(settings.teamPhoto).width(1200).height(675).url() : undefined}
       />
       <ScrollWordReveal textKey="homeStatement" />
       <Services />

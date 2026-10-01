@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import {
   animate,
@@ -13,7 +13,6 @@ import { Clock, FolderCheck, GraduationCap, Star } from "lucide-react";
 import "./Stats.css";
 import EmptyState from "@/components/ui/EmptyState";
 import Watermark from "@/components/ui/Watermark";
-import LoadingDots from "@/components/ui/LoadingDots";
 
 export interface StatItem {
   id: string;
@@ -72,8 +71,6 @@ export default function StatsClient({ stats }: { stats: StatItem[] }) {
   const locale = useLocale();
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-30% 0px -30% 0px" });
-  const [loaded, setLoaded] = useState(false);
-  useEffect(() => { setLoaded(true); }, []);
   return (
     <motion.section
       ref={sectionRef}
@@ -84,7 +81,7 @@ export default function StatsClient({ stats }: { stats: StatItem[] }) {
       initial={stats.length ? "hidden" : "visible"}
       animate={isInView || !stats.length ? "visible" : "hidden"}
     >
-      {!loaded ? <LoadingDots /> : <Watermark id="stats" />}
+      <Watermark id="stats" />
       <div className="stats__inner">
         <h2 id="stats-title" className="stats__title">
           {t("title")}
@@ -93,7 +90,7 @@ export default function StatsClient({ stats }: { stats: StatItem[] }) {
           className="stats__grid"
           variants={containerVariants}
           initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
+          animate={stats.length ? (isInView ? "visible" : "hidden") : "visible"}
         >
           {stats.length ? (
             stats.map((stat) => {

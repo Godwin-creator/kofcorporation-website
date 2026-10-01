@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { motion, useInView } from "framer-motion";
 import { ExternalLink, Heart, HeartPulse, Home } from "lucide-react";
@@ -10,7 +10,6 @@ import ProjectModal from "@/components/ui/ProjectModal";
 import EmptyState from "@/components/ui/EmptyState";
 import type { SanityProject } from "@/types/sanity";
 import Watermark from "@/components/ui/Watermark";
-import LoadingDots from "@/components/ui/LoadingDots";
 
 export interface ProjectItem {
   id: string;
@@ -63,8 +62,6 @@ export default function ProjectsClient({
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(
     null,
   );
-  const [loaded, setLoaded] = useState(false);
-  useEffect(() => { setLoaded(true); }, []);
   return (
     <motion.section
       ref={sectionRef}
@@ -75,7 +72,7 @@ export default function ProjectsClient({
       initial={projects.length ? "hidden" : "visible"}
       animate={isInView || !projects.length ? "visible" : "hidden"}
     >
-      {!loaded ? <LoadingDots /> : <Watermark id="projects" />}
+      <Watermark id="projects" />
       <div className="projects__inner">
         <header className="projects__header">
           <div className="projects__heading">
@@ -92,7 +89,7 @@ export default function ProjectsClient({
             className="projects__grid"
             variants={containerVariants}
             initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
+            animate={projects.length && isInView ? "visible" : "visible"}
           >
             {projects.map((project) => {
               const Icon =

@@ -1,13 +1,12 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 import { useTranslations } from "next-intl";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import "./Partners.css";
 import EmptyState from "@/components/ui/EmptyState";
 import Watermark from "@/components/ui/Watermark";
-import LoadingDots from "@/components/ui/LoadingDots";
 
 export interface PartnerItem {
   id: string;
@@ -33,8 +32,6 @@ export default function PartnersClient({
   const marqueeItems = [...partners, ...partners];
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "0px" });
-  const [loaded, setLoaded] = useState(false);
-  useEffect(() => { setLoaded(true); }, []);
   return (
     <motion.section
       ref={sectionRef}
@@ -44,7 +41,7 @@ export default function PartnersClient({
       initial={partners.length ? "hidden" : "visible"}
       animate={isInView || !partners.length ? "visible" : "hidden"}
     >
-      {!loaded ? <LoadingDots /> : <Watermark id="partners" />}
+      <Watermark id="partners" />
       <div className="partners__inner">
         <h2 className="partners__title">{t("title")}</h2>
         {partners.length ? (

@@ -143,8 +143,8 @@
     "home": "Home",
     "about": "About us",
     "aboutEyebrow": "About us",
-    "aboutTitle": "A local team,",
-    "aboutHighlight": "global standards.",
+    "aboutTitle": "Glocal tech ",
+    "aboutHighlight": "excellence",
     "services": "Our services",
     "servicesEyebrow": "Our expertise",
     "servicesTitle": "Digital solutions",
@@ -164,7 +164,7 @@
   },
   "scrollReveal": {
     "homeStatement": "We transform your ideas into powerful and elegant digital solutions.",
-    "aboutStatement": "Our technical expertise at the service of your ambition for over ten years.",
+    "aboutStatement": "Our technical expertise at the service of your ambition.",
     "servicesStatement": "Custom solutions designed to propel your business to new heights."
   },
   "watermarks": {

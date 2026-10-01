@@ -143,8 +143,8 @@
     "home": "Accueil",
     "about": "Qui sommes-nous ?",
     "aboutEyebrow": "Qui sommes-nous ?",
-    "aboutTitle": "Une équipe locale,",
-    "aboutHighlight": "des standards mondiaux.",
+    "aboutTitle": "L'excellence tech",
+    "aboutHighlight": "glocale",
     "services": "Nos services",
     "servicesEyebrow": "Nos expertises",
     "servicesTitle": "Des solutions digitales",
@@ -164,7 +164,7 @@
   },
   "scrollReveal": {
     "homeStatement": "Nous transformons vos idées en solutions numériques puissantes et élégantes.",
-    "aboutStatement": "Notre expertise technique au service de votre ambition depuis plus de dix ans.",
+    "aboutStatement": "Notre expertise technique au service de votre ambition.",
     "servicesStatement": "Des solutions sur mesure conçues pour propulser votre activité vers de nouveaux sommets."
   },
   "watermarks": {

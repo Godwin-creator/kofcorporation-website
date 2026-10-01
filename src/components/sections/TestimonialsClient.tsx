@@ -3,13 +3,14 @@
 import {useEffect, useRef, useState} from 'react'
 import {useTranslations} from 'next-intl'
 import {AnimatePresence, motion, useInView} from 'framer-motion'
+import Image from 'next/image'
 import {ChevronLeft, ChevronRight, Star} from 'lucide-react'
 import './Testimonials.css'
 import EmptyState from '@/components/ui/EmptyState'
 import Watermark from '@/components/ui/Watermark'
-import LoadingDots from '@/components/ui/LoadingDots'
 
-export interface TestimonialItem {id: string; quote: string; name: string; role: string; rating: number}
+export interface TestimonialItem {id: string; quote: string; name: string; role: string; rating: number; avatarUrl?: string}
+const getInitials = (name: string) => name.split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part[0]).join('').toUpperCase()
 const slideVariants = {enter: (direction: number) => ({opacity: 0, x: direction > 0 ? 56 : -56}), center: {opacity: 1, x: 0, transition: {duration: 0.55, ease: 'easeOut' as const}}, exit: (direction: number) => ({opacity: 0, x: direction > 0 ? -56 : 56, transition: {duration: 0.35, ease: 'easeIn' as const}})}
 const sectionVariants = {hidden: {opacity: 0, y: 60}, visible: {opacity: 1, y: 0, transition: {duration: 0.9, ease: [0.22, 1, 0.36, 1] as [number,number,number,number]}}}
 
@@ -20,8 +21,6 @@ export default function TestimonialsClient({testimonials}: {testimonials: Testim
   const [isPaused, setIsPaused] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
   const isInView = useInView(sectionRef, {once: true, margin: '-30% 0px -30% 0px'})
-  const [loaded, setLoaded] = useState(false)
-  useEffect(() => { setLoaded(true); }, [])
   const active = testimonials[activeIndex]
 
   useEffect(() => {
@@ -40,7 +39,7 @@ export default function TestimonialsClient({testimonials}: {testimonials: Testim
 
   if (!testimonials.length) return (
     <motion.section ref={sectionRef} id="testimonials" className="testimonials" aria-labelledby="testimonials-title" variants={sectionVariants} initial="visible" animate="visible">
-      {!loaded ? <LoadingDots /> : <Watermark id="testimonials" />}
+      <Watermark id="testimonials" />
       <div className="testimonials__inner">
         <header className="testimonials__header">
           <h2 id="testimonials-title" className="testimonials__title">{t('title')}</h2>
@@ -61,7 +60,7 @@ export default function TestimonialsClient({testimonials}: {testimonials: Testim
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      {!loaded ? <LoadingDots /> : <Watermark id="testimonials" />}
+      <Watermark id="testimonials" />
       <div className="testimonials__inner">
         <header className="testimonials__header">
           <h2 id="testimonials-title" className="testimonials__title">{t('title')}</h2>
@@ -93,8 +92,19 @@ export default function TestimonialsClient({testimonials}: {testimonials: Testim
                 </div>
                 <blockquote className="testimonial-card__quote">{active.quote}</blockquote>
                 <footer className="testimonial-card__author">
-                  <strong>{active.name}</strong>
-                  <span>{active.role}</span>
+                  {active.avatarUrl ? (
+                    <Image 
+                      src={active.avatarUrl} 
+                      alt={active.name} 
+                      width={48} 
+                      height={48} 
+                      className="testimonial-card__avatar"
+                    />
+                  ) : <div className="testimonial-card__avatar" aria-hidden="true">{getInitials(active.name)}</div>}
+                  <div className="testimonial-card__author-info">
+                    <strong>{active.name}</strong>
+                    <span>{active.role}</span>
+                  </div>
                 </footer>
               </motion.article>
             </AnimatePresence>

@@ -350,3 +350,17 @@
     padding: 1.5rem;
   }
 }
+
+.contact-page__section-title {
+  color: var(--color-accent) !important;
+  margin-bottom: 1rem !important;
+}
+
+.contact-page__section-subtitle {
+  color: var(--color-text);
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.4;
+  margin: 0;
+  max-width: 30ch;
+}

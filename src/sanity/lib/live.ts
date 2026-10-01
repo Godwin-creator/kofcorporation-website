@@ -5,11 +5,19 @@
 import { defineLive } from "next-sanity/live";
 import { client, hasSanityConfig } from '@/lib/sanity';
 
+const token = process.env.SANITY_API_READ_TOKEN;
+
 // Only initialize defineLive when Sanity is properly configured,
 // because the fallback client doesn't support .withConfig().
 function initLive() {
   if (hasSanityConfig) {
-    return defineLive({ client });
+    return defineLive({
+      client,
+      // When a read token is available, pass it to enable live content / drafts.
+      // Otherwise explicitly disable to allow public CDN fetches to work.
+      serverToken: token || false,
+      browserToken: token || false,
+    });
   }
   // Return type-compatible fallbacks
   return {

@@ -18,11 +18,12 @@ import Watermark from "@/components/ui/Watermark";
 
 interface ServiceDetail {
   id: string;
+  sanitySlug: string;
   eyebrowKey: string;
   titleKey: string;
   descriptionKey: string;
   benefitKey: string;
-  tags: string[];
+  defaultTags: string[];
   icon: LucideIcon;
   href: string;
 }
@@ -30,41 +31,45 @@ interface ServiceDetail {
 const SERVICES: ServiceDetail[] = [
   {
     id: "web",
+    sanitySlug: "developpement-web",
     eyebrowKey: "web.eyebrow",
     titleKey: "web.title",
     descriptionKey: "web.description",
     benefitKey: "web.benefit",
-    tags: ["Laravel", "Vue.js", "Angular", "Spring Boot", "Firebase"],
+    defaultTags: ["Laravel", "Vue.js", "Angular", "Spring Boot", "Firebase"],
     icon: Globe,
     href: "/services/developpement-web",
   },
   {
     id: "mobile",
+    sanitySlug: "applications-mobiles",
     eyebrowKey: "mobile.eyebrow",
     titleKey: "mobile.title",
     descriptionKey: "mobile.description",
     benefitKey: "mobile.benefit",
-    tags: ["Flutter", "Firebase", "Ionic", "Kotlin", "Java"],
+    defaultTags: ["Flutter", "Firebase", "Ionic", "Kotlin", "Java"],
     icon: Smartphone,
     href: "/services/applications-mobiles",
   },
   {
     id: "management",
+    sanitySlug: "logiciels-gestion",
     eyebrowKey: "management.eyebrow",
     titleKey: "management.title",
     descriptionKey: "management.description",
     benefitKey: "management.benefit",
-    tags: ["ERP", "CRM", "RH", "Facturation", "Spring Boot"],
+    defaultTags: ["ERP", "CRM", "RH", "Facturation", "Spring Boot"],
     icon: Monitor,
     href: "/services/logiciels-gestion",
   },
   {
     id: "training",
+    sanitySlug: "formation",
     eyebrowKey: "training.eyebrow",
     titleKey: "training.title",
     descriptionKey: "training.description",
     benefitKey: "training.benefit",
-    tags: ["Academy", "Présentiel", "En ligne", "Hybride"],
+    defaultTags: ["Academy", "Présentiel", "En ligne", "Hybride"],
     icon: GraduationCap,
     href: "https://academy.kofcorporation.com/",
   },
@@ -95,7 +100,7 @@ const cardVariants = {
   },
 };
 
-export default function ServicesPage() {
+export default function ServicesPage({sanityStacks}: {sanityStacks?: Record<string, string[]>}) {
   const t = useTranslations("pages");
   const tServices = useTranslations("servicesPage");
   return (
@@ -110,7 +115,6 @@ export default function ServicesPage() {
           variants={sectionVariants}
         >
           <div className="services-page__hero-inner">
-            <p className="services-page__eyebrow">{t("servicesEyebrow")}</p>
             <h1 id="services-page-title">
               <span className="services-page__hero-title-line">{t("servicesTitle")}</span>
               <br />
@@ -121,10 +125,6 @@ export default function ServicesPage() {
             <p className="services-page__hero-description">
               {tServices("hero.description")}
             </p>
-            <Link className="services-page__hero-link" href="#expertises">
-              {tServices("hero.cta")}
-              <ArrowRight size={18} strokeWidth={1.8} aria-hidden="true" />
-            </Link>
           </div>
         </motion.section>
 
@@ -135,10 +135,8 @@ export default function ServicesPage() {
         >
           <div className="services-page__container">
             <header className="services-page__section-header">
-              <p className="services-page__eyebrow">{tServices("expertises.eyebrow")}</p>
-              <h2 id="expertises-title">
-                {tServices("expertises.title")}
-              </h2>
+              <h2 id="expertises-title" className="services-page__section-title">{tServices("expertises.eyebrow")}</h2>
+              <p className="services-page__section-subtitle">{tServices("expertises.title")}</p>
               <p>
                 {tServices("expertises.description")}
               </p>
@@ -151,8 +149,9 @@ export default function ServicesPage() {
               whileInView="visible"
               viewport={{ once: true, amount: 0.15 }}
             >
-              {SERVICES.map(({ id, eyebrowKey, titleKey, descriptionKey, benefitKey, tags, icon: Icon, href }) => {
+              {SERVICES.map(({ id, sanitySlug, eyebrowKey, titleKey, descriptionKey, benefitKey, defaultTags, icon: Icon, href }) => {
                 const title = tServices(titleKey);
+                const tags = (sanityStacks?.[sanitySlug]?.length ? sanityStacks[sanitySlug] : defaultTags);
                 return (
                   <motion.article
                     className={`services-detail-card services-detail-card--${id}`}
@@ -202,8 +201,8 @@ export default function ServicesPage() {
         >
           <div className="services-page__method-inner">
             <div>
-              <p className="services-page__eyebrow">{tServices("method.eyebrow")}</p>
-              <h2 id="method-title">{tServices("method.title")}</h2>
+              <h2 id="method-title" className="services-page__section-title">{tServices("method.eyebrow")}</h2>
+              <p className="services-page__section-subtitle">{tServices("method.title")}</p>
             </div>
             <ol className="services-page__steps">
               <li>
