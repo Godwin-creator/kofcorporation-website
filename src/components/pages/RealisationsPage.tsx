@@ -1,5 +1,5 @@
 import {getLocale} from 'next-intl/server'
-import {client, urlFor} from '@/lib/sanity'
+import {urlFor} from '@/lib/sanity'
 import {fetchProjects} from '@/lib/queries'
 import type {SanityProject} from '@/types/sanity'
 import RealisationsClient, {type RealisationItem} from './RealisationsClient'
