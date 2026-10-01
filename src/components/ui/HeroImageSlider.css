@@ -47,7 +47,6 @@
 .hero-image-slider__mobile-panel {
   z-index: 1;
   overflow: hidden;
-  will-change: opacity, transform, filter;
 }
 
 .hero-image-slider__drag-guide {

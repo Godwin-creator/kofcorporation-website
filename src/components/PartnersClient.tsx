@@ -59,6 +59,7 @@ export default function PartnersClient({
                     alt={index < partners.length ? partner.name : ""}
                     width={240}
                     height={96}
+                    sizes="(max-width: 640px) 120px, 200px"
                   />
                 </div>
               ))}

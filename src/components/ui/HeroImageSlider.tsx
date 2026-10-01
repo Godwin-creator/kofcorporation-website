@@ -53,6 +53,7 @@ export default function HeroImageSlider() {
   const [hoveredSlot, setHoveredSlot] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [activeMobileImage, setActiveMobileImage] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const [phase, setPhase] = useState<"initial" | "puzzle1" | "result1" | "preview2" | "puzzle2" | "result2" | "preview1">("initial");
   const [puzzleIndex, setPuzzleIndex] = useState<0 | 1>(0);
   const boardRef = useRef<HTMLDivElement | null>(null);
@@ -80,11 +81,22 @@ export default function HeroImageSlider() {
       return undefined;
     }
 
+    let transitionTimer: number | undefined;
     const timer = window.setInterval(() => {
+      setIsTransitioning(true);
       setActiveMobileImage((current) => (current === 0 ? 1 : 0));
+      if (transitionTimer !== undefined) {
+        window.clearTimeout(transitionTimer);
+      }
+      transitionTimer = window.setTimeout(() => setIsTransitioning(false), 800);
     }, 10000);
 
-    return () => window.clearInterval(timer);
+    return () => {
+      window.clearInterval(timer);
+      if (transitionTimer !== undefined) {
+        window.clearTimeout(transitionTimer);
+      }
+    };
   }, [isMobile]);
 
   useEffect(() => {
@@ -248,13 +260,15 @@ export default function HeroImageSlider() {
                 x: activeMobileImage === index ? 0 : index === 1 ? 18 : -18,
                 filter: activeMobileImage === index ? "blur(0px)" : "blur(1.5px)",
               }}
+              style={{ willChange: isTransitioning ? "transform, opacity" : "auto" }}
               transition={{ duration: 0.8, ease: "easeInOut" }}
             >
               <Image
                 src={image}
                 alt=""
                 fill
-                priority
+                priority={index === 0}
+                loading={index === 0 ? "eager" : "lazy"}
                 className="hero-image-slider__img"
                 sizes="(max-width: 1023px) 340px, 500px"
               />
@@ -270,7 +284,7 @@ export default function HeroImageSlider() {
       <div className="hero-image-slider" aria-label="Image initiale du hero">
         <div className="hero-image-slider__frame">
           <div className="hero-image-slider__background">
-            <Image src={IMAGES[0]} alt="" fill className="hero-image-slider__img" priority sizes="(max-width: 1023px) 0px, 500px" />
+            <Image src={IMAGES[0]} alt="" fill className="hero-image-slider__img" priority loading="eager" sizes="(max-width: 1024px) 0px, 45vw" />
           </div>
         </div>
       </div>
@@ -282,7 +296,7 @@ export default function HeroImageSlider() {
       <div className="hero-image-slider" aria-label="Image de prévisualisation">
         <div className="hero-image-slider__frame">
           <div className="hero-image-slider__background">
-            <Image src={IMAGES[0]} alt="" fill className="hero-image-slider__img" priority sizes="(max-width: 1023px) 0px, 500px" />
+            <Image src={IMAGES[0]} alt="" fill className="hero-image-slider__img" loading="lazy" sizes="(max-width: 1024px) 0px, 45vw" />
           </div>
         </div>
       </div>
@@ -294,7 +308,7 @@ export default function HeroImageSlider() {
       <div className="hero-image-slider" aria-label="Image de prévisualisation">
         <div className="hero-image-slider__frame">
           <div className="hero-image-slider__background">
-            <Image src={IMAGES[1]} alt="" fill className="hero-image-slider__img" priority sizes="(max-width: 1023px) 0px, 500px" />
+            <Image src={IMAGES[1]} alt="" fill className="hero-image-slider__img" loading="lazy" sizes="(max-width: 1024px) 0px, 45vw" />
           </div>
         </div>
       </div>
@@ -312,7 +326,7 @@ export default function HeroImageSlider() {
         onPointerLeave={handleBoardPointerUp}
       >
         <div className="hero-image-slider__background">
-          <Image src={baseImage} alt="" fill className="hero-image-slider__img" priority sizes="(max-width: 1023px) 0px, 500px" />
+          <Image src={baseImage} alt="" fill className="hero-image-slider__img" loading="lazy" sizes="(max-width: 1024px) 0px, 45vw" />
         </div>
 
         {draggedId !== null && (

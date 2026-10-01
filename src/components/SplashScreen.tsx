@@ -47,6 +47,7 @@ export default function SplashScreen() {
           { duration: 0.8, ease: "easeIn" }
         );
 
+        document.documentElement.style.visibility = "";
         setVisible(false);
         return;
       }
@@ -60,6 +61,7 @@ export default function SplashScreen() {
         { duration: 1.5, ease: "easeIn" }
       );
 
+      document.documentElement.style.visibility = "";
       setVisible(false);
     };
 
