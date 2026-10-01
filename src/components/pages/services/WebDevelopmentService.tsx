@@ -65,9 +65,10 @@ export default function WebDevelopmentService({technologies = []}: {technologies
     const connection = (navigator as any).connection;
     const isSlow = connection ? (connection.saveData || ["slow-2g", "2g", "3g"].includes(connection.effectiveType)) : false;
     
-    if (!isMobile && !isReducedData && !isSlow) {
-      setShouldLoadVideo(true);
-    }
+    if (isMobile || isReducedData || isSlow) return;
+
+    const frame = window.requestAnimationFrame(() => setShouldLoadVideo(true));
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   return (

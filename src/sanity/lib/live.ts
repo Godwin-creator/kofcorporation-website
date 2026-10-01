@@ -21,7 +21,7 @@ function initLive() {
   }
   // Return type-compatible fallbacks
   return {
-    sanityFetch: (async (options: { query: string }) => {
+    sanityFetch: (async () => {
       return { data: [] as never, sourceMap: null, tags: [] };
     }) as ReturnType<typeof defineLive>['sanityFetch'],
     SanityLive: (() => null) as unknown as ReturnType<typeof defineLive>['SanityLive'],

@@ -1,10 +1,9 @@
 "use client";
 
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import {
-  ArrowUpRight,
   Building2,
   ExternalLink,
   Heart,
@@ -15,13 +14,11 @@ import {
   Smartphone,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { Link } from "@/i18n/navigation";
 import type { SanityProject, ProjectCategory } from "@/types/sanity";
 import ProjectModal from "@/components/ui/ProjectModal";
 import EmptyState from "@/components/ui/EmptyState";
 import "./RealisationsPage.css";
 import Watermark from "@/components/ui/Watermark";
-import LoadingDots from "@/components/ui/LoadingDots";
 
 export interface RealisationItem {
   project: SanityProject;
@@ -76,10 +73,6 @@ export default function RealisationsClient({
   const [visibleCount, setVisibleCount] = useState(6);
   const [selectedProject, setSelectedProject] =
     useState<RealisationItem | null>(null);
-  const [loaded, setLoaded] = useState(false);
-  useEffect(() => {
-    setLoaded(true);
-  }, []);
   const filteredProjects = useMemo(
     () =>
       projects.filter(
@@ -93,7 +86,7 @@ export default function RealisationsClient({
   return (
     <>
       <div className="realisations-page">
-        {!loaded ? <LoadingDots /> : <Watermark id="realisations_page" />}
+        <Watermark id="realisations_page" />
         <motion.section
           className="realisations-page__hero"
           aria-labelledby="realisations-title"

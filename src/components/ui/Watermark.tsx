@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { useTranslations } from "next-intl";
-import { motion, useInView } from "framer-motion";
+import { useInView } from "framer-motion";
 
 interface WatermarkProps {
   /** Key inside the "watermarks" translation namespace */
