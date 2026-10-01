@@ -21,7 +21,7 @@
 }
 
 .contact-page__hero-inner {
-  max-width: 900px;
+  max-width: 1280px;
   text-align: center;
 }
 
@@ -42,21 +42,23 @@
 }
 
 .contact-page h1 {
-  max-width: 850px;
+  max-width: none;
   margin: 0 auto;
   font-family: var(--font-heading);
   font-size: clamp(2rem, 7vw, 6rem);
   font-weight: 700;
   letter-spacing: -0.04em;
-  line-height: 0.98;
+  line-height: 1.12;
 }
 
 .contact-page__hero-title-line {
   display: inline-block;
+  line-height: 1.12;
   white-space: nowrap;
 }
 
 .contact-page__hero-title-highlight {
+  padding-bottom: 0.14em;
   background: linear-gradient(135deg, #0cace8 0%, #1c71aa 100%);
   background-clip: text;
   -webkit-background-clip: text;
@@ -206,7 +208,7 @@
 [data-theme="dark"] .contact-form__submit,
 [data-theme="dark"] .contact-page__success button {
   border-color: var(--color-primary);
-  color: var(--color-surface-alt);
+  color: var(--color-on-accent);
   background-color: var(--color-primary);
 }
 
@@ -214,9 +216,9 @@
 [data-theme="dark"] .contact-form__submit:focus-visible,
 [data-theme="dark"] .contact-page__success button:hover,
 [data-theme="dark"] .contact-page__success button:focus-visible {
-  border-color: #ffffff;
-  color: var(--color-surface-alt);
-  background-color: #ffffff;
+  border-color: var(--color-accent-mid);
+  color: var(--color-on-accent);
+  background-color: var(--color-accent-mid);
 }
 
 .contact-form__note {

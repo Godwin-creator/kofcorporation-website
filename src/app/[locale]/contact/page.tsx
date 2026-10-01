@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import ContactPage from "@/components/pages/ContactPage";
 import { fetchSettings } from "@/lib/queries";
-import type { CompanySettings } from "@/types/sanity";
 
 export const metadata: Metadata = {
   title: "Contact - KofCorporation",

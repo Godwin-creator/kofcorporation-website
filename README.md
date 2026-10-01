@@ -23,8 +23,9 @@ Site web institutionnel de **KofCorporation**, entreprise informatique basée à
 
 ## Fonctionnalités
 
--  **Mode clair / sombre** - persistant en `localStorage`, sans flash au chargement (`InlineScript` dans le `<head>`), respecte `prefers-color-scheme`.
--  **Multilingue (FR / EN)** - routing internationalisé avec `next-intl`.
+-  **Mode clair / sombre** - préférence persistée en `localStorage`, sans flash au chargement (`InlineScript` dans le `<head>`), respecte `prefers-color-scheme`.
+-  **Multilingue (FR / EN)** - routing internationalisé avec `next-intl`; la langue choisie est mémorisée dans le cookie `NEXT_LOCALE` pendant un an.
+-  **Mesure d'audience et de performance** - Vercel Web Analytics et Speed Insights fournissent des statistiques anonymisées/agrégées.
 -  **Hero interactif & cinématique** :
   - Machine d'état typewriter à deux lignes avec rythme de frappe humain, curseur dédié et effacement automatique.
   - Puzzle interactif desktop avec drag & drop, détection de grille et restauration intelligente du curseur natif (`grab` / `grabbing`).

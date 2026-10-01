@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import { motion, AnimatePresence, useInView } from "framer-motion";
+import Image from "next/image";
 import { Play, X, Volume2, VolumeX, Maximize2 } from "lucide-react";
 import "./VideoPresentation.css";
 import Watermark from "@/components/ui/Watermark";
@@ -170,7 +171,14 @@ export default function VideoPresentation({
             )}
 
             {!activeYoutubeId && !activeVideoSrc && teamPhotoUrl && (
-              <img className="video-presentation__inline-video" src={teamPhotoUrl} alt={t("title")} />
+              <Image
+                className="video-presentation__inline-video"
+                src={teamPhotoUrl}
+                alt={t("title")}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                unoptimized
+              />
             )}
 
             {/* ── CAS 2 : YouTube - miniature + bouton Play custom ── */}

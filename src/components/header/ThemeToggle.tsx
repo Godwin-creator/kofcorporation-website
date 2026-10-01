@@ -69,7 +69,7 @@ export default function ThemeToggle({ specularColors }: ThemeToggleProps) {
             ["--theme-ripple-y" as string]: `${themeSweep.y}px`,
             ["--theme-ripple-size" as string]: `${themeSweep.size}px`,
             ["--theme-ripple-color" as string]:
-              themeSweep.target === "dark" ? "#1A1E3A" : "#F8F9FA",
+              themeSweep.target === "dark" ? "#151A20" : "#F8F9FA",
           }}
         />
       )}

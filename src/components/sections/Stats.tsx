@@ -1,11 +1,9 @@
-import { getTranslations } from 'next-intl/server'
 import { fetchStats } from '@/lib/queries'
 import type { SanityStat } from '@/types/sanity'
 import StatsClient, { type StatItem } from './StatsClient'
 
 
 export default async function Stats() {
-  const t = await getTranslations('stats')
   const sanityStats = (await fetchStats()) ?? []
   if (!sanityStats.length) {
     console.warn('[Sanity] Aucune donnée trouvée pour le type "stat" - vérifier le Studio')

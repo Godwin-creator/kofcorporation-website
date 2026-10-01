@@ -84,9 +84,10 @@
   font-family: var(--font-heading);
   font-size: clamp(2.5rem, 5.5vw + 1rem, 4.5rem);
   font-weight: 800;
-  line-height: 1.08;
+  line-height: 1.2;
   color: #ffffff;
   margin: 0 0 1.25rem 0;
+  padding-bottom: 0.1em;
   letter-spacing: -0.03em;
   text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
 }
@@ -121,7 +122,7 @@
   font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--color-on-accent);
   background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
   box-shadow: 0 4px 20px color-mix(in srgb, var(--color-accent) 40%, transparent);
   text-decoration: none;
@@ -132,7 +133,7 @@
 .service-hero__cta--primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 28px color-mix(in srgb, var(--color-accent) 50%, transparent);
-  color: #ffffff;
+  color: var(--color-on-accent);
 }
 
 /* Secondary CTA */

@@ -49,7 +49,7 @@ export default async function MentionsLegalesPage() {
               fontSize: "1.1rem",
             }}
           >
-            Dernière mise à jour : Septembre 2026
+            Dernière mise à jour : Octobre 2026
           </p>
         </div>
       </header>
@@ -169,8 +169,16 @@ export default async function MentionsLegalesPage() {
             </a>
           </p>
           <p>
-            Aucun cookie traceur ou analytics tiers n&apos;est actuellement
-            utilisé sur ce site.
+            Les mesures d&apos;audience et de performance sont réalisées avec
+            Vercel Web Analytics et Vercel Speed Insights. Selon Vercel, ces
+            services fournissent des statistiques anonymisées ou agrégées et ne
+            permettent pas d&apos;identifier un visiteur ni de reconstituer sa
+            navigation. Les données de mesure sont transmises à Vercel.
+          </p>
+          <p>
+            Sur la page Contact, Google reCAPTCHA et Google Maps peuvent être
+            chargés. Ces services peuvent traiter des données techniques de
+            navigation conformément aux règles de confidentialité de Google.
           </p>
         </section>
         <section
@@ -181,8 +189,26 @@ export default async function MentionsLegalesPage() {
             Cookies
           </h2>
           <p>
-            Un seul cookie technique : localStorage &quot;theme&quot;
-            (préférence clair/sombre). Pas de cookie publicitaire ni analytique.
+            Le cookie technique &quot;NEXT_LOCALE&quot; mémorise la langue choisie
+            pendant un an afin de la conserver lors d&apos;une prochaine visite.
+          </p>
+          <p>
+            La préférence clair/sombre est enregistrée dans le stockage local du
+            navigateur (&quot;localStorage&quot;, clé &quot;theme&quot;); ce
+            mécanisme est distinct des cookies.
+          </p>
+          <p>
+            Vercel Web Analytics et Speed Insights mesurent respectivement
+            l&apos;audience et les performances du site. Vercel indique que ses
+            mesures sont anonymisées et que Web Analytics n&apos;utilise pas de
+            cookie tiers. Ces services ne sont pas utilisés à des fins
+            publicitaires.
+          </p>
+          <p>
+            Les services Google chargés sur la page Contact sont soumis aux
+            pratiques de confidentialité de Google. Vous pouvez gérer les
+            cookies et données enregistrées depuis les paramètres de votre
+            navigateur.
           </p>
         </section>
         <section aria-labelledby="contact-title">

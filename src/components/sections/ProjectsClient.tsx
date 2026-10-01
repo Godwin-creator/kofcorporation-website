@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { motion, useInView } from "framer-motion";
-import { ExternalLink, Heart, HeartPulse, Home } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import "./Projects.css";
 import { Link } from "@/i18n/navigation";
 import ProjectModal from "@/components/ui/ProjectModal";
@@ -18,16 +18,9 @@ export interface ProjectItem {
   description: string;
   tags: string[];
   url: string;
-  category: string;
   imageUrl?: string;
   project: SanityProject;
 }
-const ICONS = {
-  web: Heart,
-  mobile: HeartPulse,
-  logiciel: Home,
-  formation: Heart,
-};
 const sectionVariants = {
   hidden: { opacity: 0, y: 60 },
   visible: {
@@ -92,8 +85,6 @@ export default function ProjectsClient({
             animate={projects.length && isInView ? "visible" : "visible"}
           >
             {projects.map((project) => {
-              const Icon =
-                ICONS[project.category as keyof typeof ICONS] ?? Heart;
               return (
                 <motion.article
                   className="project-card"
@@ -113,15 +104,6 @@ export default function ProjectsClient({
                         : undefined
                     }
                   >
-                    <span
-                      className="project-card__visual-mark"
-                      aria-hidden="true"
-                    >
-                      <Icon size={56} strokeWidth={1.4} />
-                    </span>
-                    <span className="project-card__visual-name">
-                      {project.title}
-                    </span>
                   </div>
                   <div className="project-card__body">
                     <span className="project-card__sector">

@@ -106,9 +106,9 @@
 
 [data-theme="dark"] .stats__title,
 [data-theme="dark"] .stats__label {
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--color-text-muted);
 }
 
 [data-theme="dark"] .stats__item + .stats__item {
-  border-left-color: rgba(255, 255, 255, 0.14);
+  border-left-color: var(--color-border);
 }

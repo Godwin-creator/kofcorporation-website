@@ -49,14 +49,20 @@ export default function CustomSelect({
     };
   }, []);
 
-  useEffect(() => {
-    if (isOpen) {
-      const idx = options.findIndex((opt) => opt.value === value);
-      setFocusedIndex(idx >= 0 ? idx : 0);
-    }
-  }, [isOpen, options, value]);
+  const openSelect = () => {
+    const selectedIndex = options.findIndex((option) => option.value === value);
+    setFocusedIndex(selectedIndex >= 0 ? selectedIndex : 0);
+    setIsOpen(true);
+  };
 
-  const toggleOpen = () => setIsOpen((prev) => !prev);
+  const toggleOpen = () => {
+    if (isOpen) {
+      setIsOpen(false);
+      return;
+    }
+
+    openSelect();
+  };
 
   const handleSelect = (val: string) => {
     onChange(val);
@@ -77,7 +83,7 @@ export default function CustomSelect({
         e.key === "ArrowUp"
       ) {
         e.preventDefault();
-        setIsOpen(true);
+        openSelect();
       }
       return;
     }

@@ -140,6 +140,11 @@
   outline: none;
 }
 
+[data-theme="dark"] .testimonials__control:hover,
+[data-theme="dark"] .testimonials__control:focus-visible {
+  color: var(--color-on-accent);
+}
+
 .testimonials__dots {
   display: flex;
   justify-content: center;

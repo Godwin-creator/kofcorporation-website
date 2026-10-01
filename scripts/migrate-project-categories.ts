@@ -25,7 +25,7 @@ async function migrate() {
   console.log(`Found ${projects.length} project(s) to check.`);
 
   for (const proj of projects) {
-    const patch: Record<string, any> = {};
+    const patch: Record<string, unknown> = {};
 
     // Migrate category -> categories
     if ((!proj.categories || proj.categories.length === 0) && proj.category) {

@@ -12,12 +12,12 @@ export function applyTheme(theme: Theme) {
 
   const meta = document.querySelector('meta[name="theme-color"]');
   if (meta) {
-    meta.setAttribute("content", theme === "dark" ? "#1A1E3A" : "#E0F2FE");
+    meta.setAttribute("content", theme === "dark" ? "#151A20" : "#E0F2FE");
   }
 }
 
 export function getThemeBackground(theme: Theme): string {
-  return theme === "dark" ? "#1A1E3A" : "#E0F2FE";
+  return theme === "dark" ? "#151A20" : "#E0F2FE";
 }
 
 /**
@@ -56,20 +56,14 @@ export function useTheme(): {
   // Initialisation SSR-safe : valeur stable avant l'hydratation
   const [theme, setTheme] = useState<Theme>("light");
 
-  // Synchronisation après montage avec ce que le script inline a déjà appliqué
+  // Lire la préférence appliquée par le script inline sans l'écraser par l'état SSR.
   useEffect(() => {
-    const frame = window.requestAnimationFrame(() => {
-      setTheme(getInitialTheme());
-    });
+    const initialTheme = getInitialTheme();
+    applyTheme(initialTheme);
 
+    const frame = window.requestAnimationFrame(() => setTheme(initialTheme));
     return () => window.cancelAnimationFrame(frame);
   }, []);
-
-  // Propagation des changements vers le DOM et localStorage
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    applyTheme(theme);
-  }, [theme]);
 
   const toggleTheme = () => {
     const newTheme = theme === "dark" ? "light" : "dark";
