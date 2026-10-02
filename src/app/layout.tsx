@@ -1,4 +1,5 @@
 import type {Metadata, Viewport} from 'next'
+import { SerwistProvider } from '@serwist/turbopack/react'
 import InlineScript from '@/components/InlineScript'
 import './globals.css'
 
@@ -7,18 +8,27 @@ const siteUrl =
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  manifest: '/site.webmanifest',
   title: "KofCorporation - Societe informatique d'edition de logiciels",
   description: 'KofCorporation concoit des applications web, mobiles et logiciels sur mesure pour les entreprises et startups au Togo.',
-  icons: [
-    {rel: 'icon', url: '/favicon.svg', type: 'image/svg+xml'},
-    {rel: 'icon', url: '/favicon.ico'},
-    {rel: 'apple-touch-icon', url: '/apple-touch-icon.png'},
-  ],
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+    title: 'KofCorporation',
+  },
+  icons: {
+    apple: [{url: '/apple-touch-icon.png', sizes: '180x180'}],
+    icon: [
+      {url: '/favicon-96.png', sizes: '96x96', type: 'image/png'},
+      {url: '/favicon.svg', type: 'image/svg+xml'},
+    ],
+    shortcut: '/favicon.ico',
+  },
 }
 
 export const viewport: Viewport = {
   themeColor: [
-    {media: '(prefers-color-scheme: light)', color: '#E0F2FE'},
+    {media: '(prefers-color-scheme: light)', color: '#F8F9FA'},
     {media: '(prefers-color-scheme: dark)', color: '#1A1E3A'},
   ],
 }
@@ -36,7 +46,7 @@ if (!window.location.pathname.startsWith('/studio')) {
     document.documentElement.classList.remove('splash-active');
     document.documentElement.setAttribute('data-theme', theme);
     var themeColorMeta = document.querySelector('meta[name="theme-color"]');
-    if (themeColorMeta) themeColorMeta.setAttribute('content', theme === 'dark' ? '#1A1E3A' : '#E0F2FE');
+    if (themeColorMeta) themeColorMeta.setAttribute('content', theme === 'dark' ? '#1A1E3A' : '#F8F9FA');
   } catch (e) {}
 })();
 `.trim()
@@ -50,7 +60,14 @@ export default function RootLayout({children}: Readonly<{children: React.ReactNo
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <InlineScript html={themeInitScript} />
       </head>
-      <body suppressHydrationWarning>{children}</body>
+      <body suppressHydrationWarning>
+        <SerwistProvider
+          swUrl="/serwist/sw.js"
+          disable={process.env.NODE_ENV === 'development'}
+        >
+          {children}
+        </SerwistProvider>
+      </body>
     </html>
   )
 }

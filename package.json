@@ -29,13 +29,16 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^16.3.8",
+    "@serwist/turbopack": "^9.5.12",
     "@types/node": "^20",
     "@types/nodemailer": "^8.0.2",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "cross-env": "^10.1.0",
+    "esbuild": "^0.28.2",
     "eslint": "^9",
     "eslint-config-next": "16.3.4",
+    "serwist": "^9.5.12",
     "typescript": "^5"
   }
 }

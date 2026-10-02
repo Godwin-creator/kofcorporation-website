@@ -16,11 +16,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/contact',
   ]
 
-  const entries = locales.flatMap(locale =>
+  const entries: MetadataRoute.Sitemap = locales.flatMap(locale =>
     staticRoutes.map(route => ({
       url: `${baseUrl}/${locale}${route}`,
       lastModified: new Date(),
-      changeFrequency: route === '' ? 'weekly' : 'monthly' as const,
+      changeFrequency: route === '' ? 'weekly' : 'monthly',
       priority: route === '' ? 1.0 : route.includes('services') ? 0.8 : 0.6,
     }))
   )
