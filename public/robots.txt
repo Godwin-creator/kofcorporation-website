@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Bloquer le Studio Sanity des moteurs
+Disallow: /fr/studio
+Disallow: /en/studio
+Disallow: /studio
+
+Sitemap: https://kofcorporation.com/sitemap.xml

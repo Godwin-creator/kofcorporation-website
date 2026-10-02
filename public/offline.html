@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#1A1E3A" />
+    <title>Hors connexion | KofCorporation</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: Arial, sans-serif;
+        background: #f8f9fa;
+        color: #1a1e3a;
+      }
+      body {
+        display: grid;
+        min-height: 100vh;
+        margin: 0;
+        place-items: center;
+      }
+      main {
+        max-width: 28rem;
+        padding: 2rem;
+        text-align: center;
+      }
+      h1 {
+        font-size: 1.75rem;
+      }
+      p {
+        line-height: 1.6;
+      }
+      button {
+        margin-top: 1rem;
+        padding: 0.75rem 1rem;
+        border: 0;
+        border-radius: 4px;
+        background: #1a1e3a;
+        color: white;
+        font: inherit;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Vous êtes hors connexion</h1>
+      <p>Cette page sera disponible dès que votre connexion sera rétablie.</p>
+      <button type="button" onclick="window.location.reload()">Réessayer</button>
+    </main>
+  </body>
+</html>
