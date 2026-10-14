@@ -220,37 +220,67 @@ export default function ContactPage({settings}: {settings?: CompanySettings | nu
             ) : (
               <form className="contact-form" onSubmit={handleSubmit} noValidate>
                 <div className="contact-form__row">
-                  <label className={errors.fullName ? "contact-form__field contact-form__field--error" : "contact-form__field"}>
-                    {t("name")}
+                  <div className={errors.fullName ? "contact-form__field contact-form__field--error" : "contact-form__field"}>
+                    <label htmlFor="contact-fullName" className="contact-form__label">
+                      {t("name")}
+                      <span className="contact-form__required" aria-hidden="true"> *</span>
+                    </label>
                     <input
+                      id="contact-fullName"
                       name="fullName"
                       type="text"
+                      autoComplete="name"
+                      required
+                      aria-required="true"
                       value={form.fullName}
                       onChange={handleFieldChange("fullName")}
                       placeholder={t("namePlaceholder")}
                       aria-invalid={Boolean(errors.fullName)}
+                      aria-describedby={errors.fullName ? "contact-fullName-error" : undefined}
                     />
-                    {errors.fullName && <span className="contact-form__field-error">{errors.fullName}</span>}
-                  </label>
+                    {errors.fullName && (
+                      <span id="contact-fullName-error" role="alert" className="contact-form__field-error">
+                        {errors.fullName}
+                      </span>
+                    )}
+                  </div>
 
-                  <label className={errors.email ? "contact-form__field contact-form__field--error" : "contact-form__field"}>
-                    Email
+                  <div className={errors.email ? "contact-form__field contact-form__field--error" : "contact-form__field"}>
+                    <label htmlFor="contact-email" className="contact-form__label">
+                      Email
+                      <span className="contact-form__required" aria-hidden="true"> *</span>
+                    </label>
                     <input
+                      id="contact-email"
                       name="email"
                       type="email"
+                      autoComplete="email"
+                      required
+                      aria-required="true"
                       value={form.email}
                       onChange={handleFieldChange("email")}
                       placeholder="votre@email.com"
                       aria-invalid={Boolean(errors.email)}
+                      aria-describedby={errors.email ? "contact-email-error" : undefined}
                     />
-                    {errors.email && <span className="contact-form__field-error">{errors.email}</span>}
-                  </label>
+                    {errors.email && (
+                      <span id="contact-email-error" role="alert" className="contact-form__field-error">
+                        {errors.email}
+                      </span>
+                    )}
+                  </div>
                 </div>
 
-                <label className={errors.subject ? "contact-form__field contact-form__field--error" : "contact-form__field"}>
-                  {t("subject")}
+                <div className={errors.subject ? "contact-form__field contact-form__field--error" : "contact-form__field"}>
+                  <label id="contact-subject-label" htmlFor="contact-subject" className="contact-form__label">
+                    {t("subject")}
+                    <span className="contact-form__required" aria-hidden="true"> *</span>
+                  </label>
                   <CustomSelect
+                    id="contact-subject"
                     name="subject"
+                    ariaLabelledBy="contact-subject-label"
+                    ariaDescribedBy={errors.subject ? "contact-subject-error" : undefined}
                     value={form.subject}
                     onChange={(value) => {
                       setForm((current) => ({ ...current, subject: value }));
@@ -267,25 +297,54 @@ export default function ContactPage({settings}: {settings?: CompanySettings | nu
                     ]}
                     error={errors.subject}
                   />
-                  {errors.subject && <span className="contact-form__field-error">{errors.subject}</span>}
-                </label>
+                  {errors.subject && (
+                    <span id="contact-subject-error" role="alert" className="contact-form__field-error">
+                      {errors.subject}
+                    </span>
+                  )}
+                </div>
 
-                <label className={errors.message ? "contact-form__field contact-form__field--error" : "contact-form__field"}>
-                  {t("message")}
+                <div className={errors.message ? "contact-form__field contact-form__field--error" : "contact-form__field"}>
+                  <label htmlFor="contact-message" className="contact-form__label">
+                    {t("message")}
+                    <span className="contact-form__required" aria-hidden="true"> *</span>
+                  </label>
                   <textarea
+                    id="contact-message"
                     name="message"
                     rows={6}
+                    required
+                    aria-required="true"
                     value={form.message}
                     onChange={handleFieldChange("message")}
                     placeholder={t("messagePlaceholder")}
                     aria-invalid={Boolean(errors.message)}
+                    aria-describedby={errors.message ? "contact-message-error" : undefined}
                   />
-                  {errors.message && <span className="contact-form__field-error">{errors.message}</span>}
-                </label>
+                  {errors.message && (
+                    <span id="contact-message-error" role="alert" className="contact-form__field-error">
+                      {errors.message}
+                    </span>
+                  )}
+                </div>
 
-                <button className="contact-form__submit" type="submit" disabled={isLoading}>
-                  {isLoading ? "Envoi en cours..." : t("send")}
-                  {!isLoading && <ArrowRight size={18} strokeWidth={1.8} aria-hidden="true" />}
+                <button
+                  className="contact-form__submit"
+                  type="submit"
+                  disabled={isLoading}
+                  aria-busy={isLoading}
+                >
+                  {isLoading ? (
+                    <>
+                      <span className="contact-form__spinner" aria-hidden="true" />
+                      <span>Envoi en cours...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>{t("send")}</span>
+                      <ArrowRight size={18} strokeWidth={1.8} aria-hidden="true" />
+                    </>
+                  )}
                 </button>
 
                 {error && (

@@ -15,10 +15,18 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || 'https://kofcorporation-website.vercel.app';
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://kofcorporation.com';
 const ogImageUrl = new URL('/og-image.jpeg', siteUrl).toString();
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  alternates: {
+    canonical: siteUrl,
+    languages: {
+      fr: `${siteUrl}/fr`,
+      en: `${siteUrl}/en`,
+    },
+  },
   openGraph: {
     title: "KofCorporation - Société informatique d'édition de logiciels",
     description:
@@ -43,6 +51,50 @@ export const metadata: Metadata = {
       "KofCorporation conçoit des applications web, mobiles et logiciels sur mesure pour les entreprises et startups au Togo.",
     images: [ogImageUrl],
   },
+};
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["Organization", "ProfessionalService"],
+      "@id": `${siteUrl}/#organization`,
+      name: "KofCorporation",
+      url: siteUrl,
+      logo: `${siteUrl}/images/logo.svg`,
+      image: ogImageUrl,
+      description:
+        "Société informatique togolaise concevant des applications web, mobiles et logiciels sur mesure avec des standards internationaux.",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Agoè Minamadou, à côté de ESA",
+        addressLocality: "Lomé",
+        addressCountry: "TG",
+      },
+      telephone: ["+22870441636", "+22893554740"],
+      email: "contact@kofcorporation.com",
+      sameAs: [
+        "https://www.facebook.com/KofCorporation/",
+        "https://twitter.com/CoporationKof",
+        "https://www.instagram.com/kofcorporation.tg/",
+        "https://www.linkedin.com/company/kofcorporation",
+      ],
+      areaServed: [
+        { "@type": "Country", name: "Togo" },
+        { "@type": "AdministrativeArea", name: "Afrique de l'Ouest" },
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: siteUrl,
+      name: "KofCorporation",
+      publisher: {
+        "@id": `${siteUrl}/#organization`,
+      },
+      inLanguage: ["fr-FR", "en-US"],
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -70,6 +122,12 @@ async function LocaleLayout({
   return (
     <NextIntlClientProvider messages={messages}>
       <SectionProvider>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd),
+          }}
+        />
         <div style={{paddingTop: 64, minHeight: "100dvh", display: "flex", flexDirection: "column"}}>
           <Header />
           <main style={{flex: 1}}>{children}</main>

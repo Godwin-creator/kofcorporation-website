@@ -4,7 +4,7 @@
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 9999;
+  z-index: 10000;
 }
 
 .acursor__dot {
@@ -16,11 +16,15 @@
   background-color: var(--color-accent, #0cace8);
   border-radius: 50%;
   opacity: 1;
-  transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1),
-              width 0.15s ease,
-              height 0.15s ease,
-              opacity 0.15s ease,
-              background-color 0.2s ease;
+  /* will-change hints the compositor to promote to its own layer */
+  will-change: transform;
+  /* No transition on transform — position + scale are driven by JS (RAF).
+     Only transition visual properties that don't conflict with JS. */
+  transition:
+    width 0.15s ease,
+    height 0.15s ease,
+    opacity 0.15s ease,
+    background-color 0.2s ease;
 }
 
 .acursor__ring {
@@ -33,15 +37,16 @@
   border-radius: 50%;
   background-color: transparent;
   opacity: 0.6;
+  will-change: transform;
   /* Vitesse des animations de taille et de survol  
   (0.25s est une bonne valeur pour un bon équilibre)
   */
-  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-              width 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-              height 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-              background-color 0.25s ease,
-              border-color 0.25s ease,
-              opacity 0.2s ease;
+  transition:
+    width 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    opacity 0.2s ease;
 }
 
 /* Hover state modifications */
@@ -57,7 +62,7 @@
   height: 48px;
   background-color: var(--color-accent, #0cace8);
   border-color: var(--color-accent, #0cace8);
-  opacity: 0.15;
+  opacity: 0.32;
 }
 
 /* Click state feedback */
@@ -73,5 +78,6 @@
 .acursor.acursor--hidden {
   opacity: 0 !important;
   visibility: hidden !important;
+  /* Smooth fade-out before hiding */
+  transition: opacity 0.15s ease, visibility 0.15s ease;
 }
-

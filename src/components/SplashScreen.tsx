@@ -8,6 +8,8 @@ import {
   getThemeBackground,
 } from "@/hooks/useTheme";
 
+const SPLASH_SESSION_KEY = "kof_splash_shown";
+
 export default function SplashScreen() {
   const [visible, setVisible] = useState(false);
   const [themeBackground, setThemeBackground] = useState(() =>
@@ -18,16 +20,31 @@ export default function SplashScreen() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
+    // Si le splash a déjà été joué dans cette session d'onglets -> ne pas bloquer
+    try {
+      if (sessionStorage.getItem(SPLASH_SESSION_KEY)) {
+        document.documentElement.style.visibility = "";
+        document.documentElement.classList.remove("splash-active");
+        return;
+      }
+    } catch {
+      // Ignorer si sessionStorage indisponible (ex: iframe ou mode privé restrictif)
+    }
+
     const theme = getInitialTheme();
     applyTheme(theme);
+    setThemeBackground(getThemeBackground(theme));
     document.documentElement.classList.add("splash-active");
+    setVisible(true);
 
-    const timer = window.setTimeout(() => {
-      setThemeBackground(getThemeBackground(theme));
-      setVisible(true);
-    }, 0);
+    // Watchdog de sécurité : garantit que la page ne reste jamais bloquée
+    const safetyTimer = window.setTimeout(() => {
+      document.documentElement.style.visibility = "";
+      document.documentElement.classList.remove("splash-active");
+      setVisible(false);
+    }, 1600);
 
-    return () => window.clearTimeout(timer);
+    return () => window.clearTimeout(safetyTimer);
   }, []);
 
   useEffect(() => {
@@ -36,34 +53,68 @@ export default function SplashScreen() {
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
-    const duration = window.matchMedia("(max-width: 1023px)").matches ? 1.2 : 2;
+
+    // Détection de connexion lente (2G ou mode économie de données)
+    const nav = navigator as unknown as {
+      connection?: { saveData?: boolean; effectiveType?: string };
+    };
+    const isSlowConnection = Boolean(
+      nav.connection?.saveData ||
+        nav.connection?.effectiveType === "2g" ||
+        nav.connection?.effectiveType === "slow-2g"
+    );
+
+    const finishSplash = () => {
+      try {
+        sessionStorage.setItem(SPLASH_SESSION_KEY, "true");
+      } catch {}
+      document.documentElement.style.visibility = "";
+      document.documentElement.classList.remove("splash-active");
+      setVisible(false);
+      window.dispatchEvent(
+        new Event("kof:splash-complete", { bubbles: true })
+      );
+    };
+
+    // Mode réduit ou connexion lente : transition ultra-rapide (ou quasi nulle)
+    if (prefersReducedMotion || isSlowConnection) {
+      const quickTimer = window.setTimeout(finishSplash, 180);
+      return () => window.clearTimeout(quickTimer);
+    }
+
+    // Animation calibrée pour une perception de réactivité maximale
+    const isMobile = window.matchMedia("(max-width: 1023px)").matches;
+    const enterDuration = isMobile ? 0.22 : 0.28;
+    const holdDuration = isMobile ? 120 : 180;
+    const exitDuration = isMobile ? 0.2 : 0.26;
 
     const runAnimation = async () => {
-      if (!scope.current) return;
+      try {
+        if (!scope.current) return;
 
-      if (prefersReducedMotion) {
+        // Apparition douce avec légère échelle (0.92 -> 1)
         await animate(
           scope.current,
-          { scale: 1.2, opacity: [1, 0] },
-          { duration: 0.8, ease: "easeIn" }
+          { scale: [0.92, 1], opacity: [0, 1] },
+          { duration: enterDuration, ease: [0.16, 1, 0.3, 1] }
         );
 
-        document.documentElement.style.visibility = "";
-        setVisible(false);
-        return;
+        // Court temps de pose
+        await new Promise((resolve) => setTimeout(resolve, holdDuration));
+
+        if (!scope.current) return;
+
+        // Sortie fluide et élégante vers l'avant (1 -> 1.06) avec fondu
+        await animate(
+          scope.current,
+          { scale: [1, 1.06], opacity: [1, 0] },
+          { duration: exitDuration, ease: "easeOut" }
+        );
+      } catch {
+        // En cas d'interruption, on finalise proprement
+      } finally {
+        finishSplash();
       }
-
-      await animate(
-        scope.current,
-        {
-          scale: [1, 1.5, 2],
-          opacity: [1, 0.5, 0],
-        },
-        { duration, ease: "easeIn" }
-      );
-
-      document.documentElement.style.visibility = "";
-      setVisible(false);
     };
 
     void runAnimation();
@@ -72,13 +123,7 @@ export default function SplashScreen() {
   useEffect(() => {
     if (!visible) {
       document.documentElement.classList.remove("splash-active");
-
-      const timer = window.setTimeout(() => {
-        const event = new Event("kof:splash-complete", { bubbles: true });
-        window.dispatchEvent(event);
-      }, 150);
-
-      return () => window.clearTimeout(timer);
+      document.documentElement.style.visibility = "";
     }
   }, [visible]);
 
@@ -91,8 +136,8 @@ export default function SplashScreen() {
           style={{ background: themeBackground }}
           initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.15 }}
+          exit={{ opacity: 0, pointerEvents: "none" }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
           aria-hidden="true"
         >
           <motion.img
@@ -101,6 +146,7 @@ export default function SplashScreen() {
             alt="KofCorporation"
             width={120}
             height={120}
+            initial={{ opacity: 0, scale: 0.92 }}
             style={{
               display: "block",
               width: 120,

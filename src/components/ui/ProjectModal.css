@@ -6,6 +6,8 @@
   place-items: center;
   padding: 1rem;
   background: rgba(8, 14, 28, 0.78);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 
 .project-modal {
@@ -33,6 +35,21 @@
   color: #fff;
   background: rgba(8, 14, 28, 0.55);
   cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.project-modal__close:hover {
+  background: rgba(8, 14, 28, 0.82);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.project-modal__close:active {
+  transform: scale(0.9);
+}
+
+.project-modal__close:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
 }
 
 .project-modal__image {
@@ -52,9 +69,48 @@
 .project-modal__meta dd { margin: 0; color: var(--color-text); font-weight: 600; }
 .project-modal__description { color: var(--color-text-muted); line-height: 1.7; white-space: pre-line; }
 .project-modal__tags { display: flex; flex-wrap: wrap; gap: 0.45rem; padding: 0; margin: 1.5rem 0; list-style: none; }
-.project-modal__tags li { padding: 0.35rem 0.65rem; border: 1px solid var(--color-border); color: var(--color-text-muted); font-size: 0.75rem; }
+.project-modal__tags li {
+  padding: 0.35rem 0.65rem;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+.project-modal__tags li:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background-color: color-mix(in srgb, var(--color-accent) 6%, transparent);
+}
 .project-modal__links { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; }
-.project-modal__link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--color-accent); font-weight: 700; }
+.project-modal__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-accent);
+  font-weight: 700;
+  position: relative;
+  padding-bottom: 1px;
+  transition: color 0.2s ease;
+}
+.project-modal__link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.project-modal__link:hover::after {
+  transform: scaleX(1);
+}
+.project-modal__link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
 
 @media (max-width: 600px) {
   .project-modal__body { padding: 1.5rem; }

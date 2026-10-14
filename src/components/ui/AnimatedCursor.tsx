@@ -18,6 +18,8 @@ export default function AnimatedCursor() {
   const isHovering = useRef(false);
   const isClicking = useRef(false);
 
+  // Dirty flag: skip RAF work when cursor is stationary
+  const isDirty = useRef(false);
   const rafId = useRef<number>(0);
   const shown = useRef(false);
 
@@ -31,15 +33,20 @@ export default function AnimatedCursor() {
     const cl = isClicking.current;
     const hx = isHovering.current;
 
-    dot.style.transform = `translate3d(${x.current}px, ${y.current}px, 0) translate(-50%, -50%) scale(${cl ? 0.6 : 1})`;
-
+    // Position + scale applied together via transform — no CSS transition on transform
+    // (CSS transitions only apply to width/height/opacity/color, not transform, to avoid conflict with JS)
+    const dotScale = cl ? 0.6 : 1;
     const ringScale = hx ? 1.2 : cl ? 0.85 : 1;
+
+    dot.style.transform = `translate3d(${x.current}px, ${y.current}px, 0) translate(-50%, -50%) scale(${dotScale})`;
     ring.style.transform = `translate3d(${ringX.current}px, ${ringY.current}px, 0) translate(-50%, -50%) scale(${ringScale})`;
   }
 
   useEffect(() => {
-    // Hide on touch devices
+    // Guard 1: touch devices → skip entirely
     if (window.matchMedia("(pointer: coarse)").matches) return;
+    // Guard 2: reduced motion → skip animation
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const syncHoverState = (target: HTMLElement | null) => {
       const isNative = !!target?.closest(
@@ -59,12 +66,14 @@ export default function AnimatedCursor() {
         if (containerRef.current) {
           containerRef.current.classList.toggle("acursor--hover", hovering);
         }
+        isDirty.current = true;
       }
     };
 
     const onMouseMove = (e: MouseEvent) => {
       x.current = e.clientX;
       y.current = e.clientY;
+      isDirty.current = true;
       if (!shown.current) {
         shown.current = true;
         setVisible(true);
@@ -74,12 +83,14 @@ export default function AnimatedCursor() {
 
     const onMouseDown = () => {
       isClicking.current = true;
+      isDirty.current = true;
       containerRef.current?.classList.add("acursor--clicking");
       syncDOM();
     };
 
     const onMouseUp = () => {
       isClicking.current = false;
+      isDirty.current = true;
       containerRef.current?.classList.remove("acursor--clicking");
       syncDOM();
     };
@@ -98,17 +109,32 @@ export default function AnimatedCursor() {
     document.addEventListener("mousedown", onMouseDown);
     document.addEventListener("mouseup", onMouseUp);
 
-    // Animation loop with lerp
+    // Animation loop with lerp + dirty-flag optimisation
+    // Pour gérer la vitesse de suivi du curseur (la réactivité et la fluidité avec
+    // laquelle le cercle/anneau suit le point exact de votre souris): doit etre compris
+    // entre 0 et 1. Plus il est petit, plus le curseur est lent, plus il est grand, plus le curseur est rapide
+    const LERP_FACTOR = 0.3;
+    const CONVERGENCE_THRESHOLD = 0.05; // px — mark clean when ring converged
+
     const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
-    // Pour gérer la vitesse de suivi du curseur (la réactivité et la fluidité avec 
-    // laquelle le cercle/anneau suit le point exact de votre souris): doit etre compris 
-    // entre 0 et 1. Plus il est petit, plus le curseur est lent, plus il est grand, plus le curseur est rapide
     const animate = () => {
-      ringX.current = lerp(ringX.current, x.current, 0.3);
-      ringY.current = lerp(ringY.current, y.current, 0.3);
-      syncDOM();
       rafId.current = requestAnimationFrame(animate);
+
+      // Skip DOM work when nothing has changed
+      if (!isDirty.current) return;
+
+      ringX.current = lerp(ringX.current, x.current, LERP_FACTOR);
+      ringY.current = lerp(ringY.current, y.current, LERP_FACTOR);
+
+      syncDOM();
+
+      // Mark clean when ring has fully converged to dot position
+      const dx = Math.abs(x.current - ringX.current);
+      const dy = Math.abs(y.current - ringY.current);
+      if (dx < CONVERGENCE_THRESHOLD && dy < CONVERGENCE_THRESHOLD) {
+        isDirty.current = false;
+      }
     };
 
     rafId.current = requestAnimationFrame(animate);
@@ -123,13 +149,17 @@ export default function AnimatedCursor() {
     };
   }, []);
 
-  if (!visible) return null;
-
   return (
-    <div ref={containerRef} className="acursor">
+    <div
+      ref={containerRef}
+      className="acursor"
+      style={{
+        opacity: visible ? 1 : 0,
+        transition: "opacity 0.15s ease",
+      }}
+    >
       <div ref={dotRef} className="acursor__dot" />
       <div ref={ringRef} className="acursor__ring" />
     </div>
   );
 }
-

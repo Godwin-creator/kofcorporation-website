@@ -4,13 +4,16 @@ import InlineScript from '@/components/InlineScript'
 import './globals.css'
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || 'https://kofcorporation-website.vercel.app'
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://kofcorporation.com'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   manifest: '/site.webmanifest',
-  title: "KofCorporation - Societe informatique d'edition de logiciels",
-  description: 'KofCorporation concoit des applications web, mobiles et logiciels sur mesure pour les entreprises et startups au Togo.',
+  title: {
+    default: "KofCorporation - Société informatique d'édition de logiciels",
+    template: "%s | KofCorporation",
+  },
+  description: 'KofCorporation conçoit des applications web, mobiles et logiciels sur mesure pour les entreprises et startups au Togo.',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
@@ -29,14 +32,11 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: [
     {media: '(prefers-color-scheme: light)', color: '#F8F9FA'},
-    {media: '(prefers-color-scheme: dark)', color: '#1A1E3A'},
+    {media: '(prefers-color-scheme: dark)', color: '#151A20'},
   ],
 }
 
 const themeInitScript = `
-if (!window.location.pathname.startsWith('/studio')) {
-  document.documentElement.style.visibility = 'hidden';
-}
 (function () {
   try {
     var stored = localStorage.getItem('theme');
@@ -46,7 +46,14 @@ if (!window.location.pathname.startsWith('/studio')) {
     document.documentElement.classList.remove('splash-active');
     document.documentElement.setAttribute('data-theme', theme);
     var themeColorMeta = document.querySelector('meta[name="theme-color"]');
-    if (themeColorMeta) themeColorMeta.setAttribute('content', theme === 'dark' ? '#1A1E3A' : '#F8F9FA');
+    if (themeColorMeta) themeColorMeta.setAttribute('content', theme === 'dark' ? '#151A20' : '#F8F9FA');
+
+    // Anti-flash: apply cursor mode before first paint
+    var cursorMode = localStorage.getItem('cursor-mode');
+    document.documentElement.setAttribute(
+      'data-cursor-mode',
+      cursorMode === 'system' ? 'system' : 'custom'
+    );
   } catch (e) {}
 })();
 `.trim()

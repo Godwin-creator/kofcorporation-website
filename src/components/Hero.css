@@ -267,6 +267,18 @@
   transform: translateY(-2px);
 }
 
+.hero__cta--primary:active {
+  transform: translateY(0) scale(0.97);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--color-accent) 20%, transparent);
+  filter: brightness(0.92);
+}
+
+.hero__cta--primary:focus-visible {
+  outline: 2px solid var(--color-on-accent);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-accent) 50%, transparent);
+}
+
 .hero__cta--secondary {
   color: var(--color-text);
   background-color: var(--color-surface);
@@ -278,6 +290,16 @@
   color: var(--color-primary);
   border-color: color-mix(in srgb, var(--color-accent) 30%, transparent);
   transform: translateY(-2px);
+}
+
+.hero__cta--secondary:active {
+  transform: translateY(0) scale(0.97);
+  background-color: var(--color-border);
+}
+
+.hero__cta--secondary:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
 }
 
 /* ---- Visual / Image ---- */

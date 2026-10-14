@@ -328,6 +328,21 @@
   }
 }
 
+/* ---- Cursor toggle — desktop / fine pointer only ---- */
+/* Masqué sur mobile : le curseur personnalisé n'existe pas sur touch */
+.header__cursor-toggle-wrap {
+  display: none;
+}
+
+@media (min-width: 1024px) and (pointer: fine) {
+  .header__cursor-toggle-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+
 /* ---- Hamburger (mobile only) ---- */
 .header__hamburger {
   display: inline-flex;

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import Hero from "@/components/Hero";
@@ -7,6 +8,12 @@ import Services from "@/components/sections/Services";
 import { fetchSettings } from "@/lib/queries";
 import { urlFor } from "@/lib/sanity";
 import { SectionSkeleton } from "@/components/ui/Skeletons";
+
+export const metadata: Metadata = {
+  title: "KofCorporation - Société informatique d'édition de logiciels",
+  description:
+    "KofCorporation conçoit des applications web, mobiles et logiciels sur mesure pour les entreprises, ONG et institutions au Togo.",
+};
 
 const Stats = dynamic(() => import("@/components/sections/Stats"));
 const Projects = dynamic(() => import("@/components/sections/Projects"));
