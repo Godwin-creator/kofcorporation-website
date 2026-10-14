@@ -115,6 +115,37 @@
   color: var(--color-accent);
 }
 
+.contact-form__label {
+  display: flex;
+  align-items: center;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.contact-form__required {
+  color: var(--color-accent);
+  font-weight: 700;
+  margin-left: 0.25rem;
+}
+
+.contact-form__spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: contact-spin 0.6s linear infinite;
+}
+
+@keyframes contact-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .contact-form input,
 .contact-form select,
 .contact-form textarea {
@@ -150,6 +181,14 @@
 .contact-form textarea:focus {
   border-color: var(--color-accent);
   box-shadow: 0 0 0 2px rgba(12, 172, 232, 0.12);
+}
+
+.contact-form input:focus-visible,
+.contact-form textarea:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(12, 172, 232, 0.2);
 }
 
 .contact-form input[aria-invalid="true"],

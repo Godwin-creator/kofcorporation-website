@@ -23,7 +23,13 @@
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.custom-select__trigger:focus-visible,
+.custom-select__trigger:focus-visible {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(12, 172, 232, 0.2);
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+}
+
 .custom-select--open .custom-select__trigger {
   border-color: var(--color-accent);
   box-shadow: 0 0 0 2px rgba(12, 172, 232, 0.12);

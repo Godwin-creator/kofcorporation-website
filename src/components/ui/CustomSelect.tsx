@@ -17,6 +17,9 @@ export interface CustomSelectProps {
   placeholder: string;
   error?: string;
   name: string;
+  id?: string;
+  ariaLabelledBy?: string;
+  ariaDescribedBy?: string;
 }
 
 export default function CustomSelect({
@@ -26,6 +29,9 @@ export default function CustomSelect({
   placeholder,
   error,
   name,
+  id,
+  ariaLabelledBy,
+  ariaDescribedBy,
 }: CustomSelectProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [focusedIndex, setFocusedIndex] = useState<number>(-1);
@@ -110,6 +116,7 @@ export default function CustomSelect({
       ref={containerRef}
     >
       <button
+        id={id}
         type="button"
         className="custom-select__trigger"
         onClick={toggleOpen}
@@ -119,7 +126,9 @@ export default function CustomSelect({
         aria-haspopup="listbox"
         aria-controls={listboxId}
         aria-invalid={Boolean(error)}
-        aria-label={name}
+        aria-labelledby={ariaLabelledBy}
+        aria-describedby={ariaDescribedBy}
+        aria-label={ariaLabelledBy ? undefined : name}
       >
         <span
           className={`custom-select__value ${!selectedOption ? "custom-select__value--placeholder" : ""}`}
