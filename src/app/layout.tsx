@@ -47,6 +47,13 @@ if (!window.location.pathname.startsWith('/studio')) {
     document.documentElement.setAttribute('data-theme', theme);
     var themeColorMeta = document.querySelector('meta[name="theme-color"]');
     if (themeColorMeta) themeColorMeta.setAttribute('content', theme === 'dark' ? '#1A1E3A' : '#F8F9FA');
+
+    // Anti-flash: apply cursor mode before first paint
+    var cursorMode = localStorage.getItem('cursor-mode');
+    document.documentElement.setAttribute(
+      'data-cursor-mode',
+      cursorMode === 'system' ? 'system' : 'custom'
+    );
   } catch (e) {}
 })();
 `.trim()

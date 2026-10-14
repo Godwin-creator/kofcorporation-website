@@ -18,6 +18,8 @@
     "changeLanguage": "Changer de langue",
     "lightMode": "Mode clair",
     "darkMode": "Mode sombre",
+    "cursorCustom": "Activer le curseur personnalisé",
+    "cursorSystem": "Utiliser le curseur système",
     "bookMeeting": "Prendre RDV",
     "openMenu": "Ouvrir le menu",
     "closeMenu": "Fermer le menu",

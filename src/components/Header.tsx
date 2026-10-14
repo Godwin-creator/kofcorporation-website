@@ -17,6 +17,7 @@ import SpecularButton from "./ui/SpecularButton";
 import ServicesMegaMenu from "./header/ServicesMegaMenu";
 import LanguageSwitcher from "./header/LanguageSwitcher";
 import ThemeToggle from "./header/ThemeToggle";
+import CursorToggle from "./header/CursorToggle";
 import MobileMenu, { type NavItem } from "./header/MobileMenu";
 
 /* ------------------------------------------------------------------ */
@@ -183,6 +184,9 @@ export default function Header() {
           <div className="header__actions">
             {/* Theme toggle with ripple */}
             <ThemeToggle specularColors={specularColors} />
+
+            {/* Custom cursor toggle — desktop only (mobile always uses system cursor) */}
+            <CursorToggle specularColors={specularColors} />
 
             {/* Language selector */}
             <LanguageSwitcher specularColors={specularColors} />

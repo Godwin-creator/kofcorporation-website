@@ -1,22 +1,24 @@
 /* ============================================================
-   Cursor - hide native cursor globally
+   Cursor — hide native cursor only when custom cursor is active
+   Conditioned on [data-cursor-mode="custom"] on <html>
    ============================================================ */
 
-*,
-*::before,
-*::after,
-html,
-body,
-a,
-button,
-input,
-textarea,
-select,
-[role="button"] {
+/* ── Hide native cursor when custom cursor is active ── */
+[data-cursor-mode="custom"] *,
+[data-cursor-mode="custom"] *::before,
+[data-cursor-mode="custom"] *::after,
+[data-cursor-mode="custom"],
+[data-cursor-mode="custom"] body,
+[data-cursor-mode="custom"] a,
+[data-cursor-mode="custom"] button,
+[data-cursor-mode="custom"] input,
+[data-cursor-mode="custom"] textarea,
+[data-cursor-mode="custom"] select,
+[data-cursor-mode="custom"] [role="button"] {
   cursor: none !important;
 }
 
-/* Restore system/default cursor inside Sanity Studio and studio route */
+/* ── Restore system cursor inside Sanity Studio ── */
 body:has(#sanity),
 #sanity,
 #sanity *,
@@ -46,50 +48,52 @@ body:has(#sanity),
   cursor: text !important;
 }
 
-/* Restore system/default hand cursor for puzzle game when blocks are segmented */
-.hero-image-slider__frame--puzzle,
-.hero-image-slider__frame--puzzle *,
-.hero-image-slider__piece {
+/* ── Restore grab cursor for puzzle game ── */
+[data-cursor-mode="custom"] .hero-image-slider__frame--puzzle,
+[data-cursor-mode="custom"] .hero-image-slider__frame--puzzle *,
+[data-cursor-mode="custom"] .hero-image-slider__piece {
   cursor: grab !important;
 }
 
-.hero-image-slider__frame--puzzle:active,
-.hero-image-slider__frame--dragging,
-.hero-image-slider__frame--dragging *,
-.hero-image-slider__piece--dragging,
-.hero-image-slider__piece:active {
+[data-cursor-mode="custom"] .hero-image-slider__frame--puzzle:active,
+[data-cursor-mode="custom"] .hero-image-slider__frame--dragging,
+[data-cursor-mode="custom"] .hero-image-slider__frame--dragging *,
+[data-cursor-mode="custom"] .hero-image-slider__piece--dragging,
+[data-cursor-mode="custom"] .hero-image-slider__piece:active {
   cursor: grabbing !important;
 }
 
-/* Allow the native cursor back on touch devices and reduced-motion */
+/* ── Touch devices: always system cursor ── */
 @media (pointer: coarse) {
-  *,
-  *::before,
-  *::after,
-  html,
-  body,
-  a,
-  button,
-  input,
-  textarea,
-  select,
-  [role="button"] {
+  [data-cursor-mode="custom"] *,
+  [data-cursor-mode="custom"] *::before,
+  [data-cursor-mode="custom"] *::after,
+  [data-cursor-mode="custom"],
+  [data-cursor-mode="custom"] body,
+  [data-cursor-mode="custom"] a,
+  [data-cursor-mode="custom"] button,
+  [data-cursor-mode="custom"] input,
+  [data-cursor-mode="custom"] textarea,
+  [data-cursor-mode="custom"] select,
+  [data-cursor-mode="custom"] [role="button"] {
     cursor: auto !important;
   }
 }
 
+/* ── Reduced motion: always system cursor ── */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after,
-  html,
-  body,
-  a,
-  button,
-  input,
-  textarea,
-  select,
-  [role="button"] {
+  [data-cursor-mode="custom"] *,
+  [data-cursor-mode="custom"] *::before,
+  [data-cursor-mode="custom"] *::after,
+  [data-cursor-mode="custom"],
+  [data-cursor-mode="custom"] body,
+  [data-cursor-mode="custom"] a,
+  [data-cursor-mode="custom"] button,
+  [data-cursor-mode="custom"] input,
+  [data-cursor-mode="custom"] textarea,
+  [data-cursor-mode="custom"] select,
+  [data-cursor-mode="custom"] [role="button"] {
     cursor: auto !important;
   }
 }
+

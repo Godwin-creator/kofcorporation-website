@@ -18,6 +18,8 @@
     "changeLanguage": "Change language",
     "lightMode": "Light mode",
     "darkMode": "Dark mode",
+    "cursorCustom": "Enable custom cursor",
+    "cursorSystem": "Use system cursor",
     "bookMeeting": "Book a meeting",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
