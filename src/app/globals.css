@@ -182,6 +182,24 @@ a:hover {
   color: var(--color-accent-mid);
 }
 
+/* 9. FOCUS-VISIBLE UNIVERSEL
+   Outline cohérent pour la navigation clavier, invisible à la souris */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* Retirer le focus natif navigateur (on garde uniquement focus-visible) */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* 10. RETOUR TACTILE :active - micro-scale universel */
+button:not(:disabled):active,
+[role="button"]:not([aria-disabled="true"]):active {
+  transform: scale(0.97);
+}
+
 img,
 video {
   max-width: 100%;
