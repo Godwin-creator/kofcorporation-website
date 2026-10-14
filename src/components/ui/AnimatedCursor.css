@@ -4,7 +4,7 @@
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 9999;
+  z-index: 10000;
 }
 
 .acursor__dot {
@@ -62,7 +62,7 @@
   height: 48px;
   background-color: var(--color-accent, #0cace8);
   border-color: var(--color-accent, #0cace8);
-  opacity: 0.15;
+  opacity: 0.32;
 }
 
 /* Click state feedback */

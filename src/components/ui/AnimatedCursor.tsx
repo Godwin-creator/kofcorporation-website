@@ -149,10 +149,15 @@ export default function AnimatedCursor() {
     };
   }, []);
 
-  if (!visible) return null;
-
   return (
-    <div ref={containerRef} className="acursor">
+    <div
+      ref={containerRef}
+      className="acursor"
+      style={{
+        opacity: visible ? 1 : 0,
+        transition: "opacity 0.15s ease",
+      }}
+    >
       <div ref={dotRef} className="acursor__dot" />
       <div ref={ringRef} className="acursor__ring" />
     </div>

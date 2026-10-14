@@ -17,7 +17,7 @@ export function applyTheme(theme: Theme) {
 }
 
 export function getThemeBackground(theme: Theme): string {
-  return theme === "dark" ? "#151A20" : "#E0F2FE";
+  return theme === "dark" ? "#151A20" : "#F8F9FA";
 }
 
 /**

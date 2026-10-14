@@ -11,7 +11,10 @@ const DEFAULT_MODE: CursorMode = "custom";
 export function applyCursorMode(mode: CursorMode) {
   if (typeof window === "undefined") return;
   document.documentElement.setAttribute("data-cursor-mode", mode);
-  localStorage.setItem(STORAGE_KEY, mode);
+  try {
+    localStorage.setItem(STORAGE_KEY, mode);
+  } catch {}
+  window.dispatchEvent(new CustomEvent("kof:cursor-mode", { detail: mode }));
 }
 
 /** Lit la préférence depuis le DOM (positionné par le script inline anti-flash)
@@ -24,8 +27,10 @@ export function getInitialCursorMode(): CursorMode {
   if (dom === "custom" || dom === "system") return dom;
 
   // Priorité 2 : localStorage
-  const stored = localStorage.getItem(STORAGE_KEY);
-  if (stored === "custom" || stored === "system") return stored as CursorMode;
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored === "custom" || stored === "system") return stored as CursorMode;
+  } catch {}
 
   return DEFAULT_MODE;
 }
@@ -48,6 +53,20 @@ export function useCursorPreference(): {
     const initial = getInitialCursorMode();
     applyCursorMode(initial);
     setCursorMode(initial);
+
+    const onSync = () => {
+      setCursorMode(getInitialCursorMode());
+    };
+
+    window.addEventListener("storage", (e: StorageEvent) => {
+      if (e.key === STORAGE_KEY) onSync();
+    });
+    window.addEventListener("kof:cursor-mode", onSync);
+
+    return () => {
+      window.removeEventListener("storage", onSync as EventListener);
+      window.removeEventListener("kof:cursor-mode", onSync);
+    };
   }, []);
 
   const toggleCursorMode = useCallback(() => {

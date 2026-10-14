@@ -34,17 +34,19 @@ export default function AnimatedCursorLoader() {
     pointerQuery.addEventListener("change", evaluate);
     motionQuery.addEventListener("change", evaluate);
 
-    // Listen for storage changes (other tabs toggling the cursor)
+    // Listen for storage changes (other tabs) and local custom event (same tab)
     const onStorage = (e: StorageEvent) => {
       if (e.key === "cursor-mode") evaluate();
     };
     window.addEventListener("storage", onStorage);
+    window.addEventListener("kof:cursor-mode", evaluate);
 
     return () => {
       window.cancelAnimationFrame(frame);
       pointerQuery.removeEventListener("change", evaluate);
       motionQuery.removeEventListener("change", evaluate);
       window.removeEventListener("storage", onStorage);
+      window.removeEventListener("kof:cursor-mode", evaluate);
     };
   }, []);
 
