@@ -4,7 +4,7 @@ import InlineScript from '@/components/InlineScript'
 import './globals.css'
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || 'https://kofcorporation-website.vercel.app'
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://kofcorporation.com'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
