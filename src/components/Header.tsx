@@ -185,8 +185,10 @@ export default function Header() {
             {/* Theme toggle with ripple */}
             <ThemeToggle specularColors={specularColors} />
 
-            {/* Custom cursor toggle — desktop only (mobile always uses system cursor) */}
-            <CursorToggle specularColors={specularColors} />
+            {/* Custom cursor toggle — desktop / fine pointer only (mobile always uses system cursor) */}
+            <div className="header__cursor-toggle-wrap">
+              <CursorToggle specularColors={specularColors} />
+            </div>
 
             {/* Language selector */}
             <LanguageSwitcher specularColors={specularColors} />
