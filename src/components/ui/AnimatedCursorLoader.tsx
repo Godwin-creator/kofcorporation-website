@@ -2,7 +2,11 @@
 
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import { getInitialCursorMode, applyCursorMode } from "@/hooks/useCursorPreference";
+import {
+  getInitialCursorMode,
+  applyCursorMode,
+  syncCursorModeFromStorage,
+} from "@/hooks/useCursorPreference";
 
 const AnimatedCursor = dynamic(() => import("./AnimatedCursor"), {
   ssr: false,
@@ -36,7 +40,9 @@ export default function AnimatedCursorLoader() {
 
     // Listen for storage changes (other tabs) and local custom event (same tab)
     const onStorage = (e: StorageEvent) => {
-      if (e.key === "cursor-mode") evaluate();
+      if (e.key !== "cursor-mode" && e.key !== null) return;
+      syncCursorModeFromStorage(e.newValue);
+      evaluate();
     };
     window.addEventListener("storage", onStorage);
     window.addEventListener("kof:cursor-mode", evaluate);

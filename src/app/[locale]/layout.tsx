@@ -24,7 +24,6 @@ export const metadata: Metadata = {
     title: "KofCorporation - Société informatique d'édition de logiciels",
     description:
       "KofCorporation conçoit des applications web, mobiles et logiciels sur mesure pour les entreprises et startups au Togo.",
-    url: siteUrl,
     siteName: "KofCorporation",
     images: [
       {
