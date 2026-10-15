@@ -140,6 +140,8 @@ export default function VideoPresentation({
                   ref={videoRef}
                   className="video-presentation__inline-video"
                   src={activeVideoSrc}
+                  poster={teamPhotoUrl || "/images/images-puzzle/hero-image.webp"}
+                  preload="none"
                   autoPlay
                   muted
                   loop
@@ -266,6 +268,8 @@ export default function VideoPresentation({
                 ) : (
                   <video
                     src={activeVideoSrc}
+                    poster={teamPhotoUrl || "/images/images-puzzle/hero-image.webp"}
+                    preload="none"
                     controls
                     autoPlay
                     playsInline

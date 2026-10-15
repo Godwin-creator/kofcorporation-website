@@ -207,6 +207,7 @@
   pointer-events: none;
   user-select: none;
   white-space: nowrap;
+  text-transform: uppercase;
   z-index: 0;
   line-height: 1;
 }

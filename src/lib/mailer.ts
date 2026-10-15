@@ -11,4 +11,4 @@ export const transporter = nodemailer.createTransport({
 })
 
 export const EMAIL_FROM = process.env.EMAIL_FROM_ADDRESS 
-  ?? 'KOFCORPORATION <no-reply@kofcorporation.com>'
+  ?? 'KofCorporation <no-reply@kofcorporation.com>'
