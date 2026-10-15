@@ -110,7 +110,7 @@ export default function Header() {
           <Link href="/" className="header__logo" aria-label={t("homeAria")}>
             <Image
               src="/images/logo.svg"
-              alt="KofCorporation"
+              alt=""
               width={40}
               height={40}
               style={{ objectFit: "contain", height: "auto" }}

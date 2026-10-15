@@ -23,7 +23,7 @@
 
 .about-page__eyebrow {
   margin: 0 0 1rem;
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 600;
@@ -55,7 +55,7 @@
 
 .about-page__hero-title-highlight {
   padding-bottom: 0.14em;
-  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+  background: linear-gradient(135deg, var(--color-accent-gradient-start) 0%, var(--color-accent-dark) 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -74,7 +74,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   font-weight: 600;
 }
 
@@ -106,7 +106,7 @@
 }
 
 .about-page__section-title {
-  color: var(--color-accent) !important;
+  color: var(--color-accent-text) !important;
   margin-bottom: 1rem !important;
 }
 
@@ -162,7 +162,7 @@
 }
 
 .about-value-card > svg {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 
 .about-value-card h3 {
@@ -210,7 +210,7 @@
 }
 
 .about-page__story-list > li > span {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   font-family: var(--font-heading);
   font-weight: 600;
 }

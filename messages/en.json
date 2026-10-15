@@ -106,7 +106,7 @@
     "title": "Collaborations that matter",
     "previous": "Previous testimonial",
     "next": "Next testimonial",
-    "rating": "5 out of 5 stars",
+    "rating": "{rating} out of 5 stars",
     "select": "Select a testimonial",
     "show": "Show testimonial {number}",
     "empty": "No testimonials published yet."

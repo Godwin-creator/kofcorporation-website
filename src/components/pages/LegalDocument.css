@@ -65,7 +65,7 @@
 }
 
 .legal-document__content a {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   text-decoration: underline;
   text-underline-offset: 0.2em;
 }

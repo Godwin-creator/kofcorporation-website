@@ -11,7 +11,7 @@
   border: 1px solid transparent;
   border-radius: 0%;
   background: transparent;
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   cursor: pointer;
   opacity: 0;
   pointer-events: none;

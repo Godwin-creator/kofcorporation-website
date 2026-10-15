@@ -23,7 +23,7 @@
 
 .realisations-page__eyebrow {
   margin: 0 0 1rem;
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 600;
@@ -55,7 +55,7 @@
 
 .realisations-page__hero-title-highlight {
   padding-bottom: 0.14em;
-  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+  background: linear-gradient(135deg, var(--color-accent-gradient-start) 0%, var(--color-accent-dark) 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -74,7 +74,7 @@
   align-items: center;
   gap: 0.5rem;
   margin-top: 2rem;
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   font-weight: 600;
 }
 
@@ -133,7 +133,7 @@
 .realisations-page__filters button:hover,
 .realisations-page__load-more:hover,
 .realisations-page__show-less:hover,
-.realisation-card__details:hover { border-color: var(--color-accent); color: var(--color-accent); }
+.realisation-card__details:hover { border-color: var(--color-accent); color: var(--color-accent-text); }
 .realisations-page__actions {
   display: flex;
   align-items: center;
@@ -146,7 +146,7 @@
   display: inline-block;
   padding: 0.75rem 1.25rem;
 }
-.realisation-card__details { margin-top: 1rem; padding: 0.55rem 0.8rem; color: var(--color-accent); font-size: 0.85rem; }
+.realisation-card__details { margin-top: 1rem; padding: 0.55rem 0.8rem; color: var(--color-accent-text); font-size: 0.85rem; }
 
 .realisation-card {
   overflow: hidden;
@@ -264,7 +264,7 @@
   display: inline-flex;
   flex-shrink: 0;
   padding: 0.25rem;
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 
 .realisation-card__description {
@@ -285,7 +285,7 @@
 .realisation-card__features svg {
   flex: 0 0 auto;
   margin-top: 0.15rem;
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 
 .realisation-card ul {
@@ -336,7 +336,7 @@
 }
 
 .realisations-page__section-title {
-  color: var(--color-accent) !important;
+  color: var(--color-accent-text) !important;
   margin-bottom: 1rem !important;
 
 }

@@ -60,7 +60,7 @@
 }
 
 .header__logo:hover .header__logo-text {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 
 /* ---- Desktop Navigation ---- */
@@ -103,7 +103,7 @@
 }
 
 .header .header__specular-button.header__nav-link--active {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 
 .header .header__icon-btn.header__specular-button {
@@ -288,7 +288,7 @@
 }
 
 .header__lang-option--active {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 
 /* ---- CTA Button ---- */
@@ -301,8 +301,8 @@
   font-family: var(--font-body);
   font-size: 0.8125rem;
   font-weight: 500;
-  color: var(--color-on-accent);
-  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+  color: var(--color-on-accent-gradient);
+  background: linear-gradient(135deg, var(--color-accent-gradient-start) 0%, var(--color-accent-dark) 100%);
   border: none;
   border-radius: 0;
   text-decoration: none;
@@ -315,7 +315,7 @@
   opacity: 0.92;
   transform: translateY(-1px);
   box-shadow: 0 4px 18px color-mix(in srgb, var(--color-accent) 35%, transparent);
-  color: var(--color-on-accent);
+  color: var(--color-on-accent-gradient);
 }
 
 .header__cta:active {
@@ -417,7 +417,7 @@
 
 .mobile-nav__link:hover,
 .mobile-nav__link--active {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   background-color: rgba(12, 172, 232, 0.06);
 }
 
@@ -431,8 +431,8 @@
   font-family: var(--font-body);
   font-size: 0.9375rem;
   font-weight: 500;
-  color: var(--color-on-accent);
-  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+  color: var(--color-on-accent-gradient);
+  background: linear-gradient(135deg, var(--color-accent-gradient-start) 0%, var(--color-accent-dark) 100%);
   border: none;
   border-radius: 0;
   text-decoration: none;
@@ -443,7 +443,7 @@
 
 .mobile-nav__cta:hover {
   opacity: 0.92;
-  color: var(--color-on-accent);
+  color: var(--color-on-accent-gradient);
 }
 
 /* ============================================================
@@ -514,7 +514,7 @@
   justify-content: center;
   border-radius: 0;
   background: color-mix(in srgb, var(--color-accent) 12%, transparent);
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 
 .header__mega-card-title {
@@ -529,7 +529,7 @@
 
 .header__mega-card-arrow {
   flex-shrink: 0;
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   opacity: 0;
   transform: translateX(-4px);
   transition: opacity 0.2s ease, transform 0.2s ease;
@@ -586,7 +586,7 @@
 }
 
 .mobile-nav__chevron-btn:hover {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   background-color: rgba(12, 172, 232, 0.08);
 }
 
@@ -608,7 +608,7 @@
 }
 
 .mobile-nav__link--chevron:hover {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   background-color: rgba(12, 172, 232, 0.06);
 }
 
@@ -643,7 +643,7 @@
 }
 
 .mobile-nav__sub-link:hover {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   border-left-color: var(--color-accent);
   padding-left: 1.25rem;
 }

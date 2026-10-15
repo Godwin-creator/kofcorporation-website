@@ -19,7 +19,7 @@
 
 .services__eyebrow {
   margin: 0 0 0.75rem;
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 600;
@@ -68,7 +68,7 @@
   margin-bottom: 1.15rem;
   border: 1px solid rgba(12, 172, 232, 0.25);
   border-radius: 0;
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   background-color: rgba(12, 172, 232, 0.08);
 }
 
@@ -114,7 +114,7 @@
   align-items: center;
   gap: 0.45rem;
   margin-top: 1.25rem;
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   font-family: var(--font-body);
   font-size: 0.875rem;
   font-weight: 600;

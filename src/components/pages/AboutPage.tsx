@@ -181,7 +181,12 @@ export default function AboutPage({teamPhotoUrl, teamPhotoAlt}: {teamPhotoUrl?: 
 
         <section className="about-page__team" aria-labelledby="team-title">
           <div className="about-page__container about-page__team-grid">
-            <div className="about-page__team-mark" aria-label={teamPhotoAlt || tAbout("team.photoAlt")}>
+            <div
+              className="about-page__team-mark"
+              role={teamPhotoUrl ? "img" : undefined}
+              aria-label={teamPhotoUrl ? teamPhotoAlt || tAbout("team.photoAlt") : undefined}
+              aria-hidden={!teamPhotoUrl}
+            >
               {teamPhotoUrl ? <div className="about-page__team-photo" style={{backgroundImage: `url(${teamPhotoUrl})`}} /> : <Users size={64} strokeWidth={1.1} aria-hidden="true" />}
             </div>
             <div>

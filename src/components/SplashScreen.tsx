@@ -145,7 +145,7 @@ export default function SplashScreen() {
           <motion.img
             ref={scope}
             src="/images/logo.svg"
-            alt="KofCorporation"
+            alt=""
             width={120}
             height={120}
             initial={{ opacity: 0, scale: 0.92 }}

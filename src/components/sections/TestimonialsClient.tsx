@@ -85,7 +85,11 @@ export default function TestimonialsClient({testimonials}: {testimonials: Testim
                 animate="center"
                 exit="exit"
               >
-                <div className="testimonial-card__rating" aria-label={t('rating')}>
+                <div
+                  className="testimonial-card__rating"
+                  role="img"
+                  aria-label={t('rating', { rating: active.rating })}
+                >
                   {Array.from({length: active.rating}, (_, index) => (
                     <Star key={index} size={18} strokeWidth={1.5} fill="currentColor" aria-hidden="true" />
                   ))}

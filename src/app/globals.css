@@ -14,9 +14,12 @@
   --color-primary:       #2F3974;
   --color-primary-light: #2C417A;
   --color-accent:        #0CACE8;
+  --color-accent-text:   #006F9D;
+  --color-accent-gradient-start: #0876A0;
   --color-accent-mid:    #1A85BD;
   --color-accent-dark:   #1C71AA;
-  --color-on-accent:     #FFFFFF;
+  --color-on-accent:     #10202A;
+  --color-on-accent-gradient: #FFFFFF;
 
   /* Backgrounds & Surfaces */
   --color-bg:          #F8F9FA;
@@ -25,7 +28,7 @@
 
   /* Text */
   --color-text:       #1A1A2E;
-  --color-text-muted: #64748B;
+  --color-text-muted: #5E6B7A;
 
   /* States */
   --color-danger: #DC2626;
@@ -46,10 +49,31 @@
   --color-primary:     #42BDE8;
   --color-primary-light: #263C52;
   --color-accent:      #42BDE8;
+  --color-accent-text: #42BDE8;
+  --color-accent-gradient-start: #42BDE8;
   --color-accent-mid:  #36AED2;
   --color-accent-dark: #269DC2;
   --color-on-accent:   #10202A;
+  --color-on-accent-gradient: #10202A;
 }
+
+/*
+ * WCAG AA token adjustments (normal text target: 4.5:1):
+ * muted #64748B -> #5E6B7A: on #EEF2FF 4.26 -> 4.87; on #F8F9FA 4.51 -> 5.16.
+ * Dark muted #B9C4CD remains unchanged: 9.86 on #151A20, 7.77 on #242E38,
+ * and 8.96 on #1B232B. Accent text previously used #0CACE8: on #F8F9FA
+ * 2.47 -> #006F9D 5.30; on white 2.60 -> 5.58. Dark accent text #42BDE8
+ * is 8.06 on #151A20 and 6.35 on #242E38.
+ * on-accent #FFFFFF -> #10202A: on #0CACE8 2.60 -> 6.40; dark text on
+ * dark-theme #42BDE8 is 7.67 and on #269DC2 is 5.30.
+ * Gradient start #0CACE8 -> #0876A0 keeps white text at 5.11 (was 2.60);
+ * white on the unchanged #1C71AA endpoint is 5.26. Dark gradient text uses
+ * #10202A: 7.67 on #42BDE8 and 5.30 on #269DC2.
+ * New --color-accent-text and --color-accent-gradient-start tokens separate
+ * accessible text and gradient paint from the unchanged --color-accent fill.
+ * New --color-on-accent-gradient keeps gradient labels white in light mode
+ * and dark in dark mode (7.67 / 5.30 on the respective gradient endpoints).
+ */
 
 /* 4. BASE STYLES */
 *,
@@ -160,6 +184,22 @@ section {
   animation: watermarkIn 0.8s ease-out both;
 }
 
+.section-watermark::before {
+  content: attr(data-text);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 @keyframes watermarkIn {
   from {
     opacity: 0;
@@ -173,13 +213,13 @@ section {
 
 /* Links */
 a {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 a:hover {
-  color: var(--color-accent-mid);
+  color: var(--color-accent-text);
 }
 
 /* 9. FOCUS-VISIBLE UNIVERSEL

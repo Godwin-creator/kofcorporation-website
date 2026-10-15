@@ -132,7 +132,7 @@
   border-radius: 0px;
   background-color: rgba(12, 172, 232, 0.1);
   border: 1px solid rgba(12, 172, 232, 0.2);
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   font-family: var(--font-body);
   font-size: 0.8125rem;
   font-weight: 500;
@@ -177,7 +177,7 @@
 .hero__title-line--secondary {
   min-height: 1.26em;
   padding-bottom: 0.14em;
-  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+  background: linear-gradient(135deg, var(--color-accent-gradient-start) 0%, var(--color-accent-dark) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -256,14 +256,14 @@
 }
 
 .hero__cta--primary {
-  color: var(--color-on-accent);
-  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+  color: var(--color-on-accent-gradient);
+  background: linear-gradient(135deg, var(--color-accent-gradient-start) 0%, var(--color-accent-dark) 100%);
   box-shadow: 0 4px 14px color-mix(in srgb, var(--color-accent) 25%, transparent);
 }
 
 .hero__cta--primary:hover {
   box-shadow: 0 6px 20px color-mix(in srgb, var(--color-accent) 35%, transparent);
-  color: var(--color-on-accent);
+  color: var(--color-on-accent-gradient);
   transform: translateY(-2px);
 }
 

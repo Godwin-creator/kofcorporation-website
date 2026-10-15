@@ -106,7 +106,7 @@
     "title": "Des collaborations qui comptent",
     "previous": "Témoignage précédent",
     "next": "Témoignage suivant",
-    "rating": "5 étoiles sur 5",
+    "rating": "{rating} étoiles sur 5",
     "select": "Sélectionner un témoignage",
     "show": "Afficher le témoignage {number}",
     "empty": "Aucun témoignage publié pour le moment."

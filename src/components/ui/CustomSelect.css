@@ -99,12 +99,12 @@
 .custom-select__option--selected:hover,
 .custom-select__option--selected.custom-select__option--focused {
   background-color: var(--color-accent);
-  color: #ffffff;
+  color: var(--color-on-accent);
 }
 
 [data-theme="dark"] .custom-select__option--selected,
 [data-theme="dark"] .custom-select__option--selected:hover,
 [data-theme="dark"] .custom-select__option--selected.custom-select__option--focused {
   background-color: var(--color-accent);
-  color: #ffffff;
+  color: var(--color-on-accent);
 }
