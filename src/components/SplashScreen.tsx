@@ -80,14 +80,14 @@ export default function SplashScreen() {
 
     // Mode réduit ou connexion lente : transition ultra-rapide (ou quasi nulle)
     if (prefersReducedMotion || isSlowConnection) {
-      const quickTimer = window.setTimeout(finishSplash, 180);
+      const quickTimer = window.setTimeout(finishSplash, 220);
       return () => window.clearTimeout(quickTimer);
     }
 
     // Animation calibrée pour une perception de réactivité maximale
     const isMobile = window.matchMedia("(max-width: 1023px)").matches;
     const enterDuration = isMobile ? 0.22 : 0.28;
-    const holdDuration = isMobile ? 120 : 180;
+    const holdDuration = isMobile ? 160 : 220;
     const exitDuration = isMobile ? 0.2 : 0.26;
 
     const runAnimation = async () => {
