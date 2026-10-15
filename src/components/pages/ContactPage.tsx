@@ -1,6 +1,6 @@
 "use client";
 
-import { type FormEvent, useEffect, useState } from "react";
+import { type FormEvent, useState } from "react";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import {
@@ -16,6 +16,8 @@ import type { ContactForm } from "@/types/contact";
 import {useLocale} from "next-intl";
 import type {CompanySettings} from "@/types/sanity";
 import Watermark from "@/components/ui/Watermark";
+import { Link } from "@/i18n/navigation";
+import { legalInformation } from "@/lib/legal";
 
 import CustomSelect from "@/components/ui/CustomSelect";
 
@@ -32,39 +34,53 @@ const initialForm: ContactForm = {
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+let recaptchaScriptPromise: Promise<void> | undefined;
+
+function loadRecaptcha(siteKey: string): Promise<void> {
+  if (window.grecaptcha) {
+    return Promise.resolve();
+  }
+
+  if (!recaptchaScriptPromise) {
+    recaptchaScriptPromise = new Promise<void>((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = `https://www.google.com/recaptcha/api.js?render=${encodeURIComponent(siteKey)}`;
+      script.async = true;
+      script.defer = true;
+      script.onload = () => {
+        if (window.grecaptcha) {
+          resolve();
+        } else {
+          reject(new Error("Le service reCAPTCHA n’a pas pu être initialisé."));
+        }
+      };
+      script.onerror = () => {
+        reject(new Error("Impossible de charger le service reCAPTCHA."));
+      };
+      document.head.appendChild(script);
+    }).catch((loadError: unknown) => {
+      recaptchaScriptPromise = undefined;
+      throw loadError;
+    });
+  }
+
+  return recaptchaScriptPromise;
+}
+
 export default function ContactPage({settings}: {settings?: CompanySettings | null}) {
   const t = useTranslations("contact");
   const locale = useLocale();
-  const phones = settings?.phone?.length ? settings.phone : ["+228 70 44 16 36", "+228 93 55 47 40"];
-  const email = settings?.email || "contact@kofcorporation.com";
+  const phones = settings?.phone?.length ? settings.phone : legalInformation.phoneNumbers;
+  const email = settings?.email || legalInformation.contactEmail;
   const address = settings?.address || t("address");
   const openingHours = (locale === "en" ? settings?.openingHoursEn : settings?.openingHours) || t("hours");
   const mapsEmbedUrl = settings?.mapsEmbedUrl || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1200!2d1.1903082352326708!3d6.222112510720469!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1021599db15d7109%3A0xd3dd99c055cdec10!2sKofCorporation!5e1!3m2!1sen!2stg!4v1788719337955!5m2!1sen!2stg";
   const [submitted, setSubmitted] = useState(false);
+  const [isMapVisible, setIsMapVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [form, setForm] = useState<ContactForm>(initialForm);
   const [errors, setErrors] = useState<FormErrors>({});
-
-  useEffect(() => {
-    const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-
-    if (!siteKey) {
-      return;
-    }
-
-    const script = document.createElement("script");
-    script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`;
-    script.async = true;
-    script.defer = true;
-    document.head.appendChild(script);
-
-    return () => {
-      if (script.parentNode) {
-        document.head.removeChild(script);
-      }
-    };
-  }, []);
 
   const validateForm = (values: ContactForm): FormErrors => {
     const nextErrors: FormErrors = {};
@@ -115,7 +131,7 @@ export default function ContactPage({settings}: {settings?: CompanySettings | nu
     }
 
     const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-    if (!siteKey || !window.grecaptcha) {
+    if (!siteKey) {
       setError("Le service anti-spam n’est pas disponible pour le moment.");
       return;
     }
@@ -124,6 +140,7 @@ export default function ContactPage({settings}: {settings?: CompanySettings | nu
     setError("");
 
     try {
+      await loadRecaptcha(siteKey);
       await new Promise<void>((resolve) => {
         window.grecaptcha.ready(resolve);
       });
@@ -354,7 +371,13 @@ export default function ContactPage({settings}: {settings?: CompanySettings | nu
                   </p>
                 )}
 
-                <p className="contact-form__note">{t("privacy")}</p>
+                <p className="contact-form__note">
+                  {t.rich("privacy", {
+                    policyLink: (chunks) => (
+                      <Link href="/politique-de-confidentialite">{chunks}</Link>
+                    ),
+                  })}
+                </p>
               </form>
             )}
           </motion.div>
@@ -386,13 +409,37 @@ export default function ContactPage({settings}: {settings?: CompanySettings | nu
             </div>
 
             <div className="contact-page__map">
-              <iframe
-                title={t("map")}
-                src={mapsEmbedUrl}
-                loading="lazy"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-              />
+              {isMapVisible ? (
+                <iframe
+                  title={t("map")}
+                  src={mapsEmbedUrl}
+                  loading="lazy"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              ) : (
+                <div
+                  className="contact-page__map-preview"
+                  role="group"
+                  aria-label={t("mapPreview")}
+                >
+                  <div className="contact-page__map-art" aria-hidden="true">
+                    <span className="contact-page__map-road contact-page__map-road--one" />
+                    <span className="contact-page__map-road contact-page__map-road--two" />
+                    <span className="contact-page__map-road contact-page__map-road--three" />
+                    <MapPin size={34} strokeWidth={1.8} />
+                  </div>
+                  <p>{address}</p>
+                  <p className="contact-page__map-privacy">{t("mapPrivacy")}</p>
+                  <button
+                    className="contact-page__map-button"
+                    type="button"
+                    onClick={() => setIsMapVisible(true)}
+                  >
+                    {t("showMap")}
+                  </button>
+                </div>
+              )}
             </div>
           </aside>
         </div>

@@ -137,9 +137,10 @@
     "projects": "Nos réalisations",
     "meeting": "Prendre rendez-vous",
     "legal": "Mentions Légales",
+    "privacy": "Confidentialité",
+    "terms": "Conditions générales",
     "address": "Agoè Minamadou, à côté de ESA, Lomé, Togo",
-    "copyright": "Tous droits réservés.",
-    "terms": "CGU & Confidentialité"
+    "copyright": "Tous droits réservés."
   },
   "pages": {
     "home": "Accueil",
@@ -211,13 +212,115 @@
     "message": "Parlez-nous de votre projet",
     "messagePlaceholder": "Objectifs, contexte, délais…",
     "send": "Envoyer le message",
-    "privacy": "En envoyant ce formulaire, vous acceptez que KofCorporation utilise ces informations pour vous répondre.",
+    "privacy": "Les données transmises sont utilisées pour traiter votre demande. Consultez notre <policyLink>politique de confidentialité</policyLink>.",
     "details": "Nos coordonnées",
     "detailsTitle": "Une équipe accessible, basée à Lomé.",
     "address": "Agoè Minamadou, à côté de ESA, Lomé, Togo",
     "hours": "Lun–Sam, 8h–18h",
     "map": "Localisation de KofCorporation à Lomé",
+    "mapPreview": "Aperçu statique de la localisation de KofCorporation à Lomé",
+    "showMap": "Afficher la carte",
+    "mapPrivacy": "En affichant la carte, Google reçoit des données techniques de votre navigateur.",
     "formAside": "Coordonnées KofCorporation"
+  },
+  "legalDocuments": {
+    "notice": {
+      "title": "Mentions légales",
+      "denomination": "Dénomination",
+      "registeredName": "Raison sociale enregistrée",
+      "legalForm": "Forme juridique",
+      "legalFormValue": "{form}",
+      "rccm": "RCCM",
+      "nif": "NIF",
+      "address": "Adresse",
+      "addressValue": "{district}, à côté de {landmark}, {locality}, {country}",
+      "publicationDirector": "Directeur de publication",
+      "phone": "Téléphone",
+      "email": "E-mail",
+      "corporatePurpose": "Objet social",
+      "corporatePurposeValue": "Édition de logiciels, développement IT, fournitures de matériels informatiques, infographie, formation dans le domaine de l'informatique notamment les langages de programmation",
+      "publisher": {
+        "title": "Éditeur du site"
+      },
+      "hosting": {
+        "title": "Hébergement",
+        "body": "Hébergeur du site : {name}, {address}."
+      },
+      "intellectualProperty": {
+        "title": "Propriété intellectuelle",
+        "body": "Les contenus de ce site sont protégés par les règles applicables en matière de propriété intellectuelle. Toute reproduction ou utilisation non autorisée est interdite."
+      },
+      "personalData": {
+        "title": "Données personnelles",
+        "body": "Les informations concernant les traitements de données, leurs finalités, leurs destinataires, leur conservation et les droits des personnes sont présentées dans la politique de confidentialité.",
+        "link": "Consulter la politique de confidentialité"
+      }
+    },
+    "privacy": {
+      "title": "Politique de confidentialité",
+      "responsible": {
+        "title": "Responsable du traitement",
+        "body": "{name} détermine les finalités et les moyens du traitement des informations envoyées au moyen du formulaire de contact. Son identité juridique enregistrée reste à confirmer."
+      },
+      "data": {
+        "title": "Données collectées",
+        "form": "Le formulaire peut transmettre le nom, l’adresse e-mail, le sujet et le contenu du message, ainsi qu’un jeton anti-robot reCAPTCHA nécessaire à la protection du formulaire.",
+        "technical": "Lors de l’utilisation du site, des données techniques de navigation peuvent être traitées par les services d’hébergement, de mesure d’audience, de sécurité ou intégrés à la page (par exemple des informations relatives à l’appareil, au navigateur et à la connexion). Les catégories exactes dépendent des services sollicités."
+      },
+      "purposes": {
+        "title": "Finalités",
+        "body": "Les données du formulaire servent à recevoir, examiner et traiter les demandes de contact, à y répondre et à limiter les envois automatisés. Les données techniques contribuent au fonctionnement, à la sécurité, à la mesure d’audience et à l’amélioration du site. Les préférences enregistrées servent à mémoriser certains choix d’affichage."
+      },
+      "recipients": {
+        "title": "Destinataires et services",
+        "body": "Les demandes sont accessibles aux personnes chargées du contact au sein de KofCorporation. {websiteHost} héberge le site et fournit les outils de mesure Vercel Web Analytics et Speed Insights. Sanity fournit le système de gestion et de diffusion de contenu du site. Google fournit reCAPTCHA pour la protection du formulaire et Google Maps uniquement si vous choisissez d’afficher la carte. L’envoi des messages utilise le service SMTP configuré par KofCorporation sur un VPS ; {smtpHost} dans les informations disponibles.",
+        "smtpUnknown": "le fournisseur SMTP n’est pas identifié"
+      },
+      "retention": {
+        "title": "Durée de conservation",
+        "body": "La notice actuellement publiée indique une conservation maximale de 12 mois pour les données du formulaire. Cette durée doit être confirmée par KofCorporation. Les durées appliquées par les prestataires et les périodes de conservation des données techniques doivent également être confirmées auprès de ces prestataires."
+      },
+      "rights": {
+        "title": "Vos droits et leur exercice",
+        "body": "Sous réserve des règles applicables, vous pouvez demander l’accès aux données vous concernant, leur rectification ou leur effacement, et demander la limitation du traitement ou vous y opposer lorsque ces droits s’appliquent.",
+        "contact": "Pour exercer ces droits ou poser une question sur vos données, écrivez à {email} en précisant votre demande."
+      },
+      "storage": {
+        "title": "Cookies, stockage local et cache",
+        "locale": "Le cookie NEXT_LOCALE mémorise la langue choisie. La durée d’un an est celle indiquée dans la notice actuellement publiée.",
+        "theme": "Le thème d’affichage et le mode de curseur sont enregistrés dans le stockage local du navigateur (localStorage), sous les clés theme et cursor-mode ; il ne s’agit pas de cookies.",
+        "pwa": "Le service worker de l’application peut mettre en cache des ressources du site pour accélérer les chargements et permettre certaines fonctions hors connexion. Ce cache est stocké par le navigateur et peut être supprimé depuis ses paramètres.",
+        "recaptcha": "Google reCAPTCHA est chargé lorsque le formulaire de contact est envoyé. Google peut alors traiter des données techniques et utiliser des mécanismes de stockage conformément à ses propres règles.",
+        "maps": "La carte Google Maps n’est pas chargée avant votre clic sur « Afficher la carte ». Si vous l’affichez, votre navigateur se connecte à Google, qui peut recevoir des données techniques et utiliser ses mécanismes de stockage."
+      }
+    },
+    "terms": {
+      "title": "Conditions générales d’utilisation",
+      "purpose": {
+        "title": "Objet",
+        "body": "Les présentes conditions décrivent les règles générales d’accès et d’utilisation du site de KofCorporation. Elles ne constituent pas un contrat de prestation pour les services présentés sur le site."
+      },
+      "access": {
+        "title": "Accès au site",
+        "body": "Le site est accessible en ligne sous réserve de sa disponibilité et de la connexion de l’utilisateur. KofCorporation peut faire évoluer, interrompre ou suspendre tout ou partie du site, notamment pour sa maintenance ou sa sécurité."
+      },
+      "intellectualProperty": {
+        "title": "Propriété intellectuelle",
+        "body": "Les textes, visuels, marques, éléments graphiques et autres contenus du site sont protégés par les règles applicables en matière de propriété intellectuelle. Sauf autorisation préalable ou exception légale, leur reproduction, adaptation ou réutilisation est interdite."
+      },
+      "liability": {
+        "title": "Responsabilité",
+        "body": "KofCorporation s’efforce de présenter des informations à jour, sans garantir qu’elles soient exemptes d’erreurs ou disponibles sans interruption. Dans les limites prévues par les règles applicables, l’utilisateur reste responsable de son usage du site et de ses décisions fondées sur les informations publiées."
+      },
+      "externalLinks": {
+        "title": "Liens et services externes",
+        "body": "Le site peut renvoyer vers des sites ou services de tiers. Ces liens sont proposés à titre informatif ; KofCorporation ne contrôle pas leur contenu, leur disponibilité ni leurs pratiques de données. Leur consultation relève des conditions et politiques de leurs éditeurs."
+      },
+      "law": {
+        "title": "Droit applicable et règlement des différends",
+        "body": "Le droit applicable et la juridiction compétente restent à confirmer par KofCorporation. Aucune loi ni juridiction n’est désignée dans cette version."
+      }
+    }
   },
   "about": {
     "hero": {

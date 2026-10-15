@@ -177,6 +177,8 @@
 
 .footer__bottom-links {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1.5rem;
   font-size: 0.875rem;
 }
@@ -218,4 +220,3 @@
   position: relative;
   z-index: 1;
 }
-

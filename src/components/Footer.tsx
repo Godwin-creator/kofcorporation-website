@@ -8,6 +8,7 @@ import {
 import "./Footer.css";
 import { Link } from "@/i18n/navigation";
 import { fetchSettings } from "@/lib/queries";
+import { legalInformation } from "@/lib/legal";
 
 const currentYear = new Date().getFullYear();
 
@@ -51,8 +52,8 @@ const DEFAULT_MAPS_URL = "https://maps.app.goo.gl/srEiWn6anmGeb7du6";
 export default async function Footer() {
   const t = await getTranslations("footer");
   const settings = await fetchSettings();
-  const phones = settings?.phone?.length ? settings.phone : ["+228 70 44 16 36", "+228 93 55 47 40"];
-  const email = settings?.email || "contact@kofcorporation.com";
+  const phones = settings?.phone?.length ? settings.phone : legalInformation.phoneNumbers;
+  const email = settings?.email || legalInformation.contactEmail;
   const address = settings?.address || t("address");
   const mapsUrl = settings?.mapsUrl || DEFAULT_MAPS_URL;
 
@@ -154,11 +155,6 @@ export default async function Footer() {
                   {t("meeting")}
                 </Link>
               </li>
-              <li>
-                <Link href="/mentions-legales" className="footer__link">
-                  {t("legal")}
-                </Link>
-              </li>
             </ul>
           </div>
 
@@ -201,7 +197,9 @@ export default async function Footer() {
             © {currentYear} KofCorporation. {t("copyright")}
           </p>
           <div className="footer__bottom-links">
-             <Link href="/mentions-legales">{t("terms")}</Link>
+            <Link href="/mentions-legales">{t("legal")}</Link>
+            <Link href="/politique-de-confidentialite">{t("privacy")}</Link>
+            <Link href="/conditions-generales">{t("terms")}</Link>
           </div>
         </div>
       </div>

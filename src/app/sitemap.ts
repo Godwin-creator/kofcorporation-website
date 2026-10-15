@@ -15,6 +15,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/qui-sommes-nous',
     '/contact',
     '/mentions-legales',
+    '/politique-de-confidentialite',
+    '/conditions-generales',
   ]
 
   const entries: MetadataRoute.Sitemap = locales.flatMap((locale) =>
@@ -32,7 +34,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
           ? 1.0
           : route.includes('services')
             ? 0.8
-            : route === '/mentions-legales'
+            : route === '/mentions-legales' ||
+                route === '/politique-de-confidentialite' ||
+                route === '/conditions-generales'
               ? 0.3
               : 0.7,
         alternates: {
