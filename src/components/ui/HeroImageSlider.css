@@ -115,7 +115,7 @@
   background: rgba(12, 172, 232, 0.88);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border-radius: 9999px;
+  border-radius: 0px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
   pointer-events: none;
   animation: heroHintPulse 3s ease-in-out infinite;
