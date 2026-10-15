@@ -76,14 +76,27 @@ export default function Header() {
     };
   }, [mobileOpen]);
 
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMobileOpen(false);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [mobileOpen]);
+
   /* --- Close services mega menu when cursor leaves ------------- */
   useEffect(() => {
     const el = servicesHoverRef.current;
     if (!el) return;
+    const enter = () => setServicesOpen(true);
     const leave = () => setServicesOpen(false);
-    el.addEventListener("mouseenter", () => setServicesOpen(true));
+    el.addEventListener("mouseenter", enter);
     el.addEventListener("mouseleave", leave);
-    return () => el.removeEventListener("mouseleave", leave);
+    return () => {
+      el.removeEventListener("mouseenter", enter);
+      el.removeEventListener("mouseleave", leave);
+    };
   }, []);
 
   return (

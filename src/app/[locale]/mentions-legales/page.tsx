@@ -1,12 +1,26 @@
 import type { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
 import { getTranslations } from "next-intl/server";
+import { createLocalizedMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Mentions légales - KofCorporation",
-  description:
-    "Mentions légales, conditions générales d'utilisation et politique de confidentialité de KofCorporation.",
-};
+export function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  return createLocalizedMetadata(params, "/mentions-legales", {
+    fr: {
+      title: "Mentions légales",
+      description:
+        "Mentions légales, conditions générales d'utilisation et politique de confidentialité de KofCorporation.",
+    },
+    en: {
+      title: "Legal notice",
+      description:
+        "Read KofCorporation's legal notice, terms of use, and privacy policy.",
+    },
+  });
+}
 
 const sectionTitleStyle = {
   margin: "0 0 1rem",

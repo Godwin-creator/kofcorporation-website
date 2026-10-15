@@ -1,4 +1,5 @@
 import type {Metadata, Viewport} from 'next'
+import { getLocale } from 'next-intl/server'
 import { SerwistProvider } from '@serwist/turbopack/react'
 import InlineScript from '@/components/InlineScript'
 import './globals.css'
@@ -58,9 +59,11 @@ const themeInitScript = `
 })();
 `.trim()
 
-export default function RootLayout({children}: Readonly<{children: React.ReactNode}>) {
+export default async function RootLayout({children}: Readonly<{children: React.ReactNode}>) {
+  const locale = await getLocale()
+
   return (
-    <html lang="fr" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://cdn.sanity.io" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />

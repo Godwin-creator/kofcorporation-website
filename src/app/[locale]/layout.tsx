@@ -20,13 +20,6 @@ const ogImageUrl = new URL('/og-image.jpeg', siteUrl).toString();
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  alternates: {
-    canonical: siteUrl,
-    languages: {
-      fr: `${siteUrl}/fr`,
-      en: `${siteUrl}/en`,
-    },
-  },
   openGraph: {
     title: "KofCorporation - Société informatique d'édition de logiciels",
     description:

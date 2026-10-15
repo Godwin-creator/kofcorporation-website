@@ -52,19 +52,21 @@ export function useCursorPreference(): {
   useEffect(() => {
     const initial = getInitialCursorMode();
     applyCursorMode(initial);
-    setCursorMode(initial);
+    const initialFrame = window.requestAnimationFrame(() => setCursorMode(initial));
 
     const onSync = () => {
       setCursorMode(getInitialCursorMode());
     };
+    const onStorage = (event: StorageEvent) => {
+      if (event.key === STORAGE_KEY) onSync();
+    };
 
-    window.addEventListener("storage", (e: StorageEvent) => {
-      if (e.key === STORAGE_KEY) onSync();
-    });
+    window.addEventListener("storage", onStorage);
     window.addEventListener("kof:cursor-mode", onSync);
 
     return () => {
-      window.removeEventListener("storage", onSync as EventListener);
+      window.cancelAnimationFrame(initialFrame);
+      window.removeEventListener("storage", onStorage);
       window.removeEventListener("kof:cursor-mode", onSync);
     };
   }, []);
