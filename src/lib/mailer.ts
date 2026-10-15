@@ -8,9 +8,6 @@ export const transporter = nodemailer.createTransport({
     user: process.env.SMTP_USERNAME,
     pass: process.env.SMTP_PASSWORD,
   },
-  tls: {
-    rejectUnauthorized: false,
-  },
 })
 
 export const EMAIL_FROM = process.env.EMAIL_FROM_ADDRESS 

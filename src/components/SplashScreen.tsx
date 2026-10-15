@@ -12,7 +12,7 @@ const SPLASH_SESSION_KEY = "kof_splash_shown";
 
 export default function SplashScreen() {
   const [visible, setVisible] = useState(false);
-  const [themeBackground, setThemeBackground] = useState(() =>
+  const [themeBackground] = useState(() =>
     getThemeBackground(getInitialTheme())
   );
   const [scope, animate] = useAnimate();
@@ -33,9 +33,8 @@ export default function SplashScreen() {
 
     const theme = getInitialTheme();
     applyTheme(theme);
-    setThemeBackground(getThemeBackground(theme));
     document.documentElement.classList.add("splash-active");
-    setVisible(true);
+    const visibleFrame = window.requestAnimationFrame(() => setVisible(true));
 
     // Watchdog de sécurité : garantit que la page ne reste jamais bloquée
     const safetyTimer = window.setTimeout(() => {
@@ -44,7 +43,10 @@ export default function SplashScreen() {
       setVisible(false);
     }, 1600);
 
-    return () => window.clearTimeout(safetyTimer);
+    return () => {
+      window.cancelAnimationFrame(visibleFrame);
+      window.clearTimeout(safetyTimer);
+    };
   }, []);
 
   useEffect(() => {

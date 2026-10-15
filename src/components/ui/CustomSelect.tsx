@@ -20,6 +20,7 @@ export interface CustomSelectProps {
   id?: string;
   ariaLabelledBy?: string;
   ariaDescribedBy?: string;
+  required?: boolean;
 }
 
 export default function CustomSelect({
@@ -32,6 +33,7 @@ export default function CustomSelect({
   id,
   ariaLabelledBy,
   ariaDescribedBy,
+  required = false,
 }: CustomSelectProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [focusedIndex, setFocusedIndex] = useState<number>(-1);
@@ -125,7 +127,13 @@ export default function CustomSelect({
         aria-expanded={isOpen}
         aria-haspopup="listbox"
         aria-controls={listboxId}
+        aria-activedescendant={
+          isOpen && focusedIndex >= 0
+            ? `${listboxId}-option-${focusedIndex}`
+            : undefined
+        }
         aria-invalid={Boolean(error)}
+        aria-required={required}
         aria-labelledby={ariaLabelledBy}
         aria-describedby={ariaDescribedBy}
         aria-label={ariaLabelledBy ? undefined : name}
@@ -162,6 +170,7 @@ export default function CustomSelect({
 
               return (
                 <li
+                  id={`${listboxId}-option-${index}`}
                   key={option.value}
                   role="option"
                   aria-selected={isSelected}

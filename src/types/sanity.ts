@@ -11,7 +11,7 @@ export interface SanityProject {
   _id: string; title: string; slug: {current: string}; categories: ProjectCategory[]; client?: string; sector?: string
   description?: string; descriptionEn?: string; shortDescription?: string; shortDescriptionEn?: string
   technologies?: string[]; image?: SanityImage; gallery?: SanityImage[]; links?: ProjectLink[]
-  featured: boolean; year?: number; publishedAt?: string; order?: number
+  featured: boolean; status?: 'published' | 'draft'; year?: number; publishedAt?: string; order?: number
 }
 export interface SanityTestimonial {_id: string; name: string; role?: string; roleEn?: string; company?: string; avatar?: SanityImage; quote: string; quoteEn?: string; rating?: number; isVerified?: boolean; order?: number}
 export interface SanityPartner {_id: string; name: string; logo: SanityImage; url?: string; order?: number}

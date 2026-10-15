@@ -20,18 +20,10 @@ const ogImageUrl = new URL('/og-image.jpeg', siteUrl).toString();
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  alternates: {
-    canonical: siteUrl,
-    languages: {
-      fr: `${siteUrl}/fr`,
-      en: `${siteUrl}/en`,
-    },
-  },
   openGraph: {
     title: "KofCorporation - Société informatique d'édition de logiciels",
     description:
       "KofCorporation conçoit des applications web, mobiles et logiciels sur mesure pour les entreprises et startups au Togo.",
-    url: siteUrl,
     siteName: "KofCorporation",
     images: [
       {

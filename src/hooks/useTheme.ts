@@ -8,7 +8,9 @@ export function applyTheme(theme: Theme) {
   if (typeof window === "undefined") return;
 
   document.documentElement.setAttribute("data-theme", theme);
-  localStorage.setItem("theme", theme);
+  try {
+    localStorage.setItem("theme", theme);
+  } catch {}
 
   const meta = document.querySelector('meta[name="theme-color"]');
   if (meta) {
@@ -33,8 +35,10 @@ export function getInitialTheme(): Theme {
   if (domTheme === "light" || domTheme === "dark") return domTheme;
 
   // Priorité 2 : valeur persistée en localStorage
-  const stored = localStorage.getItem("theme");
-  if (stored === "light" || stored === "dark") return stored;
+  try {
+    const stored = localStorage.getItem("theme");
+    if (stored === "light" || stored === "dark") return stored;
+  } catch {}
 
   return window.matchMedia("(prefers-color-scheme: dark)").matches
     ? "dark"

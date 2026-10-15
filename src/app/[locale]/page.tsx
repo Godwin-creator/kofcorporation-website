@@ -8,12 +8,26 @@ import Services from "@/components/sections/Services";
 import { fetchSettings } from "@/lib/queries";
 import { urlFor } from "@/lib/sanity";
 import { SectionSkeleton } from "@/components/ui/Skeletons";
+import { createLocalizedMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "KofCorporation - Société informatique d'édition de logiciels",
-  description:
-    "KofCorporation conçoit des applications web, mobiles et logiciels sur mesure pour les entreprises, ONG et institutions au Togo.",
-};
+export function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  return createLocalizedMetadata(params, "", {
+    fr: {
+      title: "Société informatique au Togo",
+      description:
+        "KofCorporation conçoit des applications web, mobiles et logiciels sur mesure pour les entreprises, ONG et institutions au Togo.",
+    },
+    en: {
+      title: "Software company in Togo",
+      description:
+        "KofCorporation builds custom web and mobile applications and business software for companies, NGOs, and institutions in Togo.",
+    },
+  });
+}
 
 const Stats = dynamic(() => import("@/components/sections/Stats"));
 const Projects = dynamic(() => import("@/components/sections/Projects"));

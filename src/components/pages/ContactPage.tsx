@@ -281,6 +281,7 @@ export default function ContactPage({settings}: {settings?: CompanySettings | nu
                     name="subject"
                     ariaLabelledBy="contact-subject-label"
                     ariaDescribedBy={errors.subject ? "contact-subject-error" : undefined}
+                    required
                     value={form.subject}
                     onChange={(value) => {
                       setForm((current) => ({ ...current, subject: value }));

@@ -26,35 +26,46 @@ const verifyRecaptcha = async (token: string) => {
   const secretKey = process.env.RECAPTCHA_SECRET_KEY
 
   if (!secretKey) {
-    return { ok: false, reason: 'reCAPTCHA secret missing' }
+    return { ok: false, status: 503 as const }
   }
 
-  const response = await fetch('https://www.google.com/recaptcha/api/siteverify', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: new URLSearchParams({
-      secret: secretKey,
-      response: token,
-    }),
-  })
+  try {
+    const response = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        secret: secretKey,
+        response: token,
+      }),
+      signal: AbortSignal.timeout(5000),
+    })
 
-  if (!response.ok) {
-    return { ok: false, reason: 'reCAPTCHA verification request failed' }
+    if (!response.ok) {
+      return { ok: false, status: 503 as const }
+    }
+
+    const payload = (await response.json()) as {
+      success?: boolean
+      score?: number
+      action?: string
+    }
+
+    if (
+      !payload.success ||
+      payload.action !== 'contact' ||
+      typeof payload.score !== 'number' ||
+      payload.score < 0.5
+    ) {
+      return { ok: false, status: 400 as const }
+    }
+
+    return { ok: true as const }
+  } catch (error) {
+    console.error('reCAPTCHA verification error:', error)
+    return { ok: false, status: 503 as const }
   }
-
-  const payload = (await response.json()) as {
-    success?: boolean
-    score?: number
-    action?: string
-  }
-
-  if (!payload.success || typeof payload.score !== 'number' || payload.score < 0.5) {
-    return { ok: false, reason: 'reCAPTCHA score too low' }
-  }
-
-  return { ok: true }
 }
 
 const buildInternalEmailHtml = (payload: ContactForm & { submittedAt: string }) => `
@@ -98,24 +109,51 @@ const buildConfirmationEmailHtml = (payload: ContactForm & { submittedAt: string
 `
 
 export async function POST(request: Request) {
-  if (request.method !== 'POST') {
-    return NextResponse.json({ error: 'Method not allowed' }, { status: 405 })
+  const contentType = request.headers.get('content-type') ?? ''
+  if (contentType.split(';', 1)[0].trim().toLowerCase() !== 'application/json') {
+    return NextResponse.json({ error: 'Content-Type invalide.' }, { status: 400 })
   }
 
-  const contentType = request.headers.get('content-type') ?? ''
-  if (!contentType.includes('application/json')) {
-    return NextResponse.json({ error: 'Content-Type invalide.' }, { status: 400 })
+  const contentLength = request.headers.get('content-length')
+  if (contentLength && Number(contentLength) > MAX_BODY_SIZE) {
+    return NextResponse.json({ error: 'Le formulaire est trop volumineux.' }, { status: 413 })
   }
 
   let rawBody = ''
   try {
-    rawBody = await request.text()
+    const reader = request.body?.getReader()
+    if (!reader) {
+      return NextResponse.json({ error: 'Le corps de la requête est vide.' }, { status: 400 })
+    }
+
+    const chunks: Uint8Array[] = []
+    let bodySize = 0
+    while (true) {
+      const { done, value } = await reader.read()
+      if (done) break
+
+      bodySize += value.byteLength
+      if (bodySize > MAX_BODY_SIZE) {
+        void reader.cancel().catch(() => undefined)
+        return NextResponse.json({ error: 'Le formulaire est trop volumineux.' }, { status: 413 })
+      }
+
+      chunks.push(value)
+    }
+
+    const bodyBytes = new Uint8Array(bodySize)
+    let offset = 0
+    for (const chunk of chunks) {
+      bodyBytes.set(chunk, offset)
+      offset += chunk.byteLength
+    }
+    rawBody = new TextDecoder('utf-8', { fatal: true }).decode(bodyBytes)
   } catch {
     return NextResponse.json({ error: 'Impossible de lire le corps de la requête.' }, { status: 400 })
   }
 
-  if (rawBody.length === 0 || rawBody.length > MAX_BODY_SIZE) {
-    return NextResponse.json({ error: 'Le formulaire est invalide ou trop volumineux.' }, { status: 400 })
+  if (rawBody.length === 0) {
+    return NextResponse.json({ error: 'Le formulaire est invalide ou vide.' }, { status: 400 })
   }
 
   let body: unknown
@@ -140,16 +178,10 @@ export async function POST(request: Request) {
   const recaptchaValidation = await verifyRecaptcha(recaptchaToken)
 
   if (!recaptchaValidation.ok) {
-    return NextResponse.json({ error: 'Vérification anti-spam échouée.' }, { status: 400 })
-  }
-
-  const sanitizedForm = {
-    ...formData,
-    fullName: escapeHtml(formData.fullName.trim()),
-    email: escapeHtml(formData.email.trim()),
-    subject: escapeHtml(formData.subject.trim()),
-    message: escapeHtml(formData.message.trim()),
-    locale: formData.locale ? escapeHtml(formData.locale) : undefined,
+    return NextResponse.json(
+      { error: 'Vérification anti-spam échouée.' },
+      { status: recaptchaValidation.status }
+    )
   }
 
   const submittedAt = formatDateTime()
@@ -158,22 +190,26 @@ export async function POST(request: Request) {
     await transporter.sendMail({
       from: EMAIL_FROM,
       to: [adminRecipient],
-      subject: `Nouveau message - ${sanitizedForm.subject}`,
+      subject: `Nouveau message - ${formData.subject}`,
       html: buildInternalEmailHtml({
-        ...sanitizedForm,
+        ...formData,
         submittedAt,
       }),
     })
 
-    await transporter.sendMail({
-      from: EMAIL_FROM,
-      to: [sanitizedForm.email],
-      subject: 'Nous avons bien reçu votre message',
-      html: buildConfirmationEmailHtml({
-        ...sanitizedForm,
-        submittedAt,
-      }),
-    })
+    try {
+      await transporter.sendMail({
+        from: EMAIL_FROM,
+        to: [formData.email],
+        subject: 'Nous avons bien reçu votre message',
+        html: buildConfirmationEmailHtml({
+          ...formData,
+          submittedAt,
+        }),
+      })
+    } catch (error) {
+      console.error('Contact confirmation email error:', error)
+    }
 
     return NextResponse.json({ success: true }, { status: 200 })
   } catch (error) {

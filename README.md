@@ -104,6 +104,9 @@ Ouvrir [http://localhost:3000](http://localhost:3000)
 # Sanity CMS
 NEXT_PUBLIC_SANITY_PROJECT_ID=
 NEXT_PUBLIC_SANITY_DATASET=
+# Jeton de lecture serveur pour Sanity Live (facultatif sur un dataset public)
+SANITY_API_READ_TOKEN=
+# Jeton d'écriture réservé au script de migration ponctuel
 SANITY_API_TOKEN=
 
 # Google Maps
@@ -116,6 +119,8 @@ RECAPTCHA_SECRET_KEY=
 # Open Graph / URL publique du site
 NEXT_PUBLIC_SITE_URL=https://kofcorporation.com
 ```
+
+`SANITY_API_READ_TOKEN` est utilisé côté serveur pour Sanity Live; limitez ses droits au strict nécessaire. `SANITY_API_TOKEN` est réservé au script de migration et ne doit jamais être exposé au navigateur.
 
 ---
 

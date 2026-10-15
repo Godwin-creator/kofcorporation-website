@@ -17,6 +17,18 @@ export function applyCursorMode(mode: CursorMode) {
   window.dispatchEvent(new CustomEvent("kof:cursor-mode", { detail: mode }));
 }
 
+/** Synchronizes the DOM with a cursor mode received from another tab. */
+export function syncCursorModeFromStorage(value: string | null): CursorMode {
+  const mode: CursorMode =
+    value === "custom" || value === "system" ? value : DEFAULT_MODE;
+
+  if (typeof window !== "undefined") {
+    document.documentElement.setAttribute("data-cursor-mode", mode);
+  }
+
+  return mode;
+}
+
 /** Lit la préférence depuis le DOM (positionné par le script inline anti-flash)
  *  puis localStorage, puis retourne la valeur par défaut. */
 export function getInitialCursorMode(): CursorMode {
@@ -52,19 +64,22 @@ export function useCursorPreference(): {
   useEffect(() => {
     const initial = getInitialCursorMode();
     applyCursorMode(initial);
-    setCursorMode(initial);
+    const initialFrame = window.requestAnimationFrame(() => setCursorMode(initial));
 
     const onSync = () => {
       setCursorMode(getInitialCursorMode());
     };
+    const onStorage = (event: StorageEvent) => {
+      if (event.key !== STORAGE_KEY && event.key !== null) return;
+      setCursorMode(syncCursorModeFromStorage(event.newValue));
+    };
 
-    window.addEventListener("storage", (e: StorageEvent) => {
-      if (e.key === STORAGE_KEY) onSync();
-    });
+    window.addEventListener("storage", onStorage);
     window.addEventListener("kof:cursor-mode", onSync);
 
     return () => {
-      window.removeEventListener("storage", onSync as EventListener);
+      window.cancelAnimationFrame(initialFrame);
+      window.removeEventListener("storage", onStorage);
       window.removeEventListener("kof:cursor-mode", onSync);
     };
   }, []);

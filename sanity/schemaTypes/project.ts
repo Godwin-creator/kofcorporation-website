@@ -28,6 +28,7 @@ export const project = defineType({
     defineField({name: 'links', title: 'Liens du projet', type: 'array', of: [{type: 'object', name: 'projectLink', fields: [defineField({name: 'type', title: 'Type de lien', type: 'string', options: {list: linkOptions}, validation: (Rule) => Rule.required()}), defineField({name: 'url', title: 'URL du lien', type: 'url', validation: (Rule) => Rule.required()}), defineField({name: 'label', title: 'Libellé personnalisé (optionnel)', type: 'string'})], preview: {select: {type: 'type', url: 'url'}, prepare({type, url}) {return {title: `${type} - ${url}`}}}}]}),
     defineField({name: 'year', title: 'Année de réalisation', type: 'number', validation: (Rule) => Rule.min(2019).max(2030)}),
     defineField({name: 'featured', title: "Mis en avant sur la page d'accueil", type: 'boolean', initialValue: false}),
+    defineField({name: 'status', title: 'Visibilité sur le site', type: 'string', options: {list: [{title: 'Publié', value: 'published'}, {title: 'Masqué', value: 'draft'}], layout: 'radio'}, initialValue: 'published'}),
     defineField({name: 'publishedAt', title: 'Date de publication', type: 'datetime'}),
     defineField({name: 'order', title: "Ordre d'affichage", type: 'number'}),
   ],

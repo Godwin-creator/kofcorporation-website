@@ -1,12 +1,13 @@
 import { createClient } from '@sanity/client';
 
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'ppie0cw6';
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production';
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
 const token = process.env.SANITY_API_TOKEN;
 
-if (!token) {
-  console.error('SANITY_API_TOKEN is not defined in environment variables.');
-  console.log('Provide SANITY_API_TOKEN=your_token npx tsx scripts/migrate-project-categories.ts');
+if (!projectId || !dataset || !token) {
+  console.error(
+    'Set NEXT_PUBLIC_SANITY_PROJECT_ID, NEXT_PUBLIC_SANITY_DATASET, and SANITY_API_TOKEN before running this migration.'
+  );
   process.exit(1);
 }
 
