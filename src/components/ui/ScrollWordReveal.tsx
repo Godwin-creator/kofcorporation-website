@@ -30,7 +30,8 @@ export default function ScrollWordReveal({ textKey, className = "" }: ScrollWord
   });
 
   return (
-    <p ref={ref} className={`scroll-reveal ${className}`} aria-label={text}>
+    <p ref={ref} className={`scroll-reveal ${className}`}>
+      <span className="sr-only">{text}</span>
       {words.map((word, index) => {
         // Accent the first word of each "sentence" (after a comma) and the last word
         const isAccent =

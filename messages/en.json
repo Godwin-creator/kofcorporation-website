@@ -106,7 +106,7 @@
     "title": "Collaborations that matter",
     "previous": "Previous testimonial",
     "next": "Next testimonial",
-    "rating": "5 out of 5 stars",
+    "rating": "{rating} out of 5 stars",
     "select": "Select a testimonial",
     "show": "Show testimonial {number}",
     "empty": "No testimonials published yet."
@@ -137,9 +137,10 @@
     "projects": "Our projects",
     "meeting": "Book an appointment",
     "legal": "Legal notice",
+    "privacy": "Privacy",
+    "terms": "Terms of use",
     "address": "Agoè Minamadou, next to ESA, Lomé, Togo",
-    "copyright": "All rights reserved.",
-    "terms": "Terms & Privacy"
+    "copyright": "All rights reserved."
   },
   "pages": {
     "home": "Home",
@@ -211,13 +212,115 @@
     "message": "Tell us about your project",
     "messagePlaceholder": "Goals, context, timeline…",
     "send": "Send message",
-    "privacy": "By submitting this form, you agree that KofCorporation may use this information to reply to you.",
+    "privacy": "The information you submit is used to handle your enquiry. Read our <policyLink>privacy policy</policyLink>.",
     "details": "Our contact details",
     "detailsTitle": "An accessible team based in Lomé.",
     "address": "Agoè Minamadou, next to ESA, Lomé, Togo",
     "hours": "Mon–Sat, 8am–6pm",
     "map": "KofCorporation location in Lomé",
+    "mapPreview": "Static preview of KofCorporation's location in Lomé",
+    "showMap": "Show map",
+    "mapPrivacy": "When you display the map, Google receives technical data from your browser.",
     "formAside": "KofCorporation contact details"
+  },
+  "legalDocuments": {
+    "notice": {
+      "title": "Legal notice",
+      "denomination": "Business name",
+      "registeredName": "Registered company name",
+      "legalForm": "Legal form",
+      "legalFormValue": "{form} (single-member limited liability company)",
+      "rccm": "RCCM registration",
+      "nif": "Tax identification number (NIF)",
+      "address": "Address",
+      "addressValue": "{district}, next to {landmark}, {locality}, {country}",
+      "publicationDirector": "Publication director",
+      "phone": "Phone",
+      "email": "Email",
+      "corporatePurpose": "Business purpose",
+      "corporatePurposeValue": "Software publishing, IT development, computer equipment supply, graphic design, and training in information technology, including programming languages",
+      "publisher": {
+        "title": "Website publisher"
+      },
+      "hosting": {
+        "title": "Hosting",
+        "body": "Website host: {name}, {address}."
+      },
+      "intellectualProperty": {
+        "title": "Intellectual property",
+        "body": "The content of this website is protected by applicable intellectual property rules. Any unauthorised reproduction or use is prohibited."
+      },
+      "personalData": {
+        "title": "Personal data",
+        "body": "Information about data processing, its purposes and recipients, retention, and individuals’ rights is provided in the privacy policy.",
+        "link": "Read the privacy policy"
+      }
+    },
+    "privacy": {
+      "title": "Privacy policy",
+      "responsible": {
+        "title": "Data controller",
+        "body": "{name} determines the purposes and means of processing information submitted through the contact form. Its registered legal identity remains to be confirmed."
+      },
+      "data": {
+        "title": "Data collected",
+        "form": "The form may submit your name, email address, subject and message, together with an anti-bot reCAPTCHA token needed to protect the form.",
+        "technical": "When you use the website, technical browsing data may be processed by hosting, analytics, security or embedded services (for example, information about your device, browser and connection). The exact categories depend on the services used."
+      },
+      "purposes": {
+        "title": "Purposes",
+        "body": "Form data is used to receive, review and handle enquiries, reply to them and limit automated submissions. Technical data supports the operation, security, analytics and improvement of the website. Stored preferences are used to remember certain display choices."
+      },
+      "recipients": {
+        "title": "Recipients and services",
+        "body": "Enquiries are accessible to the people responsible for contact at KofCorporation. {websiteHost} hosts the website and provides Vercel Web Analytics and Speed Insights. Sanity provides the website's content management and delivery system. Google provides reCAPTCHA to protect the form and Google Maps only if you choose to display the map. Messages are sent using the SMTP service configured by KofCorporation on a VPS; {smtpHost} in the available information.",
+        "smtpUnknown": "the SMTP provider is not identified"
+      },
+      "retention": {
+        "title": "Retention period",
+        "body": "The currently published notice states a maximum retention period of 12 months for form data. KofCorporation must confirm this period. Retention periods applied by providers and periods for technical data must also be confirmed with those providers."
+      },
+      "rights": {
+        "title": "Your rights and how to exercise them",
+        "body": "Subject to applicable rules, you may request access to your personal data, its correction or deletion, and request restriction of processing or object to it where those rights apply.",
+        "contact": "To exercise these rights or ask a question about your data, email {email} and describe your request."
+      },
+      "storage": {
+        "title": "Cookies, local storage and cache",
+        "locale": "The NEXT_LOCALE cookie remembers your chosen language. The one-year duration is the period stated in the currently published notice.",
+        "theme": "The display theme and cursor mode are stored in your browser's local storage (localStorage), under the keys theme and cursor-mode; these are not cookies.",
+        "pwa": "The application service worker may cache website resources to speed up loading and support some offline features. This cache is stored by your browser and can be cleared in its settings.",
+        "recaptcha": "Google reCAPTCHA is loaded when the contact form is submitted. Google may then process technical data and use storage mechanisms under its own policies.",
+        "maps": "Google Maps is not loaded until you click “Show map”. If you display it, your browser connects to Google, which may receive technical data and use its storage mechanisms."
+      }
+    },
+    "terms": {
+      "title": "Terms of use",
+      "purpose": {
+        "title": "Purpose",
+        "body": "These terms describe the general rules for accessing and using the KofCorporation website. They do not constitute a service agreement for the services presented on the website."
+      },
+      "access": {
+        "title": "Access to the website",
+        "body": "The website is available online subject to its availability and the user's internet connection. KofCorporation may change, interrupt or suspend all or part of the website, including for maintenance or security."
+      },
+      "intellectualProperty": {
+        "title": "Intellectual property",
+        "body": "The website's text, visuals, trademarks, graphic elements and other content are protected by applicable intellectual property rules. Unless prior permission or a legal exception applies, reproduction, adaptation or reuse is prohibited."
+      },
+      "liability": {
+        "title": "Liability",
+        "body": "KofCorporation endeavours to provide up-to-date information but does not guarantee that it is error-free or continuously available. Subject to applicable rules, users remain responsible for their use of the website and decisions based on published information."
+      },
+      "externalLinks": {
+        "title": "External links and services",
+        "body": "The website may link to third-party websites or services. These links are provided for information; KofCorporation does not control their content, availability or data practices. Visiting them is subject to the terms and policies of their publishers."
+      },
+      "law": {
+        "title": "Applicable law and disputes",
+        "body": "The applicable law and competent jurisdiction must be confirmed by KofCorporation. No law or jurisdiction is designated in this version."
+      }
+    }
   },
   "about": {
     "hero": {

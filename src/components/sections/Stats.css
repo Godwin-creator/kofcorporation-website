@@ -49,13 +49,13 @@
 
 .stats__icon {
   margin-bottom: 1.25rem;
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 
 .stats__value {
   display: inline-flex;
   align-items: baseline;
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   font-family: var(--font-heading);
   font-size: 3.5rem;
   font-weight: 700;

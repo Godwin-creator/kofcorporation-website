@@ -88,7 +88,7 @@ export default function BusinessSoftwareService({technologies = []}: {technologi
               className="service-hero__video"
               src="/videos/logicielGestion-banner.mp4"
               poster="/images/services/logicielGestion-poster.webp"
-              preload="metadata"
+              preload="none"
               autoPlay
               muted
               loop

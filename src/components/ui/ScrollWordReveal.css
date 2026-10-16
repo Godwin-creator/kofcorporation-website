@@ -28,7 +28,7 @@
 
 /* Accent words: first, last, and after commas */
 .scroll-reveal__word--accent {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   font-weight: 700;
 }
 

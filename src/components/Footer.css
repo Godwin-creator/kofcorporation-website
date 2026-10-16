@@ -83,7 +83,7 @@
 
 .footer__social-link:hover {
   background-color: rgba(12, 172, 232, 0.1);
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   transform: translateY(-2px);
 }
 
@@ -113,7 +113,7 @@
 }
 
 .footer__link:hover {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 
 /* ---- Contact Column ---- */
@@ -126,7 +126,7 @@
 }
 
 .footer__icon {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   flex-shrink: 0;
   margin-top: 2px;
 }
@@ -144,7 +144,7 @@
 }
 
 .footer__list--contact a:hover {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 
 /* ---- Bottom Bar ---- */
@@ -177,6 +177,8 @@
 
 .footer__bottom-links {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1.5rem;
   font-size: 0.875rem;
 }
@@ -188,7 +190,7 @@
 }
 
 .footer__bottom-links a:hover {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 
 /* Style pour le texte en arrière-plan du footer */
@@ -205,6 +207,7 @@
   pointer-events: none;
   user-select: none;
   white-space: nowrap;
+  text-transform: uppercase;
   z-index: 0;
   line-height: 1;
 }
@@ -218,4 +221,3 @@
   position: relative;
   z-index: 1;
 }
-

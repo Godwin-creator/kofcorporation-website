@@ -1,8 +1,13 @@
 import { createClient, type SanityClient } from 'next-sanity'
 import { createImageUrlBuilder } from '@sanity/image-url'
 
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? 'placeholder-project-id'
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? ''
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET ?? 'production'
+if (!projectId && process.env.NODE_ENV === 'production') {
+  console.error(
+    'Missing NEXT_PUBLIC_SANITY_PROJECT_ID in production. Sanity content queries are disabled.',
+  )
+}
 export const hasSanityConfig = Boolean(
   process.env.NEXT_PUBLIC_SANITY_PROJECT_ID && process.env.NEXT_PUBLIC_SANITY_DATASET
 )

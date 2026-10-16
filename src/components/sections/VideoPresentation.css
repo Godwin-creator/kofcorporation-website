@@ -34,7 +34,7 @@
 
 .video-presentation__eyebrow {
   margin: 0 0 0.75rem;
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   font-family: var(--font-body);
   font-size: 0.8125rem;
   font-weight: 600;
@@ -205,7 +205,7 @@
   width: 72px;
   height: 72px;
   background-color: var(--color-accent);
-  color: #ffffff;
+  color: var(--color-on-accent);
   border: none;
   border-radius: 50%;
   display: flex;
@@ -219,7 +219,7 @@
 }
 
 .video-presentation__play-btn:hover {
-  background-color: var(--color-accent-mid);
+  background-color: var(--color-accent);
   transform: scale(1.1);
   box-shadow: 0 14px 32px rgba(12, 172, 232, 0.55);
 }
@@ -269,7 +269,7 @@
 }
 
 .video-modal__close-btn:hover {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   transform: scale(1.12);
 }
 

@@ -93,7 +93,9 @@ export default function ProjectsClient({
                 >
                   <div
                     className={`project-card__visual project-card__visual--${project.id}`}
-                    aria-label={t("preview", { title: project.title })}
+                    role={project.imageUrl ? "img" : undefined}
+                    aria-label={project.imageUrl ? t("preview", { title: project.title }) : undefined}
+                    aria-hidden={!project.imageUrl}
                     style={
                       project.imageUrl
                         ? {

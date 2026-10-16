@@ -25,7 +25,7 @@
 
 .projects__eyebrow {
   margin: 0 0 0.75rem;
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 600;
@@ -44,7 +44,7 @@
 
 .projects__all-link,
 .project-card__external-link {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 
 .projects__all-link {
@@ -156,7 +156,7 @@
 .project-card__sector {
   display: inline-block;
   margin-bottom: 0.7rem;
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   font-family: var(--font-body);
   font-size: 0.72rem;
   font-weight: 600;
@@ -251,7 +251,7 @@
   padding: 0.55rem 0.8rem;
   border: 1px solid var(--color-border);
   border-radius: 0;
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   background: transparent;
   cursor: pointer;
   font: inherit;
@@ -270,7 +270,7 @@
 .project-card__details:hover {
   border-color: var(--color-accent);
   background-color: color-mix(in srgb, var(--color-accent) 8%, transparent);
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 
 .project-card__details:hover::after {

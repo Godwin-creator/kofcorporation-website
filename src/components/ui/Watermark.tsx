@@ -23,13 +23,12 @@ export default function Watermark({ id }: WatermarkProps) {
       ref={ref}
       className="section-watermark"
       aria-hidden="true"
+      data-text={t(id)}
       style={{
         opacity: isInView ? undefined : 0,
         transform: isInView ? "translateY(-50%)" : "translateY(-50%) translateX(-8px)",
         transition: "opacity 0.8s ease-out, transform 0.8s ease-out",
       }}
-    >
-      {t(id)}
-    </span>
+    />
   );
 }

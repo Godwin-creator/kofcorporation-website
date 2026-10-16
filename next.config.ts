@@ -4,6 +4,40 @@ import { withSerwist } from "@serwist/turbopack";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  async headers() {
+    const cacheControl =
+      "public, max-age=604800, stale-while-revalidate=86400";
+
+    return [
+      {
+        source: "/images/:path*",
+        headers: [{ key: "Cache-Control", value: cacheControl }],
+      },
+      {
+        source: "/videos/:path*",
+        headers: [{ key: "Cache-Control", value: cacheControl }],
+      },
+      {
+        source: "/serwist/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "no-cache, no-store, must-revalidate",
+          },
+        ],
+      },
+      ...[
+        "/favicon.ico",
+        "/favicon.svg",
+        "/favicon-96.png",
+        "/apple-touch-icon.png",
+        "/og-image.jpeg",
+      ].map((source) => ({
+        source,
+        headers: [{ key: "Cache-Control", value: cacheControl }],
+      })),
+    ];
+  },
   images: {
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200],
