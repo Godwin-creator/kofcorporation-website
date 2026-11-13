@@ -54,15 +54,31 @@
     transform: none;
   }
 
-  /* La regle [data-theme="dark"] .hero est plus specifique que .hero--mobile :
-     sans le selecteur sombre ci-dessous, le fond du bureau restait applique
-     sur mobile en theme sombre, et son fichier de 197 Ko etait telecharge. */
-  .hero--mobile,
+  /* Le visuel du hero mobile est un fond de section, et non un bloc place
+     sous les boutons : empile au dessus de la video qui suit, il donnait
+     deux medias qui se chevauchaient au defilement.
+     L'image est floutee en amont plutot qu'avec filter: blur(), dont le
+     cout de rendu se paie a chaque peinture sur mobile. Elle pese 11 Ko,
+     contre 197 Ko pour le fond du bureau qu'elle remplace ici.
+     Le selecteur sombre est repete : [data-theme="dark"] .hero est plus
+     specifique que .hero--mobile et reprendrait sinon le dessus. */
+  .hero--mobile {
+    min-height: calc(100svh - 64px);
+    padding-block: 3rem;
+    background-color: #f5f5f5;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.78)),
+      url("/images/hero-fond/hero-mobile.webp");
+    background-size: cover;
+    background-position: center 22%;
+    background-repeat: no-repeat;
+  }
+
   [data-theme="dark"] .hero--mobile {
-    min-height: auto;
-    padding-block: 2.5rem 3rem;
-    background-color: var(--color-bg);
-    background-image: none;
+    background-color: #151A20;
+    background-image:
+      linear-gradient(rgba(21, 26, 32, 0.82), rgba(21, 26, 32, 0.82)),
+      url("/images/hero-fond/hero-mobile.webp");
   }
 
   .hero--mobile .hero__inner {
@@ -452,45 +468,5 @@
 
   .hero__cta {
     width: 100%;
-  }
-}
-
-
-/* ---- Visuel du hero sur mobile ---- */
-.hero__visual-mobile {
-  display: none;
-}
-
-@media (max-width: 1023px) {
-  .hero__visual-mobile {
-    display: block;
-    position: relative;
-    width: min(100%, 460px);
-    margin-inline: auto;
-    padding: 8px;
-    background: linear-gradient(
-      135deg,
-      rgba(12, 172, 232, 0.28),
-      rgba(255, 255, 255, 0.7),
-      rgba(12, 172, 232, 0.28)
-    );
-    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.14);
-    animation: heroMobileFadeIn 0.55s ease-out both;
-  }
-
-  .hero__visual-mobile-img {
-    display: block;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    object-position: center 28%;
-    background: var(--color-surface);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero__visual-mobile {
-    animation: none;
   }
 }
