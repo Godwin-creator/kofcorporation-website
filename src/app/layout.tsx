@@ -44,7 +44,12 @@ const themeInitScript = `
     var theme = stored === 'dark' || stored === 'light'
       ? stored
       : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    document.documentElement.classList.remove('splash-active');
+    var splashSeen = false;
+    try {
+      splashSeen = !!sessionStorage.getItem('kof_splash_shown');
+      if (!splashSeen) sessionStorage.setItem('kof_splash_shown', 'true');
+    } catch (e) {}
+    if (splashSeen) document.documentElement.classList.add('splash-seen');
     document.documentElement.setAttribute('data-theme', theme);
     var themeColorMeta = document.querySelector('meta[name="theme-color"]');
     if (themeColorMeta) themeColorMeta.setAttribute('content', theme === 'dark' ? '#151A20' : '#F8F9FA');
