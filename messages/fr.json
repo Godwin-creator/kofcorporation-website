@@ -63,6 +63,7 @@
     "eyebrow": "Notre savoir-faire",
     "title": "Des solutions digitales qui font avancer votre activité",
     "learnMore": "En savoir plus",
+    "learnMoreAbout": "En savoir plus sur {title}",
     "technologies": "Technologies pour {title}",
     "empty": "Aucun service publié pour le moment.",
     "items": {

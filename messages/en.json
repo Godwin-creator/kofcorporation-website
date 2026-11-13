@@ -63,6 +63,7 @@
     "eyebrow": "Our expertise",
     "title": "Digital solutions that move your business forward",
     "learnMore": "Learn more",
+    "learnMoreAbout": "Learn more about {title}",
     "technologies": "Technologies for {title}",
     "empty": "No services published yet.",
     "items": {
