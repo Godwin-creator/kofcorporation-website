@@ -1,6 +1,6 @@
 import { getLocale, getTranslations } from "next-intl/server";
+import HeroTypewriterMobile from "./HeroTypewriterMobile";
 import { ArrowRight } from "lucide-react";
-import Image from "next/image";
 import "./Hero.css";
 import Link from "next/link";
 import type { CompanySettings } from "@/types/sanity";
@@ -17,20 +17,17 @@ export default async function HeroMobile({
 }) {
   const [locale, t] = await Promise.all([getLocale(), getTranslations("hero")]);
   const fallback = SLOGANS[locale as keyof typeof SLOGANS] ?? SLOGANS.fr;
-  const cmsSlogan = settings?.heroSlogans?.[0];
   const cmsTitle = locale === "en" ? settings?.heroTitleEn : settings?.heroTitle;
-  const lineOne = cmsSlogan
-    ? locale === "en"
-      ? cmsSlogan.lineOneEn
-      : cmsSlogan.lineOneFr
-    : cmsTitle || fallback.lineOne;
-  const lineTwo = cmsSlogan
-    ? locale === "en"
-      ? cmsSlogan.lineTwoEn
-      : cmsSlogan.lineTwoFr
-    : cmsTitle
-      ? ""
-      : fallback.lineTwo;
+  const slogans = settings?.heroSlogans?.length
+    ? settings.heroSlogans.map((slogan) => ({
+        lineOne: locale === "en" ? slogan.lineOneEn : slogan.lineOneFr,
+        lineTwo: locale === "en" ? slogan.lineTwoEn : slogan.lineTwoFr,
+      }))
+    : [
+        cmsTitle
+          ? { lineOne: cmsTitle, lineTwo: "" }
+          : { lineOne: fallback.lineOne, lineTwo: fallback.lineTwo },
+      ];
   const description =
     (locale === "en" ? settings?.heroSubtitleEn : settings?.heroSubtitle) ??
     t("description");
@@ -39,14 +36,7 @@ export default async function HeroMobile({
     <section className="hero hero--mobile">
       <div className="hero__inner">
         <div className="hero__content hero__content--mobile">
-          <h1 className="hero__title">
-            <span className="hero__title-line hero__title-line--primary">{lineOne}</span>
-            {lineTwo && (
-              <span className="hero__title-line hero__title-line--secondary">
-                {lineTwo}
-              </span>
-            )}
-          </h1>
+          <HeroTypewriterMobile slogans={slogans} />
           <p className="hero__description">{description}</p>
           <div className="hero__actions">
             <Link href={`/${locale}/services`} className="hero__cta hero__cta--primary">
@@ -57,17 +47,6 @@ export default async function HeroMobile({
               {t("discoverProjects")}
             </Link>
           </div>
-        </div>
-        <div className="hero__visual-mobile">
-          <Image
-            src="/images/images-puzzle/hero-image.webp"
-            alt=""
-            width={960}
-            height={960}
-            sizes="100vw"
-            priority
-            className="hero__visual-mobile-img"
-          />
         </div>
       </div>
     </section>
