@@ -1,5 +1,6 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 import "./Hero.css";
 import Link from "next/link";
 import type { CompanySettings } from "@/types/sanity";
@@ -56,6 +57,17 @@ export default async function HeroMobile({
               {t("discoverProjects")}
             </Link>
           </div>
+        </div>
+        <div className="hero__visual-mobile">
+          <Image
+            src="/images/images-puzzle/hero-image.webp"
+            alt=""
+            width={960}
+            height={960}
+            sizes="100vw"
+            priority
+            className="hero__visual-mobile-img"
+          />
         </div>
       </div>
     </section>
