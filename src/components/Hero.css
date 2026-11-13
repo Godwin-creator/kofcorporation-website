@@ -81,7 +81,13 @@
       url("/images/hero-fond/hero-mobile.webp");
   }
 
+  /* .hero__inner est en position static : son z-index de base reste donc
+     sans effet. En theme sombre, le voile [data-theme="dark"] .hero::before
+     passait alors par dessus le texte et delavait titre, paragraphe et
+     boutons. Positionner le conteneur suffit a le replacer au dessus. */
   .hero--mobile .hero__inner {
+    position: relative;
+    z-index: 2;
     gap: 2.25rem;
   }
 
