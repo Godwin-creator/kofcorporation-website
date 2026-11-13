@@ -39,17 +39,19 @@ export default function ServicesClient({locale, sanityStacks}: {locale: string; 
             const Icon = ICONS[icon as keyof typeof ICONS] ?? Monitor
             const href = id === "formations" ? "/services" : `/services/${slug}`
             const isExternal = false
+            const serviceTitle = locale === "en" ? titleEn : titleFr
             return (
               <motion.article className="service-card" key={id} variants={cardVariants}>
                 <div className="service-card__icon" aria-hidden="true"><Icon size={25} strokeWidth={1.7} /></div>
-                <h3 className="service-card__title">{locale === "en" ? titleEn : titleFr}</h3>
+                <h3 className="service-card__title">{serviceTitle}</h3>
                 <p className="service-card__description">{locale === "en" ? summaryEn : summaryFr}</p>
-                <ul className="service-card__tags" aria-label={t("technologies", {title: locale === "en" ? titleEn : titleFr})}>
+                <ul className="service-card__tags" aria-label={t("technologies", {title: serviceTitle})}>
                   {stack.map((tag) => <li key={tag}>{tag}</li>)}
                 </ul>
                 <Link
                   className="service-card__link"
                   href={href}
+                  aria-label={t("learnMoreAbout", {title: serviceTitle})}
                   target={isExternal ? "_blank" : undefined}
                   rel={isExternal ? "noopener noreferrer" : undefined}
                 >
