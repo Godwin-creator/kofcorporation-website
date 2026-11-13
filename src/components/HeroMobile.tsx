@@ -34,6 +34,17 @@ export default async function HeroMobile({
 
   return (
     <section className="hero hero--mobile">
+      {/* Le fond de cette section est l'element LCP de la page sur mobile.
+          Declare en CSS, il n'est decouvert qu'une fois la feuille de style
+          analysee. Ce prechargement le rend visible des le document initial.
+          HeroMobile n'etant rendu que pour les requetes mobiles, le lien
+          n'est pas emis sur la version bureau. */}
+      <link
+        rel="preload"
+        as="image"
+        href="/images/hero-fond/hero-mobile.webp"
+        fetchPriority="high"
+      />
       <div className="hero__inner">
         <div className="hero__content hero__content--mobile">
           <HeroTypewriterMobile slogans={slogans} />

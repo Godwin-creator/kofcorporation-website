@@ -102,9 +102,15 @@
     font-size: 2.75rem;
   }
 
+  /* La hauteur des lignes est reservee : le titre s'ecrit lettre par lettre,
+     et une ligne vide au depart decalait le reste du contenu. */
   .hero__content--mobile .hero__title-line {
-    min-height: auto;
+    min-height: 1.12em;
     white-space: normal;
+  }
+
+  .hero__content--mobile .hero__title-line--secondary {
+    min-height: 1.26em;
   }
 }
 
